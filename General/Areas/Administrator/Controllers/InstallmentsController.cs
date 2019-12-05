@@ -330,7 +330,7 @@ namespace General.Areas.Administrator.Controllers
             if (ModelState.IsValid)
             {
                 var Regeant = db.Users.Where(u => u.MarketingCode == userswallet.UWMarketingCode).FirstOrDefault();
-                userswallet.UWDayDeposit = DateTime.Now.ToPeString("dd");
+                userswallet.UWDayDeposit = int.Parse(DateTime.Now.ToPeString("dd"));
                 userswallet.UWMonthDeposit = int.Parse(DateTime.Now.ToPeString("MM"));
                 userswallet.UWYearDeposit = int.Parse(DateTime.Now.ToPeString("yyyy"));
                 userswallet.UWAcountNumber = Regeant.AcountNumber;
