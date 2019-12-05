@@ -41,7 +41,7 @@ namespace General.Areas.Users.Models
         [DisplayName("کد شعبه ")/*, Required(ErrorMessage = "كاربر گرامي ، لطفاً فیلد [ {0} ] را وارد نماييد")*/]
         public int UWBranchCode { get; set; }
         [DisplayName("روز واریز")]
-        public int UWDayDeposit { get; set; }
+        public string UWDayDeposit { get; set; }
         [DisplayName("ماه واریز")]
         public int UWMonthDeposit { get; set; }
         [DisplayName("سال واریز")]

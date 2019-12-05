@@ -241,12 +241,13 @@
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ محاسبه سود معرف +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         Reagentcommission = parseFloat($("#InstallmentsNumbersAmount_" + btnId).text().trim().replace(/,/g, '') * 10) / 100;
         //====================================================  پیدا کردن معرف  و واریز سود آن ====================================
+            debugger
         MarketingCode = $("#MarketingCode_" + btnId).text().trim();
         RegeantMK(MarketingCode);
         MKsArray.push(GloabalRegeantMK);
 
         //=============================================  وارد کردن معرف  و واریز سود آن ===========================================
-        InsertCommisionRegeant(GloabalRegeantMK, Reagentcommission);
+        InsertCommisionRegeant(MarketingCode,GloabalRegeantMK, Reagentcommission);
         AmountsArray.push(Reagentcommission);
 
             while (true) {
@@ -271,7 +272,7 @@
         GetCommision1Level(MKsArray.length);
         var Calculate = parseFloat((AmountsArray[0] * GlobalCalcute1) / 100).toFixed(0);
         AmountsArray.push(Calculate);
-        InsertCommisionLeader(GloabalLeaderMK, Calculate);
+        InsertCommisionLeader(MKsArray[(LevelCount-1)],GloabalLeaderMK, Calculate);
         }
         //================================================= محاسبه و پرداخت سود سطح 2  ( بعد از معرف ) =============================================
         if (MKsArray.length == 3) {

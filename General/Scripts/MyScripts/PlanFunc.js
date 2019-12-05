@@ -54,12 +54,13 @@ function RegeantMK(MarketingCode) {
 }
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //==========================================================تابع ورود سود معرف  ========================================
-function InsertCommisionRegeant(UWMarketingCode, UWAmountDeposit) {
+function InsertCommisionRegeant(UWMarketingCodeFrom,UWMarketingCode, UWAmountDeposit) {
 
     $.ajax({
         type: "POST",
         url: "InsertCommisionRegeant",
         data: '{UWMarketingCode: "' + UWMarketingCode +
+            '", UWMarketingCodeFrom: "' + UWMarketingCodeFrom +
         '", UWAmountDeposit: "' + UWAmountDeposit +
 
         '"}',
@@ -118,12 +119,13 @@ function FindLeaderMK(MarketingCode) {
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 //==========================================================تابع ورود سود معرف  ========================================
-function InsertCommisionLeader(UWMarketingCode, UWAmountDeposit) {
+function InsertCommisionLeader(UWMarketingCodeFrom,UWMarketingCode, UWAmountDeposit) {
 
     $.ajax({
         type: "POST",
         url: "InsertCommisionRegeant",
         data: '{UWMarketingCode: "' + UWMarketingCode +
+            '", UWMarketingCodeFrom: "' + UWMarketingCodeFrom +
         '", UWAmountDeposit: "' + UWAmountDeposit +
 
         '"}',
