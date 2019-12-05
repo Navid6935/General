@@ -1,0 +1,528 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="_About" xml:space="preserve">
+    <value>درباره ما</value>
+  </data>
+  <data name="_AcountNumber" xml:space="preserve">
+    <value>شماره حساب بانکی</value>
+  </data>
+  <data name="_Address" xml:space="preserve">
+    <value>آدرس</value>
+  </data>
+  <data name="_AdministratorPage" xml:space="preserve">
+    <value>صفحه مدیریت</value>
+  </data>
+  <data name="_Agreement" xml:space="preserve">
+    <value>موافقت و امضا قرارداد بازاریابی</value>
+  </data>
+  <data name="_AllWholeThingsPeymented" xml:space="preserve">
+    <value>گزارش پورسانت پرداخت شده</value>
+  </data>
+  <data name="_AllWholeThingsPeyments" xml:space="preserve">
+    <value>گزارش پرداخت پورسانت </value>
+  </data>
+  <data name="_AmountDeposit" xml:space="preserve">
+    <value>مبلغ واریزی</value>
+  </data>
+  <data name="_ArmAndIncome" xml:space="preserve">
+    <value>تیم و سقف درآمد</value>
+  </data>
+  <data name="_ArmsNum" xml:space="preserve">
+    <value>تعداد تیم</value>
+  </data>
+  <data name="_Back" xml:space="preserve">
+    <value>برگشت</value>
+  </data>
+  <data name="_BankStatus" xml:space="preserve">
+    <value>مشخصات بانکی</value>
+  </data>
+  <data name="_BirthCertificateId" xml:space="preserve">
+    <value>شماره شناسنامه</value>
+  </data>
+  <data name="_BranchCode" xml:space="preserve">
+    <value>کد شعبه</value>
+  </data>
+  <data name="_BranchName" xml:space="preserve">
+    <value>نام شعبه بانکی</value>
+  </data>
+  <data name="_CardNumber" xml:space="preserve">
+    <value>شماره کارت بانکی</value>
+  </data>
+  <data name="_ChangePass" xml:space="preserve">
+    <value>تغییر رمز ورود</value>
+  </data>
+  <data name="_City" xml:space="preserve">
+    <value>شهر</value>
+  </data>
+  <data name="_CityName" xml:space="preserve">
+    <value>نام شهر</value>
+  </data>
+  <data name="_ConfirmPayment" xml:space="preserve">
+    <value>تایید پرداخت</value>
+  </data>
+  <data name="_ContactStatus" xml:space="preserve">
+    <value>مشخصات تماس</value>
+  </data>
+  <data name="_ContactsUs" xml:space="preserve">
+    <value>تماس با ما</value>
+  </data>
+  <data name="_Continue" xml:space="preserve">
+    <value>ادامه</value>
+  </data>
+  <data name="_Create" xml:space="preserve">
+    <value>ایجاد</value>
+  </data>
+  <data name="_CreateArms" xml:space="preserve">
+    <value>تعریف تیم</value>
+  </data>
+  <data name="_CreateArmsForAll" xml:space="preserve">
+    <value>تعریف تیم برای کاربران</value>
+  </data>
+  <data name="_CreateArmsForUser" xml:space="preserve">
+    <value>تعریف تیم برای یوزر</value>
+  </data>
+  <data name="_CreateInstallment" xml:space="preserve">
+    <value>تعریف اقساط</value>
+  </data>
+  <data name="_CreateManageUserRolesForm" xml:space="preserve">
+    <value>فرم ایجاد سطح دسترسی جدید</value>
+  </data>
+  <data name="_CreateUsers" xml:space="preserve">
+    <value>ایجاد کاربر</value>
+  </data>
+  <data name="_CreateUsersForm" xml:space="preserve">
+    <value>فرم ایجاد کاربر جدید</value>
+  </data>
+  <data name="_DateofBirth" xml:space="preserve">
+    <value>تاریخ تولد</value>
+  </data>
+  <data name="_Day" xml:space="preserve">
+    <value>روز</value>
+  </data>
+  <data name="_DayDeposit" xml:space="preserve">
+    <value>روز پرداخت</value>
+  </data>
+  <data name="_DayPayment" xml:space="preserve">
+    <value>روز پرداخت</value>
+  </data>
+  <data name="_Delete" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="_Detail" xml:space="preserve">
+    <value>جزئیات</value>
+  </data>
+  <data name="_DisconnectCooperation" xml:space="preserve">
+    <value>قطع همکاری</value>
+  </data>
+  <data name="_DisconnectCooperationCause" xml:space="preserve">
+    <value>علت قطع همکاری</value>
+  </data>
+  <data name="_DisconnectCooperationDate" xml:space="preserve">
+    <value>تاریخ قطع همکاری</value>
+  </data>
+  <data name="_DisconnectedUser" xml:space="preserve">
+    <value>لیست کاربران غیرفعال</value>
+  </data>
+  <data name="_Edit" xml:space="preserve">
+    <value>ویرایش</value>
+  </data>
+  <data name="_Education" xml:space="preserve">
+    <value>مدرک</value>
+  </data>
+  <data name="_EducationalPamphletsCreate" xml:space="preserve">
+    <value>ایجاد پست آموزشی</value>
+  </data>
+  <data name="_EducationalPamphletsDelete" xml:space="preserve">
+    <value>حذف پست آموزشی</value>
+  </data>
+  <data name="_EducationalPamphletsDetail" xml:space="preserve">
+    <value>جزئیات پست آموزشی</value>
+  </data>
+  <data name="_EducationalPamphletsEdit" xml:space="preserve">
+    <value>ویرایش پست آموزشی</value>
+  </data>
+  <data name="_EducationalPamphletsList" xml:space="preserve">
+    <value>لیست پست آموزشی</value>
+  </data>
+  <data name="_EducationName" xml:space="preserve">
+    <value>نام مدرک</value>
+  </data>
+  <data name="_Email" xml:space="preserve">
+    <value>ایمیل</value>
+  </data>
+  <data name="_FathersName" xml:space="preserve">
+    <value>نام پدر</value>
+  </data>
+  <data name="_Female" xml:space="preserve">
+    <value>زن</value>
+  </data>
+  <data name="_Finantial" xml:space="preserve">
+    <value>مالی</value>
+  </data>
+  <data name="_FirstName" xml:space="preserve">
+    <value>نام</value>
+  </data>
+  <data name="_FolowUpNo" xml:space="preserve">
+    <value>شماره پیگیری</value>
+  </data>
+  <data name="_ForgetPessword" xml:space="preserve">
+    <value>رمز عبور را فراموش کرده ام</value>
+  </data>
+  <data name="_FullName" xml:space="preserve">
+    <value>نام و نام خانوادگی</value>
+  </data>
+  <data name="_InstallmenPaymentstAgreement" xml:space="preserve">
+    <value>تایید اقساط پرداخت شده</value>
+  </data>
+  <data name="_Installment" xml:space="preserve">
+    <value>اقساط</value>
+  </data>
+  <data name="_InstallmentManagment" xml:space="preserve">
+    <value>مدیریت اقساط</value>
+  </data>
+  <data name="_InstallmentNumberAmount" xml:space="preserve">
+    <value>مبلغ قسط</value>
+  </data>
+  <data name="_InstallmentNumberNum" xml:space="preserve">
+    <value>شماره اقساط</value>
+  </data>
+  <data name="_InstallmentPaymentNotConfirm" xml:space="preserve">
+    <value>قسط های تایید نشده</value>
+  </data>
+  <data name="_InstallmentPeriodReports" xml:space="preserve">
+    <value>گزارش اقساط پرداخت شده با بازه زمانی</value>
+  </data>
+  <data name="_InstallmentsDifinition" xml:space="preserve">
+    <value>تعریف اقساط</value>
+  </data>
+  <data name="_InsuranceNumber" xml:space="preserve">
+    <value>شماره بیمه نامه</value>
+  </data>
+  <data name="_LastName" xml:space="preserve">
+    <value>نام خانوادگی</value>
+  </data>
+  <data name="_Layer" xml:space="preserve">
+    <value>لایه</value>
+  </data>
+  <data name="_LeaderMarketingCode" xml:space="preserve">
+    <value>کد بازاریابی سرگروه</value>
+  </data>
+  <data name="_Level" xml:space="preserve">
+    <value>سطح</value>
+  </data>
+  <data name="_List" xml:space="preserve">
+    <value>لیست</value>
+  </data>
+  <data name="_ListCode" xml:space="preserve">
+    <value>کد لیست</value>
+  </data>
+  <data name="_LocationStatus" xml:space="preserve">
+    <value>مشخصات مکانی</value>
+  </data>
+  <data name="_Login" xml:space="preserve">
+    <value>ورود</value>
+  </data>
+  <data name="_LoginOnChairWork" xml:space="preserve">
+    <value>ورود به میز کار</value>
+  </data>
+  <data name="_MainPage" xml:space="preserve">
+    <value>صفحه نخست</value>
+  </data>
+  <data name="_Male" xml:space="preserve">
+    <value>مرد</value>
+  </data>
+  <data name="_ManageUserRoles" xml:space="preserve">
+    <value>مدیریت نقش های کاربر</value>
+  </data>
+  <data name="_MarketingCode" xml:space="preserve">
+    <value>کد بازاریابی</value>
+  </data>
+  <data name="_Messages" xml:space="preserve">
+    <value>پیام ها و اطلاعیه ها</value>
+  </data>
+  <data name="_MessagesCreate" xml:space="preserve">
+    <value>ایجاد پیام ها و اطلاعیه ها</value>
+  </data>
+  <data name="_MessagesDelete" xml:space="preserve">
+    <value>حذف پیام ها و اطلاعیه ها</value>
+  </data>
+  <data name="_MessagesEdit" xml:space="preserve">
+    <value>ویرایش پیام ها و اطلاعیه ها</value>
+  </data>
+  <data name="_MessagesList" xml:space="preserve">
+    <value>لیست پیام ها و اطلاعیه ها</value>
+  </data>
+  <data name="_MobileNumber" xml:space="preserve">
+    <value>تلفن همراه</value>
+  </data>
+  <data name="_MonthDeposit" xml:space="preserve">
+    <value>ماه پرداخت</value>
+  </data>
+  <data name="_Mounth" xml:space="preserve">
+    <value>ماه</value>
+  </data>
+  <data name="_MounthPayment" xml:space="preserve">
+    <value>ماه پرداخت</value>
+  </data>
+  <data name="_Nafar" xml:space="preserve">
+    <value>نفر</value>
+  </data>
+  <data name="_Name" xml:space="preserve">
+    <value>نام</value>
+  </data>
+  <data name="_NationalCode" xml:space="preserve">
+    <value>کد ملی</value>
+  </data>
+  <data name="_NewRegister" xml:space="preserve">
+    <value>ثبت نام جدید</value>
+  </data>
+  <data name="_Number" xml:space="preserve">
+    <value>شماره</value>
+  </data>
+  <data name="_Options" xml:space="preserve">
+    <value>گزینه ها</value>
+  </data>
+  <data name="_Password" xml:space="preserve">
+    <value>رمز عبور</value>
+  </data>
+  <data name="_Payment" xml:space="preserve">
+    <value>پرداخت</value>
+  </data>
+  <data name="_Percentage" xml:space="preserve">
+    <value>درصد سود</value>
+  </data>
+  <data name="_PercentageAndVariablesManagment" xml:space="preserve">
+    <value>مدیریت درصدها و متغیرها</value>
+  </data>
+  <data name="_PercentageManage" xml:space="preserve">
+    <value>مدیریت درصدها</value>
+  </data>
+  <data name="_Permition" xml:space="preserve">
+    <value>دسترسی</value>
+  </data>
+  <data name="_PermitionManage" xml:space="preserve">
+    <value>مدیریت حق دسترسی</value>
+  </data>
+  <data name="_PersonStatus" xml:space="preserve">
+    <value>مشخصات فردی</value>
+  </data>
+  <data name="_Phone" xml:space="preserve">
+    <value>تلفن ثابت</value>
+  </data>
+  <data name="_Position" xml:space="preserve">
+    <value>تعیین جایگاه</value>
+  </data>
+  <data name="_PostalCode" xml:space="preserve">
+    <value>کد پستی</value>
+  </data>
+  <data name="_RegentMK" xml:space="preserve">
+    <value>کد بازاریابی معرف</value>
+  </data>
+  <data name="_Register" xml:space="preserve">
+    <value>ثبت نام</value>
+  </data>
+  <data name="_Reports" xml:space="preserve">
+    <value>گزارشات</value>
+  </data>
+  <data name="_Security" xml:space="preserve">
+    <value>امنیت</value>
+  </data>
+  <data name="_Send" xml:space="preserve">
+    <value>ارسال</value>
+  </data>
+  <data name="_SendLearningPost" xml:space="preserve">
+    <value>ارسال پست های آموزشی</value>
+  </data>
+  <data name="_SendResponse" xml:space="preserve">
+    <value>ارسال پاسخ</value>
+  </data>
+  <data name="_Sex" xml:space="preserve">
+    <value>جنسیت</value>
+  </data>
+  <data name="_ShabaName" xml:space="preserve">
+    <value>شماره شبا</value>
+  </data>
+  <data name="_ShowInstallment" xml:space="preserve">
+    <value>مشاهده اقساط</value>
+  </data>
+  <data name="_ShowQuestions" xml:space="preserve">
+    <value>مشاهده سوالات</value>
+  </data>
+  <data name="_State" xml:space="preserve">
+    <value>استان</value>
+  </data>
+  <data name="_StateName" xml:space="preserve">
+    <value>نام استان</value>
+  </data>
+  <data name="_Status" xml:space="preserve">
+    <value>مشخصات</value>
+  </data>
+  <data name="_SumResult" xml:space="preserve">
+    <value>حاصل جمع</value>
+  </data>
+  <data name="_Support" xml:space="preserve">
+    <value>پشتیبانی</value>
+  </data>
+  <data name="_SupportIssue" xml:space="preserve">
+    <value>موضوع </value>
+  </data>
+  <data name="_UserMainPage" xml:space="preserve">
+    <value>صفحه اعضاء</value>
+  </data>
+  <data name="_UserName" xml:space="preserve">
+    <value>نام کاربری</value>
+  </data>
+  <data name="_UserRolesList" xml:space="preserve">
+    <value>نقش دسترسی ها</value>
+  </data>
+  <data name="_UsersList" xml:space="preserve">
+    <value>لیست کاربران</value>
+  </data>
+  <data name="_UsersManagment" xml:space="preserve">
+    <value>مدیریت کاربران</value>
+  </data>
+  <data name="_Version" xml:space="preserve">
+    <value>ورژن</value>
+  </data>
+  <data name="_Year" xml:space="preserve">
+    <value>سال</value>
+  </data>
+  <data name="_YearDeposit" xml:space="preserve">
+    <value>سال پرداخت</value>
+  </data>
+  <data name="_YearPayment" xml:space="preserve">
+    <value>سال پرداخت</value>
+  </data>
+  <data name="_LevelPresonelArms" xml:space="preserve">
+    <value>گزارش وضعیت افراد بر اساس لایه</value>
+  </data>
+  <data name="_PersonsInArms" xml:space="preserve">
+    <value>گزارش افراد حاضر در تیم </value>
+  </data>
+  <data name="_CashReportsOnPeriod" xml:space="preserve">
+    <value>گزارش زمانی درآمد</value>
+  </data>
+  <data name="_MountlyCashReports" xml:space="preserve">
+    <value>گزارش مجموع درآمد</value>
+  </data>
+  <data name="_PaymentsConfirmReport" xml:space="preserve">
+    <value>گزارش اقساط تایید شده</value>
+  </data>
+</root>

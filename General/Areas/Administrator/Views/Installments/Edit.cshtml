@@ -1,0 +1,75 @@
+﻿@model General.Areas.Administrator.Models.Installment
+
+@{
+    ViewBag.Title = "ویرایش اقساط";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+@*<h2>Edit</h2>*@
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.InstallmentId)
+        <fieldset style="margin-bottom:15px" dir="rtl">
+            <legend>@FarsiLanguage.FarsiLanguage._PersonStatus</legend>
+            <hr class="panel-primary" />
+
+            <div class="row">
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    @Html.LabelFor(model => model.DayInstallmentNumber, htmlAttributes: new { @class = "control-label col-sm-5  col-md-5  col-xs-5" })
+                    <div class="col-sm-7 col-md-7 col-xs-7 ">
+                        @Html.EditorFor(model => model.DayInstallmentNumber, new { htmlAttributes = new { @class = "form-control well text-center " } })
+                        @Html.ValidationMessageFor(model => model.DayInstallmentNumber, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    @Html.LabelFor(model => model.MounthInstallmentNumber, htmlAttributes: new { @class = "control-label col-sm-2  col-md-2  col-xs-2" })
+                    <div class="col-sm-8 col-md-8 col-xs-8">
+                        @Html.EditorFor(model => model.MounthInstallmentNumber, new { htmlAttributes = new { @class = "form-control text-center" } })
+                        @Html.ValidationMessageFor(model => model.MounthInstallmentNumber, "", new { @class = "text-danger", @id = "InsuranceNumberValidation" })
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    @Html.LabelFor(model => model.YearInstallmentNumber, htmlAttributes: new { @class = "control-label col-sm-2  col-md-2  col-xs-2" })
+                    <div class="col-sm-8 col-md-8 col-xs-8">
+                        @Html.EditorFor(model => model.YearInstallmentNumber, new { htmlAttributes = new { @class = "form-control text-center" } })
+                        @Html.ValidationMessageFor(model => model.YearInstallmentNumber, "", new { @class = "text-danger", @id = "InsuranceNumberValidation" })
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-12">
+                    @Html.LabelFor(model => model.InstallmentsNumbersAmount, htmlAttributes: new { @class = "control-label col-sm-2  col-md-2  col-xs-2" })
+                    <div class="col-sm-8 col-md-8 col-xs-8">
+                        @Html.EditorFor(model => model.InstallmentsNumbersAmount, new { htmlAttributes = new { @class = "form-control text-center" } })
+                        @Html.ValidationMessageFor(model => model.InstallmentsNumbersAmount, "", new { @class = "text-danger", @id = "InsuranceNumberValidation" })
+                    </div>
+                </div>
+            </div>
+            <hr class="panel-primary" />
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12 col-md-pull-5">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="ویرایش" class="btn btn-default yellow darken-3" />
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+
+
+    </div>
+    @Html.HiddenFor(model => model.FirstName);
+    @Html.HiddenFor(model => model.LastName);
+    @Html.HiddenFor(model => model.InstallmentsNumberId);
+    @Html.HiddenFor(model => model.InstallmentsNumberMansStatus);
+    @Html.HiddenFor(model => model.InstallmentsNumbersNum);
+    @Html.HiddenFor(model => model.InstallmentsNumberStatus);
+    @Html.HiddenFor(model => model.InsuranceNumber);
+    @Html.HiddenFor(model => model.MarketingCode);
+    @Html.HiddenFor(model => model.RowNum);
+    @Html.HiddenFor(model => model.DateWithoutPoints);
+}
+

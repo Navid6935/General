@@ -1,0 +1,35 @@
+﻿@model General.Areas.Administrator.Models.AllArmsAndIncome
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>AllArmsAndIncome</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ArmsNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ArmsNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LimitIncomes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LimitIncomes)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ArmAndIncomeId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

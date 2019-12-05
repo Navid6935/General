@@ -1,0 +1,138 @@
+﻿
+@{
+    ViewBag.Title = "گزارش وضعیت بر اساس لایه های ایجاد شده";
+    Layout = "~/Areas/Users/Views/Shared/_Layout.cshtml";
+}
+
+@ViewBag.AllList
+@ViewBag.Man
+<div class="row" style="margin-top:15px">
+    <div class="col-md-8 col-sm-8 col-xs-8">
+        <label class="control-label col-md-3 col-sm-3 col-xs-3">@FarsiLanguage.FarsiLanguage._Level</label>
+        <div class="col-sm-7 col-md-7 col-xs-7" style="margin-top:10px">
+            <input type="text" name="Level" value="" id="Level" class="text-center" />
+            @*<select class="form-control" id="Level">
+                    <option></option>
+                    @for (int i = 1; i <= 100; i++)
+                    {
+                        <option value="@i">@i</option>
+                    }
+                </select>*@
+        </div>
+    </div>
+
+    <div class="col-sm-2 col-md-2 col-xs-2">
+        <a class="btn-floating btn-large waves-effect waves-light blue tooltipped" data-position="top" data-delay="50" data-tooltip="جستجو" id="search"><i class="material-icons">search</i></a>
+
+    </div>
+    <div class="col-sm-2 col-md-2 col-xs-2">
+        <a class="btn-floating btn-large waves-effect waves-light green tooltipped" data-position="top" data-delay="50" data-tooltip="خروجی اکسل" id="exporttoexcel"><i class="material-icons">file_download</i></a>
+
+    </div>
+</div>
+<div id="table">
+</div>
+<table class="table table-bordered table-responsive table-striped tbl" dir="rtl" id="tbl">
+    <tr>
+        <th class="center">
+            ردیف
+        </th>
+        <th class="center">
+            @FarsiLanguage.FarsiLanguage._RegentMK
+        </th>
+        <th class="center">
+            @FarsiLanguage.FarsiLanguage._LeaderMarketingCode
+        </th>
+        <th class="center">
+            @FarsiLanguage.FarsiLanguage._MarketingCode
+        </th>
+        <th class="center">
+            @FarsiLanguage.FarsiLanguage._FullName
+
+        </th>
+        <th class="center" id="MobileNum">
+            @FarsiLanguage.FarsiLanguage._MobileNumber
+        </th>
+    </tr>
+    <tr id="row"></tr>
+</table>
+<script src="~/Scripts/MyScripts/Functions.js"></script>
+<script src="~/Scripts/MyScripts/PlanFunc.js"></script>
+<script src="//Code.jquery.com/jquery.min.js"></script>
+<script src="~/Scripts/MyScripts/table2excel.js"></script>
+
+<script>
+    window.onload = function () {
+        $("label").css("color", "Black");
+        $("label").css("font-size", "20px");
+        $("label").css("margin-top", "15px");
+        GetArmsNum();
+        for (var j = LevelArms; j >= 1; j--) {
+            $("#MobileNum").after('<th class="center">تیم  ' + j + '</th>');
+        }
+    };
+    $(document).ready(function () {
+
+        $("#search").click(function () {
+            //پاک کردن سطرهای جدول
+            for (var i = 1; i < UsersMKArray.length; i++) {
+                $("#mk" + i).remove();
+            }
+            var LevelMK = $("#Level").val();
+            //$(".tbl").remove();
+            //=============================================== تابع گرفتن مقدار بازو
+            GetMKLevel(LevelMK,@Session["PId"]);
+            var Row = UsersMKArray.length / (LevelArms + 5);
+            var Counter = 0;
+            var tdnum = LevelArms + 5;
+            //alert(LevelArms);
+
+
+            for (var i = 1; i <= Row; i++) {
+                $("#row").before('<tr id= mk'+i+' class="mk">' +
+                    '<td class="text-center" id="rowNum' + i + '">' + i + '</td>');
+
+                while (tdnum != Counter && Counter < UsersMKArray.length) {
+                    $('#mk' + i + '').append('<td class="text-center" id="rowNum' + Counter + '">' + UsersMKArray[Counter] + '</td>');
+                    Counter++;
+                    //پاک کردن از آرایه
+                    //UsersMKArray.splice(Counter, 1);
+                    //alert(UsersMKArray);
+                }
+                $('#rowNum' + i + '').after('</tr>');
+                tdnum = tdnum + (LevelArms + 5);
+
+            }
+
+            });
+
+        $("#exporttoexcel").on('click', function (e) {
+            if ($("#Level").val() == null || $("#Level").val() == "" ) {
+                alert("سطح موردنظر را وارد نمایید");
+                return false;
+            }
+                e.preventDefault();
+                ResultsToTable();
+
+            });
+            function ResultsToTable(){
+           $("#tbl").table2excel({
+            exclude: ".noExl",
+            name: "Results"
+                });
+    }
+                var str1 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._UserMainPage, "UserMainPage", "GeneralPages", new { area = "Users" }, null)</li>';
+        var str2 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._LevelPresonelArms, "LevelPresonelArms", "Reports", new { area = "Users" }, null)</li>';
+
+        $('.crumbs').append(str1);
+        $('.crumbs').append(str2);
+
+        $(document).ready(function () {
+        $("Label").css("font-size", "15px");
+        $("Label").css("color", "#16008b");
+        $('label').css("margin-top", "8px");
+
+        });
+    });
+
+</script>

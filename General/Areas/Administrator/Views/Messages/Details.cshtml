@@ -1,0 +1,59 @@
+﻿@model General.Areas.Administrator.Models.Messages
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Messages</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Mdate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Mdate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MMounth)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MMounth)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MYear)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MYear)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MIssue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MIssue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MDescription)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

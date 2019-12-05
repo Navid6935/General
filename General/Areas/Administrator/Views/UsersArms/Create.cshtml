@@ -1,0 +1,73 @@
+﻿@model General.Areas.Administrator.Models.UsersArms
+
+@{
+    ViewBag.Title = "تعداد بازو - ایجاد";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <fieldset dir="rtl" class="white">
+        <legend>@FarsiLanguage.FarsiLanguage._ArmsNum</legend>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    @Html.LabelFor(model => model.MarketingCode, htmlAttributes: new { @class = "control-label col-sm-4  col-md-4  col-xs-4" })
+                    <div class="col-sm-8 col-md-8 col-xs-8 ">
+                        @Html.EditorFor(model => model.MarketingCode, new { htmlAttributes = new { @class = "form-control well" } })
+                        @Html.ValidationMessageFor(model => model.MarketingCode, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    @Html.LabelFor(model => model.InsuranceNumber, htmlAttributes: new { @class = "control-label col-sm-4  col-md-4  col-xs-4" })
+                    <div class="col-sm-8 col-md-8 col-xs-8">
+                        @Html.EditorFor(model => model.InsuranceNumber, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.InsuranceNumber, "", new { @class = "text-danger", @id = "InsuranceNumberValidation" })
+                    </div>
+                </div>
+
+            </div>
+            <hr class="panel-success" />
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    @Html.LabelFor(model => model.ArmsNumber, htmlAttributes: new { @class = "control-label col-sm-2  col-md-2  col-xs-2" })
+                    <div class="col-sm-10 col-md-10 col-xs-10 ">
+                        @Html.EditorFor(model => model.ArmsNumber, new { htmlAttributes = new { @class = "form-control well" } })
+                        @Html.ValidationMessageFor(model => model.ArmsNumber, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <hr class="panel-success" />
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10 col-md-pull-5">
+                    <input type="submit" value="ایجاد" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    </fieldset>
+}
+<div class="fixed-action-btn horizontal click-to-toggle">
+    <a class="btn-floating btn-large pulse green">
+        <i class="material-icons">menu</i>
+    </a>
+    <ul>
+        <li><a href="@Url.Action("Index")" class="btn tooltipped btn-floating blue darken-1" data-position="top" data-delay="50" data-tooltip="لیست"><i class="material-icons">arrow_back</i></a></li>
+    </ul>
+</div>
+
+<script>
+    window.onload = function () {
+        $('label').css("color", "black");
+        $('label').css("margin-top", "10px");
+       FindUserStatus("@ViewBag.UserId");
+                var str1 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._ManageUserRoles, "Index", "UsersAdmin", new { area = "Administrator" }, null)</li>';
+        var str2 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._ArmsNum, "Create", "UsersArms", new { area = "Administrator" }, null)</li>';
+        $('.crumbs').append(str1);
+        $('.crumbs').append(str2);
+    }
+
+</script>

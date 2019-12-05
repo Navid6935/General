@@ -1,0 +1,161 @@
+﻿@model General.Areas.Administrator.Models.Percentage
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+<fieldset dir="rtl" class="white">
+    <legend>@FarsiLanguage.FarsiLanguage._Percentage</legend>
+    <div class="container-fluid">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">
+
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <span class="col-md-4">
+                    مقدار پورسانت سطح 1 به درصد
+                </span>
+                <div class="col-sm-8 col-md-8 col-xs-8">
+                    @Html.EditorFor(model => model.Commission1, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Commission1, "", new { @class = "text-danger", @id = "InsuranceNumberValidation" })
+                </div>
+            </div>
+
+        </div>
+        <hr class="panel-success" />
+        <div class="row">
+
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <span class="col-md-4">
+                    مقدار پورسانت سطح 2 به درصد
+                </span>
+                <div class="col-sm-8 col-md-8 col-xs-8">
+                    @Html.EditorFor(model => model.Commission2, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Commission2, "", new { @class = "text-danger", @id = "InsuranceNumberValidation" })
+                </div>
+            </div>
+
+        </div>
+        <hr class="panel-success" />
+        <div class="row">
+
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <span class="col-md-4">
+                    مقدار پورسانت سطح 3 به درصد
+                </span>
+                <div class="col-sm-8 col-md-8 col-xs-8">
+                    @Html.EditorFor(model => model.Commission3, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Commission3, "", new { @class = "text-danger", @id = "InsuranceNumberValidation" })
+                </div>
+            </div>
+
+        </div>
+        <hr class="panel-success" />
+        <div class="row">
+
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <span class="col-md-4">
+                    مقدار پورسانت سطح 1 به درصد
+                </span>
+                <div class="col-sm-8 col-md-8 col-xs-8">
+                    @Html.EditorFor(model => model.Commission4, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Commission4, "", new { @class = "text-danger", @id = "InsuranceNumberValidation" })
+                </div>
+            </div>
+
+        </div>
+        <hr class="panel-success" />
+        <div class="row">
+
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <span class="col-md-4">
+                    مقدار پورسانت سطح 1 به درصد
+                </span>
+                <div class="col-sm-8 col-md-8 col-xs-8">
+                    @Html.EditorFor(model => model.Commission5, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Commission5, "", new { @class = "text-danger", @id = "InsuranceNumberValidation" })
+                </div>
+            </div>
+
+        </div>
+        <hr class="panel-success" />
+        <div class="row">
+
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <span class="col-md-4">
+                    مقدار پورسانت سطح 1 به درصد
+                </span>
+                <div class="col-sm-8 col-md-8 col-xs-8">
+                    @Html.EditorFor(model => model.Commission6, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Commission6, "", new { @class = "text-danger", @id = "InsuranceNumberValidation" })
+                </div>
+            </div>
+
+        </div>
+        <hr class="panel-success" />
+        <div class="row">
+
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <span class="col-md-4">
+                    مقدار پورسانت سطح 1 به درصد
+                </span>
+                <div class="col-sm-8 col-md-8 col-xs-8">
+                    @Html.EditorFor(model => model.Commission7, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Commission7, "", new { @class = "text-danger", @id = "InsuranceNumberValidation" })
+                </div>
+            </div>
+
+        </div>
+        <hr class="panel-success" />
+        <div class="row">
+
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <span class="col-md-4">
+                    مقدار پورسانت سطح 1 به درصد
+                </span>
+                <div class="col-sm-8 col-md-8 col-xs-8">
+                    @Html.EditorFor(model => model.Commission8, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Commission8, "", new { @class = "text-danger", @id = "InsuranceNumberValidation" })
+                </div>
+            </div>
+
+        </div>
+        <hr class="panel-success" />
+        <div class="row">
+
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <span class="col-md-4">
+                    مقدار پورسانت سطح 1 به درصد
+                </span>
+                <div class="col-sm-8 col-md-8 col-xs-8">
+                    @Html.EditorFor(model => model.Commission9, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Commission9, "", new { @class = "text-danger", @id = "InsuranceNumberValidation" })
+                </div>
+            </div>
+
+        </div>
+        <hr class="panel-success" />
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-6 col-md-pull-5">
+                <input type="submit" value="@FarsiLanguage.FarsiLanguage._Create" class="btn btn-large btn-default btn-primary blue" />
+            </div>
+        </div>
+    </div>
+</fieldset>
+}
+
+<div class="fixed-action-btn horizontal click-to-toggle">
+    <a class="btn-floating btn-large pulse green">
+        <i class="material-icons">menu</i>
+    </a>
+    <ul>
+        <li><a href="@Url.Action("Index")" class="btn tooltipped btn-floating blue darken-1" data-position="top" data-delay="50" data-tooltip="لیست"><i class="material-icons">arrow_back</i></a></li>
+    </ul>
+</div>

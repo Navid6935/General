@@ -1,0 +1,97 @@
+﻿@model IEnumerable<General.Models.ApplicationUser>
+
+@{
+    ViewBag.Title = "لیست کاربران غیر فعال";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<table class=" striped bordered highlight centered responsive-table text-center" style="margin-top:15px" dir="rtl">
+    <tr>
+        <th style="text-align:center">
+            @Html.Label("شناسه کاربری")
+        </th>
+        <th style="text-align:center">
+            @Html.Label("نام")
+        </th>
+        <th style="text-align:center">
+            @Html.Label("نام خانوادگی")
+        </th>
+        <th style="text-align:center">
+            @Html.Label("کد بازاریابی")
+        </th>
+        <th style="text-align:center">
+            @Html.Label("شماره بیمه")
+        </th>
+        <th style="text-align:center">
+            @Html.Label("تاریخ قطع همکاری")
+        </th>
+        <th style="text-align:center">
+            @Html.Label("علت قطع همکاری")
+        </th>
+        <th style="text-align:center">
+            @Html.Label("انتخاب")
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MarketingCode)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.InsuranceNumber6)
+                @Html.DisplayFor(modelItem => item.InsuranceNumber5)
+                @Html.DisplayFor(modelItem => item.InsuranceNumber4)
+                @Html.DisplayFor(modelItem => item.InsuranceNumber3)
+                @Html.DisplayFor(modelItem => item.InsuranceNumber2)
+                @Html.DisplayFor(modelItem => item.InsuranceNumber1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DisconnectCooperationDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DisconnectCooperationCause)
+            </td>
+            <td>
+
+                <a href="@Url.Action("connectCooperationStatus","UsersAdmin", new { id=item.Id })" class="btn-floating tooltipped green darken-2" data-position="top" data-delay="50" data-tooltip="ادامه همکاری" blue"><i class="material-icons">check_circle</i></a> |
+                <a href="@Url.Action("Details", new { id=item.Id })" class="btn-floating tooltipped blue" data-position="right" data-delay="50" data-tooltip="جزئیات" blue"><i class="material-icons">dehaze</i></a> |
+                <a href="@Url.Action("Delete", new { id=item.Id })" class="btn-floating tooltipped red" data-position="left" data-delay="50" data-tooltip="حذف" blue"><i class="material-icons">delete</i></a>
+            </td>
+        </tr>
+
+    }
+
+</table>
+<div class="fixed-action-btn horizontal click-to-toggle">
+    <a class="btn-floating btn-large pulse blue">
+        <i class="material-icons">menu</i>
+    </a>
+    <ul>
+        <li><a href="@Url.Action("AdminsMainPage", "AdminGeneralpages", new { area = "Administrator" }, null)" class="btn tooltipped btn-floating purple darken-3" data-position="top" data-tooltip="صفحه مدیریت" data-delay="50"><i class="material-icons">person</i></a></li>
+        <li><a href="@Url.Action("Index", "Home", new { area = "" }, null)" class="btn tooltipped btn-floating blue darken-3" data-position="top" data-tooltip="صفحه اصلی" data-delay="50"><i class="material-icons">home</i></a></li>
+        <li><a href="@Url.Action("Index")" class="btn tooltipped btn-floating green darken-1" data-position="top" data-delay="50" data-tooltip="بازگشت"><i class="material-icons">arrow_back</i></a></li>
+    </ul>
+</div>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script>
+    var str1 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._AdministratorPage, "AdminsMainPage", "AdminGeneralpages", new { area = "Administrator" }, null)</li>';
+     var str2 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._UsersList, "Index", "UsersAdmin", new { area = "Administrator" }, null)</li>';
+     var str3 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._DisconnectedUser, "IndexDisconnectetCoppertion", "UsersAdmin", new { area = "Administrator" }, null)</li>';
+    $('.crumbs').append(str1);
+    $('.crumbs').append(str2);
+    $('.crumbs').append(str3);
+</script>

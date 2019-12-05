@@ -1,0 +1,57 @@
+﻿@model IEnumerable<General.Areas.Administrator.Models.UsersArms>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="container-fluid">
+        <table class="right-align striped bordered highlight centered" dir="rtl" style="margin-top:15px">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.MarketingCode)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.InsuranceNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ArmsNumber)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MarketingCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.InsuranceNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ArmsNumber)
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Details", new { id=item.ArmsId })" class="btn-floating tooltipped blue" data-position="right" data-delay="50" data-tooltip="جزئیات" blue"><i class="material-icons">dehaze</i></a> |
+                        <a href="@Url.Action("Edit", new { id=item.ArmsId })" class="btn-floating tooltipped yellow darken-2" data-position="top" data-delay="50" data-tooltip="ویرایش" blue"><i class="material-icons">edit</i></a> |
+                        <a href="@Url.Action("Delete", new { id=item.ArmsId })" class="btn-floating tooltipped red" data-position="left" data-delay="50" data-tooltip="حذف" blue"><i class="material-icons">delete</i></a>
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+<div class="fixed-action-btn horizontal click-to-toggle">
+    <a class="btn-floating btn-large pulse blue">
+        <i class="material-icons">menu</i>
+    </a>
+    <ul>
+        @*<li><a href="@Url.Action("LocationMainPage", "MainPage", new { area = "Utilities" }, null)" class="btn tooltipped btn-floating green darken-1" data-position="top" data-delay="50" data-tooltip="مكان ها"><i class="material-icons">location_on</i></a></li>
+            <li><a href="@Url.Action("UnitMainPage", "MainPage", new { area = "Utilities" }, null)" class="btn tooltipped btn-floating blue darken-1" data-position="top" data-delay="50" data-tooltip="واحدها"><i class="material-icons">attach_money</i></a></li>
+            <li><a href="@Url.Action("FluidsMainPage", "MainPage", new { area = "Utilities" }, null)" class="btn tooltipped btn-floating yellow darken-1" data-position="top" data-delay="50" data-tooltip="سيالات"><i class="material-icons">whatshot</i></a></li>*@
+        <li><a href="@Url.Action("IndexCodingInfo", "Main", new { area = "BasicInformations" },null)" class="btn tooltipped btn-floating blue darken-1" data-position="top" data-delay="50" data-tooltip="کدینگ"><i class="material-icons">closed_caption</i></a></li>
+        <li><a href="@Url.Action("Edit")" class="btn tooltipped btn-floating yellow darken-1" data-position="top" data-delay="50" data-tooltip="ویرایش"><i class="material-icons">edit</i></a></li>
+
+    </ul>
+</div>

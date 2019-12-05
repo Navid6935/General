@@ -1,0 +1,53 @@
+﻿@model IEnumerable<General.Areas.BasicInformation.Models.Education>
+
+@{
+    ViewBag.Title = "لیست - مدرک";
+    Layout = "~/Areas/BasicInformation/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script>
+
+    var str1 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._Education, "Index", "Educations", new { area = "BasicInformation" }, null)</li>';
+    $('.crumbs').append(str1);
+    window.onload = function () {
+        $("th").addClass("text-center");
+        $("td").addClass("text-center");
+
+    }
+
+</script>
+
+<table class=" striped bordered highlight centered responsive-table text-center" dir="rtl" style="margin-top:15px">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.EName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EName)
+            </td>
+            <td>
+
+                <a href="@Url.Action("Details", new { id=item.EId })" class="btn-floating tooltipped blue" data-position="right" data-delay="50" data-tooltip="جزئیات" blue"><i class="material-icons">dehaze</i></a> |
+                <a href="@Url.Action("Edit", new { id=item.EId })" class="btn-floating tooltipped yellow darken-2" data-position="top" data-delay="50" data-tooltip="ویرایش" blue"><i class="material-icons">edit</i></a> |
+                <a href="@Url.Action("Delete", new { id=item.EId })" class="btn-floating tooltipped red" data-position="left" data-delay="50" data-tooltip="حذف" blue"><i class="material-icons">delete</i></a>
+            </td>
+        </tr>
+    }
+
+</table>
+<div class="fixed-action-btn horizontal click-to-toggle">
+    <a class="btn-floating btn-large pulse blue">
+        <i class="material-icons">menu</i>
+    </a>
+    <ul>
+        <li><a href="@Url.Action("Index", "UsersAdmin", new { area = "Administrator" }, null)" class="btn tooltipped btn-floating purple" data-position="top" data-tooltip="@FarsiLanguage.FarsiLanguage._UsersManagment" data-delay="50"><i class="material-icons">person</i></a></li>
+        <li><a href="@Url.Action("Index", "Home", new { area = "" }, null)" class="btn tooltipped btn-floating blue darken-3" data-position="top" data-tooltip="صفحه اصلی" data-delay="50"><i class="material-icons">home</i></a></li>
+        <li><a href="@Url.Action("create")" class="btn tooltipped btn-floating green darken-1" data-position="top" data-delay="50" data-tooltip="ایجاد"><i class="material-icons">create_new_folder</i></a></li>
+    </ul>
+</div>

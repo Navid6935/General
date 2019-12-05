@@ -1,0 +1,126 @@
+﻿@model IEnumerable<General.Areas.Administrator.Models.Installment>
+
+@{
+    ViewBag.Title = "پرداخت قسط";
+    Layout = "~/Areas/Users/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .table-striped > tbody > tr:nth-of-type(even) {
+        background-color: white;
+    }
+
+    .table-striped > tbody > tr:nth-of-type(odd) {
+        background-color: lightblue;
+    }
+</style>
+<link href="~/Content/sweetalert/sweet-alert.css" rel="stylesheet" />
+<table class="table table-bordered table-striped table-hover table-responsive " dir="rtl" style="margin-top:15px;border-color:darkblue">
+    <tr class="grey">
+        <th class="text-center" rowspan="2" style="padding-top:25px">
+            @Html.DisplayNameFor(model => model.MarketingCode)
+        </th>
+        <th class="text-center" rowspan="2" style="padding-top:25px">
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th class="text-center" rowspan="2" style="padding-top:25px">
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th class="text-center" rowspan="2" style="padding-top:25px">
+            @Html.DisplayNameFor(model => model.InstallmentsNumbersAmount)
+        </th>
+        <th class="text-center" colspan="3">
+            تاریخ سررسید
+        </th>
+
+        <th class="text-center" rowspan="2" style="padding-top:25px">@FarsiLanguage.FarsiLanguage._Payment</th>
+    </tr>
+    <tr class="grey">
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.DayInstallmentNumber)
+        </th>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.MounthInstallmentNumber)
+        </th>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.YearInstallmentNumber)
+        </th>
+    </tr>
+    @{
+        var i = 1;
+    }
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.MarketingCode)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.InstallmentsNumbersAmount)
+            </td>
+
+            <td class="text-center" id="DayInstallmentNumber_@i">
+                @Html.DisplayFor(modelItem => item.DayInstallmentNumber)
+            </td>
+            <td class="text-center" id="MounthInstallmentNumber_@i">
+                @Html.DisplayFor(modelItem => item.MounthInstallmentNumber)
+            </td>
+            <td class="text-center" id="YearInstallmentNumber_@i">
+                @Html.DisplayFor(modelItem => item.YearInstallmentNumber)
+            </td>
+            <td class="text-center">
+                @Html.ActionLink(FarsiLanguage.FarsiLanguage._Payment, "UserPayment", new { id = item.InstallmentId }, new { @id = "paymentbtn" + i })
+            </td>
+        </tr>
+        ++i;
+
+    }
+
+</table>
+<script src="~/Scripts/SweetAlert.js"></script>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script type="text/javascript">
+    for (var i = 1; i <= @ViewBag.UserInstallmentCount; i++) {
+
+        $("#paymentbtn" + i).click(function () {
+            var btnId = $(this).attr('id').replace(/paymentbtn/g, '');
+            var Now = "@DateTime.Now.ToPeString("yyyyMMdd")";
+            var NowInt = parseInt(Now)
+            if ($("#MounthInstallmentNumber_" + btnId).text().trim().length == 1) {
+             var Mounth = "0" + $("#MounthInstallmentNumber_" + btnId).text().trim();
+            }
+            else {
+                var Mounth = $("#MounthInstallmentNumber_" + btnId).text().trim();
+            }
+            if ($("#DayInstallmentNumber_" + btnId).text().trim().length == 1) {
+                var Day = "0" + $("#DayInstallmentNumber_" + btnId).text().trim();
+            }
+            else {
+                var Day = $("#DayInstallmentNumber_" + btnId).text().trim();
+            }
+                   var date = ($("#YearInstallmentNumber_" + btnId).text().trim()) + Mounth + Day;
+                    if (date > Now) {
+                     swal("خطا!", "زمان سر رسید قسط را چک کنید", "error");
+                        return false;
+                    }
+                })
+            }
+        var str1 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._UserMainPage, "UserMainPage", "GeneralPages", new { area = "Users" }, null)</li>';
+        var str2 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._Payment, "Installment", "GeneralPages", new { area = "Users" }, null)</li>';
+
+    $('.crumbs').append(str1);
+    $('.crumbs').append(str2);
+
+    $(document).ready(function () {
+        $("Label").css("font-size", "15px");
+        $("Label").css("color", "#16008b");
+        $('label').css("margin-top", "8px");
+
+    });
+
+</script>

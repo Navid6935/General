@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "مدیریت اعضاء - صفحه اصلی";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="pull-right">مدیریت اعضا</h2>
+<br />
+<br />
+<br />
+<hr class="alert-success"/>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <a href="@Url.Action("Create")"><img src="@Url.Content("~/Images/AddUsers.png")" class="ImgLink" /></a>
+        </div>
+        <div class="col-md-3">
+            <a href="@Url.Action("Index")"><img src="@Url.Content("~/Images/ListUsers.png")" class="ImgLink" /></a>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,27 @@
+﻿@model General.Areas.Administrator.Models.Arms
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Arms</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ArmsNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ArmsNumber)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ArmId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,95 @@
+﻿@model IEnumerable<General.Models.ApplicationUser>
+
+@{
+    ViewBag.Title = "صفحه یوزر";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row" id="UserPageBtn" style="display:none">
+    <div class="section">
+        <div class="row center">
+            <div class="input-field col m12 s12">
+                <a href="@Url.Action("Login2", "Account", new { area = "" }, null)" class="btn btn-large  blue darken-1" data-position="top" data-delay="50" id="AccountBtn">@FarsiLanguage.FarsiLanguage._LoginOnChairWork<i class="material-icons left">assignment_return</i></a>
+            </div>
+        </div>
+    </div>
+    <hr class="panel-primary" id="UserPagehr"/>
+    <div class="section">
+        <div class="row center">
+            <div class="input-field col m12 s12">
+                <a href="@Url.Action("CreateUser", "UsersAdmin", new { area = "Administrator",  id=Session["Id"] }, null)" class="btn btn-large  green darken-1"  id="CreateUserBtn" data-position="top" data-delay="50">@FarsiLanguage.FarsiLanguage._NewRegister<i class="material-icons left">assignment_ind</i></a>
+            </div>
+        </div>
+    </div>
+    @*<hr class="panel-primary" id="EditHR" />
+    <div class="section" id="EditDiv">
+        <div class="row center">
+            <div class="input-field col m12 s12">
+                <a href="@Url.Action("Edit", "UsersAdmin", new { area = "Administrator",  id=Session["Id"] }, null)" class="btn btn-large  orange darken-1" data-position="top" data-delay="50">@FarsiLanguage.FarsiLanguage._Edit<i class="material-icons left">assignment_ind</i></a>
+            </div>
+        </div>
+    </div>*@
+</div>
+
+<script src="//Code.jquery.com/jquery.min.js"></script>
+<script>
+
+    window.onload = function () {
+        
+        if ($("#PID").text() != null) {
+            CheckUserRegister($("#PID").text().trim());
+//alert(GlobalUserRegister);
+            $("#AccountBtn").show();
+            if (GlobalUserRegister == 0) {
+                $("#UserPageBtn").show();
+                $("#CreateUserBtn").show();
+                $("#UserPagehr").show();
+
+            }
+            else {
+            $("#UserPageBtn").show();
+            $("#AccountBtn").show();
+            $("#UserPagehr").hide();
+            $("#CreateUserBtn").hide();
+            }
+
+        }
+                @*if (@Session["PId"] == null) {
+                    alert("Wow");*@
+                //$("#CreateUserBtn").attr("href", "#");
+                //$("#CreateUserBtn").click(function () {
+                //    alert("شما ثبت نام کرده اید");
+                //});
+                    //}
+                //CheckUserRegister()
+                //alert(GlobalUserRegister.length);
+                //if (GlobalUserRegister.length == 1) {
+
+                //    $("#EditHR").hide();
+                //    $("#EditDiv").hide();
+                //}
+    }
+    $(document).ready(function () {
+            //CheckUserRegister( @*@Session["PId"]*@)
+
+        $("#AccountBtn").click(function () {
+           //alert( @*@Session["PId"]*@);
+            //==================================================== چک کردن یوزر که آیا ثبت نام کرده است
+            if (GlobalUserRegister == 0) {
+                alert("ابتدا ثبت نام را تکمیل فرمایید");
+                //$("#AccountBtn").prop("disabled",true)
+                return false;
+            }
+        });
+            var str1 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._UserMainPage, "UserMainPage", "GeneralPages", new { area = "Users" }, null)</li>';
+
+    $('.crumbs').append(str1);
+
+    $(document).ready(function () {
+        $("Label").css("font-size", "15px");
+        $("Label").css("color", "#16008b");
+        $('label').css("margin-top", "8px");
+
+    });
+    });
+</script>

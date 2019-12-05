@@ -1,0 +1,62 @@
+﻿@model Microsoft.AspNet.Identity.EntityFramework.IdentityRole
+
+@{
+    ViewBag.Title = "حذف - سطح دسترسی";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+
+}
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script>
+        var str1 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._PermitionManage, "Index", "RolesAdministrator", new { area = "Administrator" }, null)</li>';
+    var str2 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._Delete, "Delete", "RolesAdministrator", new { area = "Administrator" }, null)</li>';
+    $('.crumbs').append(str1);
+    $('.crumbs').append(str2);
+</script>
+<p class="text-right red darken-4 " style="font-size:20px;color:white;border-radius:2px;margin-top:15px;padding-right:5px" dir="rtl">حذف نقش باعث حذف این سطح دسترسی برای تمامی کاربرانی که این نقش را احراز نموده اند میگردد.</p>
+<fieldset dir="rtl">
+    <legend>فرم جزئیات سطح دسترسی</legend>
+    <div class="divider red darken-4"></div>
+    <div class="section">
+        <div class="row col m12 s12">
+            <div class="col m10 s6" style="font-size:18px;color:#034ea1">
+                @Html.DisplayFor(model => model.Name)
+            </div>
+            <div class="col m2 s6 " style="font-family:'B Koodak';font-size:15px">
+                <label>سطح دسترسی :</label>
+
+            </div>
+        </div>
+    </div>
+    <div class="divider red darken-4"></div>
+    <div class="section">
+        <div class="row col m12 s12">
+            <div class="row center">
+                <div class="input-field col m12 s12">
+
+                    @using (Html.BeginForm())
+            {
+                        @Html.AntiForgeryToken()
+                        <div class="form-actions no-color">
+                            <button class="btn btn-large waves-effect waves-light red darken-2" type="submit">
+                                @FarsiLanguage.FarsiLanguage._Delete
+                            <i class="material-icons left">delete</i>
+                    </div>
+                    }
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</fieldset>
+
+
+<div class="fixed-action-btn horizontal click-to-toggle">
+    <a class="btn-floating btn-large pulse red darken-4">
+        <i class="material-icons">menu</i>
+    </a>
+    <ul>
+        <li><a href="@Url.Action("Index")" class="btn tooltipped btn-floating blue darken-1" data-position="top" data-delay="50" data-tooltip="لیست"><i class="material-icons">arrow_back</i></a></li>
+    </ul>
+</div>

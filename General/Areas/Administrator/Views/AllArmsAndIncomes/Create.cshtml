@@ -1,0 +1,58 @@
+﻿@model General.Areas.Administrator.Models.AllArmsAndIncome
+
+@{
+    ViewBag.Title = "تعداد بازو و سقف درآمد - ایجاد";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <fieldset dir="rtl" class="white">
+        <legend>@FarsiLanguage.FarsiLanguage._ArmAndIncome</legend>
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    @Html.LabelFor(model => model.ArmsNumber, htmlAttributes: new { @class = "control-label col-sm-4  col-md-4  col-xs-4" })
+                    <div class="col-sm-8 col-md-8 col-xs-8 ">
+                        @Html.EditorFor(model => model.ArmsNumber, new { htmlAttributes = new { @class = "form-control well" } })
+                        @Html.ValidationMessageFor(model => model.ArmsNumber, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    @Html.LabelFor(model => model.LimitIncomes, htmlAttributes: new { @class = "control-label col-sm-4  col-md-4  col-xs-4" })
+                    <div class="col-sm-8 col-md-8 col-xs-8">
+                        @Html.EditorFor(model => model.LimitIncomes, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.LimitIncomes, "", new { @class = "text-danger", @id = "InsuranceNumberValidation" })
+                    </div>
+                </div>
+
+            </div>
+            <hr class="panel-success" />
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="@FarsiLanguage.FarsiLanguage._Create" class="btn btn-default btn-primary" />
+                </div>
+            </div>
+        </div>
+    </fieldset>
+}
+<div class="fixed-action-btn horizontal click-to-toggle">
+    <a class="btn-floating btn-large pulse green">
+        <i class="material-icons">menu</i>
+    </a>
+    <ul>
+        <li><a href="@Url.Action("Index")" class="btn tooltipped btn-floating blue darken-1" data-position="top" data-delay="50" data-tooltip="لیست"><i class="material-icons">arrow_back</i></a></li>
+    </ul>
+</div>
+
+<script>
+    window.onload = function () {
+        $('label').css("color", "black");
+        $('label').css("margin-top", "10px");
+
+    }
+
+</script>

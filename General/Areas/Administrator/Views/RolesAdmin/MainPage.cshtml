@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "مدیریت وظایف";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="pull-right">مدیریت وظایف</h2>
+<br />
+<br />
+<br />
+<hr class="alert-success" />
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <a href="@Url.Action("Create")"><img src="@Url.Content("~/Images/AddRole.png")" class="ImgLink" /></a>
+        </div>
+        <div class="col-md-3">
+            <a href="@Url.Action("Create")"><img src="@Url.Content("~/Images/ListRole.png")" class="ImgLink" /></a>
+
+        </div>
+    </div>
+</div>

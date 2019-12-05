@@ -1,0 +1,169 @@
+﻿@model General.Areas.Administrator.Models.Percentage
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Percentage</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Level1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Level1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Commission1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Commission1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Level2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Level2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Commission2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Commission2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Level3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Level3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Commission3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Commission3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Level4)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Level4)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Commission4)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Commission4)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Level5)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Level5)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Commission5)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Commission5)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Level6)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Level6)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Commission6)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Commission6)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Level7)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Level7)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Commission7)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Commission7)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Level8)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Level8)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Commission8)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Commission8)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Level9)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Level9)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Commission9)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Commission9)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

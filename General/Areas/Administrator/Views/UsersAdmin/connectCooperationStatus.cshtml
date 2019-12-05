@@ -1,0 +1,124 @@
+﻿@model General.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "connectCooperationStatus";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+
+
+    <fieldset style="margin-bottom:15px" dir="rtl">
+        <legend>@FarsiLanguage.FarsiLanguage._PersonStatus</legend>
+
+        <div class="divider blue darken-4"></div>
+
+        <div class="section">
+            <div class="row">
+
+                <div class=" col m3 s12 push-m9" style="font-size:18px;color:#244788">
+                    <span> @Html.Label(@FarsiLanguage.FarsiLanguage._UserName) : </span>
+                    @Html.DisplayFor(model => model.UserName, null, "")
+
+                </div>
+                <div class=" col m3 s12 push-m3" style="font-size:18px;color:#244788">
+                    <span> @Html.Label(@FarsiLanguage.FarsiLanguage._FirstName) : </span>
+                    @Html.DisplayFor(model => model.FirstName, null, "")
+
+                </div>
+                <div class=" col m3 s12 pull-m3" style="font-size:18px;color:#244788">
+                    <span> @Html.Label(@FarsiLanguage.FarsiLanguage._LastName) : </span>
+                    @Html.DisplayFor(model => model.LastName, null, "")
+
+                </div>
+                <div class=" col m3 s12 pull-m9" style="font-size:18px;color:#244788">
+                    <span> @Html.Label(@FarsiLanguage.FarsiLanguage._FathersName) : </span>
+                    @Html.DisplayFor(model => model.FathersName, null, "")
+
+                </div>
+            </div>
+        </div>
+
+        <div class="divider blue darken-4"></div>
+
+        <div class="section">
+            <div class="row">
+                <div class=" col m4 s12 push-m8" style="font-size:18px;color:#244788">
+                    <span> @Html.Label(@FarsiLanguage.FarsiLanguage._MarketingCode) : </span>
+                    @Html.DisplayFor(model => model.MarketingCode, null, "")
+
+                </div>
+
+                <div class=" col m4 s12" style="font-size:18px;color:#244788">
+                    <span> @Html.Label(@FarsiLanguage.FarsiLanguage._BirthCertificateId) : </span>
+                    @Html.DisplayFor(model => model.BirthCertificateId, null, "")
+
+                </div>
+                <div class=" col m4 s12 pull-m8" style="font-size:18px;color:#244788">
+                    <span> @Html.Label(@FarsiLanguage.FarsiLanguage._NationalCode) : </span>
+                    @Html.DisplayFor(model => model.NationalCode, null, "")
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="divider blue darken-4"></div>
+
+        <div class="section">
+            <div class="row">
+                <div class=" col m12 s12" style="font-size:18px;color:#244788">
+                    <span> @Html.Label(@FarsiLanguage.FarsiLanguage._DisconnectCooperationCause) : </span>
+                    @Html.DisplayFor(model => model.DisconnectCooperationCause, null, "")
+
+                </div>
+
+            </div>
+        </div>
+        <div class="divider blue darken-4"></div>
+
+        <div class="section">
+            <div class="row">
+                <div class=" col m12 s12 pull-m5" style="font-size:18px;color:#244788">
+
+                    <a class=" btn-large waves-effect waves-light green " id="btnAdd">
+                        ادامه همکاری
+                    </a>
+                </div>
+
+
+            </div>
+        </div>
+
+    </fieldset>
+
+
+
+<div class="fixed-action-btn horizontal click-to-toggle">
+    <a class="btn-floating btn-large pulse blue darken-4">
+        <i class="material-icons">menu</i>
+    </a>
+    <ul>
+        <li><a href="@Url.Action("connectCooperationStatus","UsersAdmin", new { id=Model.Id })" class="btn-floating tooltipped red darken-2" data-position="top" data-delay="50" data-tooltip="قطع همکاری" blue"><i class="material-icons">indeterminate_check_box</i></a></li>
+        <li><a href="@Url.Action("DisconnectCooperationStatus","UsersAdmin", new { id=Model.Id })" class="btn-floating tooltipped red darken-2" data-position="top" data-delay="50" data-tooltip="قطع همکاری" blue"><i class="material-icons">indeterminate_check_box</i></a></li>
+        <li><a href="@Url.Action("Index")" class="btn tooltipped btn-floating blue darken-1" data-position="top" data-delay="50" data-tooltip="لیست"><i class="material-icons">arrow_back</i></a></li>
+    </ul>
+
+</div>
+<script src="//Code.jquery.com/jquery.min.js"></script>
+<script src="~/Scripts/MyScripts/Functions.js"></script>
+
+<script>
+    $(document).ready(function () {
+        var PID = "@Model.Id";
+        var MK = "@Model.MarketingCode";
+
+        $("#btnAdd").click(function () {
+            if (confirm("آیا از فعال کردن یوزر مطمئن هستید ؟")) {
+                UpdateUserCoopertionStatusConnected(PID, MK)
+            }
+        });
+        $("Label").css("font-size","15px").css("color","black")
+    });
+</script>
+
+

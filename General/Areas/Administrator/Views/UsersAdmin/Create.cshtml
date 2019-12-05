@@ -1,0 +1,229 @@
+﻿    @model General.Models.RegisterViewModel
+@{
+        ViewBag.Title = "ایجاد - مدیریت کاربران ";
+        Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+
+    }
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script>
+        var str1 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._UsersList, "Index", "UsersAdmin", new { area = "Administrator" }, null)</li>';
+    var str2 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._Create, "Create", "UsersAdmin", new { area = "Administrator" }, null)</li>';
+    $('.crumbs').append(str1);
+    $('.crumbs').append(str2);
+    $(document).ready(function () {
+
+        //$('input#input_text, textarea#textarea2').characterCounter();
+
+    });
+    </script>
+    <style>
+        #Password {
+            text-transform: capitalize;
+        }
+
+        #ConfirmPassword {
+            text-transform: capitalize;
+        }
+    </style>
+    <!-- Gitter Chat Link -->
+    <div class="fixed-action-btn"><a class="btn-floating btn-large red" href="https://gitter.im/Dogfalo/materialize" target="_blank"><i class="large material-icons">chat</i></a></div>
+    @using (Html.BeginForm("Create", "UsersAdmin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary("", new { @class = "text-error" })
+        <div class="container col s3">
+            <fieldset style="margin-bottom:15px;background-color:white" dir="rtl">
+                <legend>@FarsiLanguage.FarsiLanguage._PersonStatus</legend>
+                <div class="divider green"></div>
+                <div class="section" style="padding-top: 3px; padding-bottom: 3px">
+                    <div class="row">
+                        <div class="input-field col m12 s12 pull-m4">
+                            @Html.LabelFor(model => model.Email, new { @class = "col m6 s12 offset-m5 offset-s12" })
+                            @Html.TextBoxFor(model => model.Email, new { htmlAttributes = new { @class = "validate" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+                </div>
+                <div class="divider green"></div>
+                <div class="section" style="padding-top: 3px; padding-bottom: 3px">
+                    <div class="row ">
+                        <div class="input-field col m12 s12 pull-m4">
+                            @Html.LabelFor(model => model.UserName, new { @class = "col m6 s12 offset-m1 offset-s10" })
+                            @Html.TextBoxFor(model => model.UserName, new { htmlAttributes = new { @class = "validate" } })
+                            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+                </div>
+                <div class="divider green"></div>
+                <div class="section" style="padding-top: 0px; padding-bottom: 0px">
+                    <div class="row">
+                        <div class="input-field col m12 s12 pull-m4">
+                            @Html.LabelFor(model => model.Password, new { @class = "col m6 s12 offset-m1 offset-s10" })
+                            @Html.TextBoxFor(model => model.Password, new { htmlAttributes = new { @class = "validate" } })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="input-field col m12 s12 pull-m4" id="ConfirmPass">
+                            @Html.LabelFor(model => model.ConfirmPassword, new { @class = "col m6 s12 offset-m1 offset-s10" })
+                            @Html.TextBoxFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "validate" } })
+                            @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <hr class="panel-primary" />
+
+                <div class="row">
+                    <div class="col-md-5 col-sm-5 col-xs-12">
+                        @Html.LabelFor(model => model.InsuranceNumber6, htmlAttributes: new { @class = "control-label col-sm-6  col-md-6  col-xs-6" })
+                        <div class="col-sm-6 col-md-6 col-xs-12 ">
+                            @Html.EditorFor(model => model.InsuranceNumber6, new { htmlAttributes = new { @class = "form-control  text-center", @maxlength = "5" } })
+                            @Html.ValidationMessageFor(model => model.InsuranceNumber6, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-sm-2 col-md-2 col-xs-12 ">
+                        @Html.EditorFor(model => model.InsuranceNumber5, new { htmlAttributes = new { @class = "form-control text-center", @maxlength = "4" } })
+                        @Html.ValidationMessageFor(model => model.InsuranceNumber5, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-sm-1 col-md-1 col-xs-12 ">
+                        @Html.EditorFor(model => model.InsuranceNumber4, new { htmlAttributes = new { @class = "form-control text-center", @maxlength = "1" } })
+                        @Html.ValidationMessageFor(model => model.InsuranceNumber4, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-sm-1 col-md-1 col-xs-12 ">
+                        @Html.EditorFor(model => model.InsuranceNumber3, new { htmlAttributes = new { @class = "form-control text-center", @maxlength = "1" } })
+                        @Html.ValidationMessageFor(model => model.InsuranceNumber3, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-sm-2 col-md-2 col-xs-12 ">
+                        @Html.EditorFor(model => model.InsuranceNumber2, new { htmlAttributes = new { @class = "form-control text-center", @maxlength = "5" } })
+                        @Html.ValidationMessageFor(model => model.InsuranceNumber2, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-sm-1 col-md-1 col-xs-12 ">
+                        @Html.EditorFor(model => model.InsuranceNumber1, new { htmlAttributes = new { @class = "form-control text-center", @maxlength = "2" } })
+                        @Html.ValidationMessageFor(model => model.InsuranceNumber1, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="divider green"></div>
+                <div class="section">
+                    <div class="row right">
+                        <div class="col m12 s12">
+                            <label class="col m10 push-m2 blue-text text-darken-4" style="font-size:15px">
+                                انتخاب دسترسی
+                            </label>
+                            <br />
+                            <br />
+
+                            <hr />
+
+                            @foreach (var item in (SelectList)ViewBag.RoleId)
+                            {
+
+                                <input type="checkbox" name="SelectedRoles" value="@item.Value" class=" filled-in" id="@item.Value" />
+                                @Html.Label(item.Value, new { @class = "col m9" })
+
+                            }
+                        </div>
+
+                    </div>
+                </div>
+
+            </fieldset>
+            <div class="section">
+                <div class="row center">
+                    <div class="input-field col m12 s12">
+                        <button class="btn btn-large waves-effect waves-light green" type="submit">
+                            @FarsiLanguage.FarsiLanguage._Create
+                            <i class="material-icons left">create</i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <div class="fixed-action-btn horizontal click-to-toggle">
+        <a class="btn-floating btn-large pulse green">
+            <i class="material-icons">menu</i>
+        </a>
+        <ul>
+            <li><a href="@Url.Action("Index")" class="btn tooltipped btn-floating blue darken-1" data-position="top" data-delay="50" data-tooltip="لیست"><i class="material-icons">arrow_back</i></a></li>
+        </ul>
+    </div>
+    <script src="//Code.jquery.com/jquery.min.js"></script>
+
+    <script>
+        window.onload = function () {
+            $("#ConfirmPass").hide();
+            $("#InsuranceNumber1").focus();
+            $("#UserName").prop("readonly", true)
+        }
+        var str;
+        $("#UserName").focusout(function () {
+            if ($("#UserName").val() != "" && $("#UserName").val().length == 18) {
+                var input = $(this).val();
+                $("#Password").val(makeid).focus();
+                $("#ConfirmPassword").val($("#Password").val());
+                $("#Email").focus();
+
+            }
+
+
+        })
+        $("#InsuranceNumber1").one("focusout", function () {
+            if ($(this).val().length < 2) {
+                alert("فیلد شماره بیمه نامه 2 حرف می باشد");
+                return false;
+                $(this).focus();
+            }
+            str = $(this).val().trim();
+            $("#UserName").focus();
+            $("#UserName").one("focus", $("#UserName").val(str));
+            $("#InsuranceNumber2").focus();
+        })
+
+        $("#InsuranceNumber2").one("focusout", function () {
+            if ($(this).val().length < 5) {
+                alert("فیلد شماره بیمه نامه 5 عدد می باشد");
+                return false;
+            }
+            $("#UserName").one("focus", $("#UserName").val(str + $("#InsuranceNumber2").val()));
+            str = $("#UserName").val().trim();
+            $("#InsuranceNumber3").focus();
+        })
+        $("#InsuranceNumber3").one("focusout", function () {
+            if ($(this).val().length < 1) {
+                alert("فیلد شماره بیمه نامه 1 عدد می باشد");
+                return false;
+            }
+            $("#UserName").one("focus", $("#UserName").val(str + $("#InsuranceNumber3").val()));
+            str = $("#UserName").val().trim();
+            $("#InsuranceNumber4").focus();
+        })
+        $("#InsuranceNumber4").one("focusout", function () {
+            if ($(this).val().length < 1) {
+                alert("فیلد شماره بیمه نامه 1 حرف می باشد");
+                return false;
+            }
+            $("#UserName").one("focus", $("#UserName").val(str + $("#InsuranceNumber4").val()));
+            str = $("#UserName").val().trim();
+            $("#InsuranceNumber5").focus();
+        })
+        $("#InsuranceNumber5").one("focusout", function () {
+            if ($(this).val().length < 4) {
+                alert("فیلد شماره بیمه نامه 4 حرف می باشد");
+                return false;
+            }
+            $("#UserName").one("focus", $("#UserName").val(str + $("#InsuranceNumber5").val()));
+            str = $("#UserName").val().trim();
+            $("#InsuranceNumber6").focus();
+        })
+        $("#InsuranceNumber6").one("focusout", function () {
+            if ($(this).val().length < 5) {
+                alert("فیلد شماره بیمه نامه 5 حرف می باشد");
+                return false;
+            }
+            $("#UserName").one("focus", $("#UserName").val(str + $("#InsuranceNumber6").val()));
+            str = $("#UserName").val().trim();
+            $("#UserName").focus();
+            $("#Email").focus();
+        })
+    </script>

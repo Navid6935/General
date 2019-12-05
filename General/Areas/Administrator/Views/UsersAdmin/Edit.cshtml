@@ -1,0 +1,289 @@
+﻿@model General.Models.EditUserViewModel
+
+@{
+    ViewBag.Title = "ویرایش - مدیریت کاربران";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+
+}
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script>
+        var str1 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._ManageUserRoles, "Index", "UsersAdmin", new { area = "Administrator" }, null)</li>';
+    var str2 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._Edit, "Edit", "UsersAdmin", new { area = "Administrator" }, null)</li>';
+    $('.crumbs').append(str1);
+    $('.crumbs').append(str2);
+
+    $(document).ready(function () {
+        $('input#input_text, textarea#textarea2').characterCounter();
+        $("Label").css("font-size", "15px");
+        $("Label").css("color", "#000000");
+    });
+
+</script>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(e => e.InsuranceNumber1)
+    <div class="row right-align">
+        <fieldset style="margin-bottom:15px" dir="rtl">
+            <legend>@FarsiLanguage.FarsiLanguage._PersonStatus</legend>
+            <div class="divider green"></div>
+            <div class="section">
+                <div class="row">
+                    <div class="input-field col m3 s12 push-m9 ">
+                        @Html.LabelFor(model => model.UserName, new { @class = "col m6 s12 offset-m1 offset-s10" })
+                        @Html.TextBoxFor(model => model.UserName, new { htmlAttributes = new { @class = "validate" } })
+                        @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="input-field col m3 s12 push-m3 ">
+                        @Html.LabelFor(model => model.FirstName, new { @class = "col m3 s12 offset-m1 offset-s10" })
+                        @Html.TextBoxFor(model => model.FirstName, new { htmlAttributes = new { @class = "validate" } })
+                        @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="input-field col m3 s12 pull-m3" dir="rtl">
+                        @Html.LabelFor(model => model.LastName, new { @class = "col m6 s12 offset-m5 offset-s12" })
+                        @Html.TextBoxFor(model => model.LastName, new { htmlAttributes = new { @class = "validate" } })
+                        @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="input-field col m3 s12 pull-m9 " dir="rtl">
+                        @Html.LabelFor(model => model.FathersName, new { @class = "col m6 s12 offset-m5 offset-s12" })
+                        @Html.TextBoxFor(model => model.FathersName, new { htmlAttributes = new { @class = "validate" } })
+                        @Html.ValidationMessageFor(model => model.FathersName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="divider green"></div>
+            <div class="section">
+                <div class="row">
+                    <div class="input-field col m4 s12 push-m8">
+                        @Html.LabelFor(model => model.DayofBirth, new { @class = "col m6 s12 offset-m1 offset-s10" })
+                        @Html.TextBoxFor(model => model.DayofBirth, new { htmlAttributes = new { @class = "validate" } })
+                        @Html.ValidationMessageFor(model => model.DayofBirth, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="input-field col m4 s12">
+                        @Html.LabelFor(model => model.MounthofBirth, new { @class = "col m6 s12 offset-m5 offset-s12" })
+                        @Html.TextBoxFor(model => model.MounthofBirth, new { htmlAttributes = new { @class = "validate" } })
+                        @Html.ValidationMessageFor(model => model.MounthofBirth, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="input-field col m4 s12 pull-m8 " dir="rtl">
+                        @Html.LabelFor(model => model.YearofBirth, new { @class = "col m6 s12 offset-m5 offset-s12" })
+                        @Html.TextBoxFor(model => model.YearofBirth, new { htmlAttributes = new { @class = "validate" } })
+                        @Html.ValidationMessageFor(model => model.YearofBirth, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+            </div>
+            <div class="divider green"></div>
+            <div class="section">
+                <div class="row">
+                    <div class="input-field col m6 s12 push-m6">
+                        @Html.LabelFor(model => model.BirthCertificateId, new { @class = "col m6 s12 offset-m1 offset-s10" })
+                        @Html.TextBoxFor(model => model.BirthCertificateId, new { htmlAttributes = new { @class = "validate" } })
+                        @Html.ValidationMessageFor(model => model.BirthCertificateId, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="input-field col m6 s12 pull-m6">
+                        @Html.LabelFor(model => model.NationalCode, new { @class = "col m6 s12 offset-m5 offset-s12" })
+                        @Html.TextBoxFor(model => model.NationalCode, new { htmlAttributes = new { @class = "validate" } })
+                        @Html.ValidationMessageFor(model => model.NationalCode, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="divider green"></div>
+            <div class="section">
+                <div class="row">
+                    @*<div class="col-md-6 col-sm-6 col-xs-12">
+                            @Html.LabelFor(model => model.EId, "مدرک", new { @class = "control-label col-sm-2  col-md-2  col-xs-2" })
+                            <div class="col-sm-10 col-md-10 col-xs-10">
+                                @Html.DropDownList("EId", null, "", new { @class = "form-control text-center" })
+                                @Html.ValidationMessageFor(model => model.EId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>*@
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <label for="Sex" class="control-label col-sm-2  col-md-2  col-xs-2" style="color:darkBlue;font-size:15px">@FarsiLanguage.FarsiLanguage._Sex</label>
+                        <div class="col-sm-8 col-md-8 col-xs-8">
+                            <select id="Sex" name="Sex" class="form-control">
+                                <option>@FarsiLanguage.FarsiLanguage._Male</option>
+                                <option>@FarsiLanguage.FarsiLanguage._Female</option>
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </fieldset>
+        <fieldset style="margin-bottom:15px" dir="rtl">
+            <legend>@FarsiLanguage.FarsiLanguage._ContactStatus</legend>
+            <div class="divider green"></div>
+            <div class="section">
+                <div class="row">
+
+                    <div class="input-field col m4 s12 push-m8">
+                        @Html.LabelFor(model => model.Phone, new { @class = "col m6 s12 offset-m1 offset-s10" })
+                        @Html.TextBoxFor(model => model.Phone, new { htmlAttributes = new { @class = "validate" } })
+                        @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="input-field col m4 s12">
+                        @Html.LabelFor(model => model.MobileNumber, new { @class = "col m6 s12 offset-m1 offset-s10" })
+                        @Html.TextBoxFor(model => model.MobileNumber, new { htmlAttributes = new { @class = "validate" } })
+                        @Html.ValidationMessageFor(model => model.MobileNumber, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="input-field col m4 s12 pull-m8">
+                        @Html.LabelFor(model => model.Email, new { @class = "col m6 s12 offset-m1 offset-s10" })
+                        @Html.TextBoxFor(model => model.Email, new { htmlAttributes = new { @class = "validate" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset style="margin-bottom:15px" dir="rtl">
+            <legend>@FarsiLanguage.FarsiLanguage._LocationStatus</legend>
+            <div class="divider green"></div>
+            <div class="section">
+                <div class="row">
+
+                    @*<div class="col m4 s12 push-m8">
+                            @Html.LabelFor(model => model.CName.CName, "نام شهر", new { @class = "col m6 s12 offset-m6 offset-s12", @style = "color:darkBlue;font-size:15px" })
+                            @Html.DropDownList("CId", null, "", new { @class = "browser-default" })
+                            @Html.ValidationMessageFor(model => model.CId, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="col m4 s12" dir="rtl">
+                            @Html.LabelFor(model => model.SName.SName, "نام استان", new { @class = "col m6 s12 offset-m6 offset-s12", @style = "color:darkBlue;font-size:15px" })
+                            @Html.DropDownList("SId", null, "", new { @class = "browser-default" })
+                            @Html.ValidationMessageFor(model => model.SId, "", new { @class = "text-danger" })
+                        </div>*@
+                    <div class="input-field col m12 s12 " dir="rtl">
+                        @Html.LabelFor(model => model.PostalCode, new { @class = "col m6 s12 offset-m5 offset-s12" })
+                        @Html.TextBoxFor(model => model.PostalCode, new { htmlAttributes = new { @class = "validate" } })
+                        @Html.ValidationMessageFor(model => model.PostalCode, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+            </div>
+            <div class="divider green"></div>
+            <div class="section">
+                <div class="row ">
+
+                    <div class="input-field col m12 s12">
+                        @Html.TextAreaFor(model => model.Address, htmlAttributes: new { @class = "materialize-textarea", @style = "width: 100%; max-width: 100%;", @length = "500" })
+                        @Html.LabelFor(model => model.Address, new { @class = "col m6 s12 offset-m5 offset-s12" })
+                        @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset style="margin-bottom:15px" dir="rtl">
+            <legend>@FarsiLanguage.FarsiLanguage._BankStatus</legend>
+            <div class="divider green"></div>
+            <div class="section">
+                <div class="row">
+                    <div class="input-field col m3 s12 push-m9">
+                        @Html.LabelFor(model => model.AcountNumber, new { @class = "col m6 s12 offset-m1 offset-s10" })
+                        @Html.TextBoxFor(model => model.AcountNumber, new { htmlAttributes = new { @class = "validate" } })
+                        @Html.ValidationMessageFor(model => model.AcountNumber, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="input-field col m3 s12 push-m3">
+                        @Html.LabelFor(model => model.CardNumber, new { @class = "col m6 s12 offset-m5 offset-s12" })
+                        @Html.TextBoxFor(model => model.CardNumber, new { htmlAttributes = new { @class = "validate" } })
+                        @Html.ValidationMessageFor(model => model.CardNumber, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="input-field col m3 s12 pull-m3 " dir="rtl">
+                        @Html.LabelFor(model => model.BranchName, new { @class = "col m6 s12 offset-m5 offset-s12" })
+                        @Html.TextBoxFor(model => model.BranchName, new { htmlAttributes = new { @class = "validate" } })
+                        @Html.ValidationMessageFor(model => model.BranchName, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="input-field col m3 s12 pull-m9 ">
+                        @Html.LabelFor(model => model.BranchCode, new { @class = "col m6 s12 offset-m5 offset-s12" })
+                        @Html.TextBoxFor(model => model.BranchCode, new { htmlAttributes = new { @class = "validate" } })
+                        @Html.ValidationMessageFor(model => model.BranchCode, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="divider green"></div>
+            <div class="section">
+                <div class="row">
+                    <div class="input-field col m6 s12 push-m6">
+                        @Html.LabelFor(model => model.ShabaName, new { @class = "col m6 s12 offset-m1 offset-s10" })
+                        @Html.TextBoxFor(model => model.ShabaName, new { htmlAttributes = new { @class = "validate" } })
+                        @Html.ValidationMessageFor(model => model.ShabaName, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="input-field col m6 s12 pull-m6">
+                        @Html.LabelFor(model => model.InsuranceNumber1, new { @class = "col m6 s12 offset-m5 offset-s12" })
+                        @Html.TextBoxFor(model => model.UserName, new { htmlAttributes = new { @class = "validate", @id = "InsuranceNumber" } })
+                        @Html.ValidationMessageFor(model => model.InsuranceNumber1, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+            </div>
+
+        </fieldset>
+
+        <fieldset style="margin-bottom:15px" dir="rtl">
+            <legend>@FarsiLanguage.FarsiLanguage._Permition</legend>
+            @*<div class="divider green"></div>
+                <div class="section">
+                    <div class="row">
+                        <div class="input-field col m6 s12 push-m6">
+                            @Html.LabelFor(model => model.Password, new { @class = "col m6 s12 offset-m1 offset-s10" })
+                            @Html.PasswordFor(model => model.Password, new { htmlAttributes = new { @class = "validate" } })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="input-field col m6 s12 pull-m6">
+                            @Html.LabelFor(model => model.ConfirmPassword, new { @class = "col m6 s12 offset-m5 offset-s12" })
+                            @Html.PasswordFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "validate" } })
+                            @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+                </div>*@
+            <div class="divider green"></div>
+            <div class="section">
+                <div class="row right">
+                    <div class="col m12 s12">
+                        @Html.Label("سطح دسترسی", new { @class = "control-label col-md-2" })
+                        <span class="col-md-10">
+                            @foreach (var item in Model.RolesList)
+                            {
+                                <input type="checkbox" name="SelectedRole" value="@item.Value" checked="@item.Selected" class=" filled-in" id="@item.Value" />
+                                @Html.Label(item.Value, new { @class = "col m9" })
+                            }
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+
+        </fieldset>
+
+        <div class="section">
+            <div class="row center">
+                <div class="input-field col m12 s12">
+                    <button class="btn btn-large waves-effect waves-light orange" type="submit">
+                        @FarsiLanguage.FarsiLanguage._Edit
+                        <i class="material-icons left">edit</i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+}
+
+<div class="fixed-action-btn horizontal click-to-toggle">
+    <a class="btn-floating btn-large pulse orange">
+        <i class="material-icons">menu</i>
+    </a>
+    <ul>
+        <li><a href="@Url.Action("Index")" class="btn tooltipped btn-floating blue darken-1" data-position="top" data-delay="50" data-tooltip="لیست"><i class="material-icons">arrow_back</i></a></li>
+    </ul>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#UserName").prop("disabled", true);
+        $("input").addClass("text-center");
+    });
+</script>

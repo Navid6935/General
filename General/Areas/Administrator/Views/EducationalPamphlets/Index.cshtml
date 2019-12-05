@@ -1,0 +1,62 @@
+﻿@model IEnumerable<General.Areas.Administrator.Models.EducationalPamphlets>
+
+@{
+    ViewBag.Title = "ارسال پست آموزشی";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table table-bordered table-striped text-center" dir="rtl" style="margin-top:15px">
+    <tr>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.EPIssue)
+        </th>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.EPDescription)
+        </th>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.Image)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.EPIssue)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.EPDescription)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => item.Image)
+            </td>
+            <td class="text-center">
+                <a href="@Url.Action("Details", new { id=item.EPId })" class="btn-floating tooltipped blue" data-position="right" data-delay="50" data-tooltip="جزئیات" blue"><i class="material-icons">dehaze</i></a> |
+                <a href="@Url.Action("Response", new { id=item.EPId })" class="btn-floating tooltipped green darken-2" data-position="top" data-delay="50" data-tooltip="ارسال پاسخ" blue"><i class="material-icons">check_circle</i></a> |
+                <a href="@Url.Action("Delete", new { id=item.EPId })" class="btn-floating tooltipped red" data-position="left" data-delay="50" data-tooltip="حذف" blue"><i class="material-icons">delete</i></a>
+            </td>
+        </tr>
+    }
+
+</table>
+<div class="fixed-action-btn horizontal click-to-toggle">
+    <a class="btn-floating btn-large pulse blue">
+        <i class="material-icons">menu</i>
+    </a>
+    <ul>
+        <li><a href="@Url.Action("AdminsMainPage", "AdminGeneralpages", new { area = "Administrator" }, null)" class="btn tooltipped btn-floating purple darken-3" data-position="top" data-tooltip="صفحه مدیریت" data-delay="50"><i class="material-icons">person</i></a></li>
+        <li><a href="@Url.Action("Index", "Home", new { area = "" }, null)" class="btn tooltipped btn-floating blue darken-3" data-position="top" data-tooltip="صفحه اصلی" data-delay="50"><i class="material-icons">home</i></a></li>
+        <li><a href="@Url.Action("create")" class="btn tooltipped btn-floating green darken-1" data-position="top" data-delay="50" data-tooltip="ایجاد"><i class="material-icons">create_new_folder</i></a></li>
+
+
+    </ul>
+</div>
+<script src="//Code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript">
+       var str1 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._AdministratorPage, "AdminsMainPage", "AdminGeneralpages", new { area = "Administrator" }, null)</li>';
+        var str2 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._EducationalPamphletsCreate, "Index")</li>';
+        $('.crumbs').append(str1);
+        $('.crumbs').append(str2);
+
+</script>

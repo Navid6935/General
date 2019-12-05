@@ -1,0 +1,104 @@
+﻿
+@{
+    ViewBag.Title = "صفحه مدیریت";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout-Admin.cshtml";
+}
+
+<link href="~/Content/Cascadingmenu.css" rel="stylesheet" />
+
+<div class="row">
+    <nav class="MyNav text-right">
+        <ul class="MyUl">
+
+            <li class="drop">
+                <a href="#">@FarsiLanguage.FarsiLanguage._InstallmentManagment</a>
+
+                <div class="dropdownContain">
+                    <div class="dropOut">
+                        <div class="triangle"></div>
+                        <ul>
+                            <li><a href="@Url.Action("Index", "UsersAdmin", new { area = "Administrator"})" class="Li_A" style="color: #777;font-size:13px;padding:-5px !important">@FarsiLanguage.FarsiLanguage._CreateInstallment</a></li>
+                            <li><a href="@Url.Action("CheckPayment", "Installments", new { area = "Administrator"})" class="Li_A" style="padding:-5px !important">@FarsiLanguage.FarsiLanguage._InstallmenPaymentstAgreement</a></li>
+                            <li><a href="@Url.Action("PaymentExelExport", "Installments", new { area = "Administrator"})" class="Li_A" style="color: #777;padding:0px -5px !important">@FarsiLanguage.FarsiLanguage._PaymentsConfirmReport</a></li>
+                            <li><a href="@Url.Action("Index", "Installments", new { area = "Administrator", Id = Session["Id"] })" class="Li_A" style="color: #777">@FarsiLanguage.FarsiLanguage._ShowInstallment</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </li>
+            <li class="drop">
+                <a href="#">@FarsiLanguage.FarsiLanguage._UsersManagment</a>
+
+                <div class="dropdownContain">
+                    <div class="dropOut">
+                        <div class="triangle"></div>
+                        <ul>
+                            <li><a href="~/Administrator/UsersAdmin/create" style="color:#333">@FarsiLanguage.FarsiLanguage._CreateUsers</a></li>
+                            <li><a href="~/Administrator/UsersAdmin/Index">@FarsiLanguage.FarsiLanguage._UsersList</a></li>
+                            <li><a href="~/Administrator/UsersAdmin/IndexDisconnectetCoppertion">@FarsiLanguage.FarsiLanguage._DisconnectedUser</a></li>
+                            <li><a href="~/Administrator/UsersAdmin/Index">@FarsiLanguage.FarsiLanguage._Edit</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </li>
+            <li class="drop">
+                <a href="#">@FarsiLanguage.FarsiLanguage._PercentageAndVariablesManagment</a>
+
+                <div class="dropdownContain">
+                    <div class="dropOut">
+                        <div class="triangle"></div>
+                        <ul>
+                            <li><a href="@Url.Action("Index", "Arms", new { area = "Administrator", Id = Session["Id"] })" class="Li_A">@FarsiLanguage.FarsiLanguage._CreateArmsForAll</a></li>
+                            <li><a href="@Url.Action("index", "Percentages", new { area = "Administrator", Id = Session["Id"] })" class="Li_A">@FarsiLanguage.FarsiLanguage._PercentageManage</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </li>
+            <li class="drop">
+                <a href="#">@FarsiLanguage.FarsiLanguage._Support</a>
+
+                <div class="dropdownContain">
+                    <div class="dropOut">
+                        <div class="triangle"></div>
+                        <ul>
+                            <li><a href="~/Users/Supports/IndexManager" style="color:#333">@FarsiLanguage.FarsiLanguage._ShowQuestions</a></li>
+                            <li><a href="~/Administrator/EducationalPamphlets/Index">@FarsiLanguage.FarsiLanguage._SendLearningPost</a></li>
+                            <li><a href="~/Administrator/Messages/Create">@FarsiLanguage.FarsiLanguage._Messages</a></li>
+                       </ul>
+                    </div>
+                </div>
+
+            </li>
+            <li class="drop">
+                <a href="#">@FarsiLanguage.FarsiLanguage._Finantial</a>
+
+                <div class="dropdownContain">
+                    <div class="dropOut">
+                        <div class="triangle"></div>
+                        <ul>
+                            <li><a href="@Url.Action("AllWholeThingPeyments", "UsersWallets", new { area = "Users"})" class="Li_A" style="padding:-5px !important;font-size:13px">@FarsiLanguage.FarsiLanguage._AllWholeThingsPeyments</a></li>
+                            <li><a href="@Url.Action("AllWholeThingPeymented", "UsersWallets", new { area = "Users"})" class="Li_A" style="padding:-5px !important;font-size:13px">@FarsiLanguage.FarsiLanguage._AllWholeThingsPeymented</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </li>
+            @*<li><a href="#">راهنمایی</a></li>*@
+        </ul>
+    </nav>
+</div>
+<div class="fixed-action-btn horizontal click-to-toggle">
+    <a class="btn-floating btn-large pulse orange">
+        <i class="material-icons">menu</i>
+    </a>
+    <ul>
+        <li><a href="@Url.Action("Index")" class="btn tooltipped btn-floating blue darken-1" data-position="top" data-delay="50" data-tooltip="لیست"><i class="material-icons">arrow_back</i></a></li>
+    </ul>
+</div>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script>
+    var str1 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._AdministratorPage, "AdminsMainPage", "AdminGeneralpages", new { area = "Administrator" }, null)</li>';
+    $('.crumbs').append(str1);
+</script>

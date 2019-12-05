@@ -1,0 +1,109 @@
+﻿
+@{
+    ViewBag.Title = "صفحه اصلی - یوزر";
+    Layout = "~/Areas/Users/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/Cascadingmenu.css" rel="stylesheet" />
+
+
+<nav class="MyNav text-right">
+    <ul class="MyUl">
+        <li class="drop">
+            <a href="#">@FarsiLanguage.FarsiLanguage._Installment</a>
+
+            <div class="dropdownContain">
+                <div class="dropOut">
+                    <div class="triangle"></div>
+                    <ul>
+                        <li><a href="@Url.Action("Installment", "GeneralPages", new { area = "Users", Id = Session["Id"] })" class="Li_A" style="color: #777">@FarsiLanguage.FarsiLanguage._Payment</a></li>
+                        <li><a href="@Url.Action("Index", "Installments", new { area = "Administrator", Id = Session["Id"] })" class="Li_A" style="color: #777">@FarsiLanguage.FarsiLanguage._ShowInstallment</a></li>
+
+                    </ul>
+
+                </div>
+            </div>
+
+        </li>
+        <li class="drop">
+            <a href="#">@FarsiLanguage.FarsiLanguage._Reports</a>
+
+            <div class="dropdownContain">
+                <div class="dropOut">
+                    <div class="triangle"></div>
+                    <ul>
+                        <li><a href="@Url.Action("PersonsInArms", "Reports", new { area = "Users", Id = Session["Id"] })" class="Li_A" style="color: #777">گزارش افراد حاضر در تیم</a></li>
+                        <li><a href="@Url.Action("LevelPresonelArms", "Reports", new { area = "Users", Id = Session["Id"] })" class="Li_A" style="color: #777;font-size:12px">گزارش وضعیت افراد بر اساس لایه </a></li>
+
+                    </ul>
+                </div>
+            </div>
+
+        </li>
+        <li class="drop">
+            <a href="#">پروفایل</a>
+
+            <div class="dropdownContain">
+                <div class="dropOut">
+                    <div class="triangle"></div>
+                    <ul>
+                        <li><a href="@Url.Action("ChangePassword2", "Manage", new { area = "" ,  UserName=Session["PID"]})" class="Li_A" style="color: #777">تغییر رمز عبور</a></li>
+
+                    </ul>
+                </div>
+            </div>
+
+        </li>
+        <li class="drop">
+            <a href="#">@FarsiLanguage.FarsiLanguage._Support</a>
+
+            <div class="dropdownContain">
+                <div class="dropOut">
+                    <div class="triangle"></div>
+                    <ul>
+                        <li><a href="@Url.Action("Create", "Supports", new { area = "Users" })" class="Li_A" style="color: #777">تماس با ما</a></li>
+                        <li><a href="@Url.Action("Index", "Messages", new { area = "Administrator" })" class="Li_A" style="color: #777">پیام ها و اطلاعیه ها</a></li>
+
+                    </ul>
+                </div>
+            </div>
+
+        </li>
+        <li class="drop">
+            <a href="#">@FarsiLanguage.FarsiLanguage._Finantial</a>
+
+            <div class="dropdownContain">
+                <div class="dropOut">
+                    <div class="triangle"></div>
+                    <ul>
+                        <li><a href="~/Users/Reports/MountlyCashReports">گزارش مجموع درآمد</a></li>
+                        <li><a href="~/Users/Reports/CashReportsOnPeriod">گزارش زمانی درآمد</a></li>
+
+                    </ul>
+                </div>
+            </div>
+
+        </li>
+    </ul>
+</nav>
+<div class="fixed-action-btn horizontal click-to-toggle">
+    <a class="btn-floating btn-large pulse orange">
+        <i class="material-icons">menu</i>
+    </a>
+    <ul>
+        <li><a href="@Url.Action("Index")" class="btn tooltipped btn-floating blue darken-1" data-position="top" data-delay="50" data-tooltip="لیست"><i class="material-icons">arrow_back</i></a></li>
+    </ul>
+</div>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script>
+    var str1 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._UserMainPage, "UserMainPage", "GeneralPages", new { area = "Users" }, null)</li>';
+
+    $('.crumbs').append(str1);
+
+    $(document).ready(function () {
+        $("Label").css("font-size", "15px");
+        $("Label").css("color", "#16008b");
+        $('label').css("margin-top", "8px");
+
+    });
+</script>

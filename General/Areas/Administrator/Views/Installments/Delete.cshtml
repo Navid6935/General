@@ -1,0 +1,50 @@
+﻿@model General.Areas.Administrator.Models.Installment
+
+@{
+    ViewBag.Title = "حذف اقساط";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="panel panel-danger right-align red-text text-darken-3" style="margin-top:15px;padding-right:5px;font-size:25px">آیا از حذف این آیتم مطمئن هستید؟</div>
+<div>
+
+    <div class="row">
+        <div class="col-md-3 col-sm-6 col-xs-12">
+
+            <span class="col-md-3">@Html.DisplayNameFor(model => model.DayInstallmentNumber)</span>
+            <div class="col-sm-9 col-md-9 col-xs-9 ">
+                @Html.DisplayFor(model => model.DayInstallmentNumber, null, "")
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <span class="col-md-3">@Html.DisplayNameFor(model => model.MounthInstallmentNumber)</span>
+            <div class="col-sm-9 col-md-9 col-xs-9 ">
+                @Html.DisplayFor(model => model.MounthInstallmentNumber, null, "")
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <span class="col-md-3">@Html.DisplayNameFor(model => model.YearInstallmentNumber)</span>
+            <div class="col-sm-9 col-md-9 col-xs-9 ">
+                @Html.DisplayFor(model => model.YearInstallmentNumber, null, "")
+
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-12">
+            <span class="col-md-4">@Html.DisplayNameFor(model => model.InstallmentsNumbersAmount)</span>
+            <div class="col-sm-8 col-md-8 col-xs-8 ">
+                @Html.DisplayFor(model => model.InstallmentsNumbersAmount)
+
+            </div>
+        </div>
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="حذف" class="btn btn-default red" />
+        </div>
+    }
+</div>

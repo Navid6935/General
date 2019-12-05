@@ -1,0 +1,55 @@
+﻿@model IEnumerable<General.Areas.Administrator.Models.AllArmsAndIncome>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ArmsNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LimitIncomes)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ArmsNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LimitIncomes)
+        </td>
+        <td>
+            <a href="@Url.Action("Details", new { id=item.ArmAndIncomeId })" class="btn-floating tooltipped blue" data-position="right" data-delay="50" data-tooltip="جزئیات" blue"><i class="material-icons">dehaze</i></a> |
+            <a href="@Url.Action("Edit", new { id=item.ArmAndIncomeId })" class="btn-floating tooltipped yellow darken-2" data-position="top" data-delay="50" data-tooltip="ویرایش" blue"><i class="material-icons">edit</i></a> |
+            <a href="@Url.Action("Delete", new { id=item.ArmAndIncomeId })" class="btn-floating tooltipped red" data-position="left" data-delay="50" data-tooltip="حذف" blue"><i class="material-icons">delete</i></a>
+        </td>
+    </tr>
+}
+
+</table>
+<div class="fixed-action-btn horizontal click-to-toggle">
+    <a class="btn-floating btn-large pulse blue">
+        <i class="material-icons">menu</i>
+    </a>
+    <ul>
+
+        <li><a href="@Url.Action("Index", "Cities", new { area = "BasicInformation" }, null)" class="btn tooltipped btn-floating purple darken-3" data-position="top" data-tooltip="نام شهر" data-delay="50"><i class="material-icons">location_city</i></a></li>
+        <li><a href="@Url.Action("Index", "Educations", new { area = "BasicInformation" }, null)" class="btn tooltipped btn-floating yellow darken-3" data-position="top" data-tooltip="@FarsiLanguage.FarsiLanguage._EducationName" data-delay="50"><i class="material-icons">school</i></a></li>
+        <li><a href="@Url.Action("Index", "States", new { area = "BasicInformation" }, null)" class="btn tooltipped btn-floating red darken-3" data-position="top" data-tooltip="@FarsiLanguage.FarsiLanguage._StateName" data-delay="50"><i class="material-icons">business</i></a></li>
+
+        <li><a href="@Url.Action("Index", "RolesAdmin", new { area = "Administrator" }, null)" class="btn tooltipped btn-floating grey darken-3" data-position="top" data-tooltip="@FarsiLanguage.FarsiLanguage._Permition" data-delay="50"><i class="material-icons">fingerprint</i></a></li>
+        <li><a href="@Url.Action("Index", "Home", new { area = "" }, null)" class="btn tooltipped btn-floating blue darken-3" data-position="top" data-tooltip="صفحه اصلی" data-delay="50"><i class="material-icons">home</i></a></li>
+        <li><a href="@Url.Action("create")" class="btn tooltipped btn-floating green darken-1" data-position="top" data-delay="50" data-tooltip="ایجاد"><i class="material-icons">create_new_folder</i></a></li>
+    </ul>
+</div>

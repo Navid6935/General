@@ -1,0 +1,71 @@
+﻿@model IEnumerable<General.Areas.Administrator.Models.Messages>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+
+<table class="right-align striped bordered highlight centered" style="margin-top:15px" dir="rtl">
+    <tr>
+        <th class="center">
+            @Html.DisplayNameFor(model => model.Mday)
+        </th>
+        <th class="center">
+            @Html.DisplayNameFor(model => model.MMounth)
+        </th>
+        <th class="center">
+            @Html.DisplayNameFor(model => model.MYear)
+        </th>
+        <th class="center">
+            @Html.DisplayNameFor(model => model.MIssue)
+        </th>
+        <th class="center">
+            @Html.DisplayNameFor(model => model.MDescription)
+        </th>
+        <th class="center">
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mday)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MMounth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MYear)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MIssue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MDescription)
+            </td>
+            <td>
+                <a href="@Url.Action("Details", new { id=item.MId })" class="btn-floating tooltipped blue" data-position="right" data-delay="50" data-tooltip="جزئیات" blue"><i class="material-icons">dehaze</i></a>
+            </td>
+        </tr>
+    }
+
+</table>
+<div class="fixed-action-btn horizontal click-to-toggle">
+    <a class="btn-floating btn-large pulse blue">
+        <i class="material-icons">menu</i>
+    </a>
+    <ul>
+
+        <li><a href="@Url.Action("Index", "Home", new { area = "" }, null)" class="btn tooltipped btn-floating blue darken-3" data-position="top" data-tooltip="صفحه اصلی" data-delay="50"><i class="material-icons">home</i></a></li>
+        <li><a href="@Url.Action("create")" class="btn tooltipped btn-floating green darken-1" data-position="top" data-delay="50" data-tooltip="ایجاد"><i class="material-icons">create_new_folder</i></a></li>
+    </ul>
+</div>
+<script src="//Code.jquery.com/jquery.min.js"></script>
+<script>
+    var str1 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._UserMainPage, "UserMainPage", "GeneralPages", new { area = "Users" }, null)</li>';
+    var str2 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._MessagesList, "Index")</li>';
+    $('.crumbs').append(str1);
+    $('.crumbs').append(str2);
+</script>

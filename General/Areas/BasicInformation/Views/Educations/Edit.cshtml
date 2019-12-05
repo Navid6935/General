@@ -1,0 +1,64 @@
+﻿@model General.Areas.BasicInformation.Models.Education
+
+@{
+    ViewBag.Title = "ویرایش - مدرک ";
+    Layout = "~/Areas/BasicInformation/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script>
+        var str1 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._Education, "Index", "Educations", new { area = "BasicInformation" }, null)</li>';
+    var str2 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._Edit, "Edit", "Educations", new { area = "BasicInformation" }, null)</li>';
+    $('.crumbs').append(str1);
+    $('.crumbs').append(str2);
+
+    $(document).ready(function () {
+        $('input#input_text, textarea#textarea2').characterCounter();
+        $("Label").css("font-size", "15px");
+        $("Label").css("color", "#000000");
+    });
+
+</script>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+   
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.EId)
+    <div class="row right-align">
+        <fieldset style="margin-bottom:15px" dir="rtl">
+            <legend>@FarsiLanguage.FarsiLanguage._City</legend>
+            <div class="divider green"></div>
+            <div class="section">
+                <div class="row">
+                    <div class="input-field col m4 s12 push-m8">
+                        @Html.LabelFor(model => model.EName, new { @class = "col m6 s12 offset-m1 offset-s10" })
+                        @Html.TextBoxFor(model => model.EName, new { htmlAttributes = new { @class = "validate" } })
+                        @Html.ValidationMessageFor(model => model.EName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <div class="section">
+            <div class="row center">
+                <div class="input-field col m12 s12">
+                    <button class="btn btn-large waves-effect waves-light orange" type="submit">
+                        @FarsiLanguage.FarsiLanguage._Edit
+                        <i class="material-icons left">edit</i>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<div class="fixed-action-btn horizontal click-to-toggle">
+    <a class="btn-floating btn-large pulse orange">
+        <i class="material-icons">menu</i>
+    </a>
+    <ul>
+        <li><a href="@Url.Action("Index")" class="btn tooltipped btn-floating blue darken-1" data-position="top" data-delay="50" data-tooltip="لیست"><i class="material-icons">arrow_back</i></a></li>
+    </ul>
+</div>

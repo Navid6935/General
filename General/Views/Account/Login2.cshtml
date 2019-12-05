@@ -1,0 +1,146 @@
+﻿@using General.Models
+@model LoginViewModel2
+@{
+    ViewBag.Title = "صفحه ورود";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+
+}
+@*<script>
+        window.onload = function () {
+            $("#UserName").focus();
+        }
+    </script>*@
+<style>
+    #refresh:hover {
+        cursor: pointer;
+    }
+
+    hr {
+        display: block;
+        height: 1px;
+        border: 0;
+        border-top: 1px solid #d6e9c6;
+        margin: 1em 0;
+        padding: 0;
+    }
+</style>
+
+<div class="container white" style="width:550px;border:1px solid grey;border-radius:5px;margin-top:20px">
+
+    <fieldset style="margin-bottom:5px" dir="rtl">
+        <legend>اطلاعات بازاریابی</legend>
+        <div class="row" style="margin-bottom:0px">
+            <section id="loginForm">
+                @using (Html.BeginForm("Login2", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="row" style="margin-bottom:0px">
+                        <div class="row" style="margin-bottom:0px">
+
+                            <div class=" col m6 s12 push-m3">
+
+
+                                @Html.TextBoxFor(model => model.MarketingCode, new { @placeholder = FarsiLanguage.FarsiLanguage._MarketingCode, @class = "text-center" })
+                            </div>
+                        </div>
+                        <div class="col m6 s12 row right-align push-m3">
+                            @Html.ValidationMessageFor(model => model.MarketingCode, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    @*<div class="row" style="margin-bottom:0px">
+                        <div class="row" style="margin-bottom:0px">
+
+                            <div class=" col m6 s12 push-m3">
+
+                                <input type="text" placeholder="@FarsiLanguage.FarsiLanguage._InsuranceNumber" name="InsuranceNumber" class="text-center" />
+                            </div>
+                        </div>
+
+                        <div class="col m6 s12 row right-align push-m3">
+                            @Html.ValidationMessageFor(model => model.MarketingCode, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
+                    <div class="row" style="margin-bottom:0px">
+                        <div class="row " style="margin-bottom:0px">
+                            <div class="col m6 s12 push-m3">
+
+                                @Html.PasswordFor(model => model.Password2, new { @placeholder = FarsiLanguage.FarsiLanguage._Password, @class = "text-center" })
+                            </div>
+                        </div>
+
+                        <div class="col m6 s12 row right-align push-m3">
+                            @Html.ValidationMessageFor(model => model.Password2, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom:0px">
+                        <div class="row ">
+                            <div class=" col m12 s12 pull-m4">
+                                <img alt="Captcha" id="imgcpatcha" src="@Url.Action("CaptchaImage","Captcha")" style="border-radius:5px;width:150px" />
+                                <i class="material-icons green-text text-darken-3" id="refresh">refresh</i>
+                            </div>
+                        </div>
+                        <div class="row center-align" style="margin-bottom:0px">
+                            <div class="  col m6 s12 push-m3">
+                                @Html.TextBoxFor(model => model.Captcha, new { @placeholder = FarsiLanguage.FarsiLanguage._SumResult, @class = "text-center" })
+                            </div>
+                            <div class="col m12 s12 row push-m1" style="margin-bottom:0px">
+                                @Html.ValidationMessageFor(model => model.Captcha, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <hr style="margin-bottom:0px" />
+
+                    <div class="section" style="padding-top:0px;padding-bottom:0px">
+                        <div class="row center" style="margin-bottom:0px">
+                            <div class="input-field col m6 s6" style="margin-top:30px">
+                                <a href="@Url.Action("ForgetPassword2", "Account", new { area = ""})" style="color: blue;font-size:13px;padding:-5px !important">@FarsiLanguage.FarsiLanguage._ForgetPessword</a>
+                            </div>
+                            <div class="input-field col m6 s6">
+                                <button class="btn btn-large waves-effect waves-light blue" type="submit">
+                                    @FarsiLanguage.FarsiLanguage._Login
+                                    <i class="material-icons left">lock_open</i>
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                }
+            </section>
+        </div>
+        <div class="col-md-4">
+            <section id="socialLoginForm">
+                @*//   @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })*@
+            </section>
+        </div>
+    </fieldset>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<div class="fixed-action-btn horizontal click-to-toggle">
+    <a class="btn-floating btn-large pulse green">
+        <i class="material-icons">menu</i>
+    </a>
+    <ul>
+        <li><a href="@Url.Action("Index", "Home", new { area = "" })" class="btn tooltipped btn-floating green darken-1" data-position="top" data-delay="50" data-tooltip="صفحه اصلی"><i class="material-icons">home</i></a></li>
+    </ul>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('#refresh').click(function () {
+
+            var d = new Date();
+            $("#imgcpatcha").attr("src", "../Captcha/CaptchaImage?" + d.getTime());
+
+        });
+    });
+</script>
+<script src="//Code.jquery.com/jquery.min.js"></script>

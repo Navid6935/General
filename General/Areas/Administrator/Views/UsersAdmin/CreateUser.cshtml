@@ -1,0 +1,891 @@
+﻿@model General.Models.EditUserViewModel
+
+@{
+    ViewBag.Title = "ثبت نام -  کاربران";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout-CreateUser.cshtml";
+
+}
+<link href="~/Content/sweetalert/sweet-alert.css" rel="stylesheet" />
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.Id)
+
+    <div class="row right-align" dir="rtl">
+        <div id="tabs">
+            <ul class="tabs tabs-fixed-width blue lighten-1" style="margin-top:25px;border-radius:4px">
+                <li class="tab col m3 s3"><a class="active" href="#tabs-1" style="font-size:20px;color:darkblue" id="Status">@FarsiLanguage.FarsiLanguage._Status</a></li>
+                <li class="tab col m3 s3" id="tab-2"><a href="#tabs-2" id="tabsa-2" style="font-size:20px;color:darkblue">@FarsiLanguage.FarsiLanguage._Position</a></li>
+                <li class="tab col m3 s3"><a href="#tabs-4" id="tabsa-4" style="font-size:20px;color:darkblue">@FarsiLanguage.FarsiLanguage._MarketingCode</a></li>
+            </ul>
+        </div>
+        @* ++++++++++++++++++++++++++++++++++++++++++++++  First Tab  ++++++++++++++++++++++++++++++++++++++++++++++ *@
+        <div id="tabs-1" class="col s12">
+
+            <fieldset style="margin-bottom:15px" dir="rtl">
+                <legend>@FarsiLanguage.FarsiLanguage._PersonStatus</legend>
+                <hr class="panel-primary" />
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-sm-2  col-md-2  col-xs-2" })
+                        <div class="col-sm-8 col-md-8 col-xs-8">
+                            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control text-center", @style = " max-width: 100%;", @disabled = "disabled" } })
+                            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <hr class="panel-primary" />
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-sm-2  col-md-2  col-xs-2" })
+                        <div class="col-sm-8 col-md-8 col-xs-8">
+                            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control text-center", @style = " max-width: 100%;" } })
+                            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <hr class="panel-primary" />
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-sm-2  col-md-2  col-xs-2" })
+                        <div class="col-sm-8 col-md-8 col-xs-8">
+                            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control text-center", @style = " max-width: 100%;" } })
+                            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <hr class="panel-primary" />
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        @Html.LabelFor(model => model.FathersName, htmlAttributes: new { @class = "control-label col-sm-2  col-md-2  col-xs-2" })
+                        <div class="col-sm-8 col-md-8 col-xs-8">
+                            @Html.EditorFor(model => model.FathersName, new { htmlAttributes = new { @class = "form-control text-center", @style = " max-width: 100%;" } })
+                            @Html.ValidationMessageFor(model => model.FathersName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <hr class="panel-primary" />
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        @Html.LabelFor(model => model.DayofBirth, htmlAttributes: new { @class = "control-label col-sm-2  col-md-2  col-xs-2" })
+                        <div class="col-sm-8 col-md-8 col-xs-8">
+                            <select name="DayofBirth" class="form-control" id="DayofBirth" style=" max-width: 100%;">
+                                <option value=""></option>
+                                @for (int i = 01; i <= 31; i++)
+                                {
+                                    <option value="@i">@i</option>
+
+                                }
+                            </select>
+                            @Html.ValidationMessageFor(model => model.DayofBirth, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <hr class="panel-primary" />
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        @Html.LabelFor(model => model.MounthofBirth, htmlAttributes: new { @class = "control-label col-sm-2  col-md-2  col-xs-2" })
+                        <div class="col-sm-8 col-md-8 col-xs-8">
+                            <select name="MounthofBirth" class="form-control" id="MounthofBirth" style=" max-width: 100%;">
+                                <option value=""></option>
+                                <option value="فروردین">فروردین</option>
+                                <option value="اردیبهشت">اردیبهشت</option>
+                                <option value="خرداد">خرداد</option>
+                                <option value="تیر">تیر</option>
+                                <option value="مرداد">مرداد</option>
+                                <option value="شهریور">شهریور</option>
+                                <option value="مهر">مهر</option>
+                                <option value="آبان">آبان</option>
+                                <option value="آذر">آذر</option>
+                                <option value="دی">دی</option>
+                                <option value="بهمن">بهمن</option>
+                                <option value="اسفند">اسفند</option>
+
+                            </select>
+                            @Html.ValidationMessageFor(model => model.MounthofBirth, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <hr class="panel-primary" />
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        @Html.LabelFor(model => model.YearofBirth, htmlAttributes: new { @class = "control-label col-sm-2  col-md-2  col-xs-2" })
+                        <div class="col-sm-8 col-md-8 col-xs-8">
+                            <select name="YearofBirth" class="form-control" id="YearofBirth" style=" max-width: 100%;">
+                                <option value=""></option>
+
+                                @for (int j = 1330; j <= 1430; j++)
+                                {
+                                    <option value="@j">@j</option>
+
+                                }
+                            </select>
+                            @Html.ValidationMessageFor(model => model.MounthofBirth, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <hr class="panel-primary" />
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        @Html.LabelFor(model => model.BirthCertificateId, htmlAttributes: new { @class = "control-label col-sm-2  col-md-2  col-xs-2" })
+                        <div class="col-sm-8 col-md-8 col-xs-8">
+                            @Html.EditorFor(model => model.BirthCertificateId, new { htmlAttributes = new { @class = "form-control text-center", @style = " max-width: 100%;" } })
+                            @Html.ValidationMessageFor(model => model.BirthCertificateId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <hr class="panel-primary" />
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        @Html.LabelFor(model => model.NationalCode, htmlAttributes: new { @class = "control-label col-sm-2  col-md-2  col-xs-2" })
+                        <div class="col-sm-8 col-md-8 col-xs-8">
+                            @Html.EditorFor(model => model.NationalCode, new { htmlAttributes = new { @class = "form-control text-center", @style = " max-width: 100%;" } })
+                            @Html.ValidationMessageFor(model => model.NationalCode, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <hr class="panel-primary" />
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        @Html.LabelFor(model => model.EId, "مدرک", new { @class = "control-label col-sm-2  col-md-2  col-xs-2" })
+                        <div class="col-sm-8 col-md-8 col-xs-8">
+                            @Html.DropDownList("EId", null, "", new { @class = "form-control text-center", @style = " max-width: 100%;" })
+                            @Html.ValidationMessageFor(model => model.EId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <hr class="panel-primary" />
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <label for="Sex" class="control-label col-sm-2  col-md-2  col-xs-2" style="color:darkBlue;font-size:15px">@FarsiLanguage.FarsiLanguage._Sex</label>
+                        <div class="col-sm-8 col-md-8 col-xs-8">
+                            <select id="Sex" name="Sex" class="form-control" style=" max-width: 100%;">
+                                <option value=""></option>
+                                <option value="Male">@FarsiLanguage.FarsiLanguage._Male</option>
+                                <option value="Female">@FarsiLanguage.FarsiLanguage._Female</option>
+
+                            </select>
+                            @Html.ValidationMessageFor(model => model.NationalCode, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+
+            </fieldset>
+            <fieldset style="margin-bottom:15px" dir="rtl">
+                <legend>@FarsiLanguage.FarsiLanguage._ContactStatus</legend>
+                <hr class="panel-primary" />
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        @Html.LabelFor(model => model.Phone, htmlAttributes: new { @class = "control-label col-sm-2  col-md-2  col-xs-2" })
+                        <div class="col-sm-8 col-md-8 col-xs-8">
+                            @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control text-center", @style = " max-width: 100%;" } })
+                            @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <hr class="panel-primary" />
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        @Html.LabelFor(model => model.MobileNumber, htmlAttributes: new { @class = "control-label col-sm-2  col-md-2  col-xs-2" })
+                        <div class="col-sm-8 col-md-8 col-xs-8">
+                            @Html.EditorFor(model => model.MobileNumber, new { htmlAttributes = new { @class = "form-control text-center", @style = " max-width: 100%;" } })
+                            @Html.ValidationMessageFor(model => model.MobileNumber, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <hr class="panel-primary" />
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-sm-2  col-md-2  col-xs-2" })
+                        <div class="col-sm-8 col-md-8 col-xs-8">
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control text-center", @style = " max-width: 100%;" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset style="margin-bottom:15px" dir="rtl">
+                <legend>@FarsiLanguage.FarsiLanguage._LocationStatus</legend>
+                <hr class="panel-primary" />
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        @Html.LabelFor(model => model.CName.CName, htmlAttributes: new { @class = "control-label col-sm-2  col-md-2  col-xs-2" })
+                        <div class="col-sm-8 col-md-8 col-xs-8">
+                            @Html.EditorFor(model => model.CName.CName, new { htmlAttributes = new { @class = "form-control text-center", @style = " max-width: 100%;" } })
+                            @Html.ValidationMessageFor(model => model.CName.CName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <hr class="panel-primary" />
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        @Html.LabelFor(model => model.SName.SName, htmlAttributes: new { @class = "control-label col-sm-2  col-md-2  col-xs-2" })
+                        <div class="col-sm-8 col-md-8 col-xs-8">
+                            @Html.EditorFor(model => model.SName.SName, new { htmlAttributes = new { @class = "form-control text-center", @style = " max-width: 100%;" } })
+                            @Html.ValidationMessageFor(model => model.SName.SName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <hr class="panel-primary" />
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        @Html.LabelFor(model => model.PostalCode, htmlAttributes: new { @class = "control-label col-sm-2  col-md-2  col-xs-2" })
+                        <div class="col-sm-8 col-md-8 col-xs-8">
+                            @Html.EditorFor(model => model.PostalCode, new { htmlAttributes = new { @class = "form-control text-center", @style = " max-width: 100%;" } })
+                            @Html.ValidationMessageFor(model => model.PostalCode, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <hr class="panel-primary" />
+                <div class="section">
+                    <div class="row ">
+
+                        <div class="input-field col m12 s12" id="AddressDiv">
+                            @Html.TextAreaFor(model => model.Address, htmlAttributes: new { @class = "materialize-textarea", @style = "width: 100%; max-width: 100%;", @length = "500" })
+                            @Html.LabelFor(model => model.Address, new { @class = "col m6 s12 offset-m5 offset-s12" })
+                            @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset style="margin-bottom:15px" dir="rtl">
+                <legend>@FarsiLanguage.FarsiLanguage._BankStatus</legend>
+                <hr class="panel-primary" />
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        @Html.LabelFor(model => model.AcountNumber, htmlAttributes: new { @class = "control-label col-sm-2  col-md-2  col-xs-2" })
+                        <div class="col-sm-8 col-md-8 col-xs-8">
+                            @Html.EditorFor(model => model.AcountNumber, new { htmlAttributes = new { @class = "form-control text-center", @style = " max-width: 100%;" } })
+                            @Html.ValidationMessageFor(model => model.AcountNumber, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <hr class="panel-primary" />
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        @Html.LabelFor(model => model.BranchName, htmlAttributes: new { @class = "control-label col-sm-2  col-md-2  col-xs-2" })
+                        <div class="col-sm-8 col-md-8 col-xs-8">
+                            @Html.EditorFor(model => model.BranchName, new { htmlAttributes = new { @class = "form-control text-center", @style = " max-width: 100%;" } })
+                            @Html.ValidationMessageFor(model => model.BranchName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <hr class="panel-primary" />
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        @Html.LabelFor(model => model.CardNumber, htmlAttributes: new { @class = "control-label col-sm-2  col-md-2  col-xs-2" })
+                        <div class="col-sm-8 col-md-8 col-xs-8">
+                            @Html.EditorFor(model => model.CardNumber, new { htmlAttributes = new { @class = "form-control text-center", @style = " max-width: 100%;" } })
+                            @Html.ValidationMessageFor(model => model.CardNumber, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <hr class="panel-primary" />
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        @Html.LabelFor(model => model.BranchCode, htmlAttributes: new { @class = "control-label col-sm-2  col-md-2  col-xs-2" })
+                        <div class="col-sm-8 col-md-8 col-xs-8">
+                            @Html.EditorFor(model => model.BranchCode, new { htmlAttributes = new { @class = "form-control text-center", @style = " max-width: 100%;" } })
+                            @Html.ValidationMessageFor(model => model.BranchCode, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <hr class="panel-primary" />
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        @Html.LabelFor(model => model.ShabaName, htmlAttributes: new { @class = "control-label col-sm-2  col-md-2  col-xs-2" })
+                        <div class="col-sm-8 col-md-8 col-xs-8">
+                            @Html.EditorFor(model => model.ShabaName, new { htmlAttributes = new { @class = "form-control text-center", @style = " max-width: 100%;" } })
+                            @Html.ValidationMessageFor(model => model.ShabaName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <hr class="panel-primary" />
+
+                <div class="row">
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        @Html.LabelFor(model => model.InsuranceNumber6, htmlAttributes: new { @class = "control-label col-sm-8  col-md-8  col-xs-8" })
+                        <div class="col-sm-4 col-md-4 col-xs-12 ">
+                            @Html.EditorFor(model => model.InsuranceNumber6, new { htmlAttributes = new { @class = "form-control  text-center", @maxlength = "2", @disabled = "disabled" } })
+                            @Html.ValidationMessageFor(model => model.InsuranceNumber6, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-sm-2 col-md-2 col-xs-12 ">
+                        @Html.EditorFor(model => model.InsuranceNumber5, new { htmlAttributes = new { @class = "form-control text-center", @maxlength = "5", @disabled = "disabled" } })
+                        @Html.ValidationMessageFor(model => model.InsuranceNumber5, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-sm-1 col-md-1 col-xs-12 ">
+                        @Html.EditorFor(model => model.InsuranceNumber4, new { htmlAttributes = new { @class = "form-control text-center", @maxlength = "1", @disabled = "disabled" } })
+                        @Html.ValidationMessageFor(model => model.InsuranceNumber4, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-sm-1 col-md-1 col-xs-12 ">
+                        @Html.EditorFor(model => model.InsuranceNumber3, new { htmlAttributes = new { @class = "form-control text-center", @maxlength = "1", @disabled = "disabled" } })
+                        @Html.ValidationMessageFor(model => model.InsuranceNumber3, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-sm-2 col-md-2 col-xs-12 ">
+                        @Html.EditorFor(model => model.InsuranceNumber2, new { htmlAttributes = new { @class = "form-control text-center", @maxlength = "4", @disabled = "disabled" } })
+                        @Html.ValidationMessageFor(model => model.InsuranceNumber2, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-sm-2 col-md-2 col-xs-12 ">
+                        @Html.EditorFor(model => model.InsuranceNumber1, new { htmlAttributes = new { @class = "form-control text-center", @maxlength = "5", @disabled = "disabled" } })
+                        @Html.ValidationMessageFor(model => model.InsuranceNumber1, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="divider green"></div>
+                <div class="section">
+                    <div class="row ">
+                        <div class=" col m12 s12 pull-m5">
+                            <img alt="Captcha" id="imgcpatcha" src="@Url.Action("CaptchaImage","../Captcha")" style="border-radius:5px;width:150px" />
+                            <i class="material-icons green-text text-darken-3" id="refresh">refresh</i>
+                        </div>
+                    </div>
+                    <div class="row right-align">
+                        <div class="  col m6 s12 push-m2">
+                            @Html.TextBoxFor(model => model.Captcha, new { @placeholder = FarsiLanguage.FarsiLanguage._SumResult, @id = "FirstCaptcha" })
+                        </div>
+                        <div class="col m12 s12 row right-align pull-m4">
+                            @Html.ValidationMessageFor(model => model.Captcha, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+                </div>
+            </fieldset>
+            <div class="row center">
+                <div class="input-field col m12 s12" id="tab1btnNext">
+                    <input type="button" class="btn waves-effect waves-teal btn-md green darken-2" style="font-size:18px;border-radius:4px" value="@FarsiLanguage.FarsiLanguage._Continue">
+                </div>
+            </div>
+        </div>
+        @* ++++++++++++++++++++++++++++++++++++++++++++++  Second Tab  ++++++++++++++++++++++++++++++++++++++++++++++ *@
+
+
+        <div id="tabs-2" class="col s12 ">
+
+            <fieldset class="container" style="margin-bottom:15px" dir="rtl">
+                <legend>@FarsiLanguage.FarsiLanguage._Security</legend>
+                <div class="divider green"></div>
+                <div class="section" style="padding-top:0px;padding-bottom:0px">
+                    <div class="row">
+                        <div class="input-field col m12 s12 pull-m3" id="LeadersMarketingCodeDiv">
+                            <i class="material-icons">account_box</i>
+                            @Html.LabelFor(model => model.LeadersMarketingCode, new { @class = "col m6 s12 offset-m1 offset-s12" })
+                            @Html.TextBoxFor(model => model.LeadersMarketingCode, new { htmlAttributes = new { @class = "validate MyInput" } })
+                        </div>
+                    </div>
+                    <div class="col m12 s12 row right-align pull-m1">
+                        @Html.ValidationMessageFor(model => model.LeadersMarketingCode, "", new { @class = "text-danger " })
+                    </div>
+                </div>
+                <br />
+                <div class="divider green"></div>
+                <div class="section" style="padding-top:0px;padding-bottom:0px">
+                    <div class="row">
+                        <div class="input-field col m12 s12 pull-m3" id="ReagentMarketingCodeDiv">
+                            <i class="material-icons">face</i>
+
+                            @Html.LabelFor(model => model.ReagentMarketingCode, new { @class = "col m6 s12 offset-m1 offset-s12" })
+                            @Html.TextBoxFor(model => model.ReagentMarketingCode, new { htmlAttributes = new { @class = "validate MyInput" } })
+                        </div>
+                    </div>
+                    <div class="col m12 s12 row right-align pull-m1">
+                        @Html.ValidationMessageFor(model => model.ReagentMarketingCode, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <br />
+
+                <div class="divider green"></div>
+                <div class="section" style="padding-top:0px;padding-bottom:0px">
+                    <div class="row">
+                        <div class="input-field col m12 s12 pull-m3" id="Password2Div">
+                            <i class="material-icons">vpn_key</i>
+                            @Html.LabelFor(model => model.Password2, new { @class = "col m6 s12 offset-m1 offset-s12" })
+                            @Html.PasswordFor(model => model.Password2, new { htmlAttributes = new { @class = "validate MyInput" } })
+                        </div>
+                    </div>
+                    <div class="col m12 s12 row right-align pull-m4">
+                        @Html.ValidationMessageFor(model => model.Password2, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <br />
+
+                <div class="divider green"></div>
+                <div class="section" style="padding-top:0px;padding-bottom:0px">
+                    <div class="row">
+                        <div class="input-field col m12 s12 pull-m3" id="ConfirmPassword2Div">
+                            <i class="material-icons">vpn_key</i>
+                            @Html.LabelFor(model => model.ConfirmPassword2, new { @class = "col m6 s12 offset-m1 offset-s12" })
+
+                            @Html.PasswordFor(model => model.ConfirmPassword2, new { htmlAttributes = new { @class = "validate MyInput" } })
+                        </div>
+                    </div>
+                    <div class="col m12 s12 row right-align pull-m4">
+                        @Html.ValidationMessageFor(model => model.ConfirmPassword2, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <br />
+
+
+                <div class="divider green"></div>
+                <div class="section" style="padding-top:0px;padding-bottom:0px">
+                    <div class="row ">
+                        <div class=" col m12 s12 pull-m4">
+                            <img alt="Captcha" id="imgcpatcha" src="@Url.Action("CaptchaImage","../Captcha")" style="border-radius:5px;width:150px" />
+                            <i class="material-icons green-text text-darken-3" id="refresh">refresh</i>
+                        </div>
+                    </div>
+                    <div class="row right-align">
+                        <div class="  col m6 s12 push-m3">
+                            @Html.TextBoxFor(model => model.Captcha2, new { @placeholder = FarsiLanguage.FarsiLanguage._SumResult })
+                        </div>
+                        <div class="col m12 s12 row right-align pull-m4">
+                            @Html.ValidationMessageFor(model => model.Captcha2, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+                </div>
+
+            </fieldset>
+            <div class="row center">
+
+                <div class="input-field col m6 s6" id="tab2btnPrevius">
+                    <input type="button" class="btn waves-effect waves-teal btn-md waves-purple red" style="font-size:18px;border-radius:4px" value="@FarsiLanguage.FarsiLanguage._Back">
+                </div>
+
+                <div class="row center">
+                    <div class="input-field col m6 s6" id="tab2btnNext">
+                        <input type="button" class="btn waves-effect waves-teal btn-md green darken-2" style="font-size:18px;border-radius:4px" value="@FarsiLanguage.FarsiLanguage._Continue">
+                    </div>
+                </div>
+            </div>
+        </div>
+        @* ++++++++++++++++++++++++++++++++++++++++++++++  Forth Tab  ++++++++++++++++++++++++++++++++++++++++++++++ *@
+        <div id="tabs-4" class="col s12">
+            <fieldset style="margin-bottom:15px" dir="rtl">
+                <legend id="Forthlegend">@FarsiLanguage.FarsiLanguage._MarketingCode</legend>
+                <div class="divider green"></div>
+                <div class="section">
+                    <div class="row">
+                        <div class="alert alert-success alert-dismissable fade in text-center col m8 push-m2" style="margin-top:15px">
+                            <span id="Welcome"></span>
+
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+
+
+    </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+@*<div class="fixed-action-btn horizontal click-to-toggle">
+        <a class="btn-floating btn-large pulse orange">
+            <i class="material-icons">menu</i>
+        </a>
+        <ul>
+            <li><a href="@Url.Action("Index")" class="btn tooltipped btn-floating blue darken-1" data-position="top" data-delay="50" data-tooltip="لیست"><i class="material-icons">arrow_back</i></a></li>
+        </ul>
+    </div>*@
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery-1.11.0.min.js"></script>
+<script src="~/Scripts/SweetAlert.js"></script>
+<script>
+    //============================================================ مقداردهی متغیرها =============================================
+    var MarketingCode;
+    var MarketingCodeReal;
+    var FirstCaptchaVal = $("#FirstCaptcha").val();
+    var CheckUserValidation;
+    //============================================================================================================================
+    var str1 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._UserMainPage, "UserPage", "UsersAdmin", new { area = "Administrator" }, null)</li>';
+    var str2 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._Register, "CreateUser", "UsersAdmin", new { area = "Administrator" }, null)</li>';
+    $('.crumbs').append(str1);
+    $('.crumbs').append(str2);
+
+    $(document).ready(function () {
+        $("Label").css("font-size", "15px");
+        $("Label").css("color", "#16008b");
+        $('label').css("margin-top", "8px");
+        $('#tabsa-2').prop("disabled", true);
+        $('#tabsa-4').prop("disabled", true);
+
+    });
+    //============================================================================================================================
+    $("#AcountNumber").click(function () {
+        alert("فقط شماره حساب بانک ملت وارد گردد");
+    });
+        $("#AcountNumber").one("focus",function () {
+        alert("فقط شماره حساب بانک ملت وارد گردد");
+    });
+   //============================================================================================================================
+    $(function () {
+        $('#refresh').click(function () {
+
+            var d = new Date();
+            $("#imgcpatcha").attr("src", "../Captcha/CaptchaImage?" + d.getTime());
+
+        });
+    });
+    //============================================================================================================================
+    $(function () {
+        $('#refresh').click(function () {
+
+            var d = new Date();
+            $("#imgcpatcha").attr("src", "../../../Captcha/CaptchaImage?" + d.getTime());
+
+        });
+    });
+    //==========================================================================================  آدرس دهی دکمه های تب
+    $('#tab1btnNext').click(function () {
+
+        //======================================================================================   کلیک بر روی ادامه تب 1
+        if ($("#FirstName").val() == "" || $("#FirstName").val() == undefined ||
+            $("#LastName").val() == "" || $("#LastName").val() == undefined ||
+            $("#FathersName").val() == "" || $("#FathersName").val() == undefined ||
+            $("#YearofBirth").val() == "" || $("#YearofBirth").val() == undefined ||
+            $("#BirthCertificateId").val() == "" || $("#BirthCertificateId").val() == undefined ||
+            $("#NationalCode").val() == "" || $("#NationalCode").val() == undefined ||
+            $("#Phone").val() == "" || $("#Phone").val() == undefined ||
+            $("#MobileNumber").val() == "" || $("#MobileNumber").val() == undefined ||
+            $("#Email").val() == "" || $("#Email").val() == undefined ||
+            $("#DayofBirth").val() == "" || $("#DayofBirth").val() == undefined ||
+            $("#MounthofBirth").val() == "" || $("#MounthofBirth").val() == undefined ||
+            $("#YearofBirth").val() == "" || $("#YearofBirth").val() == undefined ||
+            $("#EId").val() == "" || $("#EId").val() == undefined ||
+            $("#Sex").val() == "" || $("#Sex").val() == undefined ||
+            $("#MobileNumber").val() == "" || $("#MobileNumber").val() == undefined ||
+            $("#CId").val() == "" || $("#CId").val() == undefined ||
+            $("#SId").val() == "" || $("#SId").val() == undefined ||
+            $("#Address").val() == "" || $("#Address").val() == undefined ||
+            $("#AcountNumber").val() == "" || $("#AcountNumber").val() == undefined ||
+            $("#CardNumber").val() == "" || $("#CardNumber").val() == undefined ||
+            $("#BranchName").val() == "" || $("#BranchName").val() == undefined ||
+            $("#BranchCode").val() == "" || $("#BranchCode").val() == undefined ||
+            $("#BranchCode").val() == "" || $("#BranchCode").val() == undefined ||
+            $("#FirstCaptcha").val() == "" || $("#FirstCaptcha").val() == undefined ) {
+            CheckFill();
+        }
+        else {
+        $('#tabsa-2').prop("disabled", false);
+       $('ul.tabs').tabs('select_tab', 'tabs-2');
+        }
+
+    //$("#SecondTab").click(function () {
+    //    //================================================ ولیدیشن های تب اول====================================================================================================
+    //    if ($("#FirstName").val() == "" || $("#FirstName").val() == undefined) {
+    //        CheckFill($("#FirstName"), $("#FirstNameDiv").find("label[for =FirstName]").text());
+    //    }
+    //    if ($("#LastName").val() == "" || $("#LastName").val() == undefined) {
+    //        CheckFill($("#LastName"), $("#LastNameDiv").find("label[for =LastName]").text());
+    //    }
+    //    if ($("#FathersName").val() == "" || $("#FathersName").val() == undefined) {
+    //        CheckFill($("#FathersName"), $("#FathersNameDiv").find("label[for =FathersName]").text());
+    //    }
+    //    if ($("#YearofBirth").val() == "" || $("#YearofBirth").val() == undefined) {
+    //        CheckFill($("#YearofBirth"), $("#YearofBirthDiv").find("label[for =YearofBirth]").text());
+    //    }
+    //    if ($("#BirthCertificateId").val() == "" || $("#BirthCertificateId").val() == undefined) {
+    //        CheckFill($("#BirthCertificateId"), $("#BirthCertificateIdDiv").find("label[for =BirthCertificateId]").text());
+    //    }
+    //    if ($("#NationalCode").val() == "" || $("#NationalCode").val() == undefined) {
+    //        CheckFill($("#NationalCode"), $("#NationalCodeDiv").find("label[for =NationalCode]").text());
+    //    }
+    //    if ($("#Phone").val() == "" || $("#Phone").val() == undefined) {
+    //        CheckFill($("#Phone"), $("#PhoneDiv").find("label[for =Phone]").text());
+    //    }
+    //    if ($("#MobileNumber").val() == "" || $("#MobileNumber").val() == undefined) {
+    //        CheckFill($("#MobileNumber"), $("#MobileNumberDiv").find("label[for =MobileNumber]").text());
+    //    }
+    //    if ($("#Email").val() == "" || $("#Email").val() == undefined) {
+    //        CheckFill($("#Email"), $("#EmailDiv").find("label[for =Email]").text());
+    //    }
+    //    if ($("#PostalCode").val() == "" || $("#PostalCode").val() == undefined) {
+    //        CheckFill($("#PostalCode"), $("#PostalCodeDiv").find("label[for =PostalCode]").text());
+    //    }
+    //    if ($("#Address").val() == "" || $("#Address").val() == undefined) {
+    //        CheckFill($("#Address"), $("#AddressDiv").find("label[for =Address]").text());
+    //    }
+    //    if ($("#AcountNumber").val() == "" || $("#AcountNumber").val() == undefined) {
+    //        CheckFill($("#AcountNumber"), $("#AcountNumberDiv").find("label[for =AcountNumber]").text());
+    //    }
+    //    if ($("#CardNumber").val() == "" || $("#CardNumber").val() == undefined) {
+    //        CheckFill($("#CardNumber"), $("#CardNumberDiv").find("label[for =CardNumber]").text());
+    //    }
+    //    if ($("#BranchName").val() == "" || $("#BranchName").val() == undefined) {
+    //        CheckFill($("#BranchName"), $("#BranchNameDiv").find("label[for =BranchName]").text());
+    //    }
+    //    if ($("#BranchCode").val() == "" || $("#BranchCode").val() == undefined) {
+    //        CheckFill($("#BranchCode"), $("#BranchCodeDiv").find("label[for =BranchCode]").text());
+    //    }
+    //    if ($("#ShabaName").val() == "" || $("#ShabaName").val() == undefined) {
+    //        CheckFill($("#ShabaName"), $("#ShabaNameDiv").find("label[for =ShabaName]").text());
+    //    }
+    //    if ($("#InsuranceNumber").val() == "" || $("#InsuranceNumber").val() == undefined) {
+    //        CheckFill($("#InsuranceNumber"), $("#InsuranceNumberDiv").find("label[for =InsuranceNumber]").text());
+    //    }
+    //    else {
+
+    //        $('ul.tabs').tabs('select_tab', 'tabs-2');
+    //    }
+    });
+    //istruefunction($("#FirstName"));
+    //istruefunction($("#FathersName"));
+    //istruefunction($("#LastName"));
+    //istruefunction($("#YearofBirth"));
+    //istruefunction($("#BirthCertificateId"));
+    //istruefunction($("#NationalCode"));
+    //istruefunction($("#Phone"));
+    //istruefunction($("#MobileNumber"));
+    //istruefunction($("#Email"));
+    //istruefunction($("#PostalCode"));
+    //istruefunction($("#Address"));
+    //istruefunction($("#AcountNumber"));
+    //istruefunction($("#CardNumber"));
+    //istruefunction($("#BranchName"));
+    //istruefunction($("#BranchCode"));
+    //istruefunction($("#ShabaName"));
+    //istruefunction($("#InsuranceNumber"));
+    //================================================ ولیدیشن های تب دوم====================================================================================================
+
+    $("#tab2btnNext").click(function () {
+        if ($("#Captcha2").val() == null || $("#Captcha2").val() == "" ) {
+            alert("حاصل جمع را وارد نمایید");
+            CheckUserValidation = false;
+            return false;
+        }
+
+    //================================================ ساختن کد بازاریابی====================================================================================================
+        var code = parseInt($("#LeadersMarketingCode").val().slice(2, 6)) + 1;
+        if ((code.toString()).length == 1) {
+            code = "000" + code;
+        }
+        if ((code.toString()).length == 2) {
+            code = "00" + code;
+        }
+        if ((code.toString()).length == 3) {
+            code = "0" + code;
+        }
+        //============================================================ تابع بدست آوردن اخرین کد بازاریابی
+        FindLastMKInRage(code);
+
+        var FinalMK = "ma" + code + GlobalLastMK;
+        var PID = $("#PID").text().trim();
+
+       if ($("#LeadersMarketingCode").val() == "" || $("#LeadersMarketingCode").val() == undefined) {
+            CheckFill($("#LeadersMarketingCode"), $("#LeadersMarketingCodeDiv").find("label[for =LeadersMarketingCode]").text());
+        }
+        if ($("#ReagentMarketingCode").val() == "" || $("#ReagentMarketingCode").val() == undefined) {
+            CheckFill($("#ReagentMarketingCode"), $("#ReagentMarketingCodeDiv").find("label[for =ReagentMarketingCode]").text());
+        }
+        if ($("#Password2").val() == "" || $("#Password2").val() == undefined) {
+            CheckFill($("#Password2"), $("#Password2Div").find("label[for =Password2]").text());
+        }
+        if ($("#ConfirmPassword2").val() == "" || $("#ConfirmPassword2").val() == undefined) {
+            CheckFill($("#ConfirmPassword2"), $("#ConfirmPassword2Div").find("label[for =ConfirmPassword2]").text());
+        }
+
+        istruefunction($("#LeadersMarketingCode"));
+        istruefunction($("#ReagentMarketingCode"));
+        istruefunction($("#Password2"));
+        istruefunction($("#ConfirmPassword2"));
+
+        var LeadersMarketingCode = $("#LeadersMarketingCode").val();
+        CheckMarketingCode(LeadersMarketingCode);
+        //alert("GlobalLeaderMK : " + GlobalLeaderMK);
+
+        var ReagentMarketingCode = $("#ReagentMarketingCode").val();
+        CheckReagentMarketingCode(ReagentMarketingCode);
+        //alert("GlobalReagentMK : " + GlobalReagentMK);
+        if (GlobalLeaderMK == "" || GlobalLeaderMK == undefined) {
+            alert("کد بازاریابی سرگروه اشتباه است");
+            $("#LeadersMarketingCode").css("background-color", "#e6c4c7");
+            CheckUserValidation = false;
+            return false;
+        }
+        if (GlobalReagentMK == "" || GlobalReagentMK == undefined) {
+            alert("کد بازاریابی معرف اشتباه است");
+            $("#ReagentMarketingCode").css("background-color", "#e6c4c7");
+            CheckUserValidation = false;
+            return false;
+        }
+
+        ArmsNum();
+        if (GlobalArms == null) {
+            alert("مشکلی در بازو بوجود آمده است . لطفاً با مدیر سایت تماس حاصل فرمایید");
+            return false;
+        }
+        CheckUserArms(GlobalLeaderMK);
+        if (GlobalArms <= GlobalUserArms) {
+            alert("تعداد شاخه های شما پر شده است");
+            //=======================================================================ریدایرکت به صفحه دیگر
+            window.location.href = '/Administrator/UsersAdmin/UserPage/';
+            CheckUserValidation = false;
+
+            return false;
+        }
+        if (CheckUserValidation = true) {
+            UpdateUserData(PID, FinalMK)
+            //$('ul.tabs').tabs('select_tab', 'tabs-4');
+            //$("#Welcome").wrap("<p class='text-center'style='font-size : 20px'>" + "خانم / آقای" + " " + $("#FirstName").val() + " " + $("#LastName").val() + " " + "کد بازاریابی شما" + " " + FinalMK + " " + "می باشد ." + "</br>" + " به تیم بازاریابی بیمه پاسارگاد خوش آمدید" + "</p>")
+                    swal({
+                    title: "موفق!",
+                    text: "خانم / آقای" + " " + $("#FirstName").val() + " " + $("#LastName").val() + " " + "کد بازاریابی شما" + " " + FinalMK + " " + "می باشد ." + " به تیم بازاریابی بیمه پاسارگاد خوش آمدید",
+                    type: "success"
+                }).then(function () {
+                        window.location = '/Administrator/UsersAdmin/UserPage/';
+                });
+        }
+
+
+    });
+
+    $("#tab2btnPrevius").click(function () {
+        $('ul.tabs').tabs('select_tab', 'tabs-1');
+    });
+
+    //===================================================================================== دریافت کد بازاریابی ====================================================================================================
+        //======================================================================================   کلیک بر روی ادامه تب 3
+
+    @*$("#tab2btnNext").click(function () {
+
+        var code = parseInt($("#LeadersMarketingCode").val().slice(2, 6)) + 1;
+       // alert(code);
+        if ((code).toString().length == 1) {
+            var codestr = "000" + code;
+            MarketingCodeReal = "ma" + codestr;
+        }
+        if ((code).toString().length == 2) {
+            var codestr = "00" + code;
+            alert("ma" + codestr + $("#LeadersMarketingCode").val().slice(6, 13))
+            MarketingCodeReal = "ma" + codestr;
+
+        }
+        if ((code).toString().length == 3) {
+            var codestr = "0" + code;
+            alert(codestr);
+            MarketingCodeReal = "ma" + codestr;
+
+        }
+        if ((code).toString().length == 4) {
+            var codestr = code;
+            alert(codestr);
+            MarketingCodeReal = "ma" + codestr;
+
+        }
+
+
+        var Level = parseInt($("#LeadersMarketingCode").val().slice(2, 6));
+        var LevelPlus = parseInt($("#LeadersMarketingCode").val().slice(2, 6)) + 1;
+        var MarketingCode = $("#LeadersMarketingCode").val();
+        var UserName = $("#UserName").val();
+        //alert("LevelPlus : " + LevelPlus);
+       // GetLastCode(LevelPlus);
+
+        if ((GlobalUserNumInLvl).toString().length == 1) {
+            MarketingCodeReal = MarketingCodeReal + "000000" + GlobalUserNumInLvl;
+            $('#Alert').after("<div class='alert alert-success alert-dismissable fade in col m11 s12 pull-s1 text-center' style='font-size:18px;margin-left: 45px' ng-app=''>" +
+                'کاربر گرامی ' +
+                'کد بازاریابی شما ' +
+                ' ( '+MarketingCodeReal + ' ) ' +
+                ' می باشد .' +
+                'به تیم بازاریابی بیمه پاسارگاد خوش آمدید .' +
+                '</div>'
+            )
+        }
+        if ((GlobalUserNumInLvl).toString().length == 2) {
+            MarketingCodeReal = MarketingCodeReal + "00000" + GlobalUserNumInLvl;
+            $('#Alert').after("<div class='alert alert-success alert-dismissable fade in col m11 s12 pull-s1 text-center' style='font-size:18px;margin-left: 45px' ng-app=''>" +
+                'کاربر گرامی ' +
+                'کد بازاریابی شما ' +
+                ' ( ' + MarketingCodeReal + ' ) ' +
+                ' می باشد .' +
+                'به تیم بازاریابی بیمه پاسارگاد خوش آمدید .' +
+                '</div>'
+            )
+        }
+        if ((GlobalUserNumInLvl).toString().length == 3) {
+            MarketingCodeReal = MarketingCodeReal + "0000" + GlobalUserNumInLvl;
+            $('#Alert').after("<div class='alert alert-success alert-dismissable fade in col m11 s12 pull-s1 text-center' style='font-size:18px;margin-left: 45px' ng-app=''>" +
+                'کاربر گرامی ' +
+                'کد بازاریابی شما ' +
+                ' ( ' + MarketingCodeReal + ' ) ' +
+                ' می باشد .' +
+                'به تیم بازاریابی بیمه پاسارگاد خوش آمدید .' +
+                '</div>'
+            )
+        }
+        if ((GlobalUserNumInLvl).toString().length == 4) {
+            MarketingCodeReal = MarketingCodeReal + "000" + GlobalUserNumInLvl;
+            $('#Alert').after("<div class='alert alert-success alert-dismissable fade in col m11 s12 pull-s1 text-center' style='font-size:18px;margin-left: 45px' ng-app=''>" +
+                'کاربر گرامی ' +
+                'کد بازاریابی شما ' +
+                ' ( ' + MarketingCodeReal + ' ) ' +
+                ' می باشد .' +
+                'به تیم بازاریابی بیمه پاسارگاد خوش آمدید .' +
+                '</div>'
+            )
+        }
+        if ((GlobalUserNumInLvl).toString().length == 5) {
+            MarketingCodeReal = MarketingCodeReal + "00" + GlobalUserNumInLvl;
+            $('#Alert').after("<div class='alert alert-success alert-dismissable fade in col m11 s12 pull-s1 text-center' style='font-size:18px;margin-left: 45px' ng-app=''>" +
+                'کاربر گرامی ' +
+                'کد بازاریابی شما ' +
+                ' ( ' + MarketingCodeReal + ' ) ' +
+                ' می باشد .' +
+                'به تیم بازاریابی بیمه پاسارگاد خوش آمدید .' +
+                '</div>'
+            )
+        }
+        if ((GlobalUserNumInLvl).toString().length == 6) {
+            MarketingCodeReal = MarketingCodeReal + "0" + GlobalUserNumInLvl;
+            $('#Alert').after("<div class='alert alert-success alert-dismissable fade in col m11 s12 pull-s1 text-center' style='font-size:18px;margin-left: 45px' ng-app=''>" +
+                'کاربر گرامی ' +
+                'کد بازاریابی شما ' +
+                ' ( ' + MarketingCodeReal + ' ) ' +
+                ' می باشد .' +
+                'به تیم بازاریابی بیمه پاسارگاد خوش آمدید .' +
+                '</div>'
+            )
+        }
+        if ((GlobalUserNumInLvl).toString().length == 7) {
+            MarketingCodeReal = MarketingCodeReal  + GlobalUserNumInLvl;
+            $('#Alert').after("<div class='alert alert-success alert-dismissable fade in col m11 s12 pull-s1 text-center' style='font-size:18px;margin-left: 45px' ng-app=''>" +
+                'کاربر گرامی ' +
+                'کد بازاریابی شما ' +
+                ' ( ' + MarketingCodeReal + ' ) ' +
+                ' می باشد .' +
+                'به تیم بازاریابی بیمه پاسارگاد خوش آمدید .' +
+                '</div>'
+            )
+        }
+
+        $("#MarketingCode").val(MarketingCodeReal).focus();
+        $("#Level").val(Level + 1).focus();
+        UpdateUserData(@Session["PId"])
+        $('ul.tabs').tabs('select_tab', 'tabs-4');
+    });
+
+    $("#tab3btnPrevius").click(function () {
+        $('ul.tabs').tabs('select_tab', 'tabs-2');
+    });
+    $("#tab4btnPrevius").click(function () {
+        $('ul.tabs').tabs('select_tab', 'tabs-3');
+
+    });
+    $('#DateofBirth').click(function () {
+
+    });*@
+
+    //================================================================== درج کد بازاریابی سرگروه شخص در دیتابیس =====================================
+    //$("#LeadersMarketingCode").focusout(function () {
+
+    //})
+    //================================================================== درج کد بازاریابی معرف در دیتابیس =====================================
+
+
+</script>

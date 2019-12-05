@@ -1,0 +1,416 @@
+﻿@model General.Models.RegisterViewModel
+@{
+    ViewBag.Title = "ایجاد - مدیریت کاربران ";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+
+}
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script>
+        var str1 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._ManageUserRoles, "Index", "UsersAdmin", new { area = "Administrator" }, null)</li>';
+    var str2 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._Create, "Create", "UsersAdmin", new { area = "Administrator" }, null)</li>';
+    $('.crumbs').append(str1);
+    $('.crumbs').append(str2);
+    $(document).ready(function () {
+        $('.button-collapse').sideNav({
+            menuWidth: 300, // Default is 300
+            edge: 'left', // Choose the horizontal origin
+            closeOnClick: false, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+            draggable: true // Choose whether you can drag to open on touch screens
+        }
+        );
+        // START OPEN
+        $('.button-collapse').sideNav('show');
+        $('input#input_text, textarea#textarea2').characterCounter();
+
+    });
+
+    window.onload = function () {
+        //$("input").css("color", "grey");
+       // $("input").addClass("center");
+        $("input").css("padding-right","10px");
+
+        //$("select").addClass("text-center");
+
+    }
+    $(function () {
+        Materialize.updateTextFields();
+    });
+    $("#test").Sidenav();
+
+</script>
+
+<nav class="right">
+    <div class="nav-wrapper ">
+        <a href="#" data-activates="mobile-demo" class="button-collapse show-on-large"><i class="material-icons">menu</i></a>
+        <a href="https://codepen.io/collection/nbBqgY/" class="brand-logo" target="_blank">Materialize Framework</a>
+        <ul class="right hide">
+            <li><a href="https://codepen.io/collection/nbBqgY/" target="_blank">Sass</a></li>
+            <li><a href="https://codepen.io/collection/nbBqgY/" target="_blank">Components</a></li>
+            <li><a href="https://codepen.io/collection/nbBqgY/" target="_blank">Javascript</a></li>
+            <li><a href="https://codepen.io/collection/nbBqgY/" target="_blank">Mobile</a></li>
+        </ul>
+
+        <ul class="side-nav grey darken-2" id="mobile-demo">
+
+
+            <li class="sidenav-header blue">
+                <div class="row">
+                    <div class="col s4">
+                        <img src="https://gravatar.com/avatar/961997eb7fd5c22b3e12fb3c8ca14e11?s=80&d=https://codepen.io/assets/avatars/user-avatar-80x80-bdcd44a3bfb9a5fd01eb8b86f9e033fa1a9897c3a15b33adfc2649a002dab1b6.png" width="48px" height="48px" alt="" class="circle responsive-img valign profile-image">
+                    </div>
+                    <div class="col s8">
+                        <a class="btn-flat dropdown-button waves-effect waves-light white-text" href="#" data-activates="profile-dropdown">Jay<i class="mdi-navigation-arrow-drop-down right"></i></a>
+                        <ul id="profile-dropdown" class="dropdown-content">
+                            <li><a href="#"><i class="material-icons">person</i>Profile</a></li>
+                            <li><a href="#"><i class="material-icons">settings</i>Setting</a></li>
+                            <li><a href="#"><i class="material-icons">help</i>Help</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#"><i class="material-icons">lock</i>Lock</a></li>
+                            <li><a href="#"><i class="material-icons">exit_to_app</i>Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+
+            <li class="blue">
+                <ul class="collapsible collapsible-accordion">
+                    <li>
+                        <a class="collapsible-header white-text waves-effect waves-blue "><i class="material-icons white-text ">language</i>Language <i class="material-icons right white-text" style="margin-right:0;">arrow_drop_down</i></a>
+                        <div class="collapsible-body z-depth-3">
+                            <ul>
+                                <li><a class="waves-effect waves-blue" href="#">English</a></li>
+                                <li><a class="waves-effect waves-blue" href="#">العربية</a></li>
+                                <li><a class="waves-effect waves-blue" href="#">中文</a></li>
+                                <li><a class="waves-effect waves-blue" href="#">Čeština</a></li>
+                                <li><a class="waves-effect waves-blue" href="#">Nederlands</a></li>
+                                <li><a class="waves-effect waves-blue" href="#">Français</a></li>
+                                <li><a class="waves-effect waves-blue" href="#">Deutsch</a></li>
+                                <li><a class="waves-effect waves-blue" href="#">한국어</a></li>
+                                <li><a class="waves-effect waves-blue" href="#">Português</a></li>
+                                <li><a class="waves-effect waves-blue" href="#">Русский</a></li>
+                                <li><a class="waves-effect waves-blue" href="#">Español</a></li>
+                                <li><a class="waves-effect waves-blue" href="#">Svenska</a></li>
+                                <li><a class="waves-effect waves-blue" href="#">ภาษาไทย</a></li>
+                                <li><a class="waves-effect waves-blue" href="#">Türkçe</a></li>
+                                <li><div class="divider"></div></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+
+
+
+            <li class="white">
+                <ul class="collapsible collapsible-accordion">
+                    <li>
+                        <a class="collapsible-header waves-effect waves-blue"><i class="material-icons">folder_special</i>Layouts <i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li><a class="waves-effect waves-blue" href="#"><i class="material-icons">fullscreen</i>Full Screen<span class="new badge right yellow grey lighten-1" data-badge-caption="updated"></span></a></li>
+                                <li><a class="waves-effect waves-blue" href="#"><i class="material-icons">swap_horiz</i>Horizontal Menu<span class="new badge right yellow darken-3"></span></a></li>
+                                <li><div class="divider"></div></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            <li class="white">
+                <ul class="collapsible collapsible-accordion">
+                    <li>
+                        <a class="collapsible-header waves-effect waves-blue"><i class="material-icons">folder_open</i>A submenu <i class="material-icons right" style="margin-right:0;">arrow_drop_down</i></a>
+                        <div class="collapsible-body">
+                            <ul>
+                                <li><a class="waves-effect waves-blue" href="#"><i class="material-icons">fullscreen</i>Full Screen</a></li>
+                                <li><a class="waves-effect waves-blue" href="#"><i class="material-icons">swap_horiz</i>Horizontal Menu</a></li>
+                                <li><div class="divider"></div></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            <li class="white"><a href="#" class="waves-effect waves-blue"><i class="material-icons">mail</i>Menu item</a></li>
+            <li class="white"><a href="#" class="waves-effect waves-blue"><i class="material-icons">call</i> Menu item</a></li>
+            <li class="white"><a href="#" class="waves-effect waves-blue"><i class="material-icons">android</i> Menu item</a></li>
+            <li class="white"><a href="#" class="waves-effect waves-blue"><i class="material-icons">dialpad</i> Menu item</a></li>
+            <li class="white"><div class="divider"></div></li>
+            <li class="white"><a href="#" class="waves-effect waves-blue"><i class="material-icons">language</i> Menu item<span class="new badge right yellow darken-3"></span></a></li>
+
+            <li class="sidenav-footer grey darken-2">
+                <div class="row">
+                    <div class="social-icons">
+                        <div class="col s2">
+                            <a href="#"><i class="fa fa-lg fa-linkedin-square"></a></i>
+                        </div>
+                        <div class="col s2">
+                            <a href="#"><i class="fa fa-lg fa-facebook-official"></a></i>
+                        </div>
+                        <div class="col s2">
+                            <a href="#"><i class="fa fa-lg fa-twitter"></a></i>
+                        </div>
+                        <div class="col s2">
+                            <a href="#"><i class="fa fa-lg fa-google-plus"></a></i>
+                        </div>
+                        <div class="col s2">
+                            <a href="#"><i class="fa fa-lg fa-pinterest"></a></i>
+                        </div>
+                        <div class="col s2">
+                            <a href="#"><i class="fa fa-lg fa-youtube"></a></i>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+
+    </div>
+</nav>
+
+<!-- Gitter Chat Link -->
+<div class="fixed-action-btn"><a class="btn-floating btn-large red" href="https://gitter.im/Dogfalo/materialize" target="_blank"><i class="large material-icons">chat</i></a></div>
+@using (Html.BeginForm("Create", "UsersAdmin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary("", new { @class = "text-error" })
+
+    <fieldset style="margin-bottom:15px" dir="rtl">
+        <legend>@FarsiLanguage.FarsiLanguage._PersonStatus</legend>
+        <div class="divider green"></div>
+        <div class="section">
+            <div class="row">
+                <div class="input-field col m3 s12 push-m9 ">
+                    @Html.LabelFor(model => model.UserName, new { @class = "col m6 s12 offset-m1 offset-s10" })
+                    @Html.TextBoxFor(model => model.UserName, new { htmlAttributes = new { @class = "validate" } })
+                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                </div>
+                <div class="input-field col m3 s12 push-m3 ">
+                    @Html.LabelFor(model => model.FirstName, new { @class = "col m3 s12 offset-m1 offset-s10" })
+                    @Html.TextBoxFor(model => model.FirstName, new { htmlAttributes = new { @class = "validate" } })
+                    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                </div>
+                <div class="input-field col m3 s12 pull-m3" dir="rtl">
+                    @Html.LabelFor(model => model.LastName, new { @class = "col m6 s12 offset-m5 offset-s12" })
+                    @Html.TextBoxFor(model => model.LastName, new { htmlAttributes = new { @class = "validate" } })
+                    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                </div>
+                <div class="input-field col m3 s12 pull-m9 " dir="rtl">
+                    @Html.LabelFor(model => model.FathersName, new { @class = "col m6 s12 offset-m5 offset-s12" })
+                    @Html.TextBoxFor(model => model.FathersName, new { htmlAttributes = new { @class = "validate" } })
+                    @Html.ValidationMessageFor(model => model.FathersName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="divider green"></div>
+        <div class="section">
+            <div class="row">
+                <div class="input-field col m4 s12 push-m8">
+                    @Html.LabelFor(model => model.DateofBirth, new { @class = "col m6 s12 offset-m1 offset-s10" })
+                    @Html.TextBoxFor(model => model.DateofBirth, new { htmlAttributes = new { @class = "validate" } })
+                    @Html.ValidationMessageFor(model => model.DateofBirth, "", new { @class = "text-danger" })
+                </div>
+                <div class="input-field col m4 s12">
+                    @Html.LabelFor(model => model.BirthCertificateId, new { @class = "col m6 s12 offset-m5 offset-s12" })
+                    @Html.TextBoxFor(model => model.BirthCertificateId, new { htmlAttributes = new { @class = "validate" } })
+                    @Html.ValidationMessageFor(model => model.BirthCertificateId, "", new { @class = "text-danger" })
+                </div>
+                <div class="input-field col m4 s12 pull-m8 " dir="rtl">
+                    @Html.LabelFor(model => model.NationalCode, new { @class = "col m6 s12 offset-m5 offset-s12" })
+                    @Html.TextBoxFor(model => model.NationalCode, new { htmlAttributes = new { @class = "validate" } })
+                    @Html.ValidationMessageFor(model => model.NationalCode, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+        </div>
+        <div class="divider green"></div>
+        <div class="section">
+            <div class="row">
+
+                @*<div class="col m6 s12 push-m6">
+                    @Html.LabelFor(model => model.EName.EName, "مدرک", new { @class = "col m6 s12 offset-m6 offset-s12 ", @style = "color:darkBlue;font-size:15px" })
+                    @Html.DropDownList("EId", null, "", new { @class = "browser-default center-align" })
+                    @Html.ValidationMessageFor(model => model.EId, "", new { @class = "text-danger" })
+                </div>*@
+
+                <div class="col m6 s12 pull-m6">
+                    <label for="Sex" class="col m6 s12 offset-m6 offset-s12" style="color:darkBlue;font-size:15px">@FarsiLanguage.FarsiLanguage._Sex</label>
+
+                    <select id="Sex" name="Sex" class="browser-default">
+                        <option>@FarsiLanguage.FarsiLanguage._Male</option>
+                        <option>@FarsiLanguage.FarsiLanguage._Female</option>
+
+                    </select>
+                </div>
+            </div>
+        </div>
+
+    </fieldset>
+            <fieldset style="margin-bottom:15px" dir="rtl">
+                <legend>@FarsiLanguage.FarsiLanguage._ContactStatus</legend>
+                <div class="divider green"></div>
+                <div class="section">
+                    <div class="row">
+
+                        <div class="input-field col m4 s12 push-m8">
+                            @Html.LabelFor(model => model.Phone, new { @class = "col m6 s12 offset-m1 offset-s10" })
+                            @Html.TextBoxFor(model => model.Phone, new { htmlAttributes = new { @class = "validate" } })
+                            @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="input-field col m4 s12">
+                            @Html.LabelFor(model => model.MobileNumber, new { @class = "col m6 s12 offset-m1 offset-s10" })
+                            @Html.TextBoxFor(model => model.MobileNumber, new { htmlAttributes = new { @class = "validate" } })
+                            @Html.ValidationMessageFor(model => model.MobileNumber, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="input-field col m4 s12 pull-m8">
+                            @Html.LabelFor(model => model.Email, new { @class = "col m6 s12 offset-m1 offset-s10" })
+                            @Html.TextBoxFor(model => model.Email, new { htmlAttributes = new { @class = "validate" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+                <fieldset style="margin-bottom:15px" dir="rtl">
+                    <legend>@FarsiLanguage.FarsiLanguage._LocationStatus</legend>
+                    <div class="divider green"></div>
+                    <div class="section">
+                        <div class="row">
+
+                            @*<div class="col m4 s12 push-m8">
+                                @Html.LabelFor(model => model.CName.CName, "نام شهر", new { @class = "col m6 s12 offset-m6 offset-s12", @style = "color:darkBlue;font-size:15px" })
+                                @Html.DropDownList("CId", null, "", new { @class = "browser-default" })
+                                @Html.ValidationMessageFor(model => model.CId, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col m4 s12" dir="rtl">
+                                @Html.LabelFor(model => model.SName.SName, "نام استان", new { @class = "col m6 s12 offset-m6 offset-s12", @style = "color:darkBlue;font-size:15px" })
+                                @Html.DropDownList("SId", null, "", new { @class = "browser-default" })
+                                @Html.ValidationMessageFor(model => model.SId, "", new { @class = "text-danger" })
+                            </div>*@
+                            <div class="input-field col m4 s12 pull-m8 " dir="rtl">
+                                @Html.LabelFor(model => model.PostalCode, new { @class = "col m6 s12 offset-m5 offset-s12" })
+                                @Html.TextBoxFor(model => model.PostalCode, new { htmlAttributes = new { @class = "validate" } })
+                                @Html.ValidationMessageFor(model => model.PostalCode, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="divider green"></div>
+                    <div class="section">
+                        <div class="row ">
+
+                            <div class="input-field col m12 s12">
+                                @Html.TextAreaFor(model => model.Address, htmlAttributes: new { @class = "materialize-textarea", @style = "width: 100%; max-width: 100%;", @length = "500" })
+                                @Html.LabelFor(model => model.Address, new { @class = "col m6 s12 offset-m5 offset-s12" })
+                                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset style="margin-bottom:15px" dir="rtl">
+                    <legend>@FarsiLanguage.FarsiLanguage._BankStatus</legend>
+                    <div class="divider green"></div>
+                    <div class="section">
+                        <div class="row">
+                            <div class="input-field col m3 s12 push-m9">
+                                @Html.LabelFor(model => model.AcountNumber, new { @class = "col m6 s12 offset-m1 offset-s10" })
+                                @Html.TextBoxFor(model => model.AcountNumber, new { htmlAttributes = new { @class = "validate" } })
+                                @Html.ValidationMessageFor(model => model.AcountNumber, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="input-field col m3 s12 push-m3">
+                                @Html.LabelFor(model => model.CardNumber, new { @class = "col m6 s12 offset-m5 offset-s12" })
+                                @Html.TextBoxFor(model => model.CardNumber, new { htmlAttributes = new { @class = "validate" } })
+                                @Html.ValidationMessageFor(model => model.CardNumber, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="input-field col m3 s12 pull-m3 " dir="rtl">
+                                @Html.LabelFor(model => model.BranchName, new { @class = "col m6 s12 offset-m5 offset-s12" })
+                                @Html.TextBoxFor(model => model.BranchName, new { htmlAttributes = new { @class = "validate" } })
+                                @Html.ValidationMessageFor(model => model.BranchName, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="input-field col m3 s12 pull-m9 ">
+                                @Html.LabelFor(model => model.BranchCode, new { @class = "col m6 s12 offset-m5 offset-s12" })
+                                @Html.TextBoxFor(model => model.BranchCode, new { htmlAttributes = new { @class = "validate" } })
+                                @Html.ValidationMessageFor(model => model.BranchCode, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="divider green"></div>
+                    <div class="section">
+                        <div class="row">
+                            <div class="input-field col m6 s12 push-m6">
+                                @Html.LabelFor(model => model.ShabaName, new { @class = "col m6 s12 offset-m1 offset-s10" })
+                                @Html.TextBoxFor(model => model.ShabaName, new { htmlAttributes = new { @class = "validate" } })
+                                @Html.ValidationMessageFor(model => model.ShabaName, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="input-field col m6 s12 pull-m6">
+                                @Html.LabelFor(model => model.InsuranceNumber, new { @class = "col m6 s12 offset-m5 offset-s12" })
+                                @Html.TextBoxFor(model => model.InsuranceNumber, new { htmlAttributes = new { @class = "validate" } })
+                                @Html.ValidationMessageFor(model => model.InsuranceNumber, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+                    </div>
+
+                </fieldset>
+
+                <fieldset style="margin-bottom:15px" dir="rtl">
+                    <legend>@FarsiLanguage.FarsiLanguage._Permition</legend>
+                    <div class="divider green"></div>
+                    <div class="section">
+                        <div class="row">
+                            <div class="input-field col m6 s12 push-m6">
+                                @Html.LabelFor(model => model.Password, new { @class = "col m6 s12 offset-m1 offset-s10" })
+                                @Html.PasswordFor(model => model.Password, new { htmlAttributes = new { @class = "validate" } })
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="input-field col m6 s12 pull-m6">
+                                @Html.LabelFor(model => model.ConfirmPassword, new { @class = "col m6 s12 offset-m5 offset-s12" })
+                                @Html.PasswordFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "validate" } })
+                                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="divider green"></div>
+                    <div class="section">
+                        <div class="row right">
+                            <div class="col m12 s12">
+                                <label class="col m10 push-m2 blue-text text-darken-4" style="font-size:15px">
+                                    انتخاب دسترسی
+                                </label>
+                                <br />
+                                <br />
+
+                                <hr />
+
+                                @foreach (var item in (SelectList)ViewBag.RoleId)
+                                {
+
+                                    <input type="checkbox" name="SelectedRoles" value="@item.Value" class=" filled-in" id="@item.Value" />
+                                    @Html.Label(item.Value, new { @class = "col m9" })
+
+                                }
+                            </div>
+
+                        </div>
+                    </div>
+
+                </fieldset>
+
+                <div class="section">
+                    <div class="row center">
+                        <div class="input-field col m12 s12">
+                            <button class="btn btn-large waves-effect waves-light green" type="submit">
+                                @FarsiLanguage.FarsiLanguage._Create
+                                <i class="material-icons left">create</i>
+                        </div>
+                    </div>
+                </div>
+}
+<div class="fixed-action-btn horizontal click-to-toggle">
+    <a class="btn-floating btn-large pulse green">
+        <i class="material-icons">menu</i>
+    </a>
+    <ul>
+        <li><a href="@Url.Action("Index")" class="btn tooltipped btn-floating blue darken-1" data-position="top" data-delay="50" data-tooltip="لیست"><i class="material-icons">arrow_back</i></a></li>
+    </ul>
+</div>
+

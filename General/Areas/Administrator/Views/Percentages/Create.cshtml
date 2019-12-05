@@ -1,0 +1,205 @@
+﻿@model General.Areas.Administrator.Models.Percentage
+
+@{
+    ViewBag.Title = "درصد سود - ایجاد";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <fieldset dir="rtl" class="white">
+        <legend>@FarsiLanguage.FarsiLanguage._Percentage</legend>
+        <div class="container-fluid">
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    @Html.LabelFor(model => model.Level1, htmlAttributes: new { @class = "control-label col-sm-4  col-md-4  col-xs-4" })
+                    <div class="col-sm-8 col-md-8 col-xs-8 ">
+                        @Html.EditorFor(model => model.Level1, new { htmlAttributes = new { @class = "form-control" , @Value="1" ,@readonly="readonly"} })
+                        @Html.ValidationMessageFor(model => model.Level1, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    @Html.LabelFor(model => model.Commission1, htmlAttributes: new { @class = "control-label col-sm-4  col-md-4  col-xs-4" })
+                    <div class="col-sm-8 col-md-8 col-xs-8">
+                        @Html.EditorFor(model => model.Commission1, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Commission1, "", new { @class = "text-danger", @id = "InsuranceNumberValidation" })
+                    </div>
+                </div>
+
+            </div>
+            <hr class="panel-success" />
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    @Html.LabelFor(model => model.Level2, htmlAttributes: new { @class = "control-label col-sm-4  col-md-4  col-xs-4" })
+                    <div class="col-sm-8 col-md-8 col-xs-8 ">
+                        @Html.EditorFor(model => model.Level2, new { htmlAttributes = new { @class = "form-control ", @Value="2" ,@readonly="readonly" } })
+                        @Html.ValidationMessageFor(model => model.Level2, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    @Html.LabelFor(model => model.Commission2, htmlAttributes: new { @class = "control-label col-sm-4  col-md-4  col-xs-4" })
+                    <div class="col-sm-8 col-md-8 col-xs-8">
+                        @Html.EditorFor(model => model.Commission2, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Commission2, "", new { @class = "text-danger", @id = "InsuranceNumberValidation" })
+                    </div>
+                </div>
+
+            </div>
+            <hr class="panel-success" />
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    @Html.LabelFor(model => model.Level3, htmlAttributes: new { @class = "control-label col-sm-4  col-md-4  col-xs-4" })
+                    <div class="col-sm-8 col-md-8 col-xs-8 ">
+                        @Html.EditorFor(model => model.Level3, new { htmlAttributes = new { @class = "form-control ", @Value = "3", @readonly= "readonly" } })
+                        @Html.ValidationMessageFor(model => model.Level3, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    @Html.LabelFor(model => model.Commission3, htmlAttributes: new { @class = "control-label col-sm-4  col-md-4  col-xs-4" })
+                    <div class="col-sm-8 col-md-8 col-xs-8">
+                        @Html.EditorFor(model => model.Commission3, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Commission3, "", new { @class = "text-danger", @id = "InsuranceNumberValidation" })
+                    </div>
+                </div>
+
+            </div>
+            <hr class="panel-success" />
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    @Html.LabelFor(model => model.Level4, htmlAttributes: new { @class = "control-label col-sm-4  col-md-4  col-xs-4" })
+                    <div class="col-sm-8 col-md-8 col-xs-8 ">
+                        @Html.EditorFor(model => model.Level4, new { htmlAttributes = new { @class = "form-control ", @Value = "4", @readonly= "readonly" } })
+                        @Html.ValidationMessageFor(model => model.Level4, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    @Html.LabelFor(model => model.Commission4, htmlAttributes: new { @class = "control-label col-sm-4  col-md-4  col-xs-4" })
+                    <div class="col-sm-8 col-md-8 col-xs-8">
+                        @Html.EditorFor(model => model.Commission4, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Commission4, "", new { @class = "text-danger", @id = "InsuranceNumberValidation" })
+                    </div>
+                </div>
+
+            </div>
+            <hr class="panel-success" />
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    @Html.LabelFor(model => model.Level5, htmlAttributes: new { @class = "control-label col-sm-4  col-md-4  col-xs-4" })
+                    <div class="col-sm-8 col-md-8 col-xs-8 ">
+                        @Html.EditorFor(model => model.Level5, new { htmlAttributes = new { @class = "form-control ", @Value = "5", @readonly= "readonly" } })
+                        @Html.ValidationMessageFor(model => model.Level5, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    @Html.LabelFor(model => model.Commission5, htmlAttributes: new { @class = "control-label col-sm-4  col-md-4  col-xs-4" })
+                    <div class="col-sm-8 col-md-8 col-xs-8">
+                        @Html.EditorFor(model => model.Commission5, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Commission5, "", new { @class = "text-danger", @id = "InsuranceNumberValidation" })
+                    </div>
+                </div>
+
+            </div>
+            <hr class="panel-success" />
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    @Html.LabelFor(model => model.Level6, htmlAttributes: new { @class = "control-label col-sm-4  col-md-4  col-xs-4" })
+                    <div class="col-sm-8 col-md-8 col-xs-8 ">
+                        @Html.EditorFor(model => model.Level6, new { htmlAttributes = new { @class = "form-control ", @Value = "6", @readonly= "readonly" } })
+                        @Html.ValidationMessageFor(model => model.Level6, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    @Html.LabelFor(model => model.Commission6, htmlAttributes: new { @class = "control-label col-sm-4  col-md-4  col-xs-4" })
+                    <div class="col-sm-8 col-md-8 col-xs-8">
+                        @Html.EditorFor(model => model.Commission6, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Commission6, "", new { @class = "text-danger", @id = "InsuranceNumberValidation" })
+                    </div>
+                </div>
+
+            </div>
+            <hr class="panel-success" />
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    @Html.LabelFor(model => model.Level7, htmlAttributes: new { @class = "control-label col-sm-4  col-md-4  col-xs-4" })
+                    <div class="col-sm-8 col-md-8 col-xs-8 ">
+                        @Html.EditorFor(model => model.Level7, new { htmlAttributes = new { @class = "form-control ", @Value = "7", @readonly= "readonly" } })
+                        @Html.ValidationMessageFor(model => model.Level7, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    @Html.LabelFor(model => model.Commission7, htmlAttributes: new { @class = "control-label col-sm-4  col-md-4  col-xs-4" })
+                    <div class="col-sm-8 col-md-8 col-xs-8">
+                        @Html.EditorFor(model => model.Commission7, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Commission7, "", new { @class = "text-danger", @id = "InsuranceNumberValidation" })
+                    </div>
+                </div>
+
+            </div>
+            <hr class="panel-success" />
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    @Html.LabelFor(model => model.Level8, htmlAttributes: new { @class = "control-label col-sm-4  col-md-4  col-xs-4" })
+                    <div class="col-sm-8 col-md-8 col-xs-8 ">
+                        @Html.EditorFor(model => model.Level8, new { htmlAttributes = new { @class = "form-control ", @Value = "8", @readonly= "readonly" } })
+                        @Html.ValidationMessageFor(model => model.Level8, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    @Html.LabelFor(model => model.Commission8, htmlAttributes: new { @class = "control-label col-sm-4  col-md-4  col-xs-4" })
+                    <div class="col-sm-8 col-md-8 col-xs-8">
+                        @Html.EditorFor(model => model.Commission8, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Commission8, "", new { @class = "text-danger", @id = "InsuranceNumberValidation" })
+                    </div>
+                </div>
+
+            </div>
+            <hr class="panel-success" />
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    @Html.LabelFor(model => model.Level9, htmlAttributes: new { @class = "control-label col-sm-4  col-md-4  col-xs-4" })
+                    <div class="col-sm-8 col-md-8 col-xs-8 ">
+                        @Html.EditorFor(model => model.Level9, new { htmlAttributes = new { @class = "form-control ", @Value = "9", @readonly= "readonly" } })
+                        @Html.ValidationMessageFor(model => model.Level9, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    @Html.LabelFor(model => model.Commission9, htmlAttributes: new { @class = "control-label col-sm-4  col-md-4  col-xs-4" })
+                    <div class="col-sm-8 col-md-8 col-xs-8">
+                        @Html.EditorFor(model => model.Commission9, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Commission9, "", new { @class = "text-danger", @id = "InsuranceNumberValidation" })
+                    </div>
+                </div>
+
+            </div>
+            <hr class="panel-success" />
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-6 col-md-pull-5">
+                    <input type="submit" value="@FarsiLanguage.FarsiLanguage._Create" class="btn btn-large btn-default btn-primary blue" />
+                </div>
+            </div>
+        </div>
+    </fieldset>
+}
+<div class="fixed-action-btn horizontal click-to-toggle">
+    <a class="btn-floating btn-large pulse green">
+        <i class="material-icons">menu</i>
+    </a>
+    <ul>
+        <li><a href="@Url.Action("Index")" class="btn tooltipped btn-floating blue darken-1" data-position="top" data-delay="50" data-tooltip="لیست"><i class="material-icons">arrow_back</i></a></li>
+    </ul>
+</div>
+
+<script>
+    window.onload = function () {
+        $('label').css("color", "black");
+        $('label').css("margin-top", "10px");
+        $('input').addClass("text-center");
+    }
+
+</script>

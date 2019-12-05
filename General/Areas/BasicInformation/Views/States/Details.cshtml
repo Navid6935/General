@@ -1,0 +1,32 @@
+﻿@model General.Areas.BasicInformation.Models.State
+
+@{
+    ViewBag.Title = "جزئیات - استان";
+    Layout = "~/Areas/BasicInformation/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script>
+    var str1 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._State, "Index", "States", new { area = "BasicInformation" }, null)</li>';
+        var str2 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._Detail, "Details", "States", new { area = "BasicInformation" }, null)</li>';
+
+        $('.crumbs').append(str1); 
+    $('.crumbs').append(str2);
+
+    window.onload = function () {
+        $("Label").css("font-size", "15px");
+        $("Label").css("color", "#000000");
+
+    }
+
+</script>
+
+<fieldset style="margin-bottom:15px" dir="rtl">
+    <legend>@FarsiLanguage.FarsiLanguage._State</legend>
+    <div class="row">
+        <div class=" col m4 s12 push-m8" style="font-size:18px;color:#244788">
+            <span> @Html.Label(@FarsiLanguage.FarsiLanguage._StateName) : </span>
+            @Html.DisplayFor(model => model.SName, null, "")
+
+        </div>
+    </div>
+</fieldset>

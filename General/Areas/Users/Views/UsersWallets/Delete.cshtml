@@ -1,0 +1,73 @@
+﻿@model General.Areas.Users.Models.UsersWallet
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>UsersWallet</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UWMarketingCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UWMarketingCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UWDayDeposit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UWDayDeposit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UWMonthDeposit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UWMonthDeposit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UWYearDeposit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UWYearDeposit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UWAmountDeposit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UWAmountDeposit)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

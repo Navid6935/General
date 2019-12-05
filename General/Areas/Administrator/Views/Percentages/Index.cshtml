@@ -1,0 +1,82 @@
+﻿@model IEnumerable<General.Areas.Administrator.Models.Percentage>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+
+    <table class="right-align striped bordered highlight centered table-bordered" style="margin-top:15px" dir="rtl">
+        <tr>
+
+
+            <th class="center" style="font-size:13px">
+            مقدار پورسانت سطح 1 به درصد
+            </th>
+            <th class="center" style="font-size:13px">
+                مقدار پورسانت سطح 2 به درصد
+
+            </th>
+            <th class="center" style="font-size:13px">
+                مقدار پورسانت سطح 3 به درصد
+            </th>
+            <th class="center" style="font-size:13px">
+                مقدار پورسانت سطح 4 به درصد
+            </th>
+            <th class="center" style="font-size:13px">
+                مقدار پورسانت سطح 5 به درصد
+            </th>
+            <th class="center" style="font-size:13px">
+                مقدار پورسانت سطح 6 به درصد
+            </th>
+            <th class="center" style="font-size:13px">
+                مقدار پورسانت سطح 7 به درصد
+            </th>
+            <th class="center" style="font-size:13px">
+                مقدار پورسانت سطح 8 به درصد
+            </th>
+            <th class="center" style="font-size:13px">
+                مقدار پورسانت سطح 9 به درصد
+            </th>
+        <th class="center"></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Commission1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Commission2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Commission3)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Commission4)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Commission5)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Commission6)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Commission7)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Commission8)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Commission9)
+        </td>
+        <td>
+            <a href="@Url.Action("Details", new { id=item.PercentageId})" class="btn-floating tooltipped blue" data-position="right" data-delay="50" data-tooltip="جزئیات" blue"><i class="material-icons">dehaze</i></a> |
+            <a href="@Url.Action("Edit", new { id=item.PercentageId })" class="btn-floating tooltipped yellow darken-2" data-position="top" data-delay="50" data-tooltip="ویرایش" blue"><i class="material-icons">edit</i></a> |
+            <a href="@Url.Action("Delete", new { id=item.PercentageId })" class="btn-floating tooltipped red" data-position="left" data-delay="50" data-tooltip="حذف" blue"><i class="material-icons">delete</i></a>
+        </td>
+    </tr>
+        }
+
+    </table>

@@ -1,0 +1,101 @@
+﻿
+@{
+    ViewBag.Title = "گزارش درامد ماهیانه";
+    Layout = "~/Areas/Users/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row" style="margin-top:15px">
+    <div class="col-md-6 col-sm-6 col-xs-6">
+        <label class="control-label col-md-5 col-sm-5 col-xs-5">@FarsiLanguage.FarsiLanguage._Year</label>
+        <div class="col-sm-7 col-md-7 col-xs-7">
+            <select class="form-control" id="YearSearch">
+                <option></option>
+                @for (int i = 1397; i <= 1440; i++)
+                {
+                    <option value="@i">@i</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-6 col-xs-6">
+        <label class="control-label col-md-5 col-sm-5 col-xs-5">@FarsiLanguage.FarsiLanguage._Mounth</label>
+        <div class="col-sm-7 col-md-7 col-xs-7">
+            <select class="form-control" id="MonthSearch">
+                <option></option>
+                <option value="1">فروردین</option>
+                <option value="2">اردیبهشت</option>
+                <option value="3">خرداد</option>
+                <option value="4">تیر</option>
+                <option value="5">مرداد</option>
+                <option value="6">شهریور</option>
+                <option value="7">مهر</option>
+                <option value="8">آبان</option>
+                <option value="9">آذر</option>
+                <option value="10">دی</option>
+                <option value="11">بهمن</option>
+                <option value="12">اسفند</option>
+
+            </select>
+        </div>
+    </div>
+</div>
+
+<table class="table table-bordered table-striped right-align table-responsive" dir="rtl" style="margin-top:15px">
+    <tr id="MonthlyReportHeader">
+        @*<th class="text-center">
+            @FarsiLanguage.FarsiLanguage._MarketingCode
+        </th>
+        <th class="text-center">
+            @FarsiLanguage.FarsiLanguage._YearDeposit
+        </th>
+        <th class="text-center">
+            @FarsiLanguage.FarsiLanguage._MonthDeposit
+
+        </th>
+        <th class="text-center">
+            @FarsiLanguage.FarsiLanguage._DayDeposit
+
+        </th>
+        <th class="text-center">
+            @FarsiLanguage.FarsiLanguage._AmountDeposit
+
+        </th>*@
+    </tr>
+    <tr id="SumRow" style="display:none">
+        <td class="text-center">
+            مجموع
+        </td>     
+        <td class="text-center" id="Sum" colspan="4">
+            
+        </td>
+    </tr>
+</table>
+<script src="~/Scripts/MyScripts/PlanFunc.js"></script>
+<script src="//Code.jquery.com/jquery.min.js"></script>
+<script>
+    window.onload = function () {
+        var str1 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._UserMainPage, "UserMainPage", "GeneralPages", new { area = "Users" }, null)</li>';
+        var str2 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._MountlyCashReports, "MountlyCashReports", "Reports", new { area = "Users" }, null)</li>';
+
+    $('.crumbs').append(str1);
+    $('.crumbs').append(str2);
+        $("label").css("color", "Black");
+        $("label").css("font-size", "20px");
+        $("label").css("margin-top", "5px");
+
+    };
+    $(function () {
+        $("#MonthSearch").change(function () {
+            var Month = $("#MonthSearch").val();
+            var Year = $("#YearSearch").val();
+            if (Year == "") {
+                alert("لطفاً مقدار سال را مشخص کنید");
+                return false;
+            }
+            GetMontlyReport(Year, Month);
+            $("#SumRow").slideDown();
+            $("#Sum").text(GlobalDepositsum + "  ريال");
+            ToRial($('#Sum').text(), $('#Sum').attr('id'));
+        })
+    })
+</script>

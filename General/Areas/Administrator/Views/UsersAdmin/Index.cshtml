@@ -1,0 +1,294 @@
+﻿@model IEnumerable<General.Models.ApplicationUser>
+
+@{
+    ViewBag.Title = "مدیریت کاربران و سطوح دسترسی";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout - Index.cshtml";
+}
+
+<link href="~/Content/sweetalert/sweet-alert.css" rel="stylesheet" />
+<div class="row" style="margin-top:15px">
+    <div class="col-md-8 col-sm-8 col-xs-8">
+        <label class="control-label col-md-3 col-sm-3 col-xs-3" style="color:black;font-size:18px;margin-top:15px">@FarsiLanguage.FarsiLanguage._MarketingCode</label>
+        <div class="col-sm-4 col-md-4 col-xs-4" style="margin-top:10px">
+            <input type="text" name="MK" value="" id="MK" class="text-center" />
+            @*<select class="form-control" id="Level">
+                    <option></option>
+                    @for (int i = 1; i <= 100; i++)
+                    {
+                        <option value="@i">@i</option>
+                    }
+                </select>*@
+        </div>
+
+        <div class="col-sm-1 col-md-1 col-xs-1">
+            <a class="btn-floating btn-large waves-effect waves-light green tooltipped" data-delay="50" data-tooltip="جستجو بر اساس کد بازاریابی" id="search"><i class="material-icons">search</i></a>
+
+        </div>
+        <div class="col-sm-1 col-md-1 col-xs-1">
+            <a class="btn-floating btn-large waves-effect waves-light blue tooltipped" data-delay="50" data-position="top" data-tooltip="جستجو اعضا جدید" id="ShowNewUsers"><i class="material-icons">find_in_page</i></a>
+
+        </div>
+        <div class="col-sm-1 col-md-1 col-xs-1">
+            <a class="btn-floating btn-large waves-effect waves-light purple tooltipped" data-delay="50" data-tooltip="خروجی اکسل" id="exporttoexcel"><i class="material-icons">file_download</i></a>
+
+        </div>
+    </div>
+</div>
+
+<table class=" striped bordered highlight centered responsive-table text-center" dir="rtl" id="UserList">
+    <tr>
+        <th style="text-align:center">
+            @Html.Label("وضعیت کاربر")
+        </th>
+        <th style="text-align:center">
+            @Html.Label("شناسه کاربری")
+        </th>
+        <th style="text-align:center">
+            @Html.Label("نام")
+        </th>
+        <th style="text-align:center">
+            @Html.Label("نام خانوادگی")
+        </th>
+        <th style="text-align:center">
+            @Html.Label("کد بازاریابی")
+        </th>
+        <th style="text-align:center">
+            @Html.Label("شماره بیمه")
+        </th>
+
+        <th style="text-align:center">
+            @Html.Label("انتخاب")
+        </th>
+    </tr>
+    @{
+        var j = 1;
+    }
+    @foreach (var item in Model)
+    {
+
+        <tr id="@item.UserName">
+
+            <td>
+                @if (item.CooperationStatus == true)
+                {
+                    if (item.RegisterStatus == 1)
+                    {
+                        <a href="@Url.Action("Details", new { id=item.Id })" class="btn-floating tooltipped yellow darken-3 pulse" data-position="right" data-delay="50" data-tooltip="کاربر جدید" blue"><i class="material-icons">fiber_new</i></a>
+                    }
+                    <a href="@Url.Action("Details", new { id=item.Id })" class="btn-floating tooltipped green pulse" data-position="left" data-delay="50" data-tooltip="فعال" blue"><i class="material-icons">sync</i></a>
+                }
+                @if (item.CooperationStatus == false)
+                {
+                    if (item.RegisterStatus == 1)
+                    {
+                        <a href="@Url.Action("Details", new { id=item.Id })" class="btn-floating tooltipped yellow darken-3 pulse" data-position="right" data-delay="50" data-tooltip="وضعیت" blue"><i class="material-icons">fiber_new</i></a>
+
+                    }
+                    <a href="@Url.Action("Details", new { id=item.Id })" class="btn-floating tooltipped green red" data-position="left" data-delay="50" data-tooltip="غیرفعال" blue"><i class="material-icons">sync_disabled</i></a>
+
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MarketingCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InsuranceNumber6)
+                @Html.DisplayFor(modelItem => item.InsuranceNumber5)
+                @Html.DisplayFor(modelItem => item.InsuranceNumber4)
+                @Html.DisplayFor(modelItem => item.InsuranceNumber3)
+                @Html.DisplayFor(modelItem => item.InsuranceNumber2)
+                @Html.DisplayFor(modelItem => item.InsuranceNumber1)
+            </td>
+            <td>
+                <a href="@Url.Action("Details", new { id=item.Id })" class="btn-floating tooltipped blue" data-position="right" data-delay="50" data-tooltip="جزئیات" blue"><i class="material-icons">dehaze</i></a> |
+                <a href="@Url.Action("Create","Installments", new { id=item.Id })" class="btn-floating tooltipped green darken-2" data-position="top" data-delay="50" data-tooltip="تعریف اقساط" blue"><i class="material-icons">attach_money</i></a> |
+                <a href="@Url.Action("Create","UsersArms", new { id=item.Id })" class="btn-floating tooltipped orange darken-2" data-position="top" data-delay="50" data-tooltip="درصد سود برای بازو" blue"><i class="material-icons" style="font-size:20px;font-weight:600">%</i></a> |
+                <a href="@Url.Action("Edit", new { id=item.Id })" class="btn-floating tooltipped yellow darken-2" data-position="top" data-delay="50" data-tooltip="ویرایش" blue"><i class="material-icons">edit</i></a> |
+                <a href="@Url.Action("Delete", new { id=item.Id })" class="btn-floating tooltipped red" data-position="left" data-delay="50" data-tooltip="حذف" blue"><i class="material-icons">delete</i></a>
+            </td>
+        </tr>
+        j++;
+    }
+
+</table>
+
+<div class="row text-center ">
+    <nav aria-label="..." id="nav">
+        <ul class="pagination">
+            <li><a href="?PageIndex=1" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+            @for (int i = 1; i < (ViewBag.PageCount + 2); i++)
+            {
+                <li class="@((ViewBag.PageIndex==i)?"active Disabled":"")"><a href="?PageIndex=@i">@i<span class="sr-only">(current)</span></a></li>
+            }
+        </ul>
+    </nav>
+</div>
+<div class="fixed-action-btn horizontal click-to-toggle">
+    <a class="btn-floating btn-large pulse blue">
+        <i class="material-icons">menu</i>
+    </a>
+    <ul>
+
+        <li><a href="@Url.Action("Index", "Cities", new { area = "BasicInformation" }, null)" class="btn tooltipped btn-floating purple darken-3" data-position="top" data-tooltip="نام شهر" data-delay="50"><i class="material-icons">location_city</i></a></li>
+        <li><a href="@Url.Action("Index", "Educations", new { area = "BasicInformation" }, null)" class="btn tooltipped btn-floating yellow darken-3" data-position="top" data-tooltip="@FarsiLanguage.FarsiLanguage._EducationName" data-delay="50"><i class="material-icons">school</i></a></li>
+        <li><a href="@Url.Action("Index", "States", new { area = "BasicInformation" }, null)" class="btn tooltipped btn-floating red darken-3" data-position="top" data-tooltip="@FarsiLanguage.FarsiLanguage._StateName" data-delay="50"><i class="material-icons">business</i></a></li>
+        <li><a href="@Url.Action("AdminsMainPage", "AdminGeneralpages", new { area = "Administrator" }, null)" class="btn tooltipped btn-floating purple darken-3" data-position="top" data-tooltip="صفحه مدیریت" data-delay="50"><i class="material-icons">person</i></a></li>
+
+        <li><a href="@Url.Action("Index", "RolesAdmin", new { area = "Administrator" }, null)" class="btn tooltipped btn-floating grey darken-3" data-position="top" data-tooltip="@FarsiLanguage.FarsiLanguage._Permition" data-delay="50"><i class="material-icons">fingerprint</i></a></li>
+        <li><a href="@Url.Action("Index", "Home", new { area = "" }, null)" class="btn tooltipped btn-floating blue darken-3" data-position="top" data-tooltip="صفحه اصلی" data-delay="50"><i class="material-icons">home</i></a></li>
+        <li><a href="@Url.Action("create")" class="btn tooltipped btn-floating green darken-1" data-position="top" data-delay="50" data-tooltip="ایجاد"><i class="material-icons">create_new_folder</i></a></li>
+    </ul>
+</div>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/MyScripts/PlanFunc.js"></script>
+<script src="~/Scripts/jquery-1.11.0.min.js"></script>
+<script src="~/Scripts/SweetAlert.js"></script>
+<script>
+    window.onload = function () {
+        $("label").css("color", "Black");
+
+    }
+
+    var str1 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._AdministratorPage, "AdminsMainPage", "AdminGeneralpages", new { area = "Administrator" }, null)</li>';
+     var str2 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._UsersList, "Index", "UsersAdmin", new { area = "Administrator" }, null)</li>';
+    $('.crumbs').append(str1);
+    $('.crumbs').append(str2);
+    $("#search").click(function () {
+        if ($("#MK").val() == null || $("#MK").val() == "") {
+               swal("خطا!", "مقدار کد بازاریابی را وارد نمایید", "error");
+            return false;
+
+        }
+        if ($("#MK").val().length < 13) {
+               swal("خطا!", "مقدار کد بازاریابی را صحیح وارد نمایید", "error");
+            return false;
+
+        }
+            var MK = $("#MK").val();
+            FindMK(MK);
+            $("tr:not(tr:first)").remove();
+            $("tr:first").after('<tr id=mk>');
+            //alert(UsersMKStatusArray.length);
+            ;
+            for (var i = 0; i < UsersMKStatusArray.length; i++) {
+                if (i == 0) {
+                      //alert(UsersMKStatusArray[i]);
+                    if( UsersMKStatusArray[i] = true){
+                        $('#mk').append('<td class="text-center" id="rowNum' + i + '"><span class="btn-floating  green pulse"><i class="material-icons">sync</i></span></td>');
+                    }
+                        if( UsersMKStatusArray[i] = false){
+                            $('#mk').append('<td class="text-center" id="rowNum' + i + '"><span class="btn-floating red"><i class="material-icons">sync_disabled</i></span></td>');
+                        }
+                }
+                                      ;
+
+                if ((i => 1) && (i <= 4) && (i!=0)) {
+                                $('#mk').append('<td class="text-center" id="rowNum' + i + '">' + UsersMKStatusArray[i] + '</td>');
+
+                                      }
+
+            }
+            $('#mk').append('<td class="text-center" id="rowNum' + i + '">' + UsersMKStatusArray[5] + ' ' + UsersMKStatusArray[6] + ' ' + UsersMKStatusArray[7] + ' ' + UsersMKStatusArray[8] + ' ' + UsersMKStatusArray[9] + ' ' + UsersMKStatusArray[10] + '</td>');
+            $('#mk').append(
+                '<td class="text-center" id= "rowNum' + i + '" ><a class="btn-floating tooltipped blue" data-position="top" data-delay="50" data-tooltip="جزئیات" href="/Administrator/UsersAdmin/Details/' + UsersMKStatusArray[11] + '"><i class="material-icons">dehaze</i></a> |  '+
+                '<a class="btn-floating tooltipped green" data-position="top" data-delay="50" data-tooltip="تعریف اقساط" href="/Administrator/Installments/Create/' + UsersMKStatusArray[11] + '"><i class="material-icons">attach_money</i></a> |  '+
+                '<a class="btn-floating tooltipped orange darken-2" data-position="top" data-delay="50" data-tooltip="درصد سود برای بازو" href="/Administrator/UsersArms/Create/' + UsersMKStatusArray[11] + '"><i class="material-icons">%</i></a> | '+
+                '<a class="btn-floating tooltipped yellow darken-2" data-position="top" data-delay="50" data-tooltip="ویرایش" href="/Administrator/UsersAdmin/Edit/' + UsersMKStatusArray[11] + '"><i class="material-icons">edit</i></a> | '+
+                '<a class="btn-floating tooltipped red" data-position="top" data-delay="50" data-tooltip="حذف" href="/Administrator/UsersAdmin/Delete/' + UsersMKStatusArray[11] + '"><i class="material-icons">delete</i></a></td>'
+
+            );
+               //</tr>');
+
+
+        });
+     $("#ShowNewUsers").click(function () {
+            //var MK = $("#MK").val();
+            FindNewMK();
+
+            $("tr:not(tr:first)").remove();
+            $("#nav").remove();
+            $("tr:first").after('<tr id=mk>');
+            //alert(UsersMKStatusArray.length);
+         ;
+         //alert(UsersMKStatusArray.length);
+         //alert(UsersMKStatusArray);
+            var counter = 0;
+            var toCounter = 6;
+         var Rows = UsersMKStatusArray.length / 7;
+                     for (var i = 1; i <= Rows; i++) {
+                $("tr:last").after('<tr id=mk' + i + '>');
+
+                while (counter < toCounter) {
+                    if (UsersMKStatusArray[counter] == "True") {
+                     $('#mk' + i).append('<td class="text-center" id="rowNum' + counter + '"><span class="btn-floating  green pulse"><i class="material-icons">sync</i></span><span class="btn-floating  orange pulse"><i class="material-icons">fiber_new</i></span></td>');
+                    }
+                    else {
+                     $('#mk' + i).append('<td class="text-center" id="rowNum' + counter + '">' + UsersMKStatusArray[counter] + '</td>');
+                    }
+                    counter++;
+                         }
+                          $('#mk' + i).append(
+                  '<td class="text-center" id= "rowNum' + counter + '" ><a class="btn-floating tooltipped blue" data-position="top" data-delay="50" data-tooltip="جزئیات" href="/Administrator/UsersAdmin/Details/' + UsersMKStatusArray[counter] + '"><i class="material-icons">dehaze</i></a> |  '+
+                '<a class="btn-floating tooltipped green" data-position="top" data-delay="50" data-tooltip="تعریف اقساط" href="/Administrator/Installments/Create/' + UsersMKStatusArray[counter] + '"><i class="material-icons">attach_money</i></a> |  '+
+                '<a class="btn-floating tooltipped orange darken-2" data-position="top" data-delay="50" data-tooltip="درصد سود برای بازو" href="/Administrator/UsersArms/Create/' + UsersMKStatusArray[counter] + '"><i class="material-icons">%</i></a> | '+
+                '<a class="btn-floating tooltipped yellow darken-2" data-position="top" data-delay="50" data-tooltip="ویرایش" href="/Administrator/UsersAdmin/Edit/' + UsersMKStatusArray[counter] + '"><i class="material-icons">edit</i></a> | '+
+                '<a class="btn-floating tooltipped red" data-position="top" data-delay="50" data-tooltip="حذف" href="/Administrator/UsersAdmin/Delete/' + UsersMKStatusArray[counter] + '"><i class="material-icons">delete</i></a></td>'
+
+                              );
+                toCounter = toCounter + 7;
+
+                counter++;
+                $('#mk' + i).after("</tr>");
+            }
+            //for (var i = 0; i < UsersMKStatusArray.length; i++) {
+            //    if (i == 0) {
+            //          //alert(UsersMKStatusArray[i]);
+            //        if( UsersMKStatusArray[i] = true){
+            //            $('#mk').append('<td class="text-center" id="rowNum' + i + '"><span class="btn-floating  green pulse"><i class="material-icons">sync</i></span></td>');
+            //        }
+            //            if( UsersMKStatusArray[i] = false){
+            //                $('#mk').append('<td class="text-center" id="rowNum' + i + '"><span class="btn-floating red"><i class="material-icons">sync_disabled</i></span></td>');
+            //            }
+            //    }
+            //                          ;
+
+            //    if ((i => 1) && (i <= 4) && (i!=0)) {
+            //                    $('#mk').append('<td class="text-center" id="rowNum' + i + '">' + UsersMKStatusArray[i] + '</td>');
+
+            //                          }
+
+            //}
+            //$('#mk').append('<td class="text-center" id="rowNum' + i + '">' + UsersMKStatusArray[5] + ' ' + UsersMKStatusArray[6] + ' ' + UsersMKStatusArray[7] + ' ' + UsersMKStatusArray[8] + ' ' + UsersMKStatusArray[9] + ' ' + UsersMKStatusArray[10] + '</td>');
+            //$('#mk').append(
+            //    '<td class="text-center" id= "rowNum' + i + '" ><a class="btn-floating tooltipped blue" data-position="top" data-delay="50" data-tooltip="جزئیات" href="/Administrator/UsersAdmin/Details/' + UsersMKStatusArray[11] + '"><i class="material-icons">dehaze</i></a> |  '+
+            //    '<a class="btn-floating tooltipped green" data-position="top" data-delay="50" data-tooltip="تعریف اقساط" href="/Administrator/Installments/Create/' + UsersMKStatusArray[11] + '"><i class="material-icons">attach_money</i></a> |  '+
+            //    '<a class="btn-floating tooltipped orange darken-2" data-position="top" data-delay="50" data-tooltip="درصد سود برای بازو" href="/Administrator/UsersArms/Create/' + UsersMKStatusArray[11] + '"><i class="material-icons">%</i></a> | '+
+            //    '<a class="btn-floating tooltipped yellow darken-2" data-position="top" data-delay="50" data-tooltip="ویرایش" href="/Administrator/UsersAdmin/Edit/' + UsersMKStatusArray[11] + '"><i class="material-icons">edit</i></a> | '+
+            //    '<a class="btn-floating tooltipped red" data-position="top" data-delay="50" data-tooltip="حذف" href="/Administrator/UsersAdmin/Delete/' + UsersMKStatusArray[11] + '"><i class="material-icons">delete</i></a></td>'
+
+            //);
+            //   //</tr>');
+
+
+        });
+    $("#exporttoexcel").on('click', function (e) {
+            e.preventDefault();
+            ResultsToTable();
+
+        });
+        function ResultsToTable() {
+            $("#UserList").table2excel({
+                exclude: ".noExl",
+                name: "Results"
+            });
+          }
+</script>

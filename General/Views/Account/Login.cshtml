@@ -1,0 +1,120 @@
+﻿@using General.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "صفحه ورود";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+
+}
+
+<style>
+    #refresh:hover {
+        cursor: pointer;
+    }
+
+    hr {
+        display: block;
+        height: 1px;
+        border: 0;
+        border-top: 1px solid #d6e9c6;
+        margin: 1em 0;
+        padding: 0;
+    }
+</style>
+<div class="container-fluid">
+    <img src="~/Images/login-background.jpg" alt="Alternate Text" style="height:470px;padding:20px;margin-top:40px" class="col-md-6 col-md-pull-6 img-responsive img-rounded img-thumbnail hidden-md hidden-sm hidden-xs" />
+    <div class="container white  col-md-6 col-md-push-6" style="width:400px;border:1px solid grey;border-radius:5px;margin-top:40px">
+
+        <fieldset dir="rtl" style="margin-bottom:10px">
+            <legend>اطلاعات ورود</legend>
+            <div class="row" style="margin-bottom:0px">
+                <section id="loginForm">
+                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="row" style="margin-bottom:0px">
+                            <img src="~/Images/b7c3ca6e9e.png" style="width:100px;margin-bottom:20px;margin-right:140px" alt="User Image" class="responsive-img" />
+                        </div>
+                        <div class="row" style="margin-bottom:0px">
+                            <div class="row" style="margin-bottom:0px">
+
+                                <div class=" col m6 s6 push-m3 push-s3">
+
+
+                                    @Html.TextBoxFor(model => model.UserName, new { @placeholder = FarsiLanguage.FarsiLanguage._UserName, @class = " text-center" })
+                                </div>
+                            </div>
+                            <div class="col m6 s12 row right-align push-m3">
+                                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger " })
+                            </div>
+                        </div>
+                        <div class="row" style="margin-bottom:0px">
+                            <div class="row " style="margin-bottom:0px">
+                                <div class=" col m6 s6 push-m3 push-s3">
+
+                                    @Html.PasswordFor(model => model.Password, new { @placeholder = FarsiLanguage.FarsiLanguage._Password, @class = " text-center" })
+                                </div>
+                            </div>
+
+                            <div class="col m12 s6 row right-align push-m3">
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="row" style="margin-bottom:0px">
+                            <div class="row " style="margin-bottom:0px">
+                                <div class=" col m12 s6 pull-m4 push-s3">
+                                    <img alt="Captcha" id="imgcpatcha" src="@Url.Action("CaptchaImage","Captcha")" style="border-radius:5px;width:150px" />
+                                    <i class="material-icons green-text text-darken-3" id="refresh">refresh</i>
+                                </div>
+                            </div>
+                            <div class="row right-align" style="margin-bottom:0px">
+                                <div class="  col m6 s6 push-m3 push-s3">
+                                    @Html.TextBoxFor(model => model.Captcha, new { @placeholder = FarsiLanguage.FarsiLanguage._SumResult, @class = " text-center" })
+                                </div>
+                                <div class="col m12 s12 row right-align pull-m3" style="margin-top:10px">
+                                    @Html.ValidationMessageFor(model => model.Captcha, "", new { @class = "text-danger" })
+                                </div>
+
+                            </div>
+                        </div>
+                        <hr style="margin-bottom:0px" />
+
+                        <div class="section" style="padding-top:0px;padding-bottom:0px">
+                            <div class="row center" style="margin-bottom:0px">
+                                <div class="input-field col m6 s6" style="margin-top:30px">
+                                    <a href="@Url.Action("ForgetPassword1", "Account", new { area = ""})" style="color: blue;font-size:13px;padding:-5px !important">@FarsiLanguage.FarsiLanguage._ForgetPessword</a>
+                                </div>
+                                <div class="input-field col m6 s6">
+                                    <button class="btn btn-large waves-effect waves-light blue" type="submit">
+                                        @FarsiLanguage.FarsiLanguage._Login
+                                        <i class="material-icons left">lock_open</i>
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+                </section>
+            </div>
+            <div class="col-md-4">
+                <section id="socialLoginForm">
+                    @*//   @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })*@
+                </section>
+            </div>
+        </fieldset>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $('#refresh').click(function () {
+
+            var d = new Date();
+            $("#imgcpatcha").attr("src", "../Captcha/CaptchaImage?" + d.getTime());
+
+        });
+    });
+</script>

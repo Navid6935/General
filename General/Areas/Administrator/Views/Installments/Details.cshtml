@@ -1,0 +1,83 @@
+﻿@model General.Areas.Administrator.Models.Installment
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Installment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MarketingCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MarketingCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InsuranceNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InsuranceNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InsuranceNumbersAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InsuranceNumbersAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InsuranceNumbersNum)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InsuranceNumbersNum)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InsuranceNumberId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InsuranceNumberId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InsuranceNumberStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InsuranceNumberStatus)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.InstallmentId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

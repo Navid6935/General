@@ -1,0 +1,126 @@
+﻿
+@{
+    ViewBag.Title = "گزارش زمانی درآمد ";
+    Layout = "~/Areas/Users/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="row" style="margin-top:15px">
+        <fieldset class="col-md-12">
+            <legend dir="rtl">از تاریخ</legend>
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <label class="control-label col-md-2 col-sm-2 col-xs-2" style="color:black;font-size:25px;margin-top:10px">@FarsiLanguage.FarsiLanguage._Year</label>
+                <div class="col-sm-9 col-md-9 col-xs-9" style="margin-top:10px">
+                    <select class="form-control" id="FromYear">
+                        <option></option>
+                        @for (int y = 1397; y <= 1450; y++)
+                        {
+                            <option value="@y">@y</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <label class="control-label col-md-1 col-sm-1 col-xs-1" style="color:black;font-size:25px;margin-top:10px">@FarsiLanguage.FarsiLanguage._Mounth</label>
+                <div class="col-sm-9 col-md-9 col-xs-9" style="margin-top:10px">
+                    <select class="form-control" id="FromMounth">
+                        <option></option>
+                        <option value="1">فروردین</option>
+                        <option value="2">اردیبهشت</option>
+                        <option value="3">خرداد</option>
+                        <option value="4">تیر</option>
+                        <option value="5">مرداد</option>
+                        <option value="6">شهریور</option>
+                        <option value="7">مهر</option>
+                        <option value="8">آبان</option>
+                        <option value="9">آذر</option>
+                        <option value="10">دی</option>
+                        <option value="11">بهمن</option>
+                        <option value="12">اسفند</option>
+                    </select>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset class="col-md-12">
+            <legend dir="rtl">تا تاریخ</legend>
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <label class="control-label col-md-2 col-sm-2 col-xs-2" style="color:black;font-size:25px;margin-top:10px">@FarsiLanguage.FarsiLanguage._Year</label>
+                <div class="col-sm-9 col-md-9 col-xs-9" style="margin-top:10px">
+                    <select class="form-control" id="ToYear">
+                        <option></option>
+                        @for (int y = 1397; y <= 1450; y++)
+                        {
+                            <option value="@y">@y</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-5 col-sm-5 col-xs-5">
+                <label class="control-label col-md-1 col-sm-1 col-xs-1" style="color:black;font-size:25px;margin-top:10px">@FarsiLanguage.FarsiLanguage._Mounth</label>
+                <div class="col-sm-9 col-md-9 col-xs-9" style="margin-top:10px">
+                    <select class="form-control" id="ToMounth">
+                        <option></option>
+                        <option value="1">فروردین</option>
+                        <option value="2">اردیبهشت</option>
+                        <option value="3">خرداد</option>
+                        <option value="4">تیر</option>
+                        <option value="5">مرداد</option>
+                        <option value="6">شهریور</option>
+                        <option value="7">مهر</option>
+                        <option value="8">آبان</option>
+                        <option value="9">آذر</option>
+                        <option value="10">دی</option>
+                        <option value="11">بهمن</option>
+                        <option value="12">اسفند</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-1 col-md-1 col-xs-1">
+                <a class="btn-floating btn-large waves-effect waves-light blue tooltipped" data-position="top" data-delay="50" data-tooltip="جستجو" id="search"><i class="material-icons">search</i></a>
+
+            </div>
+
+        </fieldset>
+    </div>
+
+<table class="table table-bordered table-striped right-align table-responsive" dir="rtl" style="margin-top:15px">
+    <tr id="MonthlyReportHeader">
+    </tr>
+    <tr id="SumRow" style="display:none">
+        <td class="text-center">
+            مجموع
+        </td>
+        <td class="text-center" id="Sum" colspan="4"></td>
+    </tr>
+</table>
+<script src="~/Scripts/MyScripts/PlanFunc.js"></script>
+<script src="//Code.jquery.com/jquery.min.js"></script>
+<script>
+    window.onload = function () {
+        var str1 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._UserMainPage, "UserMainPage", "GeneralPages", new { area = "Users" }, null)</li>';
+        var str2 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._CashReportsOnPeriod, "CashReportsOnPeriod", "Reports", new { area = "Users" }, null)</li>';
+
+    $('.crumbs').append(str1);
+    $('.crumbs').append(str2);
+        $("label").css("color", "Black");
+        $("label").css("font-size", "20px");
+        $("label").css("margin-top", "5px");
+
+    };
+    $(function () {
+        $("#search").click(function () {
+            var FromMounth = $("#FromMounth").val();
+            var FromYear = $("#FromYear").val();
+            var ToMounth = $("#ToMounth").val();
+            var ToYear = $("#ToYear").val();
+            if (FromYear == "" || FromMounth == "" || ToMounth == "" || ToYear == "" ) {
+                alert("لطفاً مقادیر موردنیاز را تکمیل نمایید");
+                return false;
+            }
+            GetPeriodlyReport(FromYear, FromMounth,ToYear, ToMounth);
+            $("#SumRow").slideDown();
+            $("#Sum").text(GlobalDepositsum + "  ريال");
+            ToRial($('#Sum').text(), $('#Sum').attr('id'));
+        })
+    })
+</script>

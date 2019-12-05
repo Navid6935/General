@@ -1,0 +1,306 @@
+﻿
+@model IEnumerable<General.Areas.Users.Models.UsersWallet>
+
+@{
+    ViewBag.Title = "گزارش پورسانت های پرداخت شده";
+    Layout = "~/Areas/Users/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row col-md-12" style="margin-top:15px">
+
+    <div class="row" style="margin-top:15px">
+        <fieldset class="col-md-12">
+            <legend dir="rtl">از تاریخ</legend>
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <label class="control-label col-md-2 col-sm-2 col-xs-2" style="color:black;font-size:25px;margin-top:10px">@FarsiLanguage.FarsiLanguage._Year</label>
+                <div class="col-sm-9 col-md-9 col-xs-9" style="margin-top:10px">
+                    <select class="form-control" id="FromYear">
+                        <option></option>
+                        @for (int y = 1397; y <= 1450; y++)
+                        {
+                            <option value="@y">@y</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <label class="control-label col-md-1 col-sm-1 col-xs-1" style="color:black;font-size:25px;margin-top:10px">@FarsiLanguage.FarsiLanguage._Mounth</label>
+                <div class="col-sm-9 col-md-9 col-xs-9" style="margin-top:10px">
+                    <select class="form-control" id="FromMounth">
+                        <option></option>
+                        <option value="1">فروردین</option>
+                        <option value="2">اردیبهشت</option>
+                        <option value="3">خرداد</option>
+                        <option value="4">تیر</option>
+                        <option value="5">مرداد</option>
+                        <option value="6">شهریور</option>
+                        <option value="7">مهر</option>
+                        <option value="8">آبان</option>
+                        <option value="9">آذر</option>
+                        <option value="10">دی</option>
+                        <option value="11">بهمن</option>
+                        <option value="12">اسفند</option>
+                    </select>
+                </div>
+            </div>
+        </fieldset>
+        <br />
+        <br />
+        <fieldset class="col-md-12">
+            <legend dir="rtl">تا تاریخ</legend>
+            <div class="col-md-5 col-sm-5 col-xs-5">
+                <label class="control-label col-md-2 col-sm-2 col-xs-2" style="color:black;font-size:25px;margin-top:10px">@FarsiLanguage.FarsiLanguage._Year</label>
+                <div class="col-sm-9 col-md-9 col-xs-9" style="margin-top:10px">
+                    <select class="form-control" id="ToYear">
+                        <option></option>
+                        @for (int y = 1397; y <= 1450; y++)
+                        {
+                            <option value="@y">@y</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-4">
+                <label class="control-label col-md-1 col-sm-1 col-xs-1" style="color:black;font-size:25px;margin-top:10px">@FarsiLanguage.FarsiLanguage._Mounth</label>
+                <div class="col-sm-9 col-md-9 col-xs-9" style="margin-top:10px">
+                    <select class="form-control text-center" id="ToMounth">
+                        <option></option>
+                        <option value="1">فروردین</option>
+                        <option value="2">اردیبهشت</option>
+                        <option value="3">خرداد</option>
+                        <option value="4">تیر</option>
+                        <option value="5">مرداد</option>
+                        <option value="6">شهریور</option>
+                        <option value="7">مهر</option>
+                        <option value="8">آبان</option>
+                        <option value="9">آذر</option>
+                        <option value="10">دی</option>
+                        <option value="11">بهمن</option>
+                        <option value="12">اسفند</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-1 col-md-1 col-xs-1">
+                <a class="btn-floating btn-large waves-effect waves-light blue tooltipped" data-position="top" data-delay="50" data-tooltip="جستجو" id="search"><i class="material-icons">search</i></a>
+
+            </div>
+
+            <div class="col-sm-1 col-md-1 col-xs-1">
+                <a class="btn-floating btn-large waves-effect waves-light green tooltipped" data-position="top" data-delay="50" data-tooltip="خروجی اکسل" id="exporttoexcel"><i class="material-icons">file_download</i></a>
+
+            </div>
+            <div class="col-sm-1 col-md-1 col-xs-1">
+                <a class="btn-floating btn-large waves-effect waves-light purple tooltipped" data-position="top" data-delay="50" data-tooltip="ورود اطلاعات پرداخت" id="ShowData"><i class="material-icons">assessment</i></a>
+
+            </div>
+        </fieldset>
+        <fieldset class="col-md-12">
+            <legend dir="rtl">فیلتر کد بازاریابی</legend>
+            <div class="col-md-11 col-sm-11 col-xs-11">
+                <label class="control-label col-md-2 col-sm-2 col-xs-2" style="color:black;font-size:25px;margin-top:10px">@FarsiLanguage.FarsiLanguage._MarketingCode</label>
+                <div class="col-sm-9 col-md-9 col-xs-9 col-md-push-4" style="margin-top:10px">
+                    <input type="text" class="text-center" name="UWMarketingCode" id="MarketingCode" />
+                </div>
+            </div>
+
+            <div class="col-sm-1 col-md-1 col-xs-1">
+                <a class="btn-floating btn-large waves-effect waves-light green tooltipped" data-position="top" data-delay="50" data-tooltip="ورود اطلاعات پرداخت" id="MarketingCodeSearch"><i class="material-icons">search</i></a>
+
+            </div>
+        </fieldset>
+    </div>
+
+    <table class="table table-bordered table-striped table-hover table-responsive " dir="rtl" style="margin-top:15px;border-color:darkblue" id="Installmenttbl">
+        <tr class="grey">
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.UWMarketingCode)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.UWFirstName)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.UWLastName)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.UWAcountNumber)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.UWCardNumber)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.UWYearDeposit)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.UWMonthDeposit)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.UWDayDeposit)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.UWAmountDeposit)
+            </th>
+            @*<th class="text-center">@FarsiLanguage.FarsiLanguage._Payment</th>*@
+
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.ListCode)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.FollowUpNO)
+            </th>
+
+            @*<th class="text-center">
+                    @Html.DisplayNameFor(model => model.UWAmountDeposit)
+                </th>*@
+
+        </tr>
+        @{
+            var i = 1;
+        }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="text-center" id="MarketingCode_@i">
+                    @Html.DisplayFor(modelItem => item.UWMarketingCode)
+                </td>
+                <td class="text-center" id="FirstName_@i">
+                    @Html.DisplayFor(modelItem => item.UWFirstName)
+                </td>
+                <td class="text-center" id="LastName_@i">
+                    @Html.DisplayFor(modelItem => item.UWLastName)
+                </td>
+                <td class="text-center" id="AcountNumber_@i">
+                    @Html.DisplayFor(modelItem => item.UWAcountNumber)
+                </td>
+                <td class="text-center" id="CardNumber_@i">
+                    @Html.DisplayFor(modelItem => item.UWCardNumber)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.UWYearDeposit)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.UWMonthDeposit)
+                </td>
+                <td class="text-center" id="UWDayDeposit_@i">
+                    @Html.DisplayFor(modelItem => item.UWDayDeposit)
+                </td>
+
+                <td class="text-center" id="UWAmountDeposit_@i">
+                    @Html.DisplayFor(modelItem => item.UWAmountDeposit)
+                </td>
+                <td class="text-center" id="ListCode_@i">
+                    @Html.DisplayFor(modelItem => item.ListCode)
+                </td>
+
+                <td class="text-center" id="FollowUpNO_@i">
+                    @Html.DisplayFor(modelItem => item.FollowUpNO)
+                </td>
+                @*<td class="text-center">
+                    @Html.ActionLink(FarsiLanguage.FarsiLanguage._ConfirmPayment, "ConfirmPayment", new { id = item.UWId }, new { @id = "paymentbtn" + i, @class = "paymentbtn" })*@
+
+                @*</td>*@
+            </tr>
+            ++i;
+        }
+
+
+    </table>
+
+</div>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/MyScripts/PlanFunc.js"></script>
+<script>
+    $(document).ready(function () {
+        var str1 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._AdministratorPage, "AdminsMainPage", "AdminGeneralpages", new { area = "Administrator" }, null)</li>';
+        var str2 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._AllWholeThingsPeymented, "AllWholeThingPeymented")</li>';
+        $('.crumbs').append(str1);
+        $('.crumbs').append(str2);
+        $("#search").click(function () {
+
+            var FromYear = $("#FromYear").val();
+            var FromMounth = $("#FromMounth").val();
+            var ToYear = $("#ToYear").val();
+            var ToMounth = $("#ToMounth").val();
+            if (FromYear == "" || FromYear == null) {
+                alert("فیلد ها را تکمیل نمایید");
+                return false;
+            }
+            if (FromMounth == "" || FromMounth == null) {
+                alert("فیلد ها را تکمیل نمایید");
+                return false;
+            }
+            if (ToYear == "" || ToYear == null) {
+                alert("فیلد ها را تکمیل نمایید");
+                return false;
+            }
+            if (ToMounth == "" || ToMounth == null) {
+                alert("فیلد تا ماه را تکمیل نمایید");
+                return false;
+            }
+            $("tr:not(tr:first)").remove();
+            GetAllWholePeymented(FromYear, FromMounth, ToYear, ToMounth);
+            if (AllWholePaymentArray.length == 0) {
+                alert("در این ماه اطلاعات  موجود نمی باشد");
+                return false;
+            }
+            //
+            var counter = 0;
+            var toCounter = 11;
+            var Rows = AllWholePaymentArray.length / 11;
+            for (var i = 1; i <= Rows; i++) {
+                $("tr:last").after('<tr id=mk' + i + '>');
+
+                while (counter < toCounter) {
+                    $('#mk' + i).append('<td class="text-center" id="rowNum' + counter + '">' + AllWholePaymentArray[counter] + '</td>');
+                    counter++;
+                }
+                toCounter = toCounter + 11;
+
+                // alert(counter);
+                //$('#rowNum' + (counter - 1)).after('<td class="text-center" id= "rowNum' + counter + '" ><a href="~/Administrator/Installments/ConfirmPayment?type=1?documenttypeid=' + AllWholePaymentArray[counter] + '">تایید پرداخت</a></td>');
+                //counter++;
+                $('#mk' + i).after("</tr>");
+            }
+        });
+        $("#MarketingCodeSearch").click(function () {
+
+            var MarketingCode = $("#MarketingCode").val();
+            if (MarketingCode == "" || MarketingCode == null || MarketingCode.length < 13) {
+                alert("فیلد کد بازاریابی را تکمیل نمایید");
+                return false;
+            }
+            $("tr:not(tr:first)").remove();
+            MarketingCode = $("#MarketingCode").val();
+            GetAllWholePeymentedOnMK(MarketingCode);
+
+            var counter = 0;
+            var toCounter = 11;
+            var Rows = AllWholePaymentArray.length / 11;
+            for (var i = 1; i <= Rows; i++) {
+                $("tr:last").after('<tr id=mk' + i + '>');
+
+                while (counter < toCounter) {
+                    $('#mk' + i).append('<td class="text-center" id="rowNum' + counter + '">' + AllWholePaymentArray[counter] + '</td>');
+                    counter++;
+                }
+                toCounter = toCounter + 11;
+
+                // alert(counter);
+                //$('#rowNum' + (counter - 1)).after('<td class="text-center" id= "rowNum' + counter + '" ><a href="~/Administrator/Installments/ConfirmPayment?type=1?documenttypeid=' + AllWholePaymentArray[counter] + '">تایید پرداخت</a></td>');
+                //counter++;
+                $('#mk' + i).after("</tr>");
+            }
+        });
+        $("#exporttoexcel").on('click', function (e) {
+            e.preventDefault();
+            ResultsToTable();
+
+        });
+        function ResultsToTable() {
+            $("#Installmenttbl").table2excel({
+                exclude: ".noExl",
+                name: "Results"
+            });
+          }
+    });
+</script>

@@ -1,0 +1,48 @@
+﻿@model General.Areas.Administrator.Models.Percentage
+
+@{
+    ViewBag.Title = "جزئیات درصدها";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+    <table class="table-bordered table-striped " dir="rtl" style="margin-top:25px">
+        <tr>
+            <td class="center" style="font-family:'B Titr';font-size:20px">سطح</td>
+            <td class="center" style="font-family:'B Titr';font-size:20px">مقدار پورسانت به درصد</td>
+        </tr>
+        <tr>
+            <td class="center">@Html.DisplayNameFor(model => model.Level1)</td>
+            <td class="center">@Html.DisplayFor(model => model.Commission1)</td>
+        </tr>
+        <tr>
+            <td class="center">@Html.DisplayNameFor(model => model.Level2)</td>
+            <td class="center">@Html.DisplayFor(model => model.Commission2)</td>
+        </tr>
+        <tr>
+            <td class="center">@Html.DisplayNameFor(model => model.Level3)</td>
+            <td class="center">@Html.DisplayFor(model => model.Commission3)</td>
+        </tr>
+        <tr>
+            <td class="center">@Html.DisplayNameFor(model => model.Level4)</td>
+            <td class="center">@Html.DisplayFor(model => model.Commission4)</td>
+        </tr>
+        <tr>
+            <td class="center">@Html.DisplayNameFor(model => model.Level5)</td>
+            <td class="center">@Html.DisplayFor(model => model.Commission5)</td>
+        </tr>
+        <tr>
+            <td class="center">@Html.DisplayNameFor(model => model.Level6)</td>
+            <td class="center">@Html.DisplayFor(model => model.Commission6)</td>
+        </tr>
+        <tr>
+            <td class="center">@Html.DisplayNameFor(model => model.Level7)</td>
+            <td class="center">@Html.DisplayFor(model => model.Commission7)</td>
+        </tr>
+        <tr>
+            <td class="center">@Html.DisplayNameFor(model => model.Level8)</td>
+            <td class="center">@Html.DisplayFor(model => model.Commission8)</td>
+        </tr>
+        <tr>
+            <td class="center">@Html.DisplayNameFor(model => model.Level9)</td>
+            <td class="center">@Html.DisplayFor(model => model.Commission9)</td>
+        </tr>
+    </table>

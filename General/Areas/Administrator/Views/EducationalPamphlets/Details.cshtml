@@ -1,0 +1,45 @@
+﻿@model General.Areas.Administrator.Models.EducationalPamphlets
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+
+<div>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.EPIssue)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EPIssue)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EPDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EPDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Image)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Image)
+        </dd>
+
+    </dl>
+</div>
+<script src="//Code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript">
+       var str1 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._AdministratorPage, "AdminsMainPage", "AdminGeneralpages", new { area = "Administrator" }, null)</li>';
+        var str2 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._EducationalPamphletsCreate, "Index")</li>';
+        $('.crumbs').append(str1);
+        $('.crumbs').append(str2);
+
+</script>

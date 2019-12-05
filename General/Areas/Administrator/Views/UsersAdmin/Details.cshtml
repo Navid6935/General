@@ -1,0 +1,286 @@
+﻿@model General.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "جزئیات - مدیریت کاربران";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+
+}
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script>
+        var str1 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._ManageUserRoles, "Index", "UsersAdmin", new { area = "Administrator" }, null)</li>';
+    var str2 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._Detail, "Details", "UsersAdmin", new { area = "Administrator" }, null)</li>';
+    $('.crumbs').append(str1);
+    $('.crumbs').append(str2);
+
+    $(document).ready(function () {
+        $('input#input_text, textarea#textarea2').characterCounter();
+        $("Label").css("font-size", "15px");
+        $("Label").css("color", "#000000"); 
+    });
+
+</script>
+
+<fieldset style="margin-bottom:15px" dir="rtl">
+    <legend>@FarsiLanguage.FarsiLanguage._PersonStatus</legend>
+    <div class="divider blue darken-4"></div>
+
+    <div class="section">
+        <div class="row">
+            <div class=" col m12 s12" style="font-size:18px;color:#244788">
+                <span> @Html.Label(@FarsiLanguage.FarsiLanguage._UserName) : </span>
+                @Html.DisplayFor(model => model.UserName, null, "")
+            </div>
+        </div>
+    </div>
+    <div class="divider blue darken-4"></div>
+
+    <div class="section">
+        <div class="row">
+            <div class=" col m12 s12" style="font-size:18px;color:#244788">
+                <span> @Html.Label(@FarsiLanguage.FarsiLanguage._FirstName) : </span>
+                @Html.DisplayFor(model => model.FirstName, null, "")
+            </div>
+        </div>
+    </div>
+    <div class="divider blue darken-4"></div>
+
+    <div class="section">
+        <div class="row">
+            <div class=" col m12 s12" style="font-size:18px;color:#244788">
+                <span> @Html.Label(@FarsiLanguage.FarsiLanguage._LastName) : </span>
+                @Html.DisplayFor(model => model.LastName, null, "")
+            </div>
+        </div>
+    </div>
+    <div class="divider blue darken-4"></div>
+
+    <div class="section">
+        <div class="row">
+            <div class=" col m12 s12" style="font-size:18px;color:#244788">
+                <span> @Html.Label(@FarsiLanguage.FarsiLanguage._FathersName) : </span>
+                @Html.DisplayFor(model => model.FathersName, null, "")
+            </div>
+        </div>
+    </div>
+    <div class="divider blue darken-4"></div>
+
+    <div class="section">
+        <div class="row">
+            <div class=" col m12 s12" style="font-size:18px;color:#244788">
+                <span> @Html.Label(@FarsiLanguage.FarsiLanguage._MarketingCode) : </span>
+                @Html.DisplayFor(model => model.MarketingCode, null, "")
+            </div>
+        </div>
+    </div>
+    <div class="divider blue darken-4"></div>
+
+    <div class="section">
+        <div class="row">
+            <div class=" col m12 s12" style="font-size:18px;color:#244788">
+                <span> @Html.Label(@FarsiLanguage.FarsiLanguage._BirthCertificateId) : </span>
+                @Html.DisplayFor(model => model.BirthCertificateId, null, "")
+            </div>
+        </div>
+    </div>
+    <div class="divider blue darken-4"></div>
+
+    <div class="section">
+        <div class="row">
+            <div class=" col m12 s12" style="font-size:18px;color:#244788">
+                <span> @Html.Label(@FarsiLanguage.FarsiLanguage._NationalCode) : </span>
+                @Html.DisplayFor(model => model.NationalCode, null, "")
+            </div>
+        </div>
+    </div>
+    <div class="divider blue darken-4"></div>
+
+    <div class="section">
+        <div class="row">
+            <div class=" col m12 s12" style="font-size:18px;color:#244788">
+                <span> @Html.Label(@FarsiLanguage.FarsiLanguage._Education) : </span>
+                @Html.DisplayFor(model => model.EName.EName, null, "")
+            </div>
+        </div>
+    </div>
+    <div class="divider blue darken-4"></div>
+
+    <div class="section">
+        <div class="row">
+            <div class=" col m12 s12" style="font-size:18px;color:#244788">
+                <span> @Html.Label(@FarsiLanguage.FarsiLanguage._Sex) : </span>
+                @Html.DisplayFor(model => model.Sex, null, "")
+            </div>
+        </div>
+    </div>
+</fieldset>
+
+<fieldset style="margin-bottom:15px" dir="rtl">
+    <legend>@FarsiLanguage.FarsiLanguage._ContactStatus</legend>
+    <div class="divider blue darken-4"></div>
+
+    <div class="section">
+        <div class="row">
+            <div class=" col m12 s12" style="font-size:18px;color:#244788">
+                <span> @Html.Label(@FarsiLanguage.FarsiLanguage._Phone) : </span>
+                @Html.DisplayFor(model => model.Phone, null, "")
+            </div>
+        </div>
+    </div>
+    <div class="divider blue darken-4"></div>
+
+    <div class="section">
+        <div class="row">
+            <div class=" col m12 s12" style="font-size:18px;color:#244788">
+                <span> @Html.Label(@FarsiLanguage.FarsiLanguage._MobileNumber) : </span>
+                @Html.DisplayFor(model => model.MobileNumber, null, "")
+            </div>
+        </div>
+    </div>
+    <div class="divider blue darken-4"></div>
+
+    <div class="section">
+        <div class="row">
+            <div class=" col m12 s12" style="font-size:18px;color:#244788">
+                <span> @Html.Label(@FarsiLanguage.FarsiLanguage._Email) : </span>
+                @Html.DisplayFor(model => model.Email, null, "")
+            </div>
+        </div>
+    </div>
+
+</fieldset>
+
+<fieldset style="margin-bottom:15px" dir="rtl">
+    <legend>@FarsiLanguage.FarsiLanguage._LocationStatus</legend>
+    <div class="divider blue darken-4"></div>
+
+    <div class="section">
+        <div class="row">
+            <div class=" col m12 s12" style="font-size:18px;color:#244788">
+                <span> @Html.Label(@FarsiLanguage.FarsiLanguage._CityName) : </span>
+                @Html.DisplayFor(model => model.CName.CName, null, "")
+            </div>
+        </div>
+    </div>
+    <div class="divider blue darken-4"></div>
+
+    <div class="section">
+        <div class="row">
+            <div class=" col m12 s12" style="font-size:18px;color:#244788">
+                <span> @Html.Label(@FarsiLanguage.FarsiLanguage._StateName) : </span>
+                @Html.DisplayFor(model => model.SName.SName, null, "")
+            </div>
+        </div>
+    </div>
+    <div class="divider blue darken-4"></div>
+
+    <div class="section">
+        <div class="row">
+            <div class=" col m12 s12" style="font-size:18px;color:#244788">
+                <span> @Html.Label(@FarsiLanguage.FarsiLanguage._PostalCode) : </span>
+                @Html.DisplayFor(model => model.PostalCode, null, "")
+            </div>
+        </div>
+    </div>
+    <div class="divider blue darken-4"></div>
+
+    <div class="section">
+        <div class="row">
+            <div class=" col m12 s12" style="font-size:18px;color:#244788">
+                <span> @Html.Label(@FarsiLanguage.FarsiLanguage._Address) : </span>
+                @Html.DisplayFor(model => model.Address, null, "")
+            </div>
+        </div>
+    </div>
+</fieldset>
+
+<fieldset style="margin-bottom:15px" dir="rtl">
+    <legend>@FarsiLanguage.FarsiLanguage._BankStatus</legend>
+    <div class="divider blue darken-4"></div>
+
+    <div class="section">
+        <div class="row">
+            <div class=" col m12 s12" style="font-size:18px;color:#244788">
+                <span> @Html.Label(@FarsiLanguage.FarsiLanguage._AcountNumber) : </span>
+                @Html.DisplayFor(model => model.AcountNumber, null, "")
+            </div>
+        </div>
+    </div>
+    <div class="divider blue darken-4"></div>
+
+    <div class="section">
+        <div class="row">
+            <div class=" col m12 s12" style="font-size:18px;color:#244788">
+                <span> @Html.Label(@FarsiLanguage.FarsiLanguage._CardNumber) : </span>
+                @Html.DisplayFor(model => model.CardNumber, null, "")
+            </div>
+        </div>
+    </div>
+    <div class="divider blue darken-4"></div>
+
+    <div class="section">
+        <div class="row">
+            <div class=" col m12 s12" style="font-size:18px;color:#244788">
+                <span> @Html.Label(@FarsiLanguage.FarsiLanguage._BranchName) : </span>
+                @Html.DisplayFor(model => model.BranchName, null, "")
+            </div>
+        </div>
+    </div>
+    <div class="divider blue darken-4"></div>
+
+    <div class="section">
+        <div class="row">
+            <div class=" col m12 s12" style="font-size:18px;color:#244788">
+                <span> @Html.Label(@FarsiLanguage.FarsiLanguage._BranchCode) : </span>
+                @Html.DisplayFor(model => model.BranchCode, null, "")
+            </div>
+        </div>
+    </div>
+    <div class="divider blue darken-4"></div>
+
+    <div class="section">
+        <div class="row">
+            <div class=" col m12 s12" style="font-size:18px;color:#244788">
+                <span> @Html.Label(@FarsiLanguage.FarsiLanguage._ShabaName) : </span>
+                @Html.DisplayFor(model => model.ShabaName, null, "")
+            </div>
+        </div>
+    </div>
+</fieldset>
+<fieldset style="margin-bottom:15px" dir="rtl">
+    <legend>@FarsiLanguage.FarsiLanguage._Permition</legend>
+    <div class="row">
+        <label class="col m12 s12 control-label">
+           @FarsiLanguage.FarsiLanguage._UserRolesList :
+        </label>
+
+        @if (ViewBag.RoleNames.Count == 0)
+        {
+            <hr />
+                    <p>برای این کاربر نقشی یافت نگردید.</p>
+        }
+
+        <br />
+        <br />
+        @foreach (var item in ViewBag.RoleNames)
+        {
+            <hr class="alert-info">
+
+
+            <span style="padding-right:15px" class="col m12 s12 center">@item<i class="material-icons">account_circle</i></span>
+        }
+    </div>
+    </fieldset>
+    
+<div class="fixed-action-btn horizontal click-to-toggle">
+    <a class="btn-floating btn-large pulse blue darken-4">
+        <i class="material-icons">menu</i>
+    </a>
+    <ul>
+        <li><a href="@Url.Action("DisconnectCooperationStatus","UsersAdmin", new { id=Model.Id })" class="btn-floating tooltipped red darken-2" data-position="top" data-delay="50" data-tooltip="قطع همکاری" blue"><i class="material-icons">indeterminate_check_box</i></a></li>
+        <li><a href="@Url.Action("Index")" class="btn tooltipped btn-floating blue darken-1" data-position="top" data-delay="50" data-tooltip="لیست"><i class="material-icons">arrow_back</i></a></li>
+    </ul>
+
+</div>
+
+

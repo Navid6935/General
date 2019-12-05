@@ -1,0 +1,379 @@
+﻿@model IEnumerable<General.Areas.Administrator.Models.Installment>
+
+@{
+    ViewBag.Title = "افساط تایید شده";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+@*<link href="Css/jquery-ui.css" rel="stylesheet" />
+    <link href="Css/jquery-ui-datetimepicker.min.css" rel="stylesheet" />*@
+<link href="~/Content/sweetalert/sweet-alert.css" rel="stylesheet" />
+
+<div class="row col-md-12" style="margin-top:15px">
+    <div class="col-md-12" style="margin-top:15px;margin-bottom:15px;border:1px dashed;border-radius:5px;padding-bottom:15px">
+        <div class="row col-md-12" style="margin-top:15px;margin-right:1px;padding-bottom:15px;border-bottom:1px dashed">
+            <div class="col-md-5 col-sm-5 col-xs-5">
+                <label class="control-label col-md-5 col-sm-5 col-xs-5" style="color:black;font-size:20px;margin-top:12px">از تاریخ</label>
+                <div class="col-sm-6 col-md-6 col-xs-6" style="margin-top:10px">
+                    @*<select class="form-control" id="Year">
+                            <option></option>
+                            @for (int y = 1397; y <= 1450; y++)
+                            {
+                                <option value="@y">@y</option>
+                            }
+                        </select>*@
+                    <input type="text" id="FromDate" class="text-center" />
+
+                </div>
+            </div>
+            <div class="col-md-5 col-sm-5 col-xs-5">
+                <label class="control-label col-md-5 col-sm-5 col-xs-5" style="color:black;font-size:20px;margin-top:12px">تا تاریخ</label>
+                <div class="col-sm-6 col-md-6 col-xs-6" style="margin-top:10px">
+                    @*<select class="form-control" id="Mounth">
+                            <option></option>
+                            <option value="1">فروردین</option>
+                            <option value="2">اردیبهشت</option>
+                            <option value="3">خرداد</option>
+                            <option value="4">تیر</option>
+                            <option value="5">مرداد</option>
+                            <option value="6">شهریور</option>
+                            <option value="7">مهر</option>
+                            <option value="8">آبان</option>
+                            <option value="9">آذر</option>
+                            <option value="10">دی</option>
+                            <option value="11">بهمن</option>
+                            <option value="12">اسفند</option>
+                        </select>*@
+                    <input type="text" id="ToDate" class="text-center" />
+
+                </div>
+            </div>
+            <div class="col-sm-1 col-md-1 col-xs-1">
+                <a class="btn-floating btn-large waves-effect waves-light blue tooltipped" data-position="top" data-delay="50" data-tooltip="جستجو" id="search"><i class="material-icons">search</i></a>
+
+            </div>
+            <div class="col-sm-1 col-md-1 col-xs-1">
+                <a class="btn-floating btn-large waves-effect waves-light green tooltipped" data-position="top" data-delay="50" data-tooltip="خروجی اکسل" id="exporttoexcel"><i class="material-icons">file_download</i></a>
+
+            </div>
+        </div>
+        @*</fieldset>
+            <fieldset>
+                <legend dir="rtl">بر اساس کد بازاریابی </legend>*@
+        <div class="row col-md-12" style="margin-right:1px;padding-bottom:15px;border-bottom:1px dashed">
+            <div class="col-md-11 col-sm-11 col-xs-11">
+                <label class="control-label col-md-3 col-sm-3 col-xs-3" style="color:black;font-size:20px;margin-top:12px">کد بازاریابی</label>
+                <div class="col-sm-6 col-md-6 col-xs-6" style="margin-top:10px">
+                    @*<select class="form-control" id="Year">
+                            <option></option>
+                            @for (int y = 1397; y <= 1450; y++)
+                            {
+                                <option value="@y">@y</option>
+                            }
+                        </select>*@
+                    <input type="text" id="MarketingCode" class="text-center" maxlength="13" />
+
+                </div>
+            </div>
+            <div class="col-sm-1 col-md-1 col-xs-1">
+                <a class="btn-floating btn-large waves-effect waves-light blue tooltipped" data-position="top" data-delay="50" data-tooltip="جستجو بر اساس کد بازاریابی" id="searchMarketingCode"><i class="material-icons">search</i></a>
+
+            </div>
+
+        </div>
+        @*</fieldset>
+            <fieldset>
+                <legend dir="rtl">بر اساس شماره بیمه نامه</legend>*@
+        <div class="row col-md-12">
+            <div class="col-md-11 col-sm-11 col-xs-11">
+                <label class="control-label col-md-3 col-sm-3 col-xs-3" style="color:black;font-size:20px;margin-top:12px">شماره بیمه نامه</label>
+                <div class="col-sm-1 col-md-1 col-xs-1 col-md-pull-8" style="margin-top:10px">
+                    <input type="text" id="InsuranceNum1" class="text-center col-md-2" maxlength="2" />
+                </div>
+                <div class="col-sm-2 col-md-2 col-xs-2 col-md-pull-5" style="margin-top:10px">
+                    <input type="text" id="InsuranceNum2" class="text-center col-md-2" maxlength="5" />
+                </div>
+                <div class="col-sm-1 col-md-1 col-xs-1 col-md-pull-2" style="margin-top:10px">
+                    <input type="text" id="InsuranceNum3" class="text-center col-md-2" maxlength="1" />
+                </div>
+                <div class="col-sm-1 col-md-1 col-xs-1" style="margin-top:10px">
+                    <input type="text" id="InsuranceNum4" class="text-center col-md-2" maxlength="1" />
+                </div>
+                <div class="col-sm-2 col-md-2 col-xs-2  col-md-push-3" style="margin-top:10px">
+                    <input type="text" id="InsuranceNum5" class="text-center col-md-2" maxlength="4" />
+                </div>
+                <div class="col-sm-2 col-md-2 col-xs-2  col-md-push-7" style="margin-top:10px">
+                    <input type="text" id="InsuranceNum6" class="text-center col-md-2" maxlength="5" />
+                </div>
+            </div>
+            <div class="col-sm-1 col-md-1 col-xs-1">
+                <a class="btn-floating btn-large waves-effect waves-light blue tooltipped" data-position="top" data-delay="50" data-tooltip="جستجو بر اساس شماره بیمه نامه" id="searchOnInsuranceNum"><i class="material-icons">search</i></a>
+
+            </div>
+        </div>
+    </div>
+
+    <table class="table table-bordered table-striped table-hover table-responsive " dir="rtl" style="margin-top:15px;border-color:darkblue" id="Installmenttbl">
+        <tr class="grey">
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.MarketingCode)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.InsuranceNumber)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.DayInstallmentNumber)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.MounthInstallmentNumber)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.YearInstallmentNumber)
+            </th>
+            @*<th class="text-center">
+                    @Html.DisplayNameFor(model => model.InstallmentsNumbersNum)
+                </th>*@
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.InstallmentsNumbersAmount)
+            </th>
+            <th class="text-center">
+                وضعیت
+            </th>
+            @*<th class="text-center">@FarsiLanguage.FarsiLanguage._Payment</th>*@
+        </tr>
+        @{
+            var i = 1;
+        }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="text-center" id="MarketingCode_@i">
+                    @Html.DisplayFor(modelItem => item.MarketingCode)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td class="text-center" id="InsuranceNumber_@i">
+                    @Html.DisplayFor(modelItem => item.InsuranceNumber)
+                </td>
+                <td class="text-center" id="InsuranceNumber_@i">
+                    @Html.DisplayFor(modelItem => item.DayInstallmentNumber)
+                </td>
+
+                <td class="text-center" id="InstallmentsNumbersAmount_@i">
+                    @Html.DisplayFor(modelItem => item.MounthInstallmentNumber)
+                </td>
+                <td class="text-center" id="InstallmentsNumbersAmount_@i">
+                    @Html.DisplayFor(modelItem => item.YearInstallmentNumber)
+                </td>
+                @*<td class="text-center" id="InstallmentsNumbersAmount_@i">
+                        @Html.DisplayFor(modelItem => item.InstallmentsNumbersNum)
+                    </td>*@
+                <td class="text-center" id="InstallmentsNumbersAmount_@i">
+                    @Html.DisplayFor(modelItem => item.InstallmentsNumbersAmount)
+                </td>
+                <td class="text-center" id="InstallmentsNumbersAmount_@i">
+                    @{
+                        if (item.InstallmentsNumberMansStatus == 1)
+                        {
+                            <span class="green-text">تایید شده</span>
+                        }
+                        else
+                        {
+                            <span class="red-text">تایید نشده</span>
+                        }
+                    }
+                </td>
+                @*<td class="text-center">
+                        @Html.ActionLink(FarsiLanguage.FarsiLanguage._ConfirmPayment, "ConfirmPayment", new { id = item.InstallmentId }, new { @id = "paymentbtn" + i, @class = "paymentbtn" })
+
+                    </td>*@
+            </tr>
+            ++i;
+        }
+
+
+    </table>
+</div>
+<div style="margin-top: 200px">
+
+</div>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/MyScripts/PlanFunc.js"></script>
+<script src="~/Scripts/jquery-1.11.0.min.js"></script>
+<script src="~/Scripts/SweetAlert.js"></script>
+<link href="~/Content/sweetalert/sweet-alert.css" rel="stylesheet" />
+<script>
+    $(document).ready(function () {
+
+    var str1 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._AdministratorPage, "AdminsMainPage", "AdminGeneralpages", new { area = "Administrator" }, null)</li>';
+     var str2 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._Installment, "Create", "Installments", new { area = "Administrator" }, null)</li>';
+     var str3 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._PaymentsConfirmReport, "PaymentExelExport", "Installments", new { area = "Administrator" }, null)</li>';
+    $('.crumbs').append(str1);
+    $('.crumbs').append(str2);
+    $('.crumbs').append(str3);
+        $("#search").click(function () {
+
+            var FromDate = $("#FromDate").val().replace(/\//g, '');
+            var ToDate = $("#ToDate").val().replace(/\//g, '');
+
+            if (FromDate == "" || FromDate == null) {
+               swal("خطا!", "فیلد ها را تکمیل نمایید", "error");
+                return false;
+            }
+            if (ToDate == "" || ToDate == null) {
+               swal("خطا!", "فیلد ها را تکمیل نمایید", "error");
+                return false;
+            }
+
+            $("tr:not(tr:first)").remove();
+            GetExcelPaymentOnPeriod(FromDate,ToDate);
+            //alert(InstallmentonPeriodArray.length)
+            if (InstallmentonPeriodArray.length == 0) {
+               swal("خطا!", "در این ماه اطلاعات  موجود نمی باشد", "error");
+                return false;
+            }
+
+            var counter = 0;
+            var toCounter = 8;
+            var Rows = InstallmentonPeriodArray.length / 8;
+            for (var i = 1; i <= Rows; i++) {
+                $("tr:last").after('<tr id=mk' + i + '>');
+
+                while (counter < toCounter) {
+                    $('#mk' + i).append('<td class="text-center" id="rowNum' + counter + '">' + InstallmentonPeriodArray[counter] + '</td>');
+                    counter++;
+                }
+                toCounter = toCounter + 8;
+
+                // alert(counter);
+                //$('#rowNum' + (counter - 1)).after('<td class="text-center" id= "rowNum' + counter + '" ><a href="~/Administrator/Installments/ConfirmPayment?type=1?documenttypeid=' + InstallmentonPeriodArray[counter] + '">تایید پرداخت</a></td>');
+                //counter++;
+                //$('#mk' + i).after("</tr>");
+            }
+        });
+        //=============================================
+          $("#MarketingCode").keyup(function () {
+            var MarketingCode = $(this).val();
+            if (MarketingCode.length == 13) {
+                $(this).css("border-color","green")
+            }
+            else {
+                $(this).css("border-color","red")
+
+            }
+        })
+          $("#searchMarketingCode").click(function () {
+
+            var MarketingCode = $("#MarketingCode").val();
+            if (MarketingCode == "" || MarketingCode == null) {
+               swal("خطا!", "فیلد کد بازاریابی را تکمیل نمایید", "error");
+                return false;
+            }
+            $("tr:not(tr:first)").remove();
+            GetExcelPaymentOnPeriodOnMarketingCode(MarketingCode);
+            //alert(InstallmentonPeriodArray.length)
+            if (InstallmentonPeriodArray.length == 0) {
+               swal("خطا!", "برای این کد بازاریابی اطلاعات اقساط  موجود نمی باشد", "error");
+                return false;
+            }
+
+            var counter = 0;
+            var toCounter = 8;
+            var Rows = InstallmentonPeriodArray.length / 8;
+            for (var i = 1; i <= Rows; i++) {
+                $("tr:last").after('<tr id=mk' + i + '>');
+
+                while (counter < toCounter) {
+                    $('#mk' + i).append('<td class="text-center" id="rowNum' + counter + '">' + InstallmentonPeriodArray[counter] + '</td>');
+                    counter++;
+                }
+                toCounter = toCounter + 8;
+
+                // alert(counter);
+                //$('#rowNum' + (counter - 1)).after('<td class="text-center" id= "rowNum' + counter + '" ><a href="~/Administrator/Installments/ConfirmPayment?type=1?documenttypeid=' + InstallmentonPeriodArray[counter] + '">تایید پرداخت</a></td>');
+                //counter++;
+                //$('#mk' + i).after("</tr>");
+            }
+          });
+        //==========================================
+          $("#searchOnInsuranceNum").click(function () {
+            var InsuranceNum1 = $("#InsuranceNum1").val();
+            var InsuranceNum2 = $("#InsuranceNum2").val();
+            var InsuranceNum3 = $("#InsuranceNum3").val();
+            var InsuranceNum4 = $("#InsuranceNum4").val();
+            var InsuranceNum5 = $("#InsuranceNum5").val();
+             var InsuranceNum6 = $("#InsuranceNum6").val();
+            var InsuranceNum = InsuranceNum6 + " " + InsuranceNum5 + " " + InsuranceNum4 + " " + InsuranceNum3 + " " + InsuranceNum2 + " " + InsuranceNum1;
+            if (InsuranceNum1 == "" || InsuranceNum1 == null) {
+               swal("خطا!", "فیلد شماره بیمه را تکمیل نمایید", "error");
+                return false;
+             }
+            if (InsuranceNum2 == "" || InsuranceNum2 == null) {
+               swal("خطا!", "فیلد شماره بیمه را تکمیل نمایید", "error");
+                return false;
+             }
+            if (InsuranceNum3 == "" || InsuranceNum3 == null) {
+               swal("خطا!", "فیلد شماره بیمه را تکمیل نمایید", "error");
+                return false;
+             }
+            if (InsuranceNum4 == "" || InsuranceNum4 == null) {
+               swal("خطا!", "فیلد شماره بیمه را تکمیل نمایید", "error");
+                return false;
+             }
+            if (InsuranceNum5 == "" || InsuranceNum5 == null) {
+               swal("خطا!", "فیلد شماره بیمه را تکمیل نمایید", "error");
+                return false;
+             }
+            if (InsuranceNum6 == "" || InsuranceNum6 == null) {
+               swal("خطا!", "فیلد شماره بیمه را تکمیل نمایید", "error");
+                return false;
+            }
+            $("tr:not(tr:first)").remove();
+            GetExcelPaymentOnPeriodOnInsuranceNum(InsuranceNum);
+            //alert(InstallmentonPeriodArray.length)
+            if (InstallmentonPeriodArray.length == 0) {
+               swal("خطا!", "برای این شماره بیمه اقساط  موجود نمی باشد", "error");
+                return false;
+            }
+
+            var counter = 0;
+            var toCounter = 8;
+            var Rows = InstallmentonPeriodArray.length / 8;
+            for (var i = 1; i <= Rows; i++) {
+                $("tr:last").after('<tr id=mk' + i + '>');
+
+                while (counter < toCounter) {
+                    $('#mk' + i).append('<td class="text-center" id="rowNum' + counter + '">' + InstallmentonPeriodArray[counter] + '</td>');
+                    counter++;
+                }
+                toCounter = toCounter + 8;
+
+                // alert(counter);
+                //$('#rowNum' + (counter - 1)).after('<td class="text-center" id= "rowNum' + counter + '" ><a href="~/Administrator/Installments/ConfirmPayment?type=1?documenttypeid=' + InstallmentonPeriodArray[counter] + '">تایید پرداخت</a></td>');
+                //counter++;
+                //$('#mk' + i).after("</tr>");
+            }
+        });
+        $("#exporttoexcel").on('click', function (e) {
+            e.preventDefault();
+            ResultsToTable();
+
+        });
+        function ResultsToTable() {
+            $("#Installmenttbl").table2excel({
+                exclude: ".noExl",
+                name: "Results"
+            });
+        }
+
+    });
+</script>

@@ -1,0 +1,92 @@
+﻿@model General.Areas.Users.Models.Support
+
+@{
+    ViewBag.Title = "پشتیبانی";
+    Layout = "~/Areas/Users/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm("Create", "Supports", FormMethod.Post, new { enctype = "multipart/form-data", id = "myUploadForm" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container-fluid" dir="rtl">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger", @style = "margin-top:'15px'" })
+        <fieldset style="margin-bottom:15px" dir="rtl">
+            <legend>فرم پشتبانی</legend>
+            <hr class="panel-primary" />
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    @Html.LabelFor(model => model.SupportIssue, htmlAttributes: new { @class = "control-label col-sm-1  col-md-1  col-xs-1" })
+                    <div class="col-sm-10 col-md-10 col-xs-10 ">
+                        @Html.EditorFor(model => model.SupportIssue, new { htmlAttributes = new { @class = "form-control text-center", @style = "max-width:800px" } })
+                        @Html.ValidationMessageFor(model => model.SupportIssue, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <hr class="panel-primary" />
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    @Html.LabelFor(model => model.SupportDescription, htmlAttributes: new { @class = "control-label col-sm-1  col-md-1  col-xs-1" })
+                    <div class="col-sm-10 col-md-10 col-xs-10 ">
+                        @Html.TextAreaFor(model => model.SupportDescription, htmlAttributes: new { @class = "materialize-textarea", @style = "width: 100%; max-width: 100%", @length = "1000" })
+                        @Html.ValidationMessageFor(model => model.SupportDescription, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <hr class="panel-primary" />
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-sm-2  col-md-2  col-xs-2" })
+                    <div class="col-sm-10 col-md-10 col-xs-10 ">
+                        @Html.Upload("UploadImage")
+                        @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <hr class="panel-primary" />
+
+            <div class="row">
+
+                <div class="input-field col m12 s12 pull-m5">
+                    <button type="submit" class="btn waves-effect waves-teal btn-large">
+                        <i class="material-icons left">create</i>
+                        ایجاد
+                    </button>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+
+
+}
+<script src="//Code.jquery.com/jquery.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var str1 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._UserMainPage, "UserMainPage", "GeneralPages", new { area = "Users" }, null)</li>';
+        var str2 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._Support, "Create", "Supports", new { area = "Users" }, null)</li>';
+
+    $('.crumbs').append(str1);
+    $('.crumbs').append(str2);
+        //$('input#input_text, textarea#textarea2').characterCounter();
+        $("Label").css("font-size", "15px");
+        $("Label").css("color", "black");
+        $('label').css("margin-top", "8px");
+        //alert("asd");
+    });
+</script>
+<div class="fixed-action-btn horizontal click-to-toggle">
+    <a class="btn-floating btn-large pulse blue">
+        <i class="material-icons">menu</i>
+    </a>
+    <ul>
+
+        <li><a href="@Url.Action("Index", "Home", new { area = "" })" class="btn tooltipped btn-floating green darken-1" data-position="top" data-delay="50" data-tooltip="صفحه اصلی"><i class="material-icons">home</i></a></li>
+
+    </ul>
+</div>

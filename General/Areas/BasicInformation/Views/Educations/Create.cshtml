@@ -1,0 +1,51 @@
+﻿@model General.Areas.BasicInformation.Models.Education
+
+@{
+    ViewBag.Title = "ایجاد - مدرک";
+    Layout = "~/Areas/BasicInformation/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script>
+
+    var str1 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._Create, "Create", "Educations", new { area = "BasicInformation" }, null)</li>';
+    $('.crumbs').append(str1);
+    window.onload = function () {
+    }
+
+</script>
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <fieldset style="margin-bottom:15px" dir="rtl">
+        <legend>@FarsiLanguage.FarsiLanguage._Education</legend>
+        <div class="row">
+            <div class="input-field col m3 s12 push-m9 ">
+                @Html.LabelFor(model => model.EName, new { @class = "col m6 s12 offset-m1 offset-s10" })
+                @Html.TextBoxFor(model => model.EName, new { htmlAttributes = new { @class = "validate" } })
+                @Html.ValidationMessageFor(model => model.EName, "", new { @class = "text-danger" })
+            </div>
+</div>
+        </fieldset>
+        <div class="section">
+            <div class="row center">
+                <div class="input-field col m12 s12">
+                    <button class="btn btn-large waves-effect waves-light green" type="submit">
+                        @FarsiLanguage.FarsiLanguage._Create
+                        <i class="material-icons left">create</i>
+                </div>
+            </div>
+        </div>
+}
+            @section Scripts {
+                @Scripts.Render("~/bundles/jqueryval")
+            }
+<div class="fixed-action-btn horizontal click-to-toggle">
+    <a class="btn-floating btn-large pulse green">
+        <i class="material-icons">menu</i>
+    </a>
+    <ul>
+        <li><a href="@Url.Action("Index")" class="btn tooltipped btn-floating blue darken-1" data-position="top" data-delay="50" data-tooltip="لیست"><i class="material-icons">arrow_back</i></a></li>
+    </ul>
+</div>

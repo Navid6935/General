@@ -1,0 +1,64 @@
+﻿@model IEnumerable<General.Areas.Users.Models.UsersWallet>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UWMarketingCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UWDayDeposit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UWMonthDeposit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UWYearDeposit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UWAmountDeposit)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UWMarketingCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UWDayDeposit)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UWMonthDeposit)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UWYearDeposit)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UWAmountDeposit)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.UWId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.UWId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.UWId })
+        </td>
+    </tr>
+}
+
+</table>

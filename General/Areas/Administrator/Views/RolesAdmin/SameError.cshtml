@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "خطا!";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+<h2>خطا!</h2>
+<div class="container">
+    <div class="row">
+
+            <h2 style="font-size:20px;font-family:'B Titr'">
+                مهلت نشست شما به پايان رسيده است . لطفاً مجدداً وارد شويد
+                @Html.ActionLink("ورود", "Login", "LoginViewUsers", new { area = "Administrator" }, new { @style = "color:black" })
+            </h2>
+
+    </div>
+
+</div>
+

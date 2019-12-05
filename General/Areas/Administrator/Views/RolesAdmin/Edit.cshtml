@@ -1,0 +1,57 @@
+﻿@model General.Models.RoleViewModel
+
+@{
+    ViewBag.Title = "ویرایش - سطح دسترسی";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+
+}
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script>
+        var str1 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._PermitionManage, "Index", "RolesAdministrator", new { area = "Administrator" }, null)</li>';
+    var str2 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._Edit, "Edit", "RolesAdministrator", new { area = "Administrator" }, null)</li>';
+    $('.crumbs').append(str1);
+    $('.crumbs').append(str2);
+</script>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.Id)
+    <fieldset dir="rtl">
+        <legend> فرم ویرایش سطح دسترسی</legend>
+        <div class="divider yellow darken-2"></div>
+        <div class="section">
+            <div class="row col m12 s12">
+                <div class="input-field col m4 s12 push-m8">
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "validate", @id = "LEname" } })
+                    @Html.LabelFor(model => model.Name, new { @style = "padding-right:25px" })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="divider yellow darken-2"></div>
+        <div class="section">
+            <div class="row center">
+                <div class="input-field col m12 s12">
+                    <button class="btn btn-large waves-effect waves-light yellow darken-2" type="submit">
+                        @FarsiLanguage.FarsiLanguage._Edit
+                    <i class="material-icons left">create</i>
+            </div>
+        </div>
+    </div>
+</fieldset>
+
+}
+
+<div class="fixed-action-btn horizontal click-to-toggle">
+    <a class="btn-floating btn-large pulse yellow darken-2">
+        <i class="material-icons">menu</i>
+    </a>
+    <ul>
+        <li><a href="@Url.Action("Index")" class="btn tooltipped btn-floating blue darken-1" data-position="top" data-delay="50" data-tooltip="لیست"><i class="material-icons">arrow_back</i></a></li>
+    </ul>
+</div>
+

@@ -1,0 +1,92 @@
+﻿@model General.Areas.Users.Models.Support
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Users/Views/Shared/_Layout.cshtml";
+}
+<fieldset style="margin-bottom:15px" dir="rtl">
+    <legend>فرم پشتبانی</legend>
+    <hr class="panel-primary" />
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class=" col m12 s12" style="font-size:18px;color:#244788">
+                <span class="col-md-1 col-sm-1  black-text"> @Html.DisplayNameFor(model => model.SupportIssue)</span>
+                <div class="col-sm-10 col-md-10 col-xs-10">
+
+                    @Html.DisplayFor(model => model.SupportIssue)
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <hr class="panel-primary" />
+    <div class="row">
+
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class=" col m12 s12" style="font-size:18px;color:#244788">
+                <span class="col-md-1 col-sm-1  black-text"> @Html.DisplayNameFor(model => model.SupportDescription)</span>
+                <div class="col-sm-10 col-md-10 col-xs-10">
+
+                    @Html.DisplayFor(model => model.SupportDescription)
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <hr class="panel-primary" />
+    <div class="row">
+
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class=" col m12 s12" style="font-size:18px;color:#244788">
+                <span class="col-md-2 col-sm-2  black-text">عکس ارسال شده</span>
+                <div class="col-sm-10 col-md-10 col-xs-10">
+
+                    <img class="materialboxed" width="450" src="~/Uploads/@Model.Image">
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <hr class="panel-primary" />
+    <div class="row">
+
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class=" col m12 s12" style="font-size:18px;color:#244788">
+                <span class="col-md-1 col-sm-1  black-text"> @Html.DisplayNameFor(model => model.SupportResponse)</span>
+                <div class="col-sm-10 col-md-10 col-xs-10">
+                    @if (Model.SupportResponse == null)
+                    {
+                        <span class="red-text text-darken-2">بدون پاسخ</span>
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(model => model.SupportResponse)
+
+                    }
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    @*<div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                @Html.LabelFor(model => model.SupportResponse, htmlAttributes: new { @class = "control-label col-sm-1  col-md-1  col-xs-1" })
+                <div class="col-sm-10 col-md-10 col-xs-10 ">
+                    @Html.TextAreaFor(model => model.SupportResponse, htmlAttributes: new { @class = "materialize-textarea", @style = "width: 100%; max-width: 100%", @length = "1000" })
+                    @Html.ValidationMessageFor(model => model.SupportResponse, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>*@
+</fieldset>
+
+<script src="//Code.jquery.com/jquery.min.js"></script>
+<script src="/Scripts/materialize.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.materialboxed').materialbox();
+    });
+</script>

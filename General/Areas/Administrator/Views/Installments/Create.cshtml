@@ -1,0 +1,417 @@
+﻿@model General.Areas.Administrator.Models.Installment
+
+@{
+    ViewBag.Title = "تعریف اقساط";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <fieldset dir="rtl" class="white">
+        <legend>@FarsiLanguage.FarsiLanguage._Installment</legend>
+        <div class="container-fluid">
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    @Html.LabelFor(model => model.MarketingCode, htmlAttributes: new { @class = "control-label col-sm-4  col-md-4  col-xs-4" })
+                    <div class="col-sm-8 col-md-8 col-xs-8 ">
+                        @Html.EditorFor(model => model.MarketingCode, new { htmlAttributes = new { @class = "form-control well" } })
+                        @Html.ValidationMessageFor(model => model.MarketingCode, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    @Html.LabelFor(model => model.InsuranceNumber, htmlAttributes: new { @class = "control-label col-sm-4  col-md-4  col-xs-4" })
+                    <div class="col-sm-8 col-md-8 col-xs-8">
+                        @Html.EditorFor(model => model.InsuranceNumber, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.InsuranceNumber, "", new { @class = "text-danger", @id = "InsuranceNumberValidation" })
+                    </div>
+                </div>
+
+            </div>
+            <hr class="panel-primary" />
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-sm-4  col-md-4  col-xs-4" })
+                    <div class="col-sm-8 col-md-8 col-xs-8">
+                        @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger", @id = "FirstNameValidation" })
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-sm-4  col-md-4  col-xs-4" })
+                    <div class="col-sm-8 col-md-8 col-xs-8">
+                        @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger", @id = "LastNameValidation" })
+                    </div>
+                </div>
+
+            </div>
+            <hr class="panel-primary" />
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    @Html.LabelFor(model => model.InstallmentsNumbersNum, htmlAttributes: new { @class = "control-label col-md-2 col-sm-2 col-xs -2" })
+                    <div class="col-sm-10 col-md-10 col-xs-10">
+                        <select name="InstallmentsNumbersNum" id="InstallmentsNumbersNum" class="form-control">
+                            <option></option>
+                            @for (int i = 1; i <= 100; i++)
+                            {
+                                <option value="@i">@i</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+            <hr class="panel-primary" id="installmentHr" />
+
+            <div class="form-group">
+                <div class="col-md-10 col-md-pull-5">
+
+                    <a class=" btn-large waves-effect waves-light blue tooltipped" data-position="left" data-delay="50" data-tooltip="@FarsiLanguage.FarsiLanguage._NewRegister" id="btnAdd">
+                        <i class="material-icons">add</i>
+
+                    </a>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    //نمایش اطلاعات اقساط کاربر
+
+    <table class="table table-bordered table-striped right-align table-responsive" dir="rtl" style="margin-top:15px">
+        <tr>
+            <th class="center">
+                @Html.DisplayNameFor(model => model.MarketingCode)
+            </th>
+            <th class="center">
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th class="center">
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th class="center">
+                @Html.DisplayNameFor(model => model.InsuranceNumber)
+            </th>
+            <th class="center">
+                @Html.DisplayNameFor(model => model.InstallmentsNumbersAmount)
+            </th>
+            <th class="center">
+
+                @Html.DisplayNameFor(model => model.DayInstallmentNumber)
+            </th>
+            <th class="center">
+
+                @Html.DisplayNameFor(model => model.MounthInstallmentNumber)
+            </th>
+            <th class="center">
+
+                @Html.DisplayNameFor(model => model.YearInstallmentNumber)
+            </th>
+            <th class="center">
+
+                @Html.DisplayNameFor(model => model.InstallmentsNumberStatus)
+            </th>
+            <th class="center">
+
+            </th>
+            @if (ViewBag.UserName == "483004311139639539")
+            {
+                <th class="center">
+                    @FarsiLanguage.FarsiLanguage._Options
+                </th>
+            }
+            else
+            {
+
+            }
+        </tr>
+
+        @foreach (var item in ViewBag.Installment)
+        {
+            <tr>
+                <td class="center">
+                    @item.MarketingCode
+                </td>
+                <td class="center">
+
+                    @item.FirstName
+                </td>
+                <td class="center">
+
+                    @item.LastName
+                </td>
+                @*<td class="center">
+
+                        @item.MarkettingCodeInsuranceNumber)
+                    </td>*@
+                <td class="center">
+
+                    @item.InsuranceNumber
+                </td>
+                <td class="center">
+
+                    @item.InstallmentsNumbersAmount
+                </td>
+                <td class="center">
+
+                    @item.DayInstallmentNumber
+                </td>
+                <td class="center">
+
+                    @item.MounthInstallmentNumber
+                </td>
+                <td class="center">
+
+                    @item.YearInstallmentNumber
+                </td>
+
+                @{
+                    if (@item.InstallmentsNumberStatus == 0)
+                    {
+                        <td class="center">
+                            پرداخت نشده
+
+                        </td>
+                    }
+                    if (@item.InstallmentsNumberStatus == 1)
+                    {
+                        <td class="center">
+                            پرداخت شده
+
+                        </td>
+                    }
+                }
+
+                <td class="center">
+
+                    @* <a href="@Url.Action("Details", new { id=item.InstallmentId })" class="btn-floating tooltipped blue" data-position="right" data-delay="50" data-tooltip="جزئیات" blue"><i class="material-icons">dehaze</i></a> |*@
+                    <a href="@Url.Action("Edit", new { id=item.InstallmentId })" class="btn-floating tooltipped yellow darken-2" data-position="top" data-delay="50" data-tooltip="ویرایش" blue"><i class="material-icons">edit</i></a> |
+                    <a href="@Url.Action("Delete", new { id=item.InstallmentId })" class="btn-floating tooltipped red" data-position="left" data-delay="50" data-tooltip="حذف" blue"><i class="material-icons">delete</i></a>
+                </td>
+
+
+            </tr>
+        }
+
+    </table>
+}
+<div class="fixed-action-btn horizontal click-to-toggle">
+    <a class="btn-floating btn-large pulse green">
+        <i class="material-icons">menu</i>
+    </a>
+    <ul>
+        @*<li><a href="@Url.Action("Index", "Home", new { area = "" }, null)" class="btn tooltipped btn-floating blue darken-3" data-position="top" data-tooltip="صفحه اصلی" data-delay="50"><i class="material-icons">home</i></a></li>*@
+        <li><a href="@Url.Action("index")" class="btn tooltipped btn-floating blue darken-1" data-position="top" data-delay="50" data-tooltip="بازگشت"><i class="material-icons">arrow_back</i></a></li>
+    </ul>
+</div>
+<script src="~/Scripts/jquery-1.11.0.min.js"></script>
+<script src="~/Scripts/SweetAlert.js"></script>
+<link href="~/Content/sweetalert/sweet-alert.css" rel="stylesheet" />
+<script>
+    var InstallmentCheck;
+    window.onload = function () {
+        //var url = window.location.href;
+        //alert(url);
+        //alert("@ViewBag.UserId");
+        FindUserStatus("@ViewBag.UserId");
+        $("#btnAdd").hide();
+    }
+    $(document).ready(function () {
+     var str1 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._ManageUserRoles, "Index", "UsersAdmin", new { area = "Administrator" }, null)</li>';
+     var str2 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._Installment, "Index", "UsersAdmin", new { area = "Administrator" }, null)</li>';
+     var str3 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._InstallmentsDifinition, "Create", "Installments", new { area = "Administrator" }, null)</li>';
+    $('.crumbs').append(str1);
+    $('.crumbs').append(str2);
+    $('.crumbs').append(str3);
+        $('label').css("color", "#16008b");
+        $('label').css("margin-top", "8px");
+        var Nums = 0;
+        //$(".form-control").css("background-color", "#edf7ec");
+    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ تغییر مقدار قسط ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+            $("#InstallmentsNumbersNum").change(function () {
+            //alert($(this).val());
+                 $("InstallmentsNumbersNum:not(InstallmentsNumbersNum:first)").remove();
+                for (var j = parseInt(Nums); j >= 1; j--) {
+                    $("#InstallmentRow" + j).remove();
+                    $("#InstallmentHr" + j).remove();
+                }
+                var RowId = $(this).val();
+                Nums = $(this).val();
+                $("#btnAdd").show();
+
+
+                for (var i = 1; i <= $(this).val(); i++) {
+
+                //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ اضافه کردن سطر +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+                    $('#installmentHr').before('<hr class="panel-primary" id="InstallmentHr' + i + '"/>' +
+                        '<div class="row InstallmentRow" dir="rtl" id="InstallmentRow' + i + '">' +
+                        '<div class="col col-md-2 col-md-push-10 col-sm-12">' +
+                        '<lable for="InstallmentsNumberId' + i + '" class="control-label col-md-4" style="Margin-top:10px">@FarsiLanguage.FarsiLanguage._Number</lable>' +
+                        '<div class="col-md-8">' +
+                        '<input type=text class="form-control text-center black-text" disabled="disabled"   name="InstallmentsNumberId" id="InstallmentsNumberId' + i + '" value=' + i + '>' +
+                        '</div>' +
+                        '</div>' +
+
+                        '<div class="col col-md-2 col-md-push-6 col-sm-12">' +
+                        '<lable for="DayInstallmentNumber' + i + '" class="control-label col-md-4" style="margin-top:10px">@FarsiLanguage.FarsiLanguage._Day</lable>' +
+                        '<div class="col-md-8">' +
+                        '<input type=text class="form-control text-center" maxlength="2"  name=DayInstallmentNumber id=DayInstallmentNumber' + i + '>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="col col-md-2 col-md-push-2 col-sm-12">' +
+                        '<lable for="MounthInstallmentNumber' + i + '" class="control-label col-md-4" style="margin-top:10px">@FarsiLanguage.FarsiLanguage._Mounth</lable>' +
+                        '<div class="col-md-8">' +
+                        '<input type=text class="form-control text-center" maxlength="2" name=MounthInstallmentNumber id=MounthInstallmentNumber' + i + '>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="col col-md-2 col-md-pull-2 col-sm-12">' +
+                        '<lable for="YearInstallmentNumber' + i + '" class="control-label col-md-4" style="margin-top:10px">@FarsiLanguage.FarsiLanguage._Year</lable>' +
+                        '<div class="col-md-8">' +
+                        '<input type=text class="form-control text-center" maxlength="4" name=YearInstallmentNumber id=YearInstallmentNumber' + i + '>' +
+                        '</div>' +
+                        '</div>' +
+                        '<div class="col col-md-4 col-md-pull-8 col-sm-12">' +
+                        '<lable for="InsuranceNumbersAmount' + i + '" class="control-label col-md-4" style="margin-top:10px">@FarsiLanguage.FarsiLanguage._InstallmentNumberAmount</lable>' +
+                        '<div class="col-md-8">' +
+                        '<input type=text class="form-control text-center" name=InstallmentsNumbersAmount id=InstallmentsNumbersAmount' + i + '>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>');
+
+                    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++تبدیل به مقدار پول  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                    $("#InstallmentsNumbersAmount" + i).keyup(function () {
+                        var id = $(this).attr("id");
+                        ToRial($(this).val(), id);
+                    })
+                    //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                }
+
+        })
+        //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ تغییر مقدار قسط ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+            $("#btnAdd").click(function () {
+                //======================================================================= Installment Rows Validation Check ========================================================
+                for (var i = 1; i <= $("#InstallmentsNumbersNum").val(); i++) {
+                    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ اعتبارسنجی فیلد روز ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                    if (($("#DayInstallmentNumber" + i).val() == "")) {
+                        alert("فیلد روز نمی تواند خالی باشد");
+                        $("#DayInstallmentNumber" + i).css("border-color", "red");
+                        return false;
+                        InstallmentCheck = false;
+                    }
+                    else if (($("#DayInstallmentNumber" + i).val() < 1) || ($("#DayInstallmentNumber" + i).val() > 31)) {
+                        alert("بازه روز در ماه اشتباه است");
+                        $("#DayInstallmentNumber" + i).css("border-color", "red");
+                        return false;
+                        InstallmentCheck = false;
+
+                    }
+                    else if (($("#DayInstallmentNumber" + i).val().length != 2)) {
+                        alert("طول کاراکتر فیلد روز 2 عدد می باشد");
+                        $("#DayInstallmentNumber" + i).css("border-color", "red");
+                        return false;
+                        InstallmentCheck = false;
+
+                    }
+                    else if (($("#DayInstallmentNumber" + i).val() != "") && (($("#DayInstallmentNumber" + i).val().length == 2))) {
+                        $("#DayInstallmentNumber" + i).css("border-color", "#cccccc");
+                        InstallmentCheck = true;
+
+                    }
+                    //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ اعتبارسنجی فیلد ماه ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                    if (($("#MounthInstallmentNumber" + i).val() == "")) {
+                        alert("فیلد ماه نمی تواند خالی باشد");
+                        $("#MounthInstallmentNumber" + i).css("border-color", "red");
+                        return false;
+                        InstallmentCheck = false;
+
+                    }
+                    else if (($("#MounthInstallmentNumber" + i).val() < 1) || ($("#MounthInstallmentNumber" + i).val() > 12)) {
+                        alert("بازه ماه در سال اشتباه است");
+                        $("#MounthInstallmentNumber" + i).css("border-color", "red");
+                        return false;
+                        InstallmentCheck = false;
+
+                    }
+                    else if (($("#MounthInstallmentNumber" + i).val().length != 2)) {
+                        alert("طول کاراکتر فیلد ماه 2 عدد می باشد");
+                        $("#MounthInstallmentNumber" + i).css("border-color", "red");
+                        return false;
+                        InstallmentCheck = false;
+
+                    }
+                    else if (($("#MounthInstallmentNumber" + i).val() != "") && (($("#MounthInstallmentNumber" + i).val().length == 2))) {
+                        $("#MounthInstallmentNumber" + i).css("border-color", "#cccccc");
+                        InstallmentCheck = true;
+
+                    }
+                    //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ اعتبارسنجی فیلد سال ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                    if (($("#YearInstallmentNumber" + i).val() == "")) {
+                        alert("فیلد سال نمی تواند خالی باشد");
+                        $("#YearInstallmentNumber" + i).css("border-color", "red");
+                        InstallmentCheck = false;
+
+                    }
+                    else if (($("#YearInstallmentNumber" + i).val().length != 4)) {
+                        alert("طول کاراکتر فیلد سال 4 عدد می باشد");
+                        $("#YearInstallmentNumber" + i).css("border-color", "red");
+                        InstallmentCheck = false;
+
+                    }
+                    else if (($("#YearInstallmentNumber" + i).val() != "") && (($("#YearInstallmentNumber" + i).val().length == 2))) {
+                        $("#YearInstallmentNumber" + i).css("border-color", "#ccccc");
+                        InstallmentCheck = true;
+
+                    }
+                    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ اعتبارسنجی فیلد مبلغ قسط ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+                    //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                    if (($("#InstallmentsNumbersAmount" + i).val() == "")) {
+                        alert("فیلد مبلغ قسط نمی تواند خالی باشد");
+                        $("#InstallmentsNumbersAmount" + i).css("border-color", "red");
+                        InstallmentCheck = false;
+
+                    }
+                    else if (($("#InstallmentsNumbersAmount" + i).val() != "") && (($("#InstallmentsNumbersAmount" + i).val().length == 2))) {
+                        $("#InstallmentsNumbersAmount" + i).css("border-color", "#ccccc");
+                        InstallmentCheck = true;
+
+                    }
+
+
+                }
+                //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                //======================================================================= Installment Rows Insert ======================================================================
+
+                if (InstallmentCheck == true) {
+                    for (var i = 1; i <= $("#InstallmentsNumbersNum").val(); i++) {
+                        var MarketingCode = $("#MarketingCode").val();
+                        var FirstName = $("#FirstName").val();
+                        var LastName = $("#LastName").val();
+                        var InsuranceNumber = $("#InsuranceNumber").val();
+                        var InstallmentsNumbersNum = $("#InstallmentsNumbersNum").val();
+
+                        var InstallmentsNumbersAmount = $("#InstallmentsNumbersAmount" + i).val();
+                        var InstallmentsNumberId = $("#InstallmentsNumberId" + i).val();
+                        var DayInstallmentNumber = $("#DayInstallmentNumber" + i).val();
+                        var MounthInstallmentNumber = $("#MounthInstallmentNumber" + i).val();
+                        var YearInstallmentNumber = $("#YearInstallmentNumber" + i).val();
+                        var InstallmentsNumberStatus = 0;
+                        InsertInstallmentData(MarketingCode, FirstName, LastName, InsuranceNumber, InstallmentsNumbersAmount, InstallmentsNumbersNum, InstallmentsNumberId,
+                            DayInstallmentNumber, MounthInstallmentNumber, YearInstallmentNumber, InstallmentsNumberStatus);
+                    }
+                    //if (GlobalInstallmentStatus == true) {
+                    //  window.location.href = '/Administrator/UsersAdmin/';
+
+                    //}
+                }
+                //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+            })
+
+
+    })
+</script>

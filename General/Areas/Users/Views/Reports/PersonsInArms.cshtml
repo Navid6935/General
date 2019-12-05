@@ -1,0 +1,76 @@
+﻿
+@{
+    ViewBag.Title = "اعضای تیم";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout.cshtml";
+}
+
+@*@ViewBag.Counter ;*@
+
+@{
+    for (int i = 0; i < ViewBag.Counter; i++)
+    {
+        int j = i + 1;
+
+        <table class="table table-bordered table-responsive " dir="rtl" style="margin-top:15px;background-color:darkgreen;color:#feca04">
+            <tr>
+                <td class="text-center " style="background-color:#0f2d63">
+                    تعداد افراد حاضر در تیم @j
+                </td>
+
+                <td class="text-center">
+                    @{var item1 = ViewBag.UserCount;
+                        @item1[i] ;
+
+                        <span>&nbsp;</span> @FarsiLanguage.FarsiLanguage._Nafar;
+                    }
+                </td>
+            </tr>
+
+        </table>
+
+    }
+
+}
+<table class="table table-bordered table-responsive " dir="rtl" style="margin-top:15px;background-color:darkgreen;color:#feca04">
+    <tr>
+        <td class="text-center " style="background-color:#0f2d63">
+            تعداد لایه های ایجاد شده
+
+        </td>
+        <td class="text-center">
+            @ViewBag.HighLevel
+            <span>&nbsp;</span> @FarsiLanguage.FarsiLanguage._Layer
+
+        </td>
+    </tr>
+
+</table>
+<table class="table table-bordered table-responsive " dir="rtl" style="margin-top:15px;background-color:darkgreen;color:#feca04">
+    <tr>
+        <td class="text-center " style="background-color:#0f2d63">
+            جمع کل افراد حاضر در تیم
+
+        </td>
+        <td class="text-center">
+            @ViewBag.AllUserCount
+            <span>&nbsp;</span> @FarsiLanguage.FarsiLanguage._Nafar
+
+        </td>
+    </tr>
+
+</table>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script type="text/javascript">
+        var str1 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._UserMainPage, "UserMainPage", "GeneralPages", new { area = "Users" }, null)</li>';
+        var str2 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._PersonsInArms, "PersonsInArms", "Reports", new { area = "Users" }, null)</li>';
+
+        $('.crumbs').append(str1);
+        $('.crumbs').append(str2);
+
+        $(document).ready(function () {
+        $("Label").css("font-size", "15px");
+        $("Label").css("color", "#16008b");
+        $('label').css("margin-top", "8px");
+
+        });
+</script>
