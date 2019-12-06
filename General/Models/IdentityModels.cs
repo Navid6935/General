@@ -109,5 +109,7 @@ namespace General.Models
         public System.Data.Entity.DbSet<General.Areas.Administrator.Models.EducationalPamphlets> EducationalPamphlets { get; set; }
 
         public System.Data.Entity.DbSet<General.Areas.Administrator.Models.Messages> Messages { get; set; }
+
+        public System.Data.Entity.DbSet<General.Areas.Administrator.Models.CommisionOnArms> CommisionOnArms { get; set; }
     }
 }

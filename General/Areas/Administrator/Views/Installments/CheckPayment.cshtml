@@ -215,7 +215,15 @@
      var str3 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._InstallmenPaymentstAgreement, "CheckPayment", "Installments", new { area = "Administrator" }, null)</li>';
     $('.crumbs').append(str1);
     $('.crumbs').append(str2);
-    $('.crumbs').append(str3);
+        $('.crumbs').append(str3);
+//بدست آوردن تاریخ روز
+            var Year = @DateTime.Now.ToPeString("yyyy");
+            var month = @DateTime.Now.ToPeString("MM");
+            var day = @DateTime.Now.ToPeString("dd");
+
+            var DateNow = Year +
+                (month<10 ? '0' : '') + month +
+            (day < 10 ? '0' : '') + day;
         //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ متغیرها ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         //================ سود معرف
         var Reagentcommission;
@@ -241,7 +249,6 @@
         //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ محاسبه سود معرف +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         Reagentcommission = parseFloat($("#InstallmentsNumbersAmount_" + btnId).text().trim().replace(/,/g, '') * 10) / 100;
         //====================================================  پیدا کردن معرف  و واریز سود آن ====================================
-            debugger
         MarketingCode = $("#MarketingCode_" + btnId).text().trim();
         RegeantMK(MarketingCode);
         MKsArray.push(GloabalRegeantMK);
@@ -251,7 +258,8 @@
         AmountsArray.push(Reagentcommission);
 
             while (true) {
-            debugger
+                debugger
+
         //;
         if (GloabalLeaderMK == "" || GloabalLeaderMK == "NULL" || GloabalLeaderMK == "Null") {
         //alert("No Users");
@@ -262,7 +270,6 @@
         }
         else {
         //
-            debugger
         //====================================================  پیدا کردن Leader  و واریز سود آن ====================================
         FindLeaderMK(MKsArray[LevelCount]);
         MKsArray.push(GloabalLeaderMK);
@@ -271,15 +278,27 @@
         if (MKsArray.length == 2) {
         GetCommision1Level(MKsArray.length);
         var Calculate = parseFloat((AmountsArray[0] * GlobalCalcute1) / 100).toFixed(0);
-        AmountsArray.push(Calculate);
+            AmountsArray.push(Calculate);
+             //================================================چک کردن میزان سود
+                CheckCommision(MKsArray[(LevelCount-1)], GloabalLeaderMK,DateNow);
+                if (GlobalCommision > 1000000) {
+                    alert(Error);
+                    return false;
+                }
         InsertCommisionLeader(MKsArray[(LevelCount-1)],GloabalLeaderMK, Calculate);
         }
         //================================================= محاسبه و پرداخت سود سطح 2  ( بعد از معرف ) =============================================
         if (MKsArray.length == 3) {
         GetCommision2Level(MKsArray.length);
         var Calculate = parseFloat((AmountsArray[1] * GlobalCalcute1) / 100 + (AmountsArray[0] * GlobalCalcute2) / 100).toFixed(0);
-        AmountsArray.push(Calculate);
-        InsertCommisionLeader(GloabalLeaderMK, Calculate);
+            AmountsArray.push(Calculate);
+          //================================================چک کردن میزان سود
+                CheckCommision(MKsArray[(LevelCount-1)], GloabalLeaderMK,DateNow);
+                if (GlobalCommision > 1000000) {
+                    alert(Error);
+                    return false;
+                }
+        InsertCommisionLeader(MKsArray[(LevelCount-1)],GloabalLeaderMK, Calculate);
 
         }
         //================================================= محاسبه و پرداخت سود سطح 3  ( بعد از معرف ) =============================================
@@ -288,8 +307,13 @@
         var Calculate = parseFloat((AmountsArray[2] * GlobalCalcute1) / 100 + (AmountsArray[1] * GlobalCalcute2) / 100 + (AmountsArray[0] * GlobalCalcute3) / 100).toFixed(0);
         //alert("Calculate : " + Calculate);
         AmountsArray.push(Calculate);
-
-        InsertCommisionLeader(GloabalLeaderMK, Calculate);
+          //================================================چک کردن میزان سود
+                CheckCommision(MKsArray[(LevelCount-1)], GloabalLeaderMK,DateNow);
+                if (GlobalCommision > 1000000) {
+                    alert(Error);
+                    return false;
+                }
+        InsertCommisionLeader(MKsArray[(LevelCount-1)],GloabalLeaderMK, Calculate);
 
         }
         //================================================= محاسبه و پرداخت سود سطح 4  ( بعد از معرف ) =============================================
@@ -298,15 +322,27 @@
         var Calculate = parseFloat((AmountsArray[3] * GlobalCalcute1) / 100 + (AmountsArray[2] * GlobalCalcute2) / 100 + (AmountsArray[1] * GlobalCalcute3) / 100 + (AmountsArray[0] * GlobalCalcute4) / 100).toFixed(0);
         //alert("Calculate : " + Calculate);
 
-        AmountsArray.push(Calculate);
-        InsertCommisionLeader(GloabalLeaderMK, Calculate);
+            AmountsArray.push(Calculate);
+          //================================================چک کردن میزان سود
+                CheckCommision(MKsArray[(LevelCount-1)], GloabalLeaderMK,DateNow);
+                if (GlobalCommision > 1000000) {
+                    alert(Error);
+                    return false;
+                }
+        InsertCommisionLeader(MKsArray[(LevelCount-1)],GloabalLeaderMK, Calculate);
 
         }
         //================================================= محاسبه و پرداخت سود سطح 5  ( بعد از معرف ) =============================================
         if (MKsArray.length == 6) {
         var Calculate = parseFloat((AmountsArray[4] * GlobalCalcute1) / 100 + (AmountsArray[3] * GlobalCalcute2) / 100 + (AmountsArray[2] * GlobalCalcute3) / 100 + (AmountsArray[1] * GlobalCalcute4) / 100 + (AmountsArray[0] * GlobalCalcute5) / 100).toFixed(0);
-        AmountsArray.push(Calculate);
-        InsertCommisionLeader(GloabalLeaderMK, Calculate);
+            AmountsArray.push(Calculate);
+          //================================================چک کردن میزان سود
+                CheckCommision(MKsArray[(LevelCount-1)], GloabalLeaderMK,DateNow);
+                if (GlobalCommision > 1000000) {
+                    alert(Error);
+                    return false;
+                }
+        InsertCommisionLeader(MKsArray[(LevelCount-1)],GloabalLeaderMK, Calculate);
         //alert("Calculate : " + Calculate);
 
         }
@@ -322,26 +358,42 @@
         //================================================= محاسبه و پرداخت سود سطح 7  ( بعد از معرف ) =============================================
         if (MKsArray.length == 8) {
         var Calculate = parseFloat((AmountsArray[6] * GlobalCalcute1) / 100 + (AmountsArray[5] * GlobalCalcute2) / 100 + (AmountsArray[4] * GlobalCalcute3) / 100 + (AmountsArray[3] * GlobalCalcute4) / 100 + (AmountsArray[2] * GlobalCalcute5) / 100 + (AmountsArray[1] * GlobalCalcute6) / 100 + (AmountsArray[0] * GlobalCalcute7) / 100).toFixed(0);
-        InsertCommisionLeader(GloabalLeaderMK, Calculate);
+          AmountsArray.push(Calculate);
+            //================================================چک کردن میزان سود
+                CheckCommision(MKsArray[(LevelCount-1)], GloabalLeaderMK,DateNow);
+                if (GlobalCommision > 1000000) {
+                    alert(Error);
+                    return false;
+                }
+            InsertCommisionLeader(MKsArray[(LevelCount - 1)], GloabalLeaderMK, Calculate);
         //alert("Calculate : " + Calculate);
 
-        AmountsArray.push(Calculate);
 
         }
         //================================================= محاسبه و پرداخت سود سطح 8  ( بعد از معرف ) =============================================
         if (MKsArray.length == 9) {
         var Calculate = parseFloat((AmountsArray[7] * GlobalCalcute1) / 100 + (AmountsArray[6] * GlobalCalcute2) / 100 + (AmountsArray[5] * GlobalCalcute3) / 100 + (AmountsArray[4] * GlobalCalcute4) / 100 + (AmountsArray[3] * GlobalCalcute5) / 100 + (AmountsArray[2] * GlobalCalcute6) / 100 + (AmountsArray[1] * GlobalCalcute7) / 100 + (AmountsArray[0] * GlobalCalcute8) / 100).toFixed(0);
-        InsertCommisionLeader(GloabalLeaderMK, Calculate);
-        //alert("Calculate : " + Calculate);
-        AmountsArray.push(Calculate);
+          AmountsArray.push(Calculate);
+            //================================================چک کردن میزان سود
+                CheckCommision(MKsArray[(LevelCount-1)], GloabalLeaderMK,DateNow);
+                if (GlobalCommision > 1000000) {
+                    alert(Error);
+                    return false;
+                }
+            InsertCommisionLeader(MKsArray[(LevelCount - 1)], GloabalLeaderMK, Calculate);
 
         }
         //================================================= محاسبه و پرداخت سود سطح 9  ( بعد از معرف ) =============================================
         if (MKsArray.length == 10) {
         var Calculate = parseFloat((AmountsArray[8] * GlobalCalcute1) / 100 + (AmountsArray[7] * GlobalCalcute2) / 100 + (AmountsArray[6] * GlobalCalcute3) / 100 + (AmountsArray[5] * GlobalCalcute4) / 100 + (AmountsArray[4] * GlobalCalcute5) / 100 + (AmountsArray[3] * GlobalCalcute6) / 100 + (AmountsArray[2] * GlobalCalcute7) / 100 + (AmountsArray[1] * GlobalCalcute8) / 100 + (AmountsArray[0] * GlobalCalcute9) / 100).toFixed(0);
-        InsertCommisionLeader(GloabalLeaderMK, Calculate);
-
-        AmountsArray.push(Calculate);
+          AmountsArray.push(Calculate);
+            //================================================چک کردن میزان سود
+                CheckCommision(MKsArray[(LevelCount-1)], GloabalLeaderMK,DateNow);
+                if (GlobalCommision > 1000000) {
+                    alert(Error);
+                    return false;
+                }
+            InsertCommisionLeader(MKsArray[(LevelCount - 1)], GloabalLeaderMK, Calculate);
 
         }
         if (MKsArray.length >= 11) {
@@ -354,8 +406,14 @@
         //alert("AmountsArray : " + AmountsArray);
         //alert("AmountsArray[0] : " + AmountsArray[0]);
         var Calculate = parseFloat((AmountsArray[8] * GlobalCalcute9) / 100 + (AmountsArray[7] * GlobalCalcute8) / 100 + (AmountsArray[6] * GlobalCalcute7) / 100 + (AmountsArray[5] * GlobalCalcute6) / 100 + (AmountsArray[4] * GlobalCalcute5) / 100 + (AmountsArray[3] * GlobalCalcute4) / 100 + (AmountsArray[2] * GlobalCalcute3) / 100 + (AmountsArray[1] * GlobalCalcute2) / 100 + (AmountsArray[0] * GlobalCalcute1) / 100).toFixed(0);
-        AmountsArray.push(Calculate);
-        InsertCommisionLeader(GloabalLeaderMK, Calculate);
+          AmountsArray.push(Calculate);
+            //================================================چک کردن میزان سود
+                CheckCommision(MKsArray[(LevelCount-1)], GloabalLeaderMK,DateNow);
+                if (GlobalCommision > 1000000) {
+                    alert(Error);
+                    return false;
+                }
+            InsertCommisionLeader(MKsArray[(LevelCount - 1)], GloabalLeaderMK, Calculate);
         }
 
         }

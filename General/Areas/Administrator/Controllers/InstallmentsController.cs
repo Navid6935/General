@@ -341,8 +341,8 @@ namespace General.Areas.Administrator.Controllers
                 userswallet.UWLastName = Regeant.LastName;
                 userswallet.UserId = Regeant.Id;
 
-                string Mounth = userswallet.UWDayDeposit.ToString();
-                string Day = userswallet.UWMonthDeposit.ToString();
+                string Mounth = userswallet.UWMonthDeposit.ToString();
+                string Day = userswallet.UWDayDeposit.ToString();
                 if (Mounth.Length == 1)
                 {
                     Mounth = "0" + userswallet.UWMonthDeposit.ToString();
@@ -358,6 +358,39 @@ namespace General.Areas.Administrator.Controllers
 
             }
             return Json(userswallet);
+
+        }
+        #endregion
+
+        /// <summary>
+        /// چک کردن سود 
+        /// </summary>
+        /// <param name="disposing"></param>
+        #region CheckCommision
+        public ActionResult CheckCommision(string UWMarketingCode,string UWMarketingCodeFrom,int UWDateWithoutPoints)
+        {
+            int Temp = 0;
+            if (ModelState.IsValid)
+            {
+
+                var Regeant = db.UsersWallets
+                    .Where(u => u.UWMarketingCode == UWMarketingCode )
+                    .Where(f => f.UWMarketingCodeFrom == UWMarketingCodeFrom)
+                    .Where(d => d.UWDateWithoutPoints == UWDateWithoutPoints)
+                    .ToList();
+                if (Regeant.Count != 0)
+                {
+                    foreach (var item in Regeant)
+                    {
+                        Temp = Temp + int.Parse(item.UWAmountDeposit);
+                    }
+                }
+                else
+                {
+                    Temp = 0;
+                }
+            }
+            return Json(Temp);
 
         }
         #endregion

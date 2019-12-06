@@ -5,6 +5,8 @@ var GloabalRegeantMK;
 var GloabalLeaderMK;
 //------------------------------------------------ متغیر مجموع حساب کاربر
 var GlobalDepositsum = 0;
+//------------------------------------------------ متغیر مجموع حساب کاربر
+var GlobalCommision = 0;
 //------------------------------------------------ متغیر کد کاربری ها
 var UsersMK;
 //------------------------------------------------ متغیر بازوها
@@ -68,6 +70,41 @@ function InsertCommisionRegeant(UWMarketingCodeFrom,UWMarketingCode, UWAmountDep
         dataType: "json",
         success: function (r) {
             return true;
+        }
+    });
+}
+//==========================================================تابع ورود چک کردن سود  ========================================
+function CheckCommision(UWMarketingCodeFrom, UWMarketingCode, UWDateWithoutPoints) {
+
+    $.ajax({
+        type: "POST",
+        url: "CheckCommision",
+        async: false,
+        data: '{UWMarketingCode: "' + UWMarketingCode +
+            '", UWMarketingCodeFrom: "' + UWMarketingCodeFrom +
+            '", UWDateWithoutPoints: "' + UWDateWithoutPoints +
+            '"}',
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data, status, x) {
+
+                //alert("GloabalLeaderMK" + data);
+                GlobalCommision = data;
+                //alert(data);
+                //alert(GlobalCommision);
+            //if (data === null || data === undefined || data === "Null") {
+            //    alert('سودها تخصیص یافت');
+            //    return false;
+            //}
+
+        },
+        beforeSend: function () {
+        },
+        complete: function () {
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+
+            alert(jqXHR + textStatus + errorThrown);
         }
     });
 }

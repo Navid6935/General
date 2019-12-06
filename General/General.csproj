@@ -199,6 +199,7 @@
     <Compile Include="Areas\Administrator\Controllers\AdminPageController.cs" />
     <Compile Include="Areas\Administrator\Controllers\AllArmsAndIncomesController.cs" />
     <Compile Include="Areas\Administrator\Controllers\ArmsController.cs" />
+    <Compile Include="Areas\Administrator\Controllers\CommisionOnArmsController.cs" />
     <Compile Include="Areas\Administrator\Controllers\EducationalPamphletsController.cs" />
     <Compile Include="Areas\Administrator\Controllers\InstallmentsController.cs" />
     <Compile Include="Areas\Administrator\Controllers\MessagesController.cs" />
@@ -208,6 +209,7 @@
     <Compile Include="Areas\Administrator\Controllers\UsersArmsController.cs" />
     <Compile Include="Areas\Administrator\Models\AllArmsAndIncome.cs" />
     <Compile Include="Areas\Administrator\Models\Arms.cs" />
+    <Compile Include="Areas\Administrator\Models\CommisionOnArms.cs" />
     <Compile Include="Areas\Administrator\Models\EducationalPamphlets.cs" />
     <Compile Include="Areas\Administrator\Models\Installment.cs" />
     <Compile Include="Areas\Administrator\Models\Messages.cs" />
@@ -497,6 +499,11 @@
     <Content Include="Content\sweetalert\sweet-alert-animations.less" />
     <Content Include="Content\bootstrap\variables.less" />
     <Content Include="Content\bootstrap\mixins.less" />
+    <Content Include="Areas\Administrator\Views\CommisionOnArms\Create.cshtml" />
+    <Content Include="Areas\Administrator\Views\CommisionOnArms\Delete.cshtml" />
+    <Content Include="Areas\Administrator\Views\CommisionOnArms\Details.cshtml" />
+    <Content Include="Areas\Administrator\Views\CommisionOnArms\Edit.cshtml" />
+    <Content Include="Areas\Administrator\Views\CommisionOnArms\Index.cshtml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />

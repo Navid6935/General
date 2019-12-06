@@ -241,6 +241,15 @@ namespace FarsiLanguage {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to درصد سود برای بازو.
+        /// </summary>
+        public static string _CommisionOnArms {
+            get {
+                return ResourceManager.GetString("_CommisionOnArms", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to تایید پرداخت.
         /// </summary>
         public static string _ConfirmPayment {

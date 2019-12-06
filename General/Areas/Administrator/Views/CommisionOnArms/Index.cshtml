@@ -1,0 +1,25 @@
+﻿@model IEnumerable<General.Areas.Administrator.Models.CommisionOnArms>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Administrator/Views/Shared/_Layout-Admin.cshtml";
+}
+
+
+<table class="table striped bordered highlight centered responsive-table text-center" style="margin-top:15px">
+    <tr>
+        <th style="text-align:right">
+            @Html.DisplayNameFor(model => model.CAAmount)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td style="text-align:right">
+            @Html.DisplayFor(modelItem => item.CAAmount)
+        </td>
+
+    </tr>
+}
+
+</table>
