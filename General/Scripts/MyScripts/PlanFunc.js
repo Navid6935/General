@@ -7,6 +7,8 @@ var GloabalLeaderMK;
 var GlobalDepositsum = 0;
 //------------------------------------------------ متغیر مجموع حساب کاربر
 var GlobalCommision = 0;
+//------------------------------------------------متغیر حداکثر میزان پرداخت سود 
+var GlobalCommisionOnArms = 0;
 //------------------------------------------------ متغیر کد کاربری ها
 var UsersMK;
 //------------------------------------------------ متغیر بازوها
@@ -139,6 +141,37 @@ function FindLeaderMK(MarketingCode) {
             }
             if (data === null || data === undefined || data === "Null") {
                 alert('سودها تخصیص یافت');
+                return false;
+            }
+
+        },
+        beforeSend: function () {
+        },
+        complete: function () {
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+
+            alert(jqXHR + textStatus + errorThrown);
+        }
+    });
+}
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ مبلغ نهایت پرداختی بازو +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+function CommisionOnArms() {
+    $.ajax({
+        type: 'Get',
+        url: 'CommisionOnArms',
+        async: false,
+        data: {
+        },
+        dataType: 'json',
+        success: function (data, status, x) {
+            if (data !== null) {
+                GlobalCommisionOnArms = data.replace(/,/g, '');
+            }
+            if (data === null || data === undefined || data === "Null") {
+                alert('مقدار حداکثر پرداختی بازو را وارد کنید');
                 return false;
             }
 

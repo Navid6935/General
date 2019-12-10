@@ -120,9 +120,15 @@ namespace General.Areas.Users.Controllers
         // GET: Users/UsersWallets
         public ActionResult AllWholeThingPeyments()
         {
+            //var sum = (db.UsersWallets
+            //    .Where(m => m.ListCode == null && m.FollowUpNO == null)
+            //     .GroupBy(m => new {m.UWMarketingCode })
+            //    .OrderBy(d => d.UWDateWithoutPoints)
+            //    .ToList());
             return View(db.UsersWallets
                 .Where(m => m.ListCode == null && m.FollowUpNO == null)
-                .OrderBy(d => d.UWDateWithoutPoints)
+                 .GroupBy(m => new { m.UWMarketingCode })
+                 .Select(g =>new { Sum = g.Sum(i => Int32.Parse(i.UWAmountDeposit)) })
                 .ToList());
         }
 

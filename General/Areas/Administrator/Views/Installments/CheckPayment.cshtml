@@ -256,9 +256,11 @@
         //=============================================  وارد کردن معرف  و واریز سود آن ===========================================
         InsertCommisionRegeant(MarketingCode,GloabalRegeantMK, Reagentcommission);
         AmountsArray.push(Reagentcommission);
+            debugger
+            //===================================== بدست آوردن مبلغ حداکثر سود
+            CommisionOnArms();
 
             while (true) {
-                debugger
 
         //;
         if (GloabalLeaderMK == "" || GloabalLeaderMK == "NULL" || GloabalLeaderMK == "Null") {
@@ -281,7 +283,7 @@
             AmountsArray.push(Calculate);
              //================================================چک کردن میزان سود
                 CheckCommision(MKsArray[(LevelCount-1)], GloabalLeaderMK,DateNow);
-                if (GlobalCommision > 1000000) {
+                if (GlobalCommision > GlobalCommisionOnArms) {
                     alert(Error);
                     return false;
                 }
@@ -294,7 +296,7 @@
             AmountsArray.push(Calculate);
           //================================================چک کردن میزان سود
                 CheckCommision(MKsArray[(LevelCount-1)], GloabalLeaderMK,DateNow);
-                if (GlobalCommision > 1000000) {
+                if (GlobalCommision > GlobalCommisionOnArms) {
                     alert(Error);
                     return false;
                 }
@@ -309,7 +311,7 @@
         AmountsArray.push(Calculate);
           //================================================چک کردن میزان سود
                 CheckCommision(MKsArray[(LevelCount-1)], GloabalLeaderMK,DateNow);
-                if (GlobalCommision > 1000000) {
+                if (GlobalCommision > GlobalCommisionOnArms) {
                     alert(Error);
                     return false;
                 }
@@ -325,7 +327,7 @@
             AmountsArray.push(Calculate);
           //================================================چک کردن میزان سود
                 CheckCommision(MKsArray[(LevelCount-1)], GloabalLeaderMK,DateNow);
-                if (GlobalCommision > 1000000) {
+                if (GlobalCommision > GlobalCommisionOnArms) {
                     alert(Error);
                     return false;
                 }
@@ -338,7 +340,7 @@
             AmountsArray.push(Calculate);
           //================================================چک کردن میزان سود
                 CheckCommision(MKsArray[(LevelCount-1)], GloabalLeaderMK,DateNow);
-                if (GlobalCommision > 1000000) {
+                if (GlobalCommision > GlobalCommisionOnArms) {
                     alert(Error);
                     return false;
                 }
@@ -361,7 +363,7 @@
           AmountsArray.push(Calculate);
             //================================================چک کردن میزان سود
                 CheckCommision(MKsArray[(LevelCount-1)], GloabalLeaderMK,DateNow);
-                if (GlobalCommision > 1000000) {
+                if (GlobalCommision > GlobalCommisionOnArms) {
                     alert(Error);
                     return false;
                 }
@@ -376,7 +378,7 @@
           AmountsArray.push(Calculate);
             //================================================چک کردن میزان سود
                 CheckCommision(MKsArray[(LevelCount-1)], GloabalLeaderMK,DateNow);
-                if (GlobalCommision > 1000000) {
+                if (GlobalCommision > GlobalCommisionOnArms) {
                     alert(Error);
                     return false;
                 }
@@ -389,7 +391,7 @@
           AmountsArray.push(Calculate);
             //================================================چک کردن میزان سود
                 CheckCommision(MKsArray[(LevelCount-1)], GloabalLeaderMK,DateNow);
-                if (GlobalCommision > 1000000) {
+                if (GlobalCommision > GlobalCommisionOnArms) {
                     alert(Error);
                     return false;
                 }
@@ -409,7 +411,7 @@
           AmountsArray.push(Calculate);
             //================================================چک کردن میزان سود
                 CheckCommision(MKsArray[(LevelCount-1)], GloabalLeaderMK,DateNow);
-                if (GlobalCommision > 1000000) {
+                if (GlobalCommision > GlobalCommisionOnArms) {
                     alert(Error);
                     return false;
                 }

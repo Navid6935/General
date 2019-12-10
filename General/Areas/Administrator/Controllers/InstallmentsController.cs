@@ -357,7 +357,7 @@ namespace General.Areas.Administrator.Controllers
                 db.SaveChanges();
 
             }
-            return Json(userswallet);
+            return Json(userswallet, JsonRequestBehavior.AllowGet);
 
         }
         #endregion
@@ -390,7 +390,32 @@ namespace General.Areas.Administrator.Controllers
                     Temp = 0;
                 }
             }
-            return Json(Temp);
+            return Json(Temp, JsonRequestBehavior.AllowGet);
+
+        }
+        #endregion
+        /// <summary>
+        /// گرفتن مقدار حداکثر سود بازو
+        /// </summary>
+        /// <param name="disposing"></param>
+        #region CheckCommision
+        public ActionResult CommisionOnArms()
+        {
+            string Temp = null;
+            if (ModelState.IsValid)
+            {
+
+                var Commision = db.CommisionOnArms.FirstOrDefault();
+                if (Commision != null)
+                {
+                    Temp = Commision.CAAmount;
+                }
+                else
+                {
+                    Temp = null;
+                }
+            }
+            return Json(Temp, JsonRequestBehavior.AllowGet);
 
         }
         #endregion
