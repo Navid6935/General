@@ -9,6 +9,7 @@ var GlobalUsersNumArm;
 var GlobalCounter;
 var GlobalLastMK;
 var GlobalUnreadMessages;
+var GlobalSumCommisions;
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 function makeid() {
     var text = "";
@@ -1118,6 +1119,39 @@ function GetAllWhole(FromDate, ToDate) {
 
                     AllWholePaymentArray.push(AllWholeData);
                 });
+            }
+            if (data === null || data === undefined || data === "Null") {
+                alert('Error');
+                return false;
+            }
+
+        },
+        beforeSend: function () {
+        },
+        complete: function () {
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+
+            alert(jqXHR + textStatus + errorThrown);
+        }
+    });
+}
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ پیدا کردن لیست پورسانت های پرداختی با بازه زمانی +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+function GetSumCommisions(MarketingCode) {
+    $.ajax({
+        type: 'Get',
+        url: 'GetSumofCommision',
+        async: false,
+        data: {
+            "MarketingCode": MarketingCode
+        },
+        dataType: 'json',
+        success: function (data, status, x) {
+            if (data !== null) {
+                GlobalSumCommisions = data;
             }
             if (data === null || data === undefined || data === "Null") {
                 alert('Error');

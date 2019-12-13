@@ -120,18 +120,51 @@ namespace General.Areas.Users.Controllers
         // GET: Users/UsersWallets
         public ActionResult AllWholeThingPeyments()
         {
-            //var sum = (db.UsersWallets
-            //    .Where(m => m.ListCode == null && m.FollowUpNO == null)
-            //     .GroupBy(m => new {m.UWMarketingCode })
-            //    .OrderBy(d => d.UWDateWithoutPoints)
-            //    .ToList());
-            return View(db.UsersWallets
+            List<string> MarketingCodelist = new List<string>();
+            List<int> Amountlist = new List<int>();
+
+            var UWGroup = db.UsersWallets
                 .Where(m => m.ListCode == null && m.FollowUpNO == null)
                  .GroupBy(m => new { m.UWMarketingCode })
-                 .Select(g =>new { Sum = g.Sum(i => Int32.Parse(i.UWAmountDeposit)) })
-                .ToList());
-        }
+                 .Select(g => g.FirstOrDefault())
+                .ToList();
+            //foreach (var item in UWGroup)
+            //{
 
+            //    MarketingCodelist.Add(item.UWMarketingCode);
+            //    MarketingCodelist.Add(item.UWBranchCode.ToString());
+            //    MarketingCodelist.Add(item.UWCardNumber);
+            //    GetSumofCommision(item.UWMarketingCode);
+            //}
+            
+            //foreach (var item in MarketingCodelist)
+            //{
+            //    var sum = db.UsersWallets.tolist()
+            //}
+
+            return View(UWGroup);
+        }
+        // GET: Users/UsersWallets
+        public ActionResult GetSumofCommision(string MarketingCode)
+        {
+            int Temp = 0;
+
+            var GetAllCommisionOnMK = db.UsersWallets
+                .Where(m => m.ListCode == null && m.FollowUpNO == null)
+                .Where(m=>m.UWMarketingCode == MarketingCode)
+
+                .ToList();
+            foreach (var item in GetAllCommisionOnMK)
+            {
+                Temp += int.Parse(item.UWAmountDeposit);
+            }
+            //foreach (var item in MarketingCodelist)
+            //{
+            //    var sum = db.UsersWallets.tolist()
+            //}
+
+            return Json(Temp, JsonRequestBehavior.AllowGet);
+        }
         /// <summary>
         /// گزارش کل پورسانت های پرداختی
         /// </summary>
@@ -147,7 +180,8 @@ namespace General.Areas.Users.Controllers
             query = db.UsersWallets
                .Where(m => m.ListCode == null && m.FollowUpNO == null)
                .Where(y => y.UWDateWithoutPoints >= FromDate && y.UWDateWithoutPoints <= ToDate)
-               .OrderBy(m => m.UWDateWithoutPoints)
+                .GroupBy(m => new { m.UWMarketingCode })
+                 .Select(g => g.FirstOrDefault())
                //.GroupBy(d => d.UWDateWithoutPoints)
                .ToList();
             //if (FromMounth > ToMounth)

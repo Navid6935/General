@@ -5,6 +5,7 @@
     Layout = "~/Areas/Users/Views/Shared/_Layout.cshtml";
 }
 <link href="~/Content/sweetalert/sweet-alert.css" rel="stylesheet" />
+@ViewBag.Sum
 <div class="row col-md-12" style="margin-top:15px">
     <div class="col-md-12" style="margin-top:15px;margin-bottom:15px;border:1px dashed;border-radius:5px;padding-bottom:15px">
         <div class="row col-md-12" style="margin-top:15px;margin-right:1px">
@@ -18,7 +19,7 @@
                                 <option value="@y">@y</option>
                             }
                         </select>*@
-                    <input type="text" id="FromDate" class="text-center" />
+                    <input type="text" id="FromDate" class="text-center" maxlength="10"/>
 
                 </div>
             </div>
@@ -26,7 +27,7 @@
                 <label class="control-label col-md-5 col-sm-5 col-xs-5" style="color:black;font-size:20px;margin-top:12px">تا تاریخ</label>
                 <div class="col-sm-6 col-md-6 col-xs-6" style="margin-top:10px">
 
-                    <input type="text" id="ToDate" class="text-center" />
+                    <input type="text" id="ToDate" class="text-center" maxlength="10"/>
 
                 </div>
             </div>
@@ -151,7 +152,7 @@
                 <td class="text-center">
                     @Html.DisplayFor(modelItem => item.UWBranchCode)
                 </td>
-                <td class="text-center" id="InsuranceNumber_@i">
+                <td class="text-center" id="UWAmountDeposit_@i">
                     @Html.DisplayFor(modelItem => item.UWAmountDeposit)
                 </td>
 
@@ -172,7 +173,29 @@
 <script src="~/Scripts/MyScripts/PlanFunc.js"></script>
 <script src="~/Scripts/SweetAlert.js"></script>
 <script>
+
     $(document).ready(function () {
+       debugger
+        //=========================================== محاسبه مجموعه سود هر نفر
+        for (var j = 1; j < @i; j++) {
+            //alert($("#MarketingCode_" + j).val().trim());
+            GetSumCommisions($("#MarketingCode_" + j).text().trim());
+            //GlobalSumCommisions.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
+            //alert(GlobalSumCommisions);
+                    //$('#UWAmountDeposit_' + j).text( $(this).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") ); 
+            $('#UWAmountDeposit_' + j).text(GlobalSumCommisions)
+             $('#UWAmountDeposit_' + j).text($('#UWAmountDeposit_' + j).text().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")); 
+        }
+        function ConvertToRial() {
+            //alert( $('#UWAmountDeposit_' + j).text());
+                    $.fn.digits = function(){ 
+                return this.each(function(){ 
+                    $('#UWAmountDeposit_' + j).text($('#UWAmountDeposit_' + j).text().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")); 
+                })
+                        alert(this);
+            }
+        }
+
          var str1 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._AdministratorPage, "AdminsMainPage", "AdminGeneralpages", new { area = "Administrator" }, null)</li>';
         var str2 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._AllWholeThingsPeyments, "AllWholeThingPeyments")</li>';
         $('.crumbs').append(str1);
