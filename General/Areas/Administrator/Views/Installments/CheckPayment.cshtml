@@ -28,7 +28,7 @@
                             <option value="@y">@y</option>
                         }
                     </select>*@
-                <input type="text" id="FromDate" class="text-center" />
+                <input type="text" id="FromDate" class="text-center datepicker" />
 
             </div>
         </div>
@@ -50,7 +50,7 @@
                         <option value="11">بهمن</option>
                         <option value="12">اسفند</option>
                     </select>*@
-                <input type="text" id="ToDate" class="text-center" />
+                <input type="text" id="ToDate" class="text-center datepicker" />
 
             </div>
         </div>
@@ -216,6 +216,7 @@
     $('.crumbs').append(str1);
     $('.crumbs').append(str2);
         $('.crumbs').append(str3);
+        $(".datepicker").datepicker({dateFormat:"yy/mm/dd",isRTL:true,showButtonPanel:true})
 //بدست آوردن تاریخ روز
             var Year = @DateTime.Now.ToPeString("yyyy");
             var month = @DateTime.Now.ToPeString("MM");

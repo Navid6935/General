@@ -229,6 +229,7 @@
     <Compile Include="Areas\Users\Models\Support.cs" />
     <Compile Include="Areas\Users\Models\UsersWallet.cs" />
     <Compile Include="Areas\Users\UsersAreaRegistration.cs" />
+    <Compile Include="Classes\PersianCulture.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CaptchaController.cs" />
     <Compile Include="Controllers\DTPersianController.cs" />
@@ -295,6 +296,8 @@
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\BootstrapJalaliDatePicker\bootstrap-datepicker.css" />
+    <Content Include="Content\BootstrapJalaliDatePicker\bootstrap-datepicker.min.css" />
     <Content Include="Content\Cascadingmenu.css" />
     <Content Include="Content\DatePicker\datedropper.css" />
     <Content Include="Content\DatePicker\datedropper.min.css" />
@@ -352,6 +355,10 @@
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\BootstrapJalaliDatePicker\bootstrap-datepicker.fa.js" />
+    <Content Include="Scripts\BootstrapJalaliDatePicker\bootstrap-datepicker.fa.min.js" />
+    <Content Include="Scripts\BootstrapJalaliDatePicker\bootstrap-datepicker.js" />
+    <Content Include="Scripts\BootstrapJalaliDatePicker\bootstrap-datepicker.min.js" />
     <Content Include="Scripts\DatePicker\datedropper.js" />
     <Content Include="Scripts\DatePicker\datedropper.min.js" />
     <Content Include="fonts\MaterialIcons-Regular.ttf" />

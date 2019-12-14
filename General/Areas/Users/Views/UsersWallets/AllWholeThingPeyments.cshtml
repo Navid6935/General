@@ -19,7 +19,7 @@
                                 <option value="@y">@y</option>
                             }
                         </select>*@
-                    <input type="text" id="FromDate" class="text-center" maxlength="10"/>
+                    <input type="text" id="FromDate" class="text-center datepicker" maxlength="10"/>
 
                 </div>
             </div>
@@ -27,7 +27,7 @@
                 <label class="control-label col-md-5 col-sm-5 col-xs-5" style="color:black;font-size:20px;margin-top:12px">تا تاریخ</label>
                 <div class="col-sm-6 col-md-6 col-xs-6" style="margin-top:10px">
 
-                    <input type="text" id="ToDate" class="text-center" maxlength="10"/>
+                    <input type="text" id="ToDate" class="text-center datepicker" maxlength="10"/>
 
                 </div>
             </div>
@@ -175,7 +175,8 @@
 <script>
 
     $(document).ready(function () {
-       debugger
+        debugger
+        $(".datepicker").datepicker({dateFormat:"yy/mm/dd",isRTL:true,showButtonPanel:true})
         //=========================================== محاسبه مجموعه سود هر نفر
         for (var j = 1; j < @i; j++) {
             //alert($("#MarketingCode_" + j).val().trim());

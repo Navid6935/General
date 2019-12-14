@@ -21,7 +21,7 @@
                                 <option value="@y">@y</option>
                             }
                         </select>*@
-                    <input type="text" id="FromDate" class="text-center" />
+                    <input type="text" id="FromDate" class="text-center datepicker" />
 
                 </div>
             </div>
@@ -43,7 +43,7 @@
                             <option value="11">بهمن</option>
                             <option value="12">اسفند</option>
                         </select>*@
-                    <input type="text" id="ToDate" class="text-center" />
+                    <input type="text" id="ToDate" class="text-center datepicker" />
 
                 </div>
             </div>
@@ -219,8 +219,10 @@
      var str3 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._PaymentsConfirmReport, "PaymentExelExport", "Installments", new { area = "Administrator" }, null)</li>';
     $('.crumbs').append(str1);
     $('.crumbs').append(str2);
-    $('.crumbs').append(str3);
-        $("#search").click(function () {
+        $('.crumbs').append(str3);
+        $(".datepicker").datepicker({dateFormat:"yy/mm/dd",isRTL:true,showButtonPanel:true})
+        $("#search").click(function () {        
+
 
             var FromDate = $("#FromDate").val().replace(/\//g, '');
             var ToDate = $("#ToDate").val().replace(/\//g, '');
