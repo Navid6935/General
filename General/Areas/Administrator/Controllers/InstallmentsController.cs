@@ -333,6 +333,8 @@ namespace General.Areas.Administrator.Controllers
                 userswallet.UWDayDeposit = int.Parse(DateTime.Now.ToPeString("dd"));
                 userswallet.UWMonthDeposit = int.Parse(DateTime.Now.ToPeString("MM"));
                 userswallet.UWYearDeposit = int.Parse(DateTime.Now.ToPeString("yyyy"));
+                userswallet.UWInsuranceNumber = Regeant.InsuranceNumber1 + Regeant.InsuranceNumber2 + Regeant.InsuranceNumber3 +
+                    Regeant.InsuranceNumber4 + Regeant.InsuranceNumber5+Regeant.InsuranceNumber6 ;
                 userswallet.UWAcountNumber = Regeant.AcountNumber;
                 userswallet.UWCardNumber = Regeant.CardNumber;
                 userswallet.UWShabaId = Regeant.ShabaName;

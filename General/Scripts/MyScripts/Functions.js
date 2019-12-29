@@ -10,6 +10,7 @@ var GlobalCounter;
 var GlobalLastMK;
 var GlobalUnreadMessages;
 var GlobalSumCommisions;
+var GlobalAllWholeResult;
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 function makeid() {
     var text = "";
@@ -986,41 +987,41 @@ function GetExcelPaymentOnPeriodGetExcelPaymentOnPeriod(FromDate, ToDate) {
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ پیدا کردن لیست قسط ها +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-function GetExcelPaymentOnPeriodGetExcelPaymentOnPeriod(FromDate, ToDate) {
+//function GetExcelPaymentOnPeriodGetExcelPaymentOnPeriod(FromDate, ToDate) {
 
-    $.ajax({
-        type: 'Get',
-        url: 'GetExcelPaymentOnPeriod',
-        async: false,
-        data: {
-            "FromDate": FromDate,
-            "ToDate": ToDate
-        },
-        dataType: 'json',
-        success: function (data, status, x) {
-            if (data !== null) {
-                InstallmentonPeriodArray = [];
-                $.each(data, function (id, Installment) {
+//    $.ajax({
+//        type: 'Get',
+//        url: 'GetExcelPaymentOnPeriod',
+//        async: false,
+//        data: {
+//            "FromDate": FromDate,
+//            "ToDate": ToDate
+//        },
+//        dataType: 'json',
+//        success: function (data, status, x) {
+//            if (data !== null) {
+//                InstallmentonPeriodArray = [];
+//                $.each(data, function (id, Installment) {
 
-                    InstallmentonPeriodArray.push(Installment);
-                });
-            }
-            if (data === null || data === undefined || data === "Null") {
-                alert('Error');
-                return false;
-            }
+//                    InstallmentonPeriodArray.push(Installment);
+//                });
+//            }
+//            if (data === null || data === undefined || data === "Null") {
+//                alert('Error');
+//                return false;
+//            }
 
-        },
-        beforeSend: function () {
-        },
-        complete: function () {
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
+//        },
+//        beforeSend: function () {
+//        },
+//        complete: function () {
+//        },
+//        error: function (jqXHR, textStatus, errorThrown) {
 
-            alert(jqXHR + textStatus + errorThrown);
-        }
-    });
-}
+//            alert(jqXHR + textStatus + errorThrown);
+//        }
+//    });
+//}
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ پیدا کردن لیست قسط ها  بر اساس کد بازاریابی+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1241,6 +1242,43 @@ function UpdateAllWholePayment(AllWholePaymentArray) {
         dataType: "json"
     });
 }
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ پیدا کردن لیست پورسانت های پرداختی با کدلیست و شماره پیگیری +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+function GetListAllWholePayments(FromDate, ToDate, CodeList, FollowUpNO, For) {
+    $.ajax({
+        type: 'Get',
+        url: 'GetListAllWholePayments',
+        async: false,
+        data: {
+            "FromDate": FromDate,
+            "ToDate": ToDate,
+            "CodeList": CodeList,
+            "FollowUpNO": FollowUpNO,
+            "For": For
+        },
+        dataType: 'json',
+        success: function (data, status, x) {
+            if (data !== null) {
+                GlobalAllWholeResult = data;
+            }
+            if (data === null || data === undefined || data === "Null") {
+                alert('Error');
+                return false;
+            }
+
+        },
+        beforeSend: function () {
+        },
+        complete: function () {
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+
+            alert(jqXHR + textStatus + errorThrown);
+        }
+    });
+}
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ پیدا کردن لیست پورسانت های پرداختی با بازه زمانی +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

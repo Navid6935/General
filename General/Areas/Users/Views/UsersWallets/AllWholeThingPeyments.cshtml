@@ -5,7 +5,7 @@
     Layout = "~/Areas/Users/Views/Shared/_Layout.cshtml";
 }
 <link href="~/Content/sweetalert/sweet-alert.css" rel="stylesheet" />
-@ViewBag.Sum
+@*@ViewBag.Sum*@
 <div class="row col-md-12" style="margin-top:15px">
     <div class="col-md-12" style="margin-top:15px;margin-bottom:15px;border:1px dashed;border-radius:5px;padding-bottom:15px">
         <div class="row col-md-12" style="margin-top:15px;margin-right:1px">
@@ -19,7 +19,7 @@
                                 <option value="@y">@y</option>
                             }
                         </select>*@
-                    <input type="text" id="FromDate" class="text-center datepicker" maxlength="10"/>
+                    <input type="text" id="FromDate" class="text-center datepicker" maxlength="10" autocomplete="off"/>
 
                 </div>
             </div>
@@ -27,7 +27,7 @@
                 <label class="control-label col-md-5 col-sm-5 col-xs-5" style="color:black;font-size:20px;margin-top:12px">تا تاریخ</label>
                 <div class="col-sm-6 col-md-6 col-xs-6" style="margin-top:10px">
 
-                    <input type="text" id="ToDate" class="text-center datepicker" maxlength="10"/>
+                    <input type="text" id="ToDate" class="text-center datepicker" maxlength="10" autocomplete="off"/>
 
                 </div>
             </div>
@@ -51,43 +51,57 @@
 
         <fieldset class="col-md-12" id="ImportData" style="display:none">
             <legend dir="rtl">ورود اطلاعات</legend>
-            <div class="col-md-2 col-sm-5 col-xs-5" style="margin-top:10px">
-                <label class="control-label col-md-6 col-sm-6 col-xs-6" style="color:black;font-size:12px;margin-top:5px">@FarsiLanguage.FarsiLanguage._ListCode</label>
-                <div class="col-sm-6 col-md-6 col-xs-6">
-                    <input type="text" id="ListCode" class="text-center" />
-                </div>
-            </div>
-            <div class="col-md-2 col-sm-5 col-xs-5" style="margin-top:10px">
-                <label class="control-label col-md-5 col-sm-5 col-xs-5" style="color:black;font-size:12px;margin-top:5px">@FarsiLanguage.FarsiLanguage._FolowUpNo</label>
-                <div class="col-sm-7 col-md-7 col-xs-7">
-                    <input type="text" id="FollowUpNO" class="text-center" />
-                </div>
-            </div>
-            <div class="col-md-2 col-sm-5 col-xs-5" style="margin-top:10px">
-                <label class="control-label col-md-5 col-sm-5 col-xs-5" style="color:black;font-size:12px;margin-top:5px">@FarsiLanguage.FarsiLanguage._DayPayment</label>
-                <div class="col-sm-7 col-md-7 col-xs-7">
-                    <input type="text" id="DayPeyment" class="text-center" value=@DateTime.Now.ToPeString("dd") />
-                </div>
-            </div>
-            <div class="col-md-2 col-sm-5 col-xs-5" style="margin-top:10px">
-                <label class="control-label col-md-5 col-sm-5 col-xs-5" style="color:black;font-size:12px;margin-top:5px">@FarsiLanguage.FarsiLanguage._MounthPayment</label>
-                <div class="col-sm-7 col-md-7 col-xs-7">
-                    <input type="text" id="MounthPeyment" class="text-center" value=@DateTime.Now.ToPeString("MM") />
-                </div>
-            </div>
-            <div class="col-md-2 col-sm-5 col-xs-5" style="margin-top:10px">
-                <label class="control-label col-md-5 col-sm-5 col-xs-5" style="color:black;font-size:12px;margin-top:5px">@FarsiLanguage.FarsiLanguage._YearPayment</label>
-                <div class="col-sm-7 col-md-7 col-xs-7">
-                    <input type="text" id="YearPeyment" class="text-center" value=@DateTime.Now.ToPeString("yy") />
-                </div>
-            </div>
-            <div class="col-sm-1 col-md-1 col-xs-1">
-                <a class="btn-floating btn-large waves-effect waves-light green darken-4 tooltipped" data-position="top" data-delay="50" data-tooltip="جستجو" id="Datasearch"><i class="material-icons">search</i></a>
+            <div class="col-md-12">
 
+                <div class="col-md-4 col-sm-5 col-xs-5" style="margin-top:10px">
+                    <label class="control-label col-md-7 col-sm-6 col-xs-6" style="color:black;font-size:12px;margin-top:10px">@FarsiLanguage.FarsiLanguage._ListCode</label>
+                    <div class="col-sm-6 col-md-5 col-xs-6">
+                        <input type="text" id="ListCode" class="text-center" />
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-5 col-xs-5" style="margin-top:10px">
+                    <label class="control-label col-md-5 col-sm-5 col-xs-5" style="color:black;font-size:12px;margin-top:10px">@FarsiLanguage.FarsiLanguage._FolowUpNo</label>
+                    <div class="col-sm-7 col-md-7 col-xs-7">
+                        <input type="text" id="FollowUpNO" class="text-center" />
+                    </div>
+                </div>
             </div>
-            <div class="col-sm-1 col-md-1 col-xs-1">
-                <a class="btn-floating btn-large waves-effect waves-light blue darken-4 tooltipped" data-position="top" data-delay="50" data-tooltip="تایید پرداخت" id="SaveData" style="display:none"><i class="material-icons">save</i></a>
 
+            <div class="col-md-12" style="margin-top:30px">
+                <div class="col-md-5 col-sm-5 col-xs-5" style="margin-top:10px">
+                    <label class="control-label col-md-5 col-sm-5 col-xs-5" style="color:black;font-size:12px;margin-top:10px">@FarsiLanguage.FarsiLanguage._DatePayment</label>
+                    <div class="col-sm-7 col-md-7 col-xs-7">
+                        <input type="text" id="DatePayment" class="text-center" value=@DateTime.Now.ToPeString("yy/MM/dd") />
+                    </div>
+                </div>
+                <div class="col-md-5 col-sm-5 col-xs-5" style="margin-top:10px">
+                    <label class="control-label col-md-5 col-sm-5 col-xs-5" style="color:black;font-size:12px;margin-top:10px">@FarsiLanguage.FarsiLanguage._For</label>
+                    <div class="col-sm-7 col-md-7 col-xs-7">
+                        <select id="For" class="browser-default">
+                            <option value="0"></option>
+                            <option value="فروردین">فروردین</option>
+                            <option value="اردیبهشت">اردیبهشت</option>
+                            <option value="خرداد">خرداد</option>
+                            <option value="تیر">تیر</option>
+                            <option value="مرداد">مرداد</option>
+                            <option value="شهریور">شهریور</option>
+                            <option value="مهر">مهر</option>
+                            <option value="آبان">آبان</option>
+                            <option value="آذر">آذر</option>
+                            <option value="دی">دی</option>
+                            <option value="بهمن">بهمن</option>
+                            <option value="اسفند">اسفند</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-1 col-md-1 col-xs-1">
+                    <a class="btn-floating btn-large waves-effect waves-light green darken-4 tooltipped" data-position="top" data-delay="50" data-tooltip="جستجو" id="Datasearch"><i class="material-icons">search</i></a>
+
+                </div>
+                <div class="col-sm-1 col-md-1 col-xs-1">
+                    <a class="btn-floating btn-large waves-effect waves-light blue darken-4 tooltipped" data-position="top" data-delay="50" data-tooltip="تایید پرداخت" id="SaveData" style="display:none"><i class="material-icons">save</i></a>
+
+                </div>
             </div>
         </fieldset>
     </div>
@@ -175,10 +189,11 @@
 <script>
 
     $(document).ready(function () {
-        debugger
+        $("#Installmenttbl").hide();
         $(".datepicker").datepicker({dateFormat:"yy/mm/dd",isRTL:true,showButtonPanel:true})
+        //$(".datepicker").datepicker({dateFormat:"yy/mm/dd",isRTL:true,showButtonPanel:true})
         //=========================================== محاسبه مجموعه سود هر نفر
-        for (var j = 1; j < @i; j++) {
+        @*for (var j = 1; j < @i; j++) {
             //alert($("#MarketingCode_" + j).val().trim());
             GetSumCommisions($("#MarketingCode_" + j).text().trim());
             //GlobalSumCommisions.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
@@ -186,7 +201,7 @@
                     //$('#UWAmountDeposit_' + j).text( $(this).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") ); 
             $('#UWAmountDeposit_' + j).text(GlobalSumCommisions)
              $('#UWAmountDeposit_' + j).text($('#UWAmountDeposit_' + j).text().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")); 
-        }
+        }*@
         function ConvertToRial() {
             //alert( $('#UWAmountDeposit_' + j).text());
                     $.fn.digits = function(){ 
@@ -202,11 +217,7 @@
         $('.crumbs').append(str1);
         $('.crumbs').append(str2);
         $("#Datesearch").click(function () {
-            $("#SaveData").show();
-            $("#Datasearch").hide();
-            $("#DayPeyment").val($("#DayPeyment").val().replace('/', ''))
-            $("#MounthPeyment").val($("#MounthPeyment").val().replace('/', ''))
-            $("#YearPeyment").val($("#YearPeyment").val().replace('/', ''))
+
             var FromDate = $("#FromDate").val().replace(/\//g, '');
             var ToDate = $("#ToDate").val().replace(/\//g, '');
              if (FromDate == "" || FromDate == null) {
@@ -217,11 +228,13 @@
                swal("خطا!", "فیلد ها را تکمیل نمایید", "error");
                 return false;
             }
-            debugger
+             $("#SaveData").show();
+            $("#Datasearch").hide();
+              $("#Installmenttbl").show();
             $("tr:not(tr:first)").remove();
             GetAllWhole(FromDate, ToDate);
             if (AllWholePaymentArray.length == 0) {
-               swal("خطا!", "در این ماه اطلاعات  موجود نمی باشد", "error");
+               swal("خطا!", "در این بازه تاریخ اطلاعات  موجود نمی باشد", "error");
                 return false;
             }
             //
@@ -254,9 +267,7 @@
         $("#ShowData").click(function () {
 
             $("#ImportData").slideToggle(500);
-            $("#DayPeyment").val($("#DayPeyment").val().replace('/', ''))
-            $("#MounthPeyment").val($("#MounthPeyment").val().replace('/', ''))
-            $("#YearPeyment").val($("#YearPeyment").val().replace('/', ''))
+            //$("#DatePayment").val($("#DatePayment").val().replace('/', ''))
         });
 
         $("#Datasearch").click(function () {
@@ -264,7 +275,7 @@
          var FollowUpNO = $("#FollowUpNO").val();
 
             if ((FollowUpNO == "" || FollowUpNO == null) && (ListCode == "" || ListCode == null)) {
-                alert("فیلد ها را تکمیل نمایید");
+                 swal("خطا!", "فیلد ها را تکمیل نمایید", "error");
                 return false;
             }
 
@@ -293,50 +304,40 @@
             }
         });
         $("#SaveData").click(function () {
-
+            var FromDate = $("#FromDate").val().replace(/\//g, '');
+            var ToDate = $("#ToDate").val().replace(/\//g, '');
+            var CodeList = $("#ListCode").val();
+            var FollowUpNO = $("#FollowUpNO").val();
               if (FollowUpNO == "" || FollowUpNO == null) {
-                alert("فیلد ها را تکمیل نمایید");
+                 swal("خطا!", "فیلد ها را تکمیل نمایید", "error");
                 return false;
             }
               if (ListCode == "" || ListCode == null) {
-                alert("فیلد ها را تکمیل نمایید");
+                 swal("خطا!", "فیلد ها را تکمیل نمایید", "error");
                 return false;
             }
-            ////
-            var length = AllWholePaymentArray.length / 6;
-            var AllWholePaymentArrayLocal = [];
-            //    alert(AllWholePaymentArray);
-            //alert(AllWholePaymentArray.length);
-
-            var a = 0;
-            var b = 11;
-            var c = 10;
-            for (var i = 0; i < length; i++) {
-                for (var j = a; j < b; j++) {
-
-                    if (j < c) {
-                     AllWholePaymentArrayLocal.push(AllWholePaymentArray[j])
-
-                    }
-                    if (j == c) {
-                    AllWholePaymentArrayLocal.push($("#ListCode").val())
-                    AllWholePaymentArrayLocal.push($("#FollowUpNO").val())
-                    AllWholePaymentArrayLocal.push($("#DayPeyment").val())
-                    AllWholePaymentArrayLocal.push($("#MounthPeyment").val())
-                    AllWholePaymentArrayLocal.push($("#YearPeyment").val())
-
-                    }
-                }
-                 UpdateAllWholePayment(AllWholePaymentArrayLocal)
-
-                a += 10;
-                b += 11;
-                c += 10;
-                //============================================ Clear Array
-                AllWholePaymentArrayLocal = [];
+            if (FromDate == "" || FromDate == null) {
+                 swal("خطا!", "فیلد ها را تکمیل نمایید", "error");
+                return false;
             }
-            alert("کد لیست و شماره پیگیری افزوده شد");
-                location.reload();
+               if (ToDate == "" || ToDate == null) {
+                 swal("خطا!", "فیلد ها را تکمیل نمایید", "error");
+                return false;
+            }
+            var For = $("#For").val();
+            GetListAllWholePayments(FromDate, ToDate,CodeList,FollowUpNO,For);
+             //UpdateAllWholePayment(AllWholePaymentArrayLocal)
+            if (GlobalAllWholeResult == true) {
+              swal({
+                title: "موفق!",
+                text: "کد لیست و شماره پیگیری افزوده شد",
+                type: "success"
+            }).then(function () {
+                 location.reload();
+            });
+               
+            }
+
 
                 //UpdateAllWholePayment(AllWholePaymentArray[i]);
 

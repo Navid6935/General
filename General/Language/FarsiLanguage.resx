@@ -528,4 +528,10 @@
   <data name="_CommisionOnArms" xml:space="preserve">
     <value>درصد سود برای بازو</value>
   </data>
+  <data name="_DatePayment" xml:space="preserve">
+    <value>تاریخ پرداخت</value>
+  </data>
+  <data name="_For" xml:space="preserve">
+    <value>بابت</value>
+  </data>
 </root>

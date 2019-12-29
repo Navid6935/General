@@ -367,6 +367,15 @@ namespace FarsiLanguage {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to تاریخ پرداخت.
+        /// </summary>
+        public static string _DatePayment {
+            get {
+                return ResourceManager.GetString("_DatePayment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to روز.
         /// </summary>
         public static string _Day {
@@ -570,6 +579,15 @@ namespace FarsiLanguage {
         public static string _FolowUpNo {
             get {
                 return ResourceManager.GetString("_FolowUpNo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to بابت.
+        /// </summary>
+        public static string _For {
+            get {
+                return ResourceManager.GetString("_For", resourceCulture);
             }
         }
         

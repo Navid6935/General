@@ -63,6 +63,7 @@ function InsertCommisionRegeant(UWMarketingCodeFrom,UWMarketingCode, UWAmountDep
     $.ajax({
         type: "POST",
         url: "InsertCommisionRegeant",
+        async: false,
         data: '{UWMarketingCode: "' + UWMarketingCode +
             '", UWMarketingCodeFrom: "' + UWMarketingCodeFrom +
         '", UWAmountDeposit: "' + UWAmountDeposit +
@@ -194,6 +195,7 @@ function InsertCommisionLeader(UWMarketingCodeFrom,UWMarketingCode, UWAmountDepo
     $.ajax({
         type: "POST",
         url: "InsertCommisionRegeant",
+        async: false,
         data: '{UWMarketingCode: "' + UWMarketingCode +
             '", UWMarketingCodeFrom: "' + UWMarketingCodeFrom +
         '", UWAmountDeposit: "' + UWAmountDeposit +

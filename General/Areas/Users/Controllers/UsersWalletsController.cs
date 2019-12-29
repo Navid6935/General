@@ -145,13 +145,15 @@ namespace General.Areas.Users.Controllers
             return View(UWGroup);
         }
         // GET: Users/UsersWallets
-        public ActionResult GetSumofCommision(string MarketingCode)
+        public int GetSumofCommision(string MarketingCode,int FromDate,int ToDate)
         {
             int Temp = 0;
 
             var GetAllCommisionOnMK = db.UsersWallets
                 .Where(m => m.ListCode == null && m.FollowUpNO == null)
                 .Where(m=>m.UWMarketingCode == MarketingCode)
+               .Where(y => y.UWDateWithoutPoints >= FromDate && y.UWDateWithoutPoints <= ToDate)
+
 
                 .ToList();
             foreach (var item in GetAllCommisionOnMK)
@@ -162,8 +164,8 @@ namespace General.Areas.Users.Controllers
             //{
             //    var sum = db.UsersWallets.tolist()
             //}
-
-            return Json(Temp, JsonRequestBehavior.AllowGet);
+            ViewBag.Temp=Temp;
+            return Temp;
         }
         /// <summary>
         /// گزارش کل پورسانت های پرداختی
@@ -184,30 +186,31 @@ namespace General.Areas.Users.Controllers
                  .Select(g => g.FirstOrDefault())
                //.GroupBy(d => d.UWDateWithoutPoints)
                .ToList();
-            //if (FromMounth > ToMounth)
-            //{
-            //    query = db.UsersWallets
 
-            //       .Where(m => m.ListCode == null && m.FollowUpNO == null)
-            //       .Where(y => y.UWYearDeposit >= FromYear && y.UWYearDeposit <= ToYear)
-            //       .Where(m => m.UWMonthDeposit <= FromMounth && m.UWMonthDeposit >= ToMounth)
-            //       .OrderBy(m => m.UWMonthDeposit)
-            //       .ThenBy(y => y.UWYearDeposit)
-            //       .ToList();
-            //}
-            //if (FromMounth == ToMounth)
-            //{
-            //     query = db.UsersWallets
+                //if (FromMounth > ToMounth)
+                //{
+                //    query = db.UsersWallets
 
-            //        .Where(m => m.ListCode == null && m.FollowUpNO == null)
-            //        .Where(y => y.UWYearDeposit >= FromYear && y.UWYearDeposit <= ToYear)
-            //        .OrderBy(m => m.UWMonthDeposit)
-            //        .ThenBy(y => y.UWYearDeposit)
-            //        .ToList();
-            //}
+                //       .Where(m => m.ListCode == null && m.FollowUpNO == null)
+                //       .Where(y => y.UWYearDeposit >= FromYear && y.UWYearDeposit <= ToYear)
+                //       .Where(m => m.UWMonthDeposit <= FromMounth && m.UWMonthDeposit >= ToMounth)
+                //       .OrderBy(m => m.UWMonthDeposit)
+                //       .ThenBy(y => y.UWYearDeposit)
+                //       .ToList();
+                //}
+                //if (FromMounth == ToMounth)
+                //{
+                //     query = db.UsersWallets
 
-            //ViewBag.SumAllWholes;
-            if (query.Count != 0)
+                //        .Where(m => m.ListCode == null && m.FollowUpNO == null)
+                //        .Where(y => y.UWYearDeposit >= FromYear && y.UWYearDeposit <= ToYear)
+                //        .OrderBy(m => m.UWMonthDeposit)
+                //        .ThenBy(y => y.UWYearDeposit)
+                //        .ToList();
+                //}
+
+                //ViewBag.SumAllWholes;
+                if (query.Count != 0)
             {
                 foreach (var item in query)
                 {
@@ -218,7 +221,7 @@ namespace General.Areas.Users.Controllers
                     AllWholeList.Add(item.UWCardNumber);
                     AllWholeList.Add(item.UWShabaId);
                     AllWholeList.Add(item.UWBranchCode.ToString());
-                    AllWholeList.Add(item.UWAmountDeposit.ToString());
+                    AllWholeList.Add(GetSumofCommision(item.UWMarketingCode, FromDate,ToDate).ToString());
                     AllWholeList.Add(item.UWId.ToString());
                     ;
 
@@ -273,7 +276,69 @@ namespace General.Areas.Users.Controllers
         #region UpdateUserData
 
         /// <summary>
-        ///آخرین عدد
+        ///ثبت کد لیست و کد پرداخت
+        /// </summary>
+        /// <param name="plantareacode"></param>
+        /// <returns></returns>
+        public ActionResult GetListAllWholePayments(int FromDate, int ToDate,int CodeList,string FollowUpNO,string For)
+        {
+            //if (ModelState.IsValid)
+            //{
+                var query = db.UsersWallets
+               .Where(m => m.ListCode == null && m.FollowUpNO == null)
+                .Where(y => y.UWDateWithoutPoints >= FromDate && y.UWDateWithoutPoints <= ToDate)
+                .ToList();
+            List<Guid> AllUWIdList = new List<Guid>();
+            foreach (var item in query)
+            {
+                AllUWIdList.Add(item.UWId);
+                UpdateAllWholePayments(CodeList, FollowUpNO, For, item.UWId);
+
+
+            }
+            //}
+            return Json(true, JsonRequestBehavior.AllowGet);
+
+        }
+        #endregion
+        // GET: Users/UsersWallets
+        public ActionResult AllWholeThingPeymented()
+        {
+            return View(db.UsersWallets.Where(m => m.ListCode != null && m.FollowUpNO != null).ToList());
+        }
+        // =========================================================================== گزارش کل پورسانت های پرداخت شده
+
+        /// <summary>
+        ///ثبت کد لیست و کد پرداخت و بابت
+        /// </summary>
+        /// <param name="plantareacode"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult UpdateAllWholePayments(int ListCode ,string FollowUpNO,string For, Guid UWId)
+        {
+            if (ModelState.IsValid)
+            {
+                var AllWholePaymentdata = (from c in db.UsersWallets
+                                           where c.UWId == UWId
+                                           select c).FirstOrDefault();
+                var UWDatePeyment =DateTime.Now.ToPeString("yyyy")  +DateTime.Now.ToPeString("MM")+ DateTime.Now.ToPeString("dd");
+                AllWholePaymentdata.ListCode = ListCode;
+                AllWholePaymentdata.FollowUpNO = FollowUpNO;
+                AllWholePaymentdata.UWFor = For;
+                AllWholePaymentdata.UWDatePeyment = int.Parse(UWDatePeyment);
+                //AllWholePaymentdata.UWMonthPeyment = userwallet.UWMonthPeyment;
+                //AllWholePaymentdata.UWYearPeyment = userwallet.UWYearPeyment;
+
+                //string ArmsNum = "";
+                db.SaveChanges();
+            }
+            return new EmptyResult();
+
+        }
+        // =========================================================================== گزارش کل پورسانت های پرداخت شده
+
+        /// <summary>
+        ///ثبت کد لیست و کد پرداخت
         /// </summary>
         /// <param name="plantareacode"></param>
         /// <returns></returns>
@@ -287,9 +352,9 @@ namespace General.Areas.Users.Controllers
                                            select c).FirstOrDefault();
                 AllWholePaymentdata.ListCode = userwallet.ListCode;
                 AllWholePaymentdata.FollowUpNO = userwallet.FollowUpNO;
-                AllWholePaymentdata.UWDayPeyment = userwallet.UWDayPeyment;
-                AllWholePaymentdata.UWMonthPeyment = userwallet.UWMonthPeyment;
-                AllWholePaymentdata.UWYearPeyment = userwallet.UWYearPeyment;
+                AllWholePaymentdata.UWDatePeyment = userwallet.UWDatePeyment;
+                //AllWholePaymentdata.UWMonthPeyment = userwallet.UWMonthPeyment;
+                //AllWholePaymentdata.UWYearPeyment = userwallet.UWYearPeyment;
 
                 //string ArmsNum = "";
                 db.SaveChanges();
@@ -297,12 +362,11 @@ namespace General.Areas.Users.Controllers
             return new EmptyResult();
 
         }
-        #endregion
-        // GET: Users/UsersWallets
-        public ActionResult AllWholeThingPeymented()
-        {
-            return View(db.UsersWallets.Where(m => m.ListCode != null && m.FollowUpNO != null).ToList());
-        }
+        //// GET: Users/UsersWallets
+        //public ActionResult AllWholeThingPeymented()
+        //{
+        //    return View(db.UsersWallets.Where(m => m.ListCode != null && m.FollowUpNO != null).ToList());
+        //}
         // =========================================================================== گزارش کل پورسانت های پرداخت شده
 
         public ActionResult GetAllWholePeymented(int FromYear, int FromMounth, int ToYear, int ToMounth)
@@ -400,14 +464,14 @@ namespace General.Areas.Users.Controllers
                     AllWholeList.Add(item.UWLastName);
                     AllWholeList.Add(item.UWAcountNumber);
                     AllWholeList.Add(item.UWCardNumber);
-                    AllWholeList.Add(item.UWYearPeyment.ToString());
-                    AllWholeList.Add(item.UWMonthPeyment.ToString());
-                    AllWholeList.Add(item.UWDayPeyment.ToString());
+                    AllWholeList.Add(item.UWDatePeyment.ToString());
+                    //AllWholeList.Add(item.UWMonthPeyment.ToString());
+                    //AllWholeList.Add(item.UWDayPeyment.ToString());
                     AllWholeList.Add(item.UWAmountDeposit.ToString());
                     //AllWholeList.Add(item.UWId.ToString());
                     AllWholeList.Add(item.ListCode.ToString());
                     AllWholeList.Add(item.FollowUpNO.ToString());
-                    ;
+                   
 
                 }
 

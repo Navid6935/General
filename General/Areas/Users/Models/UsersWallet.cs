@@ -24,6 +24,8 @@ namespace General.Areas.Users.Models
         public string UserId { get; set; }
         [DisplayName("کد بازاریابی"), TypeConverter("NvarChar(13)"), MaxLength(13, ErrorMessage = " طول فيلد [ {0} ] 13 کاراکتر است"), MinLength(13, ErrorMessage = " طول فيلد [ {0} ] 13 کاراکتر است"), Required(ErrorMessage = "كاربر گرامي ، لطفاً فیلد [ {0} ] را وارد نماييد")]
         public string UWMarketingCode { get; set; }
+        [DisplayName("شماره بیمه نامه"), TypeConverter("NvarChar(18)")/*, Required(ErrorMessage = "كاربر گرامي ، لطفاً فیلد [ {0} ] را وارد نماييد")*/]
+        public string UWInsuranceNumber { get; set; }
         [DisplayName("کد بازاریابی ارسال کننده"), TypeConverter("NvarChar(13)"), MaxLength(13, ErrorMessage = " طول فيلد [ {0} ] 13 کاراکتر است"), MinLength(13, ErrorMessage = " طول فيلد [ {0} ] 13 کاراکتر است"), Required(ErrorMessage = "كاربر گرامي ، لطفاً فیلد [ {0} ] را وارد نماييد")]
         public string UWMarketingCodeFrom { get; set; }
         //=============================================================== FirstName ==========================================================================
@@ -52,12 +54,14 @@ namespace General.Areas.Users.Models
         public int? ListCode { get; set; }
         [DisplayName("شماره پیگیری"), TypeConverter("NvarChar(50)"), StringLength(50, ErrorMessage = "طول فيلد {0} 50 کاراکتر است")]
         public string FollowUpNO { get; set; }
-        [DisplayName("روز پرداخت")]
-        public int UWDayPeyment { get; set; }
-        [DisplayName("ماه پرداخت")]
-        public int UWMonthPeyment { get; set; }
-        [DisplayName("سال پرداخت")]
-        public int UWYearPeyment { get; set; }
+        [DisplayName("تاریخ پرداخت")]
+        public int UWDatePeyment { get; set; }
+        //[DisplayName("ماه پرداخت")]
+        //public int UWMonthPeyment { get; set; }
+        //[DisplayName("سال پرداخت")]
+        //public int UWYearPeyment { get; set; }
+        [DisplayName("بابت"), TypeConverter("NvarChar(50)"), StringLength(50, ErrorMessage = "طول فيلد {0} 50 کاراکتر است")]
+        public string UWFor { get; set; }
         [DisplayName("تاریخ بدون ممیز")/*, TypeConverter("NvarChar(8)")*/]
         public int UWDateWithoutPoints { get; set; }
 
