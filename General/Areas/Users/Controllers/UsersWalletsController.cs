@@ -304,7 +304,7 @@ namespace General.Areas.Users.Controllers
         // GET: Users/UsersWallets
         public ActionResult AllWholeThingPeymented()
         {
-            return View(db.UsersWallets.Where(m => m.ListCode != null && m.FollowUpNO != null).ToList());
+            return View(db.UsersWallets.Where(m => m.ListCode != null && m.FollowUpNO != null).OrderBy(d=>d.UWDateWithoutPoints).ToList());
         }
         // =========================================================================== گزارش کل پورسانت های پرداخت شده
 
@@ -369,45 +369,22 @@ namespace General.Areas.Users.Controllers
         //}
         // =========================================================================== گزارش کل پورسانت های پرداخت شده
 
-        public ActionResult GetAllWholePeymented(int FromYear, int FromMounth, int ToYear, int ToMounth)
+        public ActionResult GetAllWholePeymented(int FromDate, int ToDate)
         {
 
             List<string> AllWholeList = new List<string>();
             var query = db.UsersWallets
                 .Where(m => m.ListCode != null && m.FollowUpNO != null)
                 .ToList();
-            if (FromMounth < ToMounth)
-            {
+
                 query = db.UsersWallets
 
                    .Where(m => m.ListCode != null && m.FollowUpNO != null)
-                   .Where(y => y.UWYearDeposit >= FromYear && y.UWYearDeposit <= ToYear)
-                   .Where(m => m.UWMonthDeposit >= FromMounth && m.UWMonthDeposit <= ToMounth)
-                   .OrderBy(m => m.UWMonthDeposit)
-                   .ThenBy(y => y.UWYearDeposit)
+                   .Where(y => y.UWDateWithoutPoints >= FromDate && y.UWDateWithoutPoints <= ToDate)
+                   .OrderBy(m => m.UWDateWithoutPoints)
+                   //.ThenBy(y => y.UWYearDeposit)
                    .ToList();
-            }
-            if (FromMounth > ToMounth)
-            {
-                query = db.UsersWallets
-
-                   .Where(m => m.ListCode != null && m.FollowUpNO != null)
-                   .Where(y => y.UWYearDeposit >= FromYear && y.UWYearDeposit <= ToYear)
-                   .Where(m => m.UWMonthDeposit <= FromMounth && m.UWMonthDeposit >= ToMounth)
-                   .OrderBy(m => m.UWMonthDeposit)
-                   .ThenBy(y => y.UWYearDeposit)
-                   .ToList();
-            }
-            if (FromMounth == ToMounth)
-            {
-                query = db.UsersWallets
-
-                   .Where(m => m.ListCode != null && m.FollowUpNO != null)
-                   .Where(y => y.UWYearDeposit >= FromYear && y.UWYearDeposit <= ToYear)
-                   .OrderBy(m => m.UWMonthDeposit)
-                   .ThenBy(y => y.UWYearDeposit)
-                   .ToList();
-            }
+            
 
             //ViewBag.SumAllWholes;
             if (query.Count != 0)
@@ -415,17 +392,18 @@ namespace General.Areas.Users.Controllers
                 foreach (var item in query)
                 {
                     AllWholeList.Add(item.UWMarketingCode);
+                    AllWholeList.Add(item.UWInsuranceNumber);
                     AllWholeList.Add(item.UWFirstName);
                     AllWholeList.Add(item.UWLastName);
-                    AllWholeList.Add(item.UWAcountNumber);
-                    AllWholeList.Add(item.UWCardNumber);
-                    AllWholeList.Add(item.UWYearDeposit.ToString());
-                    AllWholeList.Add(item.UWMonthDeposit.ToString());
-                    AllWholeList.Add(item.UWDayDeposit.ToString());
-                    AllWholeList.Add(item.UWAmountDeposit.ToString());
-                    //AllWholeList.Add(item.UWId.ToString());
                     AllWholeList.Add(item.ListCode.ToString());
-                    AllWholeList.Add(item.FollowUpNO.ToString());
+                    AllWholeList.Add(item.FollowUpNO);
+                    AllWholeList.Add(item.UWDatePeyment.ToString());
+                    AllWholeList.Add(item.UWFor);
+                    AllWholeList.Add(item.UWAmountDeposit.ToString());
+                    //AllWholeList.Add(item.UWAmountDeposit.ToString());
+                    ////AllWholeList.Add(item.UWId.ToString());
+                    //AllWholeList.Add(item.ListCode.ToString());
+                    //AllWholeList.Add(item.FollowUpNO.ToString());
                     ;
 
                 }
@@ -434,7 +412,7 @@ namespace General.Areas.Users.Controllers
             return Json(AllWholeList, JsonRequestBehavior.AllowGet);
 
         }
-        // =========================================================================== گزارش کل پورسانت های پرداخت شده
+        // =========================================================================== گزارش کل پورسانت های پرداخت شده بر اساس کد بازاریابی
 
         public ActionResult GetAllWholePeymentedOnMarketingCode(string MarketingCode)
         {
@@ -449,8 +427,7 @@ namespace General.Areas.Users.Controllers
 
                .Where(m => m.ListCode != null && m.FollowUpNO != null)
                .Where(y => y.UWMarketingCode == MarketingCode)
-               .OrderBy(m => m.UWMonthDeposit)
-               .ThenBy(y => y.UWYearDeposit)
+               .OrderBy(m => m.UWDateWithoutPoints)
                .ToList();
 
 
@@ -460,18 +437,57 @@ namespace General.Areas.Users.Controllers
                 foreach (var item in query)
                 {
                     AllWholeList.Add(item.UWMarketingCode);
+                    AllWholeList.Add(item.UWInsuranceNumber);
                     AllWholeList.Add(item.UWFirstName);
                     AllWholeList.Add(item.UWLastName);
-                    AllWholeList.Add(item.UWAcountNumber);
-                    AllWholeList.Add(item.UWCardNumber);
-                    AllWholeList.Add(item.UWDatePeyment.ToString());
-                    //AllWholeList.Add(item.UWMonthPeyment.ToString());
-                    //AllWholeList.Add(item.UWDayPeyment.ToString());
-                    AllWholeList.Add(item.UWAmountDeposit.ToString());
-                    //AllWholeList.Add(item.UWId.ToString());
                     AllWholeList.Add(item.ListCode.ToString());
-                    AllWholeList.Add(item.FollowUpNO.ToString());
-                   
+                    AllWholeList.Add(item.FollowUpNO);
+                    AllWholeList.Add(item.UWDatePeyment.ToString());
+                    AllWholeList.Add(item.UWFor);
+                    AllWholeList.Add(item.UWAmountDeposit.ToString());
+
+
+                }
+
+            }
+            return Json(AllWholeList, JsonRequestBehavior.AllowGet);
+
+        }
+
+        // =========================================================================== گزارش کل پورسانت های پرداخت شده بر اساس شماره بیمه نامه
+
+        public ActionResult GetAllWholePeymentedOnInsuranceNum(string InsuranceNum)
+        {
+
+            List<string> AllWholeList = new List<string>();
+            var query = db.UsersWallets
+                .Where(m => m.ListCode != null && m.FollowUpNO != null)
+                .ToList();
+
+
+            query = db.UsersWallets
+
+               .Where(m => m.ListCode != null && m.FollowUpNO != null)
+               .Where(y => y.UWInsuranceNumber == InsuranceNum)
+               .OrderBy(m => m.UWDateWithoutPoints)
+               .ToList();
+
+
+            //ViewBag.SumAllWholes;
+            if (query.Count != 0)
+            {
+                foreach (var item in query)
+                {
+                    AllWholeList.Add(item.UWMarketingCode);
+                    AllWholeList.Add(item.UWInsuranceNumber);
+                    AllWholeList.Add(item.UWFirstName);
+                    AllWholeList.Add(item.UWLastName);
+                    AllWholeList.Add(item.ListCode.ToString());
+                    AllWholeList.Add(item.FollowUpNO);
+                    AllWholeList.Add(item.UWDatePeyment.ToString());
+                    AllWholeList.Add(item.UWFor);
+                    AllWholeList.Add(item.UWAmountDeposit.ToString());
+
 
                 }
 

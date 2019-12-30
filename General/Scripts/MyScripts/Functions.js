@@ -1283,17 +1283,15 @@ function GetListAllWholePayments(FromDate, ToDate, CodeList, FollowUpNO, For) {
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ پیدا کردن لیست پورسانت های پرداختی با بازه زمانی +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-function GetAllWholePeymented(FromYear, FromMounth, ToYear, ToMounth) {
+function GetAllWholePeymented(FromDate, ToDate) {
     //alert(FromYear);
     $.ajax({
         type: 'Get',
         url: 'GetAllWholePeymented',
         async: false,
         data: {
-            "FromYear": FromYear,
-            "FromMounth": FromMounth,
-            "ToYear": ToYear,
-            "ToMounth": ToMounth
+            "FromDate": FromDate,
+            "ToDate": ToDate
         },
         dataType: 'json',
         success: function (data, status, x) {
@@ -1332,6 +1330,44 @@ function GetAllWholePeymentedOnMK(MarketingCode) {
         async: false,
         data: {
             "MarketingCode": MarketingCode
+        },
+        dataType: 'json',
+        success: function (data, status, x) {
+            if (data !== null) {
+
+                AllWholePaymentArray = [];
+                $.each(data, function (id, AllWholeData) {
+
+                    AllWholePaymentArray.push(AllWholeData);
+                });
+            }
+            if (data === null || data === undefined || data === "Null") {
+                alert('Error');
+                return false;
+            }
+
+        },
+        beforeSend: function () {
+        },
+        complete: function () {
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+
+            alert(jqXHR + textStatus + errorThrown);
+        }
+    });
+}
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ پیدا کردن لیست پورسانت های پرداختی با بازه زمانی +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+function GetAllWholePeymentedOnInsurance(InsuranceNum) {
+    //
+    $.ajax({
+        type: 'Get',
+        url: 'GetAllWholePeymentedOnInsuranceNum',
+        async: false,
+        data: {
+            "InsuranceNum": InsuranceNum
         },
         dataType: 'json',
         success: function (data, status, x) {

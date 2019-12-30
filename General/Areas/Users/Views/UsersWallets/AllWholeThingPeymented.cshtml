@@ -13,13 +13,7 @@
             <div class="col-md-5 col-sm-5 col-xs-5">
                 <label class="control-label col-md-5 col-sm-5 col-xs-5" style="color:black;font-size:20px;margin-top:12px">از تاریخ</label>
                 <div class="col-sm-6 col-md-6 col-xs-6" style="margin-top:10px">
-                    @*<select class="form-control" id="Year">
-                            <option></option>
-                            @for (int y = 1397; y <= 1450; y++)
-                            {
-                                <option value="@y">@y</option>
-                            }
-                        </select>*@
+
                     <input type="text" id="FromDate" class="text-center datepicker" autocomplete="off" />
 
                 </div>
@@ -27,21 +21,7 @@
             <div class="col-md-5 col-sm-5 col-xs-5">
                 <label class="control-label col-md-5 col-sm-5 col-xs-5" style="color:black;font-size:20px;margin-top:12px">تا تاریخ</label>
                 <div class="col-sm-6 col-md-6 col-xs-6" style="margin-top:10px">
-                    @*<select class="form-control" id="Mounth">
-                            <option></option>
-                            <option value="1">فروردین</option>
-                            <option value="2">اردیبهشت</option>
-                            <option value="3">خرداد</option>
-                            <option value="4">تیر</option>
-                            <option value="5">مرداد</option>
-                            <option value="6">شهریور</option>
-                            <option value="7">مهر</option>
-                            <option value="8">آبان</option>
-                            <option value="9">آذر</option>
-                            <option value="10">دی</option>
-                            <option value="11">بهمن</option>
-                            <option value="12">اسفند</option>
-                        </select>*@
+ 
                     <input type="text" id="ToDate" class="text-center datepicker" autocomplete="off" />
 
                 </div>
@@ -74,7 +54,7 @@
                 </div>
             </div>
             <div class="col-sm-1 col-md-1 col-xs-1">
-                <a class="btn-floating btn-large waves-effect waves-light blue tooltipped" data-position="top" data-delay="50" data-tooltip="جستجو بر اساس کد بازاریابی" id="searchMarketingCode"><i class="material-icons">search</i></a>
+                <a class="btn-floating btn-large waves-effect waves-light blue tooltipped" data-position="top" data-delay="50" data-tooltip="جستجو بر اساس کد بازاریابی" id="MarketingCodeSearch"><i class="material-icons">search</i></a>
 
             </div>
 
@@ -197,15 +177,16 @@
 
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <script src="~/Scripts/MyScripts/PlanFunc.js"></script>
+<script src="~/Scripts/SweetAlert.js"></script>
 <script>
     $(document).ready(function () {
         var str1 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._AdministratorPage, "AdminsMainPage", "AdminGeneralpages", new { area = "Administrator" }, null)</li>';
         var str2 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._AllWholeThingsPeymented, "AllWholeThingPeymented")</li>';
         $('.crumbs').append(str1);
         $('.crumbs').append(str2);
-        $("#DatePeyment_1").replaceWith()
+        $(".datepicker").datepicker({dateFormat:"yy/mm/dd",isRTL:true,showButtonPanel:true})
         $("#search").click(function () {
-
+            debugger
             var FromDate = $("#FromDate").val().replace(/\//g, '');
             var ToDate = $("#ToDate").val().replace(/\//g, '');
              if (FromDate == "" || FromDate == null) {
@@ -217,15 +198,15 @@
                 return false;
             }
             $("tr:not(tr:first)").remove();
-            GetAllWholePeymented(FromYear, FromMounth, ToYear, ToMounth);
+            GetAllWholePeymented(FromDate, ToDate);
             if (AllWholePaymentArray.length == 0) {
-                alert("در این ماه اطلاعات  موجود نمی باشد");
+               swal("خطا!", "در این ماه اطلاعات  موجود نمی باشد", "error");
                 return false;
             }
             //
             var counter = 0;
-            var toCounter = 11;
-            var Rows = AllWholePaymentArray.length / 11;
+            var toCounter = 9;
+            var Rows = AllWholePaymentArray.length / 9;
             for (var i = 1; i <= Rows; i++) {
                 $("tr:last").after('<tr id=mk' + i + '>');
 
@@ -233,7 +214,7 @@
                     $('#mk' + i).append('<td class="text-center" id="rowNum' + counter + '">' + AllWholePaymentArray[counter] + '</td>');
                     counter++;
                 }
-                toCounter = toCounter + 11;
+                toCounter = toCounter + 9;
 
                 // alert(counter);
                 //$('#rowNum' + (counter - 1)).after('<td class="text-center" id= "rowNum' + counter + '" ><a href="~/Administrator/Installments/ConfirmPayment?type=1?documenttypeid=' + AllWholePaymentArray[counter] + '">تایید پرداخت</a></td>');
@@ -245,7 +226,7 @@
 
             var MarketingCode = $("#MarketingCode").val();
             if (MarketingCode == "" || MarketingCode == null || MarketingCode.length < 13) {
-                alert("فیلد کد بازاریابی را تکمیل نمایید");
+               swal("خطا!", "فیلد کد بازاریابی را تکمیل نمایید", "error");
                 return false;
             }
             $("tr:not(tr:first)").remove();
@@ -253,8 +234,8 @@
             GetAllWholePeymentedOnMK(MarketingCode);
 
             var counter = 0;
-            var toCounter = 11;
-            var Rows = AllWholePaymentArray.length / 11;
+            var toCounter = 9;
+            var Rows = AllWholePaymentArray.length / 9;
             for (var i = 1; i <= Rows; i++) {
                 $("tr:last").after('<tr id=mk' + i + '>');
 
@@ -262,7 +243,61 @@
                     $('#mk' + i).append('<td class="text-center" id="rowNum' + counter + '">' + AllWholePaymentArray[counter] + '</td>');
                     counter++;
                 }
-                toCounter = toCounter + 11;
+                toCounter = toCounter + 9;
+
+                // alert(counter);
+                //$('#rowNum' + (counter - 1)).after('<td class="text-center" id= "rowNum' + counter + '" ><a href="~/Administrator/Installments/ConfirmPayment?type=1?documenttypeid=' + AllWholePaymentArray[counter] + '">تایید پرداخت</a></td>');
+                //counter++;
+                $('#mk' + i).after("</tr>");
+            }
+        });
+        $("#searchOnInsuranceNum").click(function () {
+              debugger
+var InsuranceNum1 = $("#InsuranceNum1").val();
+            var InsuranceNum2 = $("#InsuranceNum2").val();
+            var InsuranceNum3 = $("#InsuranceNum3").val();
+            var InsuranceNum4 = $("#InsuranceNum4").val();
+            var InsuranceNum5 = $("#InsuranceNum5").val();
+             var InsuranceNum6 = $("#InsuranceNum6").val();
+            var InsuranceNum = InsuranceNum1 +  InsuranceNum2 + InsuranceNum3 + InsuranceNum4 + InsuranceNum5 +  InsuranceNum6;
+            if (InsuranceNum1 == "" || InsuranceNum1 == null) {
+               swal("خطا!", "فیلد شماره بیمه را تکمیل نمایید", "error");
+                return false;
+             }
+            if (InsuranceNum2 == "" || InsuranceNum2 == null) {
+               swal("خطا!", "فیلد شماره بیمه را تکمیل نمایید", "error");
+                return false;
+             }
+            if (InsuranceNum3 == "" || InsuranceNum3 == null) {
+               swal("خطا!", "فیلد شماره بیمه را تکمیل نمایید", "error");
+                return false;
+             }
+            if (InsuranceNum4 == "" || InsuranceNum4 == null) {
+               swal("خطا!", "فیلد شماره بیمه را تکمیل نمایید", "error");
+                return false;
+             }
+            if (InsuranceNum5 == "" || InsuranceNum5 == null) {
+               swal("خطا!", "فیلد شماره بیمه را تکمیل نمایید", "error");
+                return false;
+             }
+            if (InsuranceNum6 == "" || InsuranceNum6 == null) {
+               swal("خطا!", "فیلد شماره بیمه را تکمیل نمایید", "error");
+                return false;
+            }
+            $("tr:not(tr:first)").remove();
+            GetAllWholePeymentedOnInsurance(InsuranceNum);
+
+            var counter = 0;
+            var toCounter = 9;
+            var Rows = AllWholePaymentArray.length / 9;
+            for (var i = 1; i <= Rows; i++) {
+                $("tr:last").after('<tr id=mk' + i + '>');
+
+                while (counter < toCounter) {
+                    $('#mk' + i).append('<td class="text-center" id="rowNum' + counter + '">' + AllWholePaymentArray[counter] + '</td>');
+                    counter++;
+                }
+                toCounter = toCounter + 9;
 
                 // alert(counter);
                 //$('#rowNum' + (counter - 1)).after('<td class="text-center" id= "rowNum' + counter + '" ><a href="~/Administrator/Installments/ConfirmPayment?type=1?documenttypeid=' + AllWholePaymentArray[counter] + '">تایید پرداخت</a></td>');

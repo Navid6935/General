@@ -79,18 +79,18 @@
                     <div class="col-sm-7 col-md-7 col-xs-7">
                         <select id="For" class="browser-default">
                             <option value="0"></option>
-                            <option value="فروردین">فروردین</option>
-                            <option value="اردیبهشت">اردیبهشت</option>
-                            <option value="خرداد">خرداد</option>
-                            <option value="تیر">تیر</option>
-                            <option value="مرداد">مرداد</option>
-                            <option value="شهریور">شهریور</option>
-                            <option value="مهر">مهر</option>
-                            <option value="آبان">آبان</option>
-                            <option value="آذر">آذر</option>
-                            <option value="دی">دی</option>
-                            <option value="بهمن">بهمن</option>
-                            <option value="اسفند">اسفند</option>
+                            <option value="فروردین ماه">فروردین ماه</option>
+                            <option value="اردیبهشت ماه"> اردیبهشت ماه</option>
+                            <option value="خرداد ماه">خرداد ماه</option>
+                            <option value="تیر ماه">تیر ماه</option>
+                            <option value="مرداد ماه">مرداد ماه</option>
+                            <option value="شهریور ماه">شهریور ماه</option>
+                            <option value="مهر ماه">مهر ماه</option>
+                            <option value="آبان ماه">آبان ماه</option>
+                            <option value="آذر ماه">آذر ماه</option>
+                            <option value="دی ماه">دی ماه</option>
+                            <option value="بهمن ماه">بهمن ماه</option>
+                            <option value="اسفند ماه">اسفند ماه</option>
                         </select>
                     </div>
                 </div>
@@ -308,6 +308,7 @@
             var ToDate = $("#ToDate").val().replace(/\//g, '');
             var CodeList = $("#ListCode").val();
             var FollowUpNO = $("#FollowUpNO").val();
+            var For = $("#For").val();
               if (FollowUpNO == "" || FollowUpNO == null) {
                  swal("خطا!", "فیلد ها را تکمیل نمایید", "error");
                 return false;
@@ -324,7 +325,6 @@
                  swal("خطا!", "فیلد ها را تکمیل نمایید", "error");
                 return false;
             }
-            var For = $("#For").val();
             GetListAllWholePayments(FromDate, ToDate,CodeList,FollowUpNO,For);
              //UpdateAllWholePayment(AllWholePaymentArrayLocal)
             if (GlobalAllWholeResult == true) {
