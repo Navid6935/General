@@ -495,6 +495,37 @@ namespace General.Areas.Users.Controllers
             return Json(AllWholeList, JsonRequestBehavior.AllowGet);
 
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        // GET: Users/UsersWallets
+        public ActionResult CommissionOnTeam()
+        {
+            List<string> MarketingCodelist = new List<string>();
+            List<int> Amountlist = new List<int>();
+
+            var UWGroup = db.UsersWallets
+                .Where(m => m.ListCode == null && m.FollowUpNO == null)
+                 .GroupBy(m => new { m.UWMarketingCode })
+                 .Select(g => g.FirstOrDefault())
+                .ToList();
+            //foreach (var item in UWGroup)
+            //{
+
+            //    MarketingCodelist.Add(item.UWMarketingCode);
+            //    MarketingCodelist.Add(item.UWBranchCode.ToString());
+            //    MarketingCodelist.Add(item.UWCardNumber);
+            //    GetSumofCommision(item.UWMarketingCode);
+            //}
+
+            //foreach (var item in MarketingCodelist)
+            //{
+            //    var sum = db.UsersWallets.tolist()
+            //}
+
+            return View(UWGroup);
+        }
     }
 
 }
