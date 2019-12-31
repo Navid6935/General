@@ -304,7 +304,7 @@ namespace General.Areas.Users.Controllers
         // GET: Users/UsersWallets
         public ActionResult AllWholeThingPeymented()
         {
-            return View(db.UsersWallets.Where(m => m.ListCode != null && m.FollowUpNO != null).OrderBy(d=>d.UWDateWithoutPoints).ToList());
+            return View(db.UsersWallets.Where(m => m.ListCode != null && m.FollowUpNO != null).OrderBy(d=>d.UWDatePeyment).ToList());
         }
         // =========================================================================== گزارش کل پورسانت های پرداخت شده
 
@@ -380,8 +380,8 @@ namespace General.Areas.Users.Controllers
                 query = db.UsersWallets
 
                    .Where(m => m.ListCode != null && m.FollowUpNO != null)
-                   .Where(y => y.UWDateWithoutPoints >= FromDate && y.UWDateWithoutPoints <= ToDate)
-                   .OrderBy(m => m.UWDateWithoutPoints)
+                   .Where(y => y.UWDatePeyment >= FromDate && y.UWDatePeyment <= ToDate)
+                   .OrderBy(m => m.UWDatePeyment)
                    //.ThenBy(y => y.UWYearDeposit)
                    .ToList();
             
@@ -427,7 +427,7 @@ namespace General.Areas.Users.Controllers
 
                .Where(m => m.ListCode != null && m.FollowUpNO != null)
                .Where(y => y.UWMarketingCode == MarketingCode)
-               .OrderBy(m => m.UWDateWithoutPoints)
+               .OrderBy(m => m.UWDatePeyment)
                .ToList();
 
 
@@ -469,7 +469,7 @@ namespace General.Areas.Users.Controllers
 
                .Where(m => m.ListCode != null && m.FollowUpNO != null)
                .Where(y => y.UWInsuranceNumber == InsuranceNum)
-               .OrderBy(m => m.UWDateWithoutPoints)
+               .OrderBy(m => m.UWDatePeyment)
                .ToList();
 
 
