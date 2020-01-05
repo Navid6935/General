@@ -28,7 +28,7 @@
                             <option value="@y">@y</option>
                         }
                     </select>*@
-                <input type="text" id="FromDate" class="text-center datepicker" />
+                <input type="text" id="FromDate" class="text-center datepicker" autocomplete="off"/>
 
             </div>
         </div>
@@ -50,7 +50,7 @@
                         <option value="11">بهمن</option>
                         <option value="12">اسفند</option>
                     </select>*@
-                <input type="text" id="ToDate" class="text-center datepicker" />
+                <input type="text" id="ToDate" class="text-center datepicker" autocomplete="off" />
 
             </div>
         </div>
@@ -475,6 +475,7 @@
             }
         })
         $("#searchMarketingCode").click(function () {
+            debugger
 
             var MarketingCode = $("#MarketingCode").val();
             if (MarketingCode == "" || MarketingCode == null) {
@@ -487,7 +488,7 @@
         if (InstallmentDataArray.length == 0) {
                swal("خطا!", "برای این کد بازاریابی اطلاعات اقساط  موجود نمی باشد", "error");
         return false;
-        }
+            }
         var counter = 0;
         var toCounter = 8;
         var Rows = InstallmentDataArray.length / 9;

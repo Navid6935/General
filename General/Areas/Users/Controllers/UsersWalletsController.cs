@@ -15,6 +15,8 @@ namespace General.Areas.Users.Controllers
     public class UsersWalletsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        //لیست پورسانت هر تیم
+        List<string> AllCommisionList = new List<string>();
 
         // GET: Users/UsersWallets
         public ActionResult Index()
@@ -223,8 +225,6 @@ namespace General.Areas.Users.Controllers
                     AllWholeList.Add(item.UWBranchCode.ToString());
                     AllWholeList.Add(GetSumofCommision(item.UWMarketingCode, FromDate,ToDate).ToString());
                     AllWholeList.Add(item.UWId.ToString());
-                    ;
-
                 }
 
             }
@@ -304,7 +304,44 @@ namespace General.Areas.Users.Controllers
         // GET: Users/UsersWallets
         public ActionResult AllWholeThingPeymented()
         {
-            return View(db.UsersWallets.Where(m => m.ListCode != null && m.FollowUpNO != null).OrderBy(d=>d.UWDatePeyment).ToList());
+            int Temp = 0;
+            List<string> oArrayList = new List<string>();
+            //System.Collections.ArrayList oArrayList = new System.Collections.ArrayList();
+            var query = db.UsersWallets.Where(m => m.ListCode != null && m.FollowUpNO != null)
+                 .GroupBy(m => new { m.UWMarketingCode, m.ListCode })
+                 .Select(g => g.FirstOrDefault())
+                 .ToList();
+
+            foreach (var item2 in query)
+            {
+                oArrayList.Add(item2.UWMarketingCode);
+                oArrayList.Add(item2.UWInsuranceNumber);
+                oArrayList.Add(item2.UWFirstName);
+                oArrayList.Add(item2.UWLastName);
+                oArrayList.Add(item2.ListCode.ToString());
+                oArrayList.Add(item2.FollowUpNO);
+                oArrayList.Add(item2.UWDatePeyment.ToString());
+                oArrayList.Add(item2.UWFor);
+                oArrayList.Add(GetSumofCommisionOnPaymented(item2.UWMarketingCode,item2.ListCode).ToString());
+            }
+            ViewBag.AllWholeList = oArrayList;
+            return View(query);
+        }
+        // =========================================================================== گزارش کل پورسانت های پرداخت شده
+        public int GetSumofCommisionOnPaymented(string MarketingCode, int? ListCode)
+        {
+            int Temp = 0;
+
+            var GetAllCommisionOnMKAndListCode = db.UsersWallets
+                .Where(m => m.ListCode == ListCode)
+                .Where(m => m.UWMarketingCode == MarketingCode)
+                .ToList();
+            foreach (var item in GetAllCommisionOnMKAndListCode)
+            {
+                Temp += int.Parse(item.UWAmountDeposit);
+            }
+
+            return Temp;
         }
         // =========================================================================== گزارش کل پورسانت های پرداخت شده
 
@@ -372,43 +409,32 @@ namespace General.Areas.Users.Controllers
         public ActionResult GetAllWholePeymented(int FromDate, int ToDate)
         {
 
-            List<string> AllWholeList = new List<string>();
+            System.Collections.ArrayList AllWholeList = new System.Collections.ArrayList();
             var query = db.UsersWallets
                 .Where(m => m.ListCode != null && m.FollowUpNO != null)
                 .ToList();
-
-                query = db.UsersWallets
-
-                   .Where(m => m.ListCode != null && m.FollowUpNO != null)
+             query = db.UsersWallets.Where(m => m.ListCode != null && m.FollowUpNO != null)
                    .Where(y => y.UWDatePeyment >= FromDate && y.UWDatePeyment <= ToDate)
-                   .OrderBy(m => m.UWDatePeyment)
-                   //.ThenBy(y => y.UWYearDeposit)
-                   .ToList();
-            
-
+                    .GroupBy(m => new { m.UWMarketingCode, m.ListCode })
+                    .Select(g => g.FirstOrDefault())
+                    .ToList();
             //ViewBag.SumAllWholes;
             if (query.Count != 0)
             {
-                foreach (var item in query)
-                {
-                    AllWholeList.Add(item.UWMarketingCode);
-                    AllWholeList.Add(item.UWInsuranceNumber);
-                    AllWholeList.Add(item.UWFirstName);
-                    AllWholeList.Add(item.UWLastName);
-                    AllWholeList.Add(item.ListCode.ToString());
-                    AllWholeList.Add(item.FollowUpNO);
-                    AllWholeList.Add(item.UWDatePeyment.ToString());
-                    AllWholeList.Add(item.UWFor);
-                    AllWholeList.Add(item.UWAmountDeposit.ToString());
-                    //AllWholeList.Add(item.UWAmountDeposit.ToString());
-                    ////AllWholeList.Add(item.UWId.ToString());
-                    //AllWholeList.Add(item.ListCode.ToString());
-                    //AllWholeList.Add(item.FollowUpNO.ToString());
-                    ;
-
-                }
-
+                foreach (var item2 in query)
+            {
+                    AllWholeList.Add(item2.UWMarketingCode);
+                    AllWholeList.Add(item2.UWInsuranceNumber);
+                    AllWholeList.Add(item2.UWFirstName);
+                    AllWholeList.Add(item2.UWLastName);
+                    AllWholeList.Add(item2.ListCode.ToString());
+                    AllWholeList.Add(item2.FollowUpNO);
+                    AllWholeList.Add(item2.UWDatePeyment.ToString());
+                    AllWholeList.Add(item2.UWFor);
+                    AllWholeList.Add(GetSumofCommisionOnPaymented(item2.UWMarketingCode, item2.ListCode).ToString());
             }
+                }
+            
             return Json(AllWholeList, JsonRequestBehavior.AllowGet);
 
         }
@@ -427,6 +453,8 @@ namespace General.Areas.Users.Controllers
 
                .Where(m => m.ListCode != null && m.FollowUpNO != null)
                .Where(y => y.UWMarketingCode == MarketingCode)
+               .GroupBy(m => new { m.UWMarketingCode, m.ListCode })
+               .Select(g => g.FirstOrDefault())
                .OrderBy(m => m.UWDatePeyment)
                .ToList();
 
@@ -444,7 +472,7 @@ namespace General.Areas.Users.Controllers
                     AllWholeList.Add(item.FollowUpNO);
                     AllWholeList.Add(item.UWDatePeyment.ToString());
                     AllWholeList.Add(item.UWFor);
-                    AllWholeList.Add(item.UWAmountDeposit.ToString());
+                    AllWholeList.Add(GetSumofCommisionOnPaymented(item.UWMarketingCode, item.ListCode).ToString());
 
 
                 }
@@ -469,6 +497,8 @@ namespace General.Areas.Users.Controllers
 
                .Where(m => m.ListCode != null && m.FollowUpNO != null)
                .Where(y => y.UWInsuranceNumber == InsuranceNum)
+                .GroupBy(m => new { m.UWMarketingCode, m.ListCode })
+               .Select(g => g.FirstOrDefault())
                .OrderBy(m => m.UWDatePeyment)
                .ToList();
 
@@ -486,7 +516,7 @@ namespace General.Areas.Users.Controllers
                     AllWholeList.Add(item.FollowUpNO);
                     AllWholeList.Add(item.UWDatePeyment.ToString());
                     AllWholeList.Add(item.UWFor);
-                    AllWholeList.Add(item.UWAmountDeposit.ToString());
+                    AllWholeList.Add(GetSumofCommisionOnPaymented(item.UWMarketingCode, item.ListCode).ToString());
 
 
                 }
@@ -525,6 +555,92 @@ namespace General.Areas.Users.Controllers
             //}
 
             return View(UWGroup);
+        }
+
+        // =========================================================================== محاسبه سود هر تیم بر اساس تاریخ
+
+        public ActionResult GetAllCommisionOnTeamOnDate(int FromDate, int ToDate)
+        {
+
+            //بدست آوردن تعداد نفرات
+            var query1 = db.UsersWallets
+
+                //.Where(m => m.ListCode != null && m.FollowUpNO != null)
+                .Where(y => y.UWDatePeyment >= FromDate && y.UWDatePeyment <= ToDate)
+             .GroupBy(m => new { m.UWMarketingCode })
+            .Select(g => g.FirstOrDefault())
+            .ToList();
+            var query2 = db.UsersWallets
+
+                   //.Where(m => m.ListCode != null && m.FollowUpNO != null)
+                   .Where(y => y.UWDatePeyment >= FromDate && y.UWDatePeyment <= ToDate)
+                .GroupBy(m => new { m.UWMarketingCode, m.UWMarketingCodeFrom })
+               .Select(g => g.FirstOrDefault())
+               .ToList();
+
+            //ViewBag.SumAllWholes;
+            if (query1.Count != 0)
+            {
+                foreach (var item in query1)
+                {
+                    AllCommisionList.Add(item.UWMarketingCode);
+                    AllCommisionList.Add(item.UWInsuranceNumber);
+                    AllCommisionList.Add(item.UWFirstName);
+                    AllCommisionList.Add(item.UWLastName);
+                    foreach (var item2 in query2)
+                    {
+                        GetAllCommisionOnTeam(item2.UWMarketingCode, item2.UWMarketingCodeFrom);
+
+                    }
+                    var CheckNumofTeam = db.UsersWallets
+                    .Where(m => m.UWMarketingCode == item.UWMarketingCode)
+                     .GroupBy(m => new { m.UWMarketingCodeFrom })
+                     .Select(g => g.FirstOrDefault())
+                    .ToList();
+                    //اضافه کردن صفر به جای مقادیری که تیم کار نکرده است
+                    for (int i = 4; i > CheckNumofTeam.Count; i--)
+                    {
+                        AllCommisionList.Add("0");
+
+                    }
+                }
+            }
+            return Json(AllCommisionList, JsonRequestBehavior.AllowGet);
+
+        }
+        // =========================================================================== محاسبه سود هر تیم
+        public int GetSumofCommisionOnFirstTeam(string MarketingCode, string MarketingCodeFrom)
+        {
+            int Temp = 0;
+
+            var GetAllCommisionOnMKAndMKFromOnTeam = db.UsersWallets
+                .Where(m => m.UWMarketingCode == MarketingCode)
+
+                .ToList();
+            foreach (var item in GetAllCommisionOnMKAndMKFromOnTeam)
+            {
+                Temp += int.Parse(item.UWAmountDeposit);
+            }
+
+            return Temp;
+        }
+        // =========================================================================== محاسبه سود هر تیم
+        public int GetAllCommisionOnTeam(string MarketingCode, string MarketingCodeFrom)
+        {
+            int Temp = 0;
+
+            var GetAllCommisionOnMKAndMKFromOnTeam = db.UsersWallets
+                .Where(m => m.UWMarketingCode == MarketingCode)
+                .Where(m => m.UWMarketingCodeFrom == MarketingCodeFrom)
+               .ToList();
+
+            foreach (var item in GetAllCommisionOnMKAndMKFromOnTeam)
+            {
+                Temp += int.Parse(item.UWAmountDeposit);
+            }
+            AllCommisionList.Add(Temp.ToString());
+
+            return Temp;
         }
     }
 

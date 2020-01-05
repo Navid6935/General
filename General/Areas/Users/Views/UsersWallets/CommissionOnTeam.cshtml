@@ -1,8 +1,329 @@
-﻿
+﻿@model IEnumerable<General.Areas.Users.Models.UsersWallet>
+
 @{
     ViewBag.Title = "گزارش پورسانت هر تیم";
-    Layout = "~/Areas/Administrator/Views/Shared/_Layout-Admin.cshtml";
+    Layout = "~/Areas/Users/Views/Shared/_Layout.cshtml";
 }
+<link href="~/Content/sweetalert/sweet-alert.css" rel="stylesheet" />
+@*@ViewBag.Sum*@
+<div class="row col-md-12" style="margin-top:15px">
+    <div class="col-md-12" style="margin-top:15px;margin-bottom:15px;border:1px dashed;border-radius:5px;padding-bottom:15px">
+        <div class="row col-md-12" style="margin-top:15px;margin-right:1px;padding-bottom:15px;border-bottom:1px dashed">
+            <div class="col-md-5 col-sm-5 col-xs-5">
+                <label class="control-label col-md-5 col-sm-5 col-xs-5" style="color:black;font-size:20px;margin-top:12px">از تاریخ</label>
+                <div class="col-sm-6 col-md-6 col-xs-6" style="margin-top:10px">
 
-<h2>CommissionOnTeam</h2>
+                    <input type="text" id="FromDate" class="text-center datepicker" autocomplete="off" />
+
+                </div>
+            </div>
+            <div class="col-md-5 col-sm-5 col-xs-5">
+                <label class="control-label col-md-5 col-sm-5 col-xs-5" style="color:black;font-size:20px;margin-top:12px">تا تاریخ</label>
+                <div class="col-sm-6 col-md-6 col-xs-6" style="margin-top:10px">
+
+                    <input type="text" id="ToDate" class="text-center datepicker" autocomplete="off" />
+
+                </div>
+            </div>
+            <div class="col-sm-1 col-md-1 col-xs-1">
+                <a class="btn-floating btn-large waves-effect waves-light blue tooltipped" data-position="top" data-delay="50" data-tooltip="جستجو" id="Datesearch"><i class="material-icons">search</i></a>
+
+            </div>
+            <div class="col-sm-1 col-md-1 col-xs-1">
+                <a class="btn-floating btn-large waves-effect waves-light green tooltipped" data-position="top" data-delay="50" data-tooltip="خروجی اکسل" id="exporttoexcel"><i class="material-icons">file_download</i></a>
+
+            </div>
+        </div>
+        @*</fieldset>
+            <fieldset>
+                <legend dir="rtl">بر اساس کد بازاریابی </legend>*@
+        <div class="row col-md-12" style="margin-right:1px;padding-bottom:15px;border-bottom:1px dashed">
+            <div class="col-md-11 col-sm-11 col-xs-11">
+                <label class="control-label col-md-3 col-sm-3 col-xs-3" style="color:black;font-size:20px;margin-top:12px">کد بازاریابی</label>
+                <div class="col-sm-6 col-md-6 col-xs-6" style="margin-top:10px">
+                    @*<select class="form-control" id="Year">
+                            <option></option>
+                            @for (int y = 1397; y <= 1450; y++)
+                            {
+                                <option value="@y">@y</option>
+                            }
+                        </select>*@
+                    <input type="text" id="MarketingCode" class="text-center" maxlength="13" />
+
+                </div>
+            </div>
+            <div class="col-sm-1 col-md-1 col-xs-1">
+                <a class="btn-floating btn-large waves-effect waves-light blue tooltipped" data-position="top" data-delay="50" data-tooltip="جستجو بر اساس کد بازاریابی" id="MarketingCodeSearch"><i class="material-icons">search</i></a>
+
+            </div>
+
+        </div>
+        @*</fieldset>
+            <fieldset>
+                <legend dir="rtl">بر اساس شماره بیمه نامه</legend>*@
+        <div class="row col-md-12">
+            <div class="col-md-11 col-sm-11 col-xs-11">
+                <label class="control-label col-md-3 col-sm-3 col-xs-3" style="color:black;font-size:20px;margin-top:12px">شماره بیمه نامه</label>
+                <div class="col-sm-1 col-md-1 col-xs-1 col-md-pull-8" style="margin-top:10px">
+                    <input type="text" id="InsuranceNum1" class="text-center col-md-2" maxlength="2" />
+                </div>
+                <div class="col-sm-2 col-md-2 col-xs-2 col-md-pull-5" style="margin-top:10px">
+                    <input type="text" id="InsuranceNum2" class="text-center col-md-2" maxlength="5" />
+                </div>
+                <div class="col-sm-1 col-md-1 col-xs-1 col-md-pull-2" style="margin-top:10px">
+                    <input type="text" id="InsuranceNum3" class="text-center col-md-2" maxlength="1" />
+                </div>
+                <div class="col-sm-1 col-md-1 col-xs-1" style="margin-top:10px">
+                    <input type="text" id="InsuranceNum4" class="text-center col-md-2" maxlength="1" />
+                </div>
+                <div class="col-sm-2 col-md-2 col-xs-2  col-md-push-3" style="margin-top:10px">
+                    <input type="text" id="InsuranceNum5" class="text-center col-md-2" maxlength="4" />
+                </div>
+                <div class="col-sm-2 col-md-2 col-xs-2  col-md-push-7" style="margin-top:10px">
+                    <input type="text" id="InsuranceNum6" class="text-center col-md-2" maxlength="5" />
+                </div>
+            </div>
+            <div class="col-sm-1 col-md-1 col-xs-1">
+                <a class="btn-floating btn-large waves-effect waves-light blue tooltipped" data-position="top" data-delay="50" data-tooltip="جستجو بر اساس شماره بیمه نامه" id="searchOnInsuranceNum"><i class="material-icons">search</i></a>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <table class="table table-bordered table-striped table-hover table-responsive " dir="rtl" style="margin-top:15px;border-color:darkblue" id="Commisiontbl">
+        <tr class="grey">
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.UWMarketingCode)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.UWInsuranceNumber)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.UWFirstName)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.UWLastName)
+            </th>
+            <th class="text-center">
+                @FarsiLanguage.FarsiLanguage._FirstTeam
+            </th>
+            <th class="text-center">
+                @FarsiLanguage.FarsiLanguage._SecondTeam
+            </th>
+            <th class="text-center">
+                @FarsiLanguage.FarsiLanguage._ThirdTeam
+            <th class="text-center">
+                @FarsiLanguage.FarsiLanguage._ForthTeam
+            </th>
+            <th class="text-center">
+                @FarsiLanguage.FarsiLanguage._SumResult
+            </th>
+        </tr>
+        @{
+            var i = 1;
+        }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="text-center" id="MarketingCode_@i">
+                    @Html.DisplayFor(modelItem => item.UWMarketingCode)
+                </td>
+                <td class="text-center" id="MarketingCode_@i">
+                    @Html.DisplayFor(modelItem => item.UWInsuranceNumber)
+                </td>
+                <td class="text-center" id="FirstName_@i">
+                    @Html.DisplayFor(modelItem => item.UWFirstName)
+                </td>
+                <td class="text-center" id="LastName_@i">
+                    @Html.DisplayFor(modelItem => item.UWLastName)
+                </td>
+                <td class="text-center" id="AccountNumber_@i">
+                    @Html.DisplayFor(modelItem => item.ListCode)
+                </td>
+                <td class="text-center" id="CardNumber_@i">
+                    @Html.DisplayFor(modelItem => item.FollowUpNO)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.UWDatePeyment)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.UWFor)
+                </td>
+                <td class="text-center" id="UWAmountDeposit_@i">
+                    @Html.DisplayFor(modelItem => item.UWAmountDeposit)
+                </td>
+
+
+                @*<td class="text-center">
+                    @Html.ActionLink(FarsiLanguage.FarsiLanguage._ConfirmPayment, "ConfirmPayment", new { id = item.UWId }, new { @id = "paymentbtn" + i, @class = "paymentbtn" })*@
+
+                @*</td>*@
+            </tr>
+            ++i;
+        }
+
+
+    </table>
+</div>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/MyScripts/PlanFunc.js"></script>
+<script src="~/Scripts/SweetAlert.js"></script>
+<script>
+
+    $(document).ready(function () {
+        //$("#Commisiontbl").hide();
+        $(".datepicker").datepicker({dateFormat:"yy/mm/dd",isRTL:true,showButtonPanel:true})
+        //$(".datepicker").datepicker({dateFormat:"yy/mm/dd",isRTL:true,showButtonPanel:true})
+        //=========================================== محاسبه مجموعه سود هر نفر
+        function ConvertToRial() {
+            //alert( $('#UWAmountDeposit_' + j).text());
+                    $.fn.digits = function(){
+                return this.each(function(){
+                    $('#UWAmountDeposit_' + j).text($('#UWAmountDeposit_' + j).text().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+                })
+                        alert(this);
+            }
+        }
+
+         var str1 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._AdministratorPage, "AdminsMainPage", "AdminGeneralpages", new { area = "Administrator" }, null)</li>';
+        var str2 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._AllWholeThingsPeyments, "AllWholeThingPeyments")</li>';
+        $('.crumbs').append(str1);
+        $('.crumbs').append(str2);
+        $("#Datesearch").click(function () {
+
+            var FromDate = $("#FromDate").val().replace(/\//g, '');
+            var ToDate = $("#ToDate").val().replace(/\//g, '');
+             if (FromDate == "" || FromDate == null) {
+                 swal("خطا!", "فیلد ها را تکمیل نمایید", "error");
+                return false;
+            }
+            if (ToDate == "" || ToDate == null) {
+               swal("خطا!", "فیلد ها را تکمیل نمایید", "error");
+                return false;
+            }
+             //$("#SaveData").show();
+            //$("#Datasearch").hide();
+              //$("#Installmenttbl").show();
+            debugger
+            $("tr:not(tr:first)").remove();
+            GetAllCommisionOnTeamOnDate(FromDate, ToDate);
+            if (AllWholePaymentArray.length == 0) {
+               swal("خطا!", "در این بازه تاریخ اطلاعات  موجود نمی باشد", "error");
+                return false;
+            }
+            //
+            var counter = 0;
+            var toCounter = 7;
+            var Rows = AllWholePaymentArray.length / 8;
+            for (var i = 1; i <= Rows; i++) {
+                $("tr:last").after('<tr id=mk' + i + '>');
+
+                while (counter < toCounter) {
+                    $('#mk' + i).append('<td class="text-center" id="rowNum' + counter + '">' + AllWholePaymentArray[counter] + '</td>');
+                    counter++;
+                }
+                toCounter = toCounter + 8;
+                counter++;
+                $('#mk' + i).after("</tr>");
+            }
+        });
+        $("#exporttoexcel").on('click', function (e) {
+            e.preventDefault();
+            ResultsToTable();
+
+        });
+        function ResultsToTable() {
+            $("#Installmenttbl").table2excel({
+                exclude: ".noExl",
+                name: "Results"
+            });
+        }
+        $("#ShowData").click(function () {
+
+            $("#ImportData").slideToggle(500);
+            //$("#DatePayment").val($("#DatePayment").val().replace('/', ''))
+        });
+
+        $("#Datasearch").click(function () {
+            var ListCode = $("#ListCode").val();
+         var FollowUpNO = $("#FollowUpNO").val();
+
+            if ((FollowUpNO == "" || FollowUpNO == null) && (ListCode == "" || ListCode == null)) {
+                 swal("خطا!", "فیلد ها را تکمیل نمایید", "error");
+                return false;
+            }
+
+            $("tr:not(tr:first)").remove();
+            GetAllWholeOnListCodeAndFolowUpNo(ListCode, FollowUpNO);
+            if (AllWholePaymentOnListCodeArray.length == 0) {
+                alert("اطلاعات  موجود نمی باشد");
+                return false;
+            }
+             var counter2 = 0;
+            var toCounter2 = 7;
+            var Rows2 = AllWholePaymentOnListCodeArray.length / 8;
+            for (var i = 1; i <= Rows2; i++) {
+                $("tr:last").after('<tr id=mk' + i + '>');
+
+                while (counter2 < toCounter2) {
+                    $('#mk' + i).append('<td class="text-center" id="rowNum' + counter2 + '">' + AllWholePaymentOnListCodeArray[counter2] + '</td>');
+                    counter2++;
+                }
+                toCounter2 = toCounter2 + 8;
+
+                // alert(counter);
+                $('#rowNum' + (counter2 - 1)).after('<td class="text-center" id= "rowNum' + counter2 + '" ><a href="~/Administrator/Installments/ConfirmPayment?type=1?documenttypeid=' + AllWholePaymentOnListCodeArray[counter2] + '">تایید پرداخت</a></td>');
+                counter2++;
+                $('#mk' + i).after("</tr>");
+            }
+        });
+        $("#SaveData").click(function () {
+            var FromDate = $("#FromDate").val().replace(/\//g, '');
+            var ToDate = $("#ToDate").val().replace(/\//g, '');
+            var CodeList = $("#ListCode").val();
+            var FollowUpNO = $("#FollowUpNO").val();
+            var For = $("#For").val();
+              if (FollowUpNO == "" || FollowUpNO == null) {
+                 swal("خطا!", "فیلد ها را تکمیل نمایید", "error");
+                return false;
+            }
+              if (ListCode == "" || ListCode == null) {
+                 swal("خطا!", "فیلد ها را تکمیل نمایید", "error");
+                return false;
+            }
+            if (FromDate == "" || FromDate == null) {
+                 swal("خطا!", "فیلد ها را تکمیل نمایید", "error");
+                return false;
+            }
+               if (ToDate == "" || ToDate == null) {
+                 swal("خطا!", "فیلد ها را تکمیل نمایید", "error");
+                return false;
+            }
+            GetListAllWholePayments(FromDate, ToDate,CodeList,FollowUpNO,For);
+             //UpdateAllWholePayment(AllWholePaymentArrayLocal)
+            if (GlobalAllWholeResult == true) {
+              swal({
+                title: "موفق!",
+                text: "کد لیست و شماره پیگیری افزوده شد",
+                type: "success"
+            }).then(function () {
+                 location.reload();
+            });
+
+            }
+
+
+                //UpdateAllWholePayment(AllWholePaymentArray[i]);
+
+        });
+
+    });
+</script>
+
+
 

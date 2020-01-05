@@ -534,4 +534,19 @@
   <data name="_For" xml:space="preserve">
     <value>بابت</value>
   </data>
+  <data name="_CommisionOnTeam" xml:space="preserve">
+    <value>گزارش پورسانت هر تیم</value>
+  </data>
+  <data name="_FirstTeam" xml:space="preserve">
+    <value>تیم 1</value>
+  </data>
+  <data name="_ForthTeam" xml:space="preserve">
+    <value>تیم 4</value>
+  </data>
+  <data name="_SecondTeam" xml:space="preserve">
+    <value>تیم 2</value>
+  </data>
+  <data name="_ThirdTeam" xml:space="preserve">
+    <value>تیم 3</value>
+  </data>
 </root>

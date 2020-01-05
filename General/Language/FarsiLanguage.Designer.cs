@@ -250,6 +250,15 @@ namespace FarsiLanguage {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to گزارش پورسانت هر تیم.
+        /// </summary>
+        public static string _CommisionOnTeam {
+            get {
+                return ResourceManager.GetString("_CommisionOnTeam", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to تایید پرداخت.
         /// </summary>
         public static string _ConfirmPayment {
@@ -574,6 +583,15 @@ namespace FarsiLanguage {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to تیم 1.
+        /// </summary>
+        public static string _FirstTeam {
+            get {
+                return ResourceManager.GetString("_FirstTeam", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to شماره پیگیری.
         /// </summary>
         public static string _FolowUpNo {
@@ -597,6 +615,15 @@ namespace FarsiLanguage {
         public static string _ForgetPessword {
             get {
                 return ResourceManager.GetString("_ForgetPessword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to تیم 4.
+        /// </summary>
+        public static string _ForthTeam {
+            get {
+                return ResourceManager.GetString("_ForthTeam", resourceCulture);
             }
         }
         
@@ -1105,6 +1132,15 @@ namespace FarsiLanguage {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to تیم 2.
+        /// </summary>
+        public static string _SecondTeam {
+            get {
+                return ResourceManager.GetString("_SecondTeam", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to امنیت.
         /// </summary>
         public static string _Security {
@@ -1227,6 +1263,15 @@ namespace FarsiLanguage {
         public static string _SupportIssue {
             get {
                 return ResourceManager.GetString("_SupportIssue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to تیم 3.
+        /// </summary>
+        public static string _ThirdTeam {
+            get {
+                return ResourceManager.GetString("_ThirdTeam", resourceCulture);
             }
         }
         

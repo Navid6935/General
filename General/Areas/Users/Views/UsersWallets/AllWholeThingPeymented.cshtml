@@ -184,9 +184,14 @@
         var str2 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._AllWholeThingsPeymented, "AllWholeThingPeymented")</li>';
         $('.crumbs').append(str1);
         $('.crumbs').append(str2);
-        $(".datepicker").datepicker({dateFormat:"yy/mm/dd",isRTL:true,showButtonPanel:true})
+        $(".datepicker").datepicker({ dateFormat: "yy/mm/dd", isRTL: true, showButtonPanel: true })
+        debugger
+        for (var j = 1; j < @i; j++) {
+            var Amount = $("#UWDayDeposit_" + j).text().trim();
+            var id = $("#UWDayDeposit_" + j).attr("id");
+            ToRial(Amount, id);
+        }
         $("#search").click(function () {
-            debugger
             var FromDate = $("#FromDate").val().replace(/\//g, '');
             var ToDate = $("#ToDate").val().replace(/\//g, '');
              if (FromDate == "" || FromDate == null) {

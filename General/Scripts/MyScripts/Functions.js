@@ -345,7 +345,6 @@ function InsertInstallmentData(MarketingCode, FirstName, LastName, InsuranceNumb
 }
 //------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //========================================================== تبدیل به مقدار پولی ========================================
-
 function ToRial(str, id) {
 
     str = str.replace(/\,/g, '');
@@ -1106,6 +1105,45 @@ function GetAllWhole(FromDate, ToDate) {
     $.ajax({
         type: 'Get',
         url: 'GetAllWholes',
+        async: false,
+        data: {
+            "FromDate": FromDate,
+            "ToDate": ToDate
+        },
+        dataType: 'json',
+        success: function (data, status, x) {
+            if (data !== null) {
+
+                AllWholePaymentArray = [];
+                $.each(data, function (id, AllWholeData) {
+
+                    AllWholePaymentArray.push(AllWholeData);
+                });
+            }
+            if (data === null || data === undefined || data === "Null") {
+                alert('Error');
+                return false;
+            }
+
+        },
+        beforeSend: function () {
+        },
+        complete: function () {
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+
+            alert(jqXHR + textStatus + errorThrown);
+        }
+    });
+}
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ محاسبه سود هر تیم بر اساس تاریخ +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+function GetAllCommisionOnTeamOnDate(FromDate, ToDate) {
+    $.ajax({
+        type: 'Get',
+        url: 'GetAllCommisionOnTeamOnDate',
         async: false,
         data: {
             "FromDate": FromDate,

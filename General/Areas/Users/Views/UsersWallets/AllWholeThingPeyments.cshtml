@@ -12,15 +12,7 @@
             <div class="col-md-4 col-sm-4 col-xs-4">
                 <label class="control-label col-md-5 col-sm-5 col-xs-5" style="color:black;font-size:20px;margin-top:12px">از تاریخ</label>
                 <div class="col-sm-6 col-md-6 col-xs-6" style="margin-top:10px">
-                    @*<select class="form-control" id="Year">
-                            <option></option>
-                            @for (int y = 1397; y <= 1450; y++)
-                            {
-                                <option value="@y">@y</option>
-                            }
-                        </select>*@
                     <input type="text" id="FromDate" class="text-center datepicker" maxlength="10" autocomplete="off"/>
-
                 </div>
             </div>
             <div class="col-md-4 col-sm-4 col-xs-4">
@@ -132,12 +124,6 @@
             <th class="text-center">
                 @Html.DisplayNameFor(model => model.UWAmountDeposit)
             </th>
-
-            @*<th class="text-center">
-                    @Html.DisplayNameFor(model => model.UWAmountDeposit)
-                </th>*@
-
-            @*<th class="text-center">@FarsiLanguage.FarsiLanguage._Payment</th>*@
         </tr>
         @{
             var i = 1;
@@ -193,15 +179,6 @@
         $(".datepicker").datepicker({dateFormat:"yy/mm/dd",isRTL:true,showButtonPanel:true})
         //$(".datepicker").datepicker({dateFormat:"yy/mm/dd",isRTL:true,showButtonPanel:true})
         //=========================================== محاسبه مجموعه سود هر نفر
-        @*for (var j = 1; j < @i; j++) {
-            //alert($("#MarketingCode_" + j).val().trim());
-            GetSumCommisions($("#MarketingCode_" + j).text().trim());
-            //GlobalSumCommisions.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
-            //alert(GlobalSumCommisions);
-                    //$('#UWAmountDeposit_' + j).text( $(this).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") ); 
-            $('#UWAmountDeposit_' + j).text(GlobalSumCommisions)
-             $('#UWAmountDeposit_' + j).text($('#UWAmountDeposit_' + j).text().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")); 
-        }*@
         function ConvertToRial() {
             //alert( $('#UWAmountDeposit_' + j).text());
                     $.fn.digits = function(){ 
