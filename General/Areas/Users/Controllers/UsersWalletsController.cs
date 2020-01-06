@@ -587,43 +587,86 @@ namespace General.Areas.Users.Controllers
                     AllCommisionList.Add(item.UWInsuranceNumber);
                     AllCommisionList.Add(item.UWFirstName);
                     AllCommisionList.Add(item.UWLastName);
-                    foreach (var item2 in query2)
-                    {
-                        GetAllCommisionOnTeam(item2.UWMarketingCode, item2.UWMarketingCodeFrom);
-
-                    }
                     var CheckNumofTeam = db.UsersWallets
                     .Where(m => m.UWMarketingCode == item.UWMarketingCode)
                      .GroupBy(m => new { m.UWMarketingCodeFrom })
                      .Select(g => g.FirstOrDefault())
                     .ToList();
+                foreach (var item2 in CheckNumofTeam)
+                    //for (int i = 0; i < CheckNumofTeam.Count; i++)
+                        {
+                        GetAllCommisionOnTeam(item2.UWMarketingCode, item2.UWMarketingCodeFrom);
+                    }
+
                     //اضافه کردن صفر به جای مقادیری که تیم کار نکرده است
                     for (int i = 4; i > CheckNumofTeam.Count; i--)
                     {
                         AllCommisionList.Add("0");
 
                     }
+                    GetAllCommisionAllTeam(item.UWMarketingCode);
+
                 }
             }
             return Json(AllCommisionList, JsonRequestBehavior.AllowGet);
 
         }
-        // =========================================================================== محاسبه سود هر تیم
-        public int GetSumofCommisionOnFirstTeam(string MarketingCode, string MarketingCodeFrom)
-        {
-            int Temp = 0;
 
-            var GetAllCommisionOnMKAndMKFromOnTeam = db.UsersWallets
-                .Where(m => m.UWMarketingCode == MarketingCode)
+        // =========================================================================== محاسبه سود هر تیم بر اساس کد بازاریابی
 
-                .ToList();
-            foreach (var item in GetAllCommisionOnMKAndMKFromOnTeam)
-            {
-                Temp += int.Parse(item.UWAmountDeposit);
-            }
+        //public ActionResult GetAllCommisionOnTeamOnMK(string MarketingCode)
+        //{
 
-            return Temp;
-        }
+        //    //بدست آوردن تعداد نفرات
+        //    var query1 = db.UsersWallets
+
+        //        //.Where(m => m.ListCode != null && m.FollowUpNO != null)
+        //        .Where(y => y.UWMarketingCode == MarketingCode )
+        //     .GroupBy(m => new { m.UWMarketingCode })
+        //    .Select(g => g.FirstOrDefault())
+        //    .ToList();
+        //    var query2 = db.UsersWallets
+
+        //           //.Where(m => m.ListCode != null && m.FollowUpNO != null)
+        //           .Where(y => y.UWDatePeyment >= FromDate && y.UWDatePeyment <= ToDate)
+        //        .GroupBy(m => new { m.UWMarketingCode, m.UWMarketingCodeFrom })
+        //       .Select(g => g.FirstOrDefault())
+        //       .ToList();
+
+        //    //ViewBag.SumAllWholes;
+        //    if (query1.Count != 0)
+        //    {
+        //        foreach (var item in query1)
+        //        {
+        //            AllCommisionList.Add(item.UWMarketingCode);
+        //            AllCommisionList.Add(item.UWInsuranceNumber);
+        //            AllCommisionList.Add(item.UWFirstName);
+        //            AllCommisionList.Add(item.UWLastName);
+        //            var CheckNumofTeam = db.UsersWallets
+        //            .Where(m => m.UWMarketingCode == item.UWMarketingCode)
+        //             .GroupBy(m => new { m.UWMarketingCodeFrom })
+        //             .Select(g => g.FirstOrDefault())
+        //            .ToList();
+        //            foreach (var item2 in CheckNumofTeam)
+        //            //for (int i = 0; i < CheckNumofTeam.Count; i++)
+        //            {
+        //                GetAllCommisionOnTeam(item2.UWMarketingCode, item2.UWMarketingCodeFrom);
+        //            }
+
+        //            //اضافه کردن صفر به جای مقادیری که تیم کار نکرده است
+        //            for (int i = 4; i > CheckNumofTeam.Count; i--)
+        //            {
+        //                AllCommisionList.Add("0");
+
+        //            }
+        //            GetAllCommisionAllTeam(item.UWMarketingCode);
+
+        //        }
+        //    }
+        //    return Json(AllCommisionList, JsonRequestBehavior.AllowGet);
+
+        //}
+
         // =========================================================================== محاسبه سود هر تیم
         public int GetAllCommisionOnTeam(string MarketingCode, string MarketingCodeFrom)
         {
@@ -640,8 +683,27 @@ namespace General.Areas.Users.Controllers
             }
             AllCommisionList.Add(Temp.ToString());
 
+
             return Temp;
         }
+    // =========================================================================== محاسبه سود هر تیم
+    public int GetAllCommisionAllTeam(string MarketingCode)
+    {
+        int Temp = 0;
+
+        var GetAllCommisionAllTeams = db.UsersWallets
+            .Where(m => m.UWMarketingCode == MarketingCode)
+           .ToList();
+
+        foreach (var item in GetAllCommisionAllTeams)
+        {
+            Temp += int.Parse(item.UWAmountDeposit);
+        }
+        AllCommisionList.Add(Temp.ToString());
+
+
+        return Temp;
     }
 
+    }
 }
