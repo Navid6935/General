@@ -512,6 +512,8 @@
     <Content Include="Areas\Administrator\Views\CommisionOnArms\Edit.cshtml" />
     <Content Include="Areas\Administrator\Views\CommisionOnArms\Index.cshtml" />
     <Content Include="Areas\Users\Views\UsersWallets\CommissionOnTeam.cshtml" />
+    <Content Include="Areas\Users\Views\Reports\CommisionPeymented.cshtml" />
+    <Content Include="Areas\Users\Views\Reports\CommissionOnTeamInUsers.cshtml" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />

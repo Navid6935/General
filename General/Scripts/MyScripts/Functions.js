@@ -1177,6 +1177,82 @@ function GetAllCommisionOnTeamOnDate(FromDate, ToDate) {
 }
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ محاسبه سود هر تیم بر اساس کد بازاریابی +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+function GetAllCommisionOnTeamOnMK(MarketingCode) {
+    $.ajax({
+        type: 'Get',
+        url: 'GetAllCommisionOnTeamOnMK',
+        async: false,
+        data: {
+            "MarketingCode": MarketingCode
+        },
+        dataType: 'json',
+        success: function (data, status, x) {
+            if (data !== null) {
+
+                AllWholePaymentArray = [];
+                $.each(data, function (id, AllWholeData) {
+
+                    AllWholePaymentArray.push(AllWholeData);
+                });
+            }
+            if (data === null || data === undefined || data === "Null") {
+                alert('Error');
+                return false;
+            }
+
+        },
+        beforeSend: function () {
+        },
+        complete: function () {
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+
+            alert(jqXHR + textStatus + errorThrown);
+        }
+    });
+}
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ محاسبه سود هر تیم بر اساس شماره بیمه نامه +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+function GetAllCommisionOnTeamOnInsurance(InsuranceNum) {
+    $.ajax({
+        type: 'Get',
+        url: 'GetAllCommisionOnTeamOnInsurance',
+        async: false,
+        data: {
+            "InsuranceNum": InsuranceNum
+        },
+        dataType: 'json',
+        success: function (data, status, x) {
+            if (data !== null) {
+
+                AllWholePaymentArray = [];
+                $.each(data, function (id, AllWholeData) {
+
+                    AllWholePaymentArray.push(AllWholeData);
+                });
+            }
+            if (data === null || data === undefined || data === "Null") {
+                alert('Error');
+                return false;
+            }
+
+        },
+        beforeSend: function () {
+        },
+        complete: function () {
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+
+            alert(jqXHR + textStatus + errorThrown);
+        }
+    });
+}
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ پیدا کردن لیست پورسانت های پرداختی با بازه زمانی +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 function GetSumCommisions(MarketingCode) {
@@ -1469,4 +1545,43 @@ function GetMessagesNotRead() {
         }
     });
 }
+
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ پیدا کردن لیست پورسانت های پرداختی با بازه زمانی +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+function GetCommisionOnDate(FromDate, ToDate) {
+    $.ajax({
+        type: 'Get',
+        url: 'GetCommisionOnDate',
+        async: false,
+        data: {
+            "FromDate": FromDate,
+            "ToDate": ToDate
+        },
+        dataType: 'json',
+        success: function (data, status, x) {
+            if (data !== null) {
+
+                AllWholePaymentArray = [];
+                $.each(data, function (id, AllWholeData) {
+
+                    AllWholePaymentArray.push(AllWholeData);
+                });
+            }
+            if (data === null || data === undefined || data === "Null") {
+                alert('Error');
+                return false;
+            }
+
+        },
+        beforeSend: function () {
+        },
+        complete: function () {
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+
+            alert(jqXHR + textStatus + errorThrown);
+        }
+    });
+}

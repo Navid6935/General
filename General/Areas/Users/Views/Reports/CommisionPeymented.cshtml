@@ -1,0 +1,155 @@
+﻿
+
+@model IEnumerable<General.Areas.Users.Models.UsersWallet>
+
+@{
+    ViewBag.Title = "گزارش پورسانت پرداخت شده";
+    Layout = "~/Areas/Users/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/sweetalert/sweet-alert.css" rel="stylesheet" />
+@*@ViewBag.Sum*@
+<div class="row col-md-12" style="margin-top:15px">
+    <div class="col-md-12" style="margin-top:15px;margin-bottom:15px;border:1px dashed;border-radius:5px;padding-bottom:15px">
+        <div class="row col-md-12" style="margin-top:15px;margin-right:1px">
+            <div class="col-md-4 col-sm-4 col-xs-4">
+                <label class="control-label col-md-5 col-sm-5 col-xs-5" style="color:black;font-size:20px;margin-top:12px">از تاریخ</label>
+                <div class="col-sm-6 col-md-6 col-xs-6" style="margin-top:10px">
+                    <input type="text" id="FromDate" class="text-center datepicker" maxlength="10" autocomplete="off" />
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-4">
+                <label class="control-label col-md-5 col-sm-5 col-xs-5" style="color:black;font-size:20px;margin-top:12px">تا تاریخ</label>
+                <div class="col-sm-6 col-md-6 col-xs-6" style="margin-top:10px">
+
+                    <input type="text" id="ToDate" class="text-center datepicker" maxlength="10" autocomplete="off" />
+
+                </div>
+            </div>
+            <div class="col-sm-2 col-md-2 col-xs-2">
+                <a class="btn-floating btn-large waves-effect waves-light blue tooltipped" data-position="top" data-delay="50" data-tooltip="جستجو" id="Datesearch"><i class="material-icons">search</i></a>
+
+            </div>
+
+            <div class="col-sm-1 col-md-1 col-xs-1">
+                <a class="btn-floating btn-large waves-effect waves-light green tooltipped" data-position="top" data-delay="50" data-tooltip="خروجی اکسل" id="exporttoexcel"><i class="material-icons">file_download</i></a>
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <table class="table table-bordered table-striped table-hover table-responsive " dir="rtl" style="margin-top:15px;border-color:darkblue" id="Commisiontbl">
+        <tr class="grey">
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.ListCode)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.FollowUpNO)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.UWDatePeyment)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.UWFor)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.UWAmountDeposit)
+            </th>
+            
+        </tr>
+        @{
+            var i = 1;
+        }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="text-center" id="MarketingCode_@i">
+                    @Html.DisplayFor(modelItem => item.ListCode)
+                </td>
+                <td class="text-center" id="FirstName_@i">
+                    @Html.DisplayFor(modelItem => item.FollowUpNO)
+                </td>
+                <td class="text-center" id="LastName_@i">
+                    @Html.DisplayFor(modelItem => item.UWDatePeyment)
+                </td>
+                <td class="text-center" id="AccountNumber_@i">
+                    @Html.DisplayFor(modelItem => item.UWFor)
+                </td>
+                <td class="text-center" id="CardNumber_@i">
+                    @Html.DisplayFor(modelItem => item.UWAmountDeposit)
+                </td>
+
+            </tr>
+            ++i;
+        }
+
+
+    </table>
+</div>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/MyScripts/PlanFunc.js"></script>
+<script src="~/Scripts/SweetAlert.js"></script>
+<script>
+
+    $(document).ready(function () {
+        //$("#Installmenttbl").hide();
+        $(".datepicker").datepicker({dateFormat:"yy/mm/dd",isRTL:true,showButtonPanel:true})
+        //$(".datepicker").datepicker({dateFormat:"yy/mm/dd",isRTL:true,showButtonPanel:true})
+
+
+         var str1 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._AdministratorPage, "AdminsMainPage", "AdminGeneralpages", new { area = "Administrator" }, null)</li>';
+        var str2 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._AllWholeThingsPeyments, "AllWholeThingPeyments")</li>';
+        $('.crumbs').append(str1);
+        $('.crumbs').append(str2);
+        $("#Datesearch").click(function () {
+
+            var FromDate = $("#FromDate").val().replace(/\//g, '');
+            var ToDate = $("#ToDate").val().replace(/\//g, '');
+             if (FromDate == "" || FromDate == null) {
+                 swal("خطا!", "فیلد ها را تکمیل نمایید", "error");
+                return false;
+            }
+            if (ToDate == "" || ToDate == null) {
+               swal("خطا!", "فیلد ها را تکمیل نمایید", "error");
+                return false;
+            }
+            $("tr:not(tr:first)").remove();
+            GetCommisionOnDate(FromDate, ToDate);
+            if (AllWholePaymentArray.length == 0) {
+               swal("خطا!", "در این بازه تاریخ اطلاعات  موجود نمی باشد", "error");
+                return false;
+            }
+            debugger
+            var counter = 0;
+            var toCounter = 5;
+            var Rows = AllWholePaymentArray.length / 5;
+            for (var i = 1; i <= Rows; i++) {
+                $("tr:last").after('<tr id=mk' + i + '>');
+
+                while (counter < toCounter) {
+                    $('#mk' + i).append('<td class="text-center" id="rowNum' + counter + '">' + AllWholePaymentArray[counter] + '</td>');
+                    counter++;
+                }
+                toCounter = toCounter + 5;
+                $('#mk' + i).after("</tr>");
+            }
+        });
+        $("#exporttoexcel").on('click', function (e) {
+            e.preventDefault();
+            ResultsToTable();
+
+        });
+        function ResultsToTable() {
+            $("#Commisiontbl").table2excel({
+                exclude: ".noExl",
+                name: "Results"
+            });
+        }
+
+
+    });
+</script>
+
+

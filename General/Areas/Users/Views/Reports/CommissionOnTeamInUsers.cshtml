@@ -1,14 +1,15 @@
-﻿@model IEnumerable<General.Areas.Users.Models.UsersWallet>
+﻿
+@model IEnumerable<General.Areas.Users.Models.UsersWallet>
 
 @{
-    ViewBag.Title = "گزارش پورسانت هر تیم";
+    ViewBag.Title = "گزارش مجموع پورسانت هر تیم";
     Layout = "~/Areas/Users/Views/Shared/_Layout.cshtml";
 }
 <link href="~/Content/sweetalert/sweet-alert.css" rel="stylesheet" />
 @*@ViewBag.Sum*@
 <div class="row col-md-12" style="margin-top:15px">
-    <div class="col-md-12" style="margin-top:15px;margin-bottom:15px;border:1px dashed;border-radius:5px;padding-bottom:15px">
-        <div class="row col-md-12" style="margin-top:15px;margin-right:1px;padding-bottom:15px;border-bottom:1px dashed">
+    <div class="col-md-12" style="margin-top:15px;margin-bottom:15px;border:1px dashed;border-radius:5px;padding-top:15px">
+        <div class="row col-md-12" style="margin-top:15px;margin-right:1px;padding-bottom:15px">
             <div class="col-md-5 col-sm-5 col-xs-5">
                 <label class="control-label col-md-5 col-sm-5 col-xs-5" style="color:black;font-size:20px;margin-top:12px">از تاریخ</label>
                 <div class="col-sm-6 col-md-6 col-xs-6" style="margin-top:10px">
@@ -37,17 +38,17 @@
         @*</fieldset>
             <fieldset>
                 <legend dir="rtl">بر اساس کد بازاریابی </legend>*@
-        <div class="row col-md-12" style="margin-right:1px;padding-bottom:15px;border-bottom:1px dashed">
+        @*<div class="row col-md-12" style="margin-right:1px;padding-bottom:15px;border-bottom:1px dashed">
             <div class="col-md-11 col-sm-11 col-xs-11">
                 <label class="control-label col-md-3 col-sm-3 col-xs-3" style="color:black;font-size:20px;margin-top:12px">کد بازاریابی</label>
                 <div class="col-sm-6 col-md-6 col-xs-6" style="margin-top:10px">
-                    @*<select class="form-control" id="Year">
+                    <select class="form-control" id="Year">
                             <option></option>
                             @for (int y = 1397; y <= 1450; y++)
                             {
                                 <option value="@y">@y</option>
                             }
-                        </select>*@
+                        </select>
                     <input type="text" id="MarketingCode" class="text-center" maxlength="13" />
 
                 </div>
@@ -57,11 +58,11 @@
 
             </div>
 
-        </div>
+        </div>*@
         @*</fieldset>
             <fieldset>
                 <legend dir="rtl">بر اساس شماره بیمه نامه</legend>*@
-        <div class="row col-md-12">
+        @*<div class="row col-md-12">
             <div class="col-md-11 col-sm-11 col-xs-11">
                 <label class="control-label col-md-3 col-sm-3 col-xs-3" style="color:black;font-size:20px;margin-top:12px">شماره بیمه نامه</label>
                 <div class="col-sm-1 col-md-1 col-xs-1 col-md-pull-8" style="margin-top:10px">
@@ -87,7 +88,7 @@
                 <a class="btn-floating btn-large waves-effect waves-light blue tooltipped" data-position="top" data-delay="50" data-tooltip="جستجو بر اساس شماره بیمه نامه" id="searchOnInsuranceNum"><i class="material-icons">search</i></a>
 
             </div>
-        </div>
+        </div>*@
     </div>
 
 
@@ -337,6 +338,7 @@
 
     });
 </script>
+
 
 
 

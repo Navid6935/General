@@ -614,5 +614,81 @@ namespace General.Areas.Users.Controllers
             //}
             return Json(ArmNum, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult CommisionPeymented()
+        {
+            var UserId = Session["PID"];
+            if (UserId == null)
+            {
+                return RedirectToAction("Login", "Account", new { area = ""});
+            }
+            var User = db.Users.Where(u => u.UserName == UserId).FirstOrDefault();
+            var UWGroup = db.UsersWallets
+                .Where(m => m.UWMarketingCode == User.MarketingCode)
+                .Where(lc => lc.ListCode !=null && lc.FollowUpNO != null)
+               .OrderBy(w=>w.UWDatePeyment)
+                .ToList();
+            return View(UWGroup);
+        }
+        public ActionResult GetCommisionOnDate( int FromDate, int ToDate)
+        {
+            var UserId = Session["PID"];
+            if (UserId == null)
+            {
+                return RedirectToAction("Login", "Account", new { area = "" });
+            }
+            List<string> AllCommisionList = new List<string>();
+            var User = db.Users.Where(u => u.UserName == UserId).FirstOrDefault();
+            var Commisions = db.UsersWallets
+                .Where(m => m.UWMarketingCode == User.MarketingCode)
+               .Where(y => y.UWDateWithoutPoints >= FromDate && y.UWDateWithoutPoints <= ToDate)
+                .Where(lc => lc.ListCode !=null && lc.FollowUpNO != null)
+               .OrderBy(w=>w.UWDatePeyment)
+                .ToList();
+            if (Commisions.Count != 0)
+            {
+                foreach (var item in Commisions)
+                {
+                    AllCommisionList.Add(item.ListCode.ToString());
+                    AllCommisionList.Add(item.FollowUpNO);
+                    AllCommisionList.Add(item.UWDatePeyment.ToString());
+                    AllCommisionList.Add(item.UWFor);
+                    AllCommisionList.Add(item.UWAmountDeposit);
+
+                }
+
+            }
+            return Json(AllCommisionList, JsonRequestBehavior.AllowGet);
+        }
+        /// <summary>
+        /// صفحه اصلی گزارش پورسانت هر تیم یوزر
+        /// </summary>
+        /// <returns></returns>
+        // GET: Users/UsersWallets
+        public ActionResult CommissionOnTeamInUsers()
+        {
+            List<string> MarketingCodelist = new List<string>();
+            List<int> Amountlist = new List<int>();
+
+            var UWGroup = db.UsersWallets
+                .Where(m => m.ListCode == null && m.FollowUpNO == null)
+                 .GroupBy(m => new { m.UWMarketingCode })
+                 .Select(g => g.FirstOrDefault())
+                .ToList();
+            //foreach (var item in UWGroup)
+            //{
+
+            //    MarketingCodelist.Add(item.UWMarketingCode);
+            //    MarketingCodelist.Add(item.UWBranchCode.ToString());
+            //    MarketingCodelist.Add(item.UWCardNumber);
+            //    GetSumofCommision(item.UWMarketingCode);
+            //}
+
+            //foreach (var item in MarketingCodelist)
+            //{
+            //    var sum = db.UsersWallets.tolist()
+            //}
+
+            return View(UWGroup);
+        }
     }
 }
