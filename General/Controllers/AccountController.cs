@@ -88,7 +88,7 @@ namespace General.Controllers
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var user = db.Users.Where(u => u.UserName == model.UserName).FirstOrDefault();
 
-           
+
             //if (user.UserName == "123456789123456789")
             //{
             //    Session["PID"] = model.UserName;
@@ -103,50 +103,52 @@ namespace General.Controllers
             //    return RedirectToAction("AdministratorsMainPage", "AdministratorGeneralpages", new { area = "Administrator", Id = user.Id });
 
             //}
-           var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: true);
+            var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: true);
             //var pass = user.PasswordHash;
             //var pass2 = model.Password;
 
-                switch (result)
-                {
+            switch (result)
+            {
 
-                    case SignInStatus.Success:
-                        if (user.CooperationStatus == false)
-                        {
-                            ModelState.AddModelError("", "نام كاربري يا رمز عبور اشتباه مي باشد");
-                            return View(model);
-
-                        }
-                        if (user.UserName == "483004311139639539")
-                        {
-                            Session["PID"] = model.UserName;
-                            Session["Id"] = user.Id;
-                        Session["Name"] = user.FirstName;
-                        Session["Family"] = user.LastName;
-                        return RedirectToAction("AdminsMainPage", "AdminGeneralpages", new { area = "Administrator", Id = user.Id });
-                        }
-
-                        else
-                        {
-                            Session["PID"] = model.UserName;
-                            Session["Id"] = user.Id;
-                        Session["Name"] = user.FirstName;
-                        Session["Family"] = user.LastName;
-                        return RedirectToAction("UserPage", "UsersAdmin", new { area = "Administrator", Id = user.Id });
-                        }
-
-                    case SignInStatus.LockedOut:
-                        return View("Lockout");
-                    case SignInStatus.RequiresVerification:
-                        return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-
-                    case SignInStatus.Failure:
-                    default:
+                case SignInStatus.Success:
+                    if (user.CooperationStatus == false)
+                    {
                         ModelState.AddModelError("", "نام كاربري يا رمز عبور اشتباه مي باشد");
                         return View(model);
-                
 
-            
+                    }
+                    if (user.UserName == "483004311139639539")
+                    {
+                        Session["PID"] = model.UserName;
+                        Session["Id"] = user.Id;
+                        Session["Name"] = user.FirstName;
+                        Session["Family"] = user.LastName;
+                        Session["MC"] = user.MarketingCode;
+                        return RedirectToAction("AdminsMainPage", "AdminGeneralpages", new { area = "Administrator", Id = user.Id });
+                    }
+
+                    else
+                    {
+                        Session["PID"] = model.UserName;
+                        Session["Id"] = user.Id;
+                        Session["Name"] = user.FirstName;
+                        Session["Family"] = user.LastName;
+                        Session["MC"] = user.MarketingCode;
+                        return RedirectToAction("UserPage", "UsersAdmin", new { area = "Administrator", Id = user.Id });
+                    }
+
+                case SignInStatus.LockedOut:
+                    return View("Lockout");
+                case SignInStatus.RequiresVerification:
+                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+
+                case SignInStatus.Failure:
+                default:
+                    ModelState.AddModelError("", "نام كاربري يا رمز عبور اشتباه مي باشد");
+                    return View(model);
+
+
+
             }
         }
 
@@ -501,6 +503,7 @@ namespace General.Controllers
         public ActionResult LogOff()
         {
             Session.Abandon();
+            Session.Clear();
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return RedirectToAction("Index", "Home");
         }

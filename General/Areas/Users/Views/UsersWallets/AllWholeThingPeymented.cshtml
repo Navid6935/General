@@ -21,7 +21,7 @@
             <div class="col-md-5 col-sm-5 col-xs-5">
                 <label class="control-label col-md-5 col-sm-5 col-xs-5" style="color:black;font-size:20px;margin-top:12px">تا تاریخ</label>
                 <div class="col-sm-6 col-md-6 col-xs-6" style="margin-top:10px">
- 
+
                     <input type="text" id="ToDate" class="text-center datepicker" autocomplete="off" />
 
                 </div>
@@ -91,7 +91,7 @@
         </div>
     </div>
 
-
+    
 
     <table class="table table-bordered table-striped table-hover table-responsive " dir="rtl" style="margin-top:15px;border-color:darkblue" id="Installmenttbl">
         <tr class="grey">
@@ -114,7 +114,13 @@
                 @Html.DisplayNameFor(model => model.FollowUpNO)
             </th>
             <th class="text-center">
-                @Html.DisplayNameFor(model => model.UWDatePeyment)
+                @Html.DisplayNameFor(model => model.UWDayDeposit)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.UWMonthDeposit)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.UWYearDeposit)
             </th>
             <th class="text-center">
                 @Html.DisplayNameFor(model => model.UWFor)
@@ -124,13 +130,14 @@
             </th>
 
             @*<th class="text-center">
-                    @Html.DisplayNameFor(model => model.UWAmountDeposit)
-                </th>*@
+                @Html.DisplayNameFor(model => model.UWAmountDeposit)
+            </th>*@
 
         </tr>
         @{
             var i = 1;
         }
+
         @foreach (var item in Model)
         {
             <tr>
@@ -152,21 +159,28 @@
                 <td class="text-center" id="CardNumber_@i">
                     @Html.DisplayFor(modelItem => item.FollowUpNO)
                 </td>
-                <td class="text-center" id="DatePeyment_@i">
-                    @Html.DisplayFor(modelItem => item.UWDatePeyment)
+                <td class="text-center" id="DayDeposit_@i">
+                    @Html.DisplayFor(modelItem => item.UWDayDeposit)
+                </td>
+                <td class="text-center" id="MonthDeposit_@i">
+                    @Html.DisplayFor(modelItem => item.UWMonthDeposit)
+                </td>
+                <td class="text-center" id="YearDeposit_@i">
+                    @Html.DisplayFor(modelItem => item.UWYearDeposit)
                 </td>
                 <td class="text-center">
                     @Html.DisplayFor(modelItem => item.UWFor)
                 </td>
                 <td class="text-center" id="UWDayDeposit_@i">
-                    @Html.DisplayFor(modelItem => item.UWAmountDeposit)
+                    @ViewBag.AllWholeList
                 </td>
 
                 @*<td class="text-center">
-                    @Html.ActionLink(FarsiLanguage.FarsiLanguage._ConfirmPayment, "ConfirmPayment", new { id = item.UWId }, new { @id = "paymentbtn" + i, @class = "paymentbtn" })*@
+                @Html.ActionLink(FarsiLanguage.FarsiLanguage._ConfirmPayment, "ConfirmPayment", new { id = item.UWId }, new { @id = "paymentbtn" + i, @class = "paymentbtn" })*@
 
                 @*</td>*@
             </tr>
+
             ++i;
         }
 
@@ -185,7 +199,7 @@
         $('.crumbs').append(str1);
         $('.crumbs').append(str2);
         $(".datepicker").datepicker({ dateFormat: "yy/mm/dd", isRTL: true, showButtonPanel: true })
-        debugger
+        $("#Installmenttbl").hide();
         for (var j = 1; j < @i; j++) {
             var Amount = $("#UWDayDeposit_" + j).text().trim();
             var id = $("#UWDayDeposit_" + j).attr("id");
@@ -208,10 +222,11 @@
                swal("خطا!", "در این ماه اطلاعات  موجود نمی باشد", "error");
                 return false;
             }
-            //
+              $("#Installmenttbl").show();
+
             var counter = 0;
-            var toCounter = 9;
-            var Rows = AllWholePaymentArray.length / 9;
+            var toCounter = 11;
+            var Rows = AllWholePaymentArray.length / 11;
             for (var i = 1; i <= Rows; i++) {
                 $("tr:last").after('<tr id=mk' + i + '>');
 
@@ -219,7 +234,7 @@
                     $('#mk' + i).append('<td class="text-center" id="rowNum' + counter + '">' + AllWholePaymentArray[counter] + '</td>');
                     counter++;
                 }
-                toCounter = toCounter + 9;
+                toCounter = toCounter + 11;
 
                 // alert(counter);
                 //$('#rowNum' + (counter - 1)).after('<td class="text-center" id= "rowNum' + counter + '" ><a href="~/Administrator/Installments/ConfirmPayment?type=1?documenttypeid=' + AllWholePaymentArray[counter] + '">تایید پرداخت</a></td>');
@@ -237,10 +252,11 @@
             $("tr:not(tr:first)").remove();
             MarketingCode = $("#MarketingCode").val();
             GetAllWholePeymentedOnMK(MarketingCode);
+              $("#Installmenttbl").show();
 
             var counter = 0;
-            var toCounter = 9;
-            var Rows = AllWholePaymentArray.length / 9;
+            var toCounter = 11;
+            var Rows = AllWholePaymentArray.length / 11;
             for (var i = 1; i <= Rows; i++) {
                 $("tr:last").after('<tr id=mk' + i + '>');
 
@@ -248,7 +264,7 @@
                     $('#mk' + i).append('<td class="text-center" id="rowNum' + counter + '">' + AllWholePaymentArray[counter] + '</td>');
                     counter++;
                 }
-                toCounter = toCounter + 9;
+                toCounter = toCounter + 11;
 
                 // alert(counter);
                 //$('#rowNum' + (counter - 1)).after('<td class="text-center" id= "rowNum' + counter + '" ><a href="~/Administrator/Installments/ConfirmPayment?type=1?documenttypeid=' + AllWholePaymentArray[counter] + '">تایید پرداخت</a></td>');
@@ -291,10 +307,11 @@ var InsuranceNum1 = $("#InsuranceNum1").val();
             }
             $("tr:not(tr:first)").remove();
             GetAllWholePeymentedOnInsurance(InsuranceNum);
+              $("#Installmenttbl").show();
 
             var counter = 0;
-            var toCounter = 9;
-            var Rows = AllWholePaymentArray.length / 9;
+            var toCounter = 11;
+            var Rows = AllWholePaymentArray.length / 11;
             for (var i = 1; i <= Rows; i++) {
                 $("tr:last").after('<tr id=mk' + i + '>');
 
@@ -302,7 +319,7 @@ var InsuranceNum1 = $("#InsuranceNum1").val();
                     $('#mk' + i).append('<td class="text-center" id="rowNum' + counter + '">' + AllWholePaymentArray[counter] + '</td>');
                     counter++;
                 }
-                toCounter = toCounter + 9;
+                toCounter = toCounter + 11;
 
                 // alert(counter);
                 //$('#rowNum' + (counter - 1)).after('<td class="text-center" id= "rowNum' + counter + '" ><a href="~/Administrator/Installments/ConfirmPayment?type=1?documenttypeid=' + AllWholePaymentArray[counter] + '">تایید پرداخت</a></td>');

@@ -310,7 +310,9 @@ namespace General.Areas.Users.Controllers
             var query = db.UsersWallets.Where(m => m.ListCode != null && m.FollowUpNO != null)
                  .GroupBy(m => new { m.UWMarketingCode, m.ListCode })
                  .Select(g => g.FirstOrDefault())
-                 .ToList();
+                  .OrderBy(m => m.UWDatePeyment)
+                 .ToList();              
+
 
             foreach (var item2 in query)
             {
@@ -323,8 +325,9 @@ namespace General.Areas.Users.Controllers
                 oArrayList.Add(item2.UWDatePeyment.ToString());
                 oArrayList.Add(item2.UWFor);
                 oArrayList.Add(GetSumofCommisionOnPaymented(item2.UWMarketingCode,item2.ListCode).ToString());
+            ViewBag.AllWholeList = GetSumofCommisionOnPaymented(item2.UWMarketingCode, item2.ListCode).ToString();
             }
-            ViewBag.AllWholeList = oArrayList;
+            ViewBag.AllWholeList = Temp;
             return View(query);
         }
         // =========================================================================== گزارش کل پورسانت های پرداخت شده
@@ -417,6 +420,7 @@ namespace General.Areas.Users.Controllers
                    .Where(y => y.UWDatePeyment >= FromDate && y.UWDatePeyment <= ToDate)
                     .GroupBy(m => new { m.UWMarketingCode, m.ListCode })
                     .Select(g => g.FirstOrDefault())
+                     .OrderBy(m => m.UWDatePeyment)
                     .ToList();
             //ViewBag.SumAllWholes;
             if (query.Count != 0)
@@ -429,7 +433,9 @@ namespace General.Areas.Users.Controllers
                     AllWholeList.Add(item2.UWLastName);
                     AllWholeList.Add(item2.ListCode.ToString());
                     AllWholeList.Add(item2.FollowUpNO);
-                    AllWholeList.Add(item2.UWDatePeyment.ToString());
+                    AllWholeList.Add(item2.UWDayDeposit.ToString());
+                    AllWholeList.Add(item2.UWMonthDeposit.ToString());
+                    AllWholeList.Add(item2.UWYearDeposit.ToString());
                     AllWholeList.Add(item2.UWFor);
                     AllWholeList.Add(GetSumofCommisionOnPaymented(item2.UWMarketingCode, item2.ListCode).ToString());
             }
@@ -470,8 +476,9 @@ namespace General.Areas.Users.Controllers
                     AllWholeList.Add(item.UWLastName);
                     AllWholeList.Add(item.ListCode.ToString());
                     AllWholeList.Add(item.FollowUpNO);
-                    AllWholeList.Add(item.UWDatePeyment.ToString());
-                    AllWholeList.Add(item.UWFor);
+                    AllWholeList.Add(item.UWDayDeposit.ToString());
+                    AllWholeList.Add(item.UWMonthDeposit.ToString());
+                    AllWholeList.Add(item.UWYearDeposit.ToString()); AllWholeList.Add(item.UWFor);
                     AllWholeList.Add(GetSumofCommisionOnPaymented(item.UWMarketingCode, item.ListCode).ToString());
 
 
@@ -514,8 +521,9 @@ namespace General.Areas.Users.Controllers
                     AllWholeList.Add(item.UWLastName);
                     AllWholeList.Add(item.ListCode.ToString());
                     AllWholeList.Add(item.FollowUpNO);
-                    AllWholeList.Add(item.UWDatePeyment.ToString());
-                    AllWholeList.Add(item.UWFor);
+                    AllWholeList.Add(item.UWDayDeposit.ToString());
+                    AllWholeList.Add(item.UWMonthDeposit.ToString());
+                    AllWholeList.Add(item.UWYearDeposit.ToString()); AllWholeList.Add(item.UWFor);
                     AllWholeList.Add(GetSumofCommisionOnPaymented(item.UWMarketingCode, item.ListCode).ToString());
 
 

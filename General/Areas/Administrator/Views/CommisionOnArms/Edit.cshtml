@@ -1,38 +1,61 @@
 ﻿@model General.Areas.Administrator.Models.CommisionOnArms
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "ویرایش حد کمسیون";
     Layout = "~/Areas/Administrator/Views/Shared/_Layout-Admin.cshtml";
 }
 
-<h2>Edit</h2>
-
+<div class="alert-danger bordered right-align" style="margin:15px auto;padding:10px;border-radius:10px;border:1px solid #7d0303">
+    حداکثر میزان سود هر بازو را وارد نمایید
+</div>
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>CommisionOnArms</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.CAId)
+    <fieldset>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CAAmount, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CAAmount, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CAAmount, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        <legend class="right-align">میزان سود</legend>
+        <div class="form-horizontal">
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.CAId)
+            <div class="row">
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CAAmount, htmlAttributes: new { @class = "control-label col-md-2 blue-text  text-darken-3" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.CAAmount, new { htmlAttributes = new { @class = "form-control  center-align" } })
+                        @Html.ValidationMessageFor(model => model.CAAmount, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <hr class="alert-success darken-3" />
+
+                <div class="form-group">
+                    <div class=" col-md-12  col-md-push-5">
+                        <input type="submit" value="ثبت" class="btn btn-default" />
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
+            </div>
+</fieldset>
 }
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery-1.11.0.min.js"></script>
+<script src="~/Scripts/SweetAlert.js"></script>
+<script src="~/Scripts/table2excel.js"></script>
+<script src="~/Scripts/MyScripts/table2excel.js"></script>
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+<script>
+    $(document).ready(function () {
+    var str1 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._AdministratorPage, "AdminsMainPage", "AdminGeneralpages", new { area = "Administrator" }, null)</li>';
+     var str2 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._CommisionOnArms, "Create", "CommisionOnArms", new { area = "Administrator" }, null)</li>';
+     @*var str3 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._InstallmenPaymentstAgreement, "CheckPayment", "Installments", new { area = "Administrator" }, null)</li>';*@
+    $('.crumbs').append(str1);
+    $('.crumbs').append(str2);
+        //$('.crumbs').append(str3);
+                //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++تبدیل به مقدار پول  ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        $("#CAAmount").keyup(function () {
+            var id = $(this).attr("id");
+            ToRial($(this).val(), id);
+        })
+    });
+</script>

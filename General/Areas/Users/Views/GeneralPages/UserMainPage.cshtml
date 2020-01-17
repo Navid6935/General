@@ -75,8 +75,8 @@
                 <div class="dropOut">
                     <div class="triangle"></div>
                     <ul>
-                        <li><a href="~/Users/Reports/MountlyCashReports">گزارش مجموع درآمد</a></li>
-                        <li><a href="~/Users/Reports/CashReportsOnPeriod">گزارش زمانی درآمد</a></li>
+                        @*<li><a href="~/Users/Reports/MountlyCashReports">گزارش مجموع درآمد</a></li>
+                        <li><a href="~/Users/Reports/CashReportsOnPeriod">گزارش زمانی درآمد</a></li>*@
                         <li><a href="@Url.Action("CommisionPeymented", "Reports", new { area = "Users" @*,  UserName=Session["PID"]*@})" class="Li_A" style="color: #777">پورسانت پرداخت شده</a></li>
                         <li><a href="@Url.Action("CommissionOnTeamInUsers", "Reports", new { area = "Users" @*,  UserName=Session["PID"]*@})" class="Li_A" style="color: #777">پورسانت هر تیم</a></li>
 

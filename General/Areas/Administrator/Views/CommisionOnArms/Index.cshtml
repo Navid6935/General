@@ -1,25 +1,58 @@
 ﻿@model IEnumerable<General.Areas.Administrator.Models.CommisionOnArms>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "لیست حد کمسیون";
     Layout = "~/Areas/Administrator/Views/Shared/_Layout-Admin.cshtml";
 }
 
 
-<table class="table striped bordered highlight centered responsive-table text-center" style="margin-top:15px">
+<table class="table striped bordered highlight centered responsive-table text-center" dir="rtl" style="margin-top:15px">
     <tr>
-        <th style="text-align:right">
+        <th class="text-center">
             @Html.DisplayNameFor(model => model.CAAmount)
         </th>
+        <th style="text-align:right"></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td style="text-align:right">
-            @Html.DisplayFor(modelItem => item.CAAmount)
-        </td>
+    @foreach (var item in Model)
+    {
+        <tr>
 
-    </tr>
-}
+            <td>
+                @Html.DisplayFor(modelItem => item.CAAmount)
+            </td>
+            <td>
+                <a href="@Url.Action("Edit", new { id=item.CAId })" class="btn-floating tooltipped yellow darken-2" data-position="top" data-delay="50" data-tooltip="ویرایش" blue"><i class="material-icons">edit</i></a> |
+                <a href="@Url.Action("Delete", new { id=item.CAId })" class="btn-floating tooltipped red" data-position="left" data-delay="50" data-tooltip="حذف" blue"><i class="material-icons">delete</i></a>
+            </td>
+        </tr>
+    }
 
 </table>
+<div class="fixed-action-btn horizontal click-to-toggle">
+    <a class="btn-floating btn-large pulse blue">
+        <i class="material-icons">menu</i>
+    </a>
+    <ul>
+        <li><a href="@Url.Action("Index", "Home", new { area = "" }, null)" class="btn tooltipped btn-floating blue darken-3" data-position="top" data-tooltip="صفحه اصلی" data-delay="50"><i class="material-icons">home</i></a></li>
+        <li><a href="@Url.Action("create")" class="btn tooltipped btn-floating green darken-1" data-position="top" data-delay="50" data-tooltip="ایجاد"><i class="material-icons">create_new_folder</i></a></li>
+    </ul>
+</div>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery-1.11.0.min.js"></script>
+<script src="~/Scripts/SweetAlert.js"></script>
+<script src="~/Scripts/table2excel.js"></script>
+<script src="~/Scripts/MyScripts/table2excel.js"></script>
+
+<script>
+    $(document).ready(function () {
+    var str1 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._AdministratorPage, "AdminsMainPage", "AdminGeneralpages", new { area = "Administrator" }, null)</li>';
+     var str2 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._CommisionOnArms, "index", "CommisionOnArms", new { area = "Administrator" }, null)</li>';
+     @*var str3 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._InstallmenPaymentstAgreement, "CheckPayment", "Installments", new { area = "Administrator" }, null)</li>';*@
+    $('.crumbs').append(str1);
+    $('.crumbs').append(str2);
+        //$('.crumbs').append(str3);
+
+    });
+</script>

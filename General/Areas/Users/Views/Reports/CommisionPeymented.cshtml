@@ -48,7 +48,13 @@
                 @Html.DisplayNameFor(model => model.FollowUpNO)
             </th>
             <th class="text-center">
-                @Html.DisplayNameFor(model => model.UWDatePeyment)
+                @Html.DisplayNameFor(model => model.UWDayDeposit)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.UWMonthDeposit)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.UWYearDeposit)
             </th>
             <th class="text-center">
                 @Html.DisplayNameFor(model => model.UWFor)
@@ -56,31 +62,38 @@
             <th class="text-center">
                 @Html.DisplayNameFor(model => model.UWAmountDeposit)
             </th>
-            
+
         </tr>
+
         @{
             var i = 1;
         }
         @foreach (var item in Model)
         {
-            <tr>
-                <td class="text-center" id="MarketingCode_@i">
-                    @Html.DisplayFor(modelItem => item.ListCode)
-                </td>
-                <td class="text-center" id="FirstName_@i">
-                    @Html.DisplayFor(modelItem => item.FollowUpNO)
-                </td>
-                <td class="text-center" id="LastName_@i">
-                    @Html.DisplayFor(modelItem => item.UWDatePeyment)
-                </td>
-                <td class="text-center" id="AccountNumber_@i">
-                    @Html.DisplayFor(modelItem => item.UWFor)
-                </td>
-                <td class="text-center" id="CardNumber_@i">
-                    @Html.DisplayFor(modelItem => item.UWAmountDeposit)
-                </td>
+    <tr>
+        <td class="text-center" id="ListCode_@i">
+            @Html.DisplayFor(modelItem => item.ListCode)
+        </td>
+        <td class="text-center" id="FollowUpNO_@i">
+            @Html.DisplayFor(modelItem => item.FollowUpNO)
+        </td>
+        <td class="text-center" id="UWDayDeposit_@i">
+            @Html.DisplayFor(modelItem => item.UWDayDeposit)
+        </td>
+        <td class="text-center" id="UWMonthDeposit_@i">
+            @Html.DisplayFor(modelItem => item.UWMonthDeposit)
+        </td>
+        <td class="text-center" id="UWYearDeposit_@i">
+            @Html.DisplayFor(modelItem => item.UWYearDeposit)
+        </td>
+        <td class="text-center" id="AccountNumber_@i">
+            @Html.DisplayFor(modelItem => item.UWFor)
+        </td>
+        <td class="text-center" id="CardNumber_@i">
+            @Html.DisplayFor(modelItem => item.UWAmountDeposit)
+        </td>
 
-            </tr>
+    </tr>
             ++i;
         }
 
@@ -99,10 +112,12 @@
         //$(".datepicker").datepicker({dateFormat:"yy/mm/dd",isRTL:true,showButtonPanel:true})
 
 
-         var str1 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._AdministratorPage, "AdminsMainPage", "AdminGeneralpages", new { area = "Administrator" }, null)</li>';
+         var str1 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._UserMainPage, "UserMainPage", "GeneralPages", new { area = "Users" }, null)</li>';
         var str2 = '<li>@Html.ActionLink(FarsiLanguage.FarsiLanguage._AllWholeThingsPeyments, "AllWholeThingPeyments")</li>';
         $('.crumbs').append(str1);
         $('.crumbs').append(str2);
+          $("#Commisiontbl").hide();
+
         $("#Datesearch").click(function () {
 
             var FromDate = $("#FromDate").val().replace(/\//g, '');
@@ -116,6 +131,8 @@
                 return false;
             }
             $("tr:not(tr:first)").remove();
+            //$("tr:not(tr:first)").remove();
+          $("#Commisiontbl").show();
             GetCommisionOnDate(FromDate, ToDate);
             if (AllWholePaymentArray.length == 0) {
                swal("خطا!", "در این بازه تاریخ اطلاعات  موجود نمی باشد", "error");
@@ -123,16 +140,16 @@
             }
             debugger
             var counter = 0;
-            var toCounter = 5;
-            var Rows = AllWholePaymentArray.length / 5;
+            var toCounter = 7;
+            var Rows = AllWholePaymentArray.length /  7;
             for (var i = 1; i <= Rows; i++) {
-                $("tr:last").after('<tr id=mk' + i + '>');
+              $("tr:last").after('<tr id=mk' + i + '>' );
 
                 while (counter < toCounter) {
                     $('#mk' + i).append('<td class="text-center" id="rowNum' + counter + '">' + AllWholePaymentArray[counter] + '</td>');
                     counter++;
                 }
-                toCounter = toCounter + 5;
+                toCounter = toCounter + 7;
                 $('#mk' + i).after("</tr>");
             }
         });

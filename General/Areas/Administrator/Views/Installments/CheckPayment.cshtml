@@ -28,7 +28,7 @@
                             <option value="@y">@y</option>
                         }
                     </select>*@
-                <input type="text" id="FromDate" class="text-center datepicker" autocomplete="off"/>
+                <input type="text" id="FromDate" class="text-center datepicker" autocomplete="off" />
 
             </div>
         </div>
@@ -457,7 +457,6 @@
                     }
                     toCounter = toCounter + 9;
 
-                   // alert(counter);
                     $('#rowNum' + (counter - 1)).after('<td class="text-center" id= "rowNum' + counter + '" ><a href="~/Administrator/Installments/ConfirmPayment?type=1?documenttypeid=' + InstallmentDataArray[counter] + '">تایید پرداخت</a></td>');
                     counter++;
                     $('#mk' + i).after("</tr>");

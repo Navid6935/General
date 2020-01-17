@@ -1585,3 +1585,42 @@ function GetCommisionOnDate(FromDate, ToDate) {
         }
     });
 }
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ محاسبه سود هر تیم بر اساس تاریخ +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+function GetAllCommisionOnTeamOnDateInUsers(FromDate, ToDate, MarketingCode) {
+    $.ajax({
+        type: 'Get',
+        url: 'GetAllCommisionOnTeamOnDateInUsers',
+        async: false,
+        data: {
+            "FromDate": FromDate,
+            "ToDate": ToDate,
+            "MarketingCode": MarketingCode
+        },
+        dataType: 'json',
+        success: function (data, status, x) {
+            if (data !== null) {
+                AllWholePaymentArray = [];
+                $.each(data, function (id, AllWholeData) {
+
+                    AllWholePaymentArray.push(AllWholeData);
+                });
+            }
+            if (data === null || data === undefined || data === "Null") {
+                alert('Error');
+                return false;
+            }
+
+        },
+        beforeSend: function () {
+        },
+        complete: function () {
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+
+            alert(jqXHR + textStatus + errorThrown);
+        }
+    });
+}

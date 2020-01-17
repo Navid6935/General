@@ -11,6 +11,8 @@ namespace General.Areas.Users.Controllers
     public class ReportsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        //لیست پورسانت هر تیم
+        List<string> AllCommisionList;
         //====================================================== متغیر تعداد نفرات در یک بازو
         int ArmsUser = 0;
         //====================================================== متغیر تعداد کل نفرات 
@@ -287,7 +289,7 @@ namespace General.Areas.Users.Controllers
             //======================================================  آرایه کدهای بازاریابی بازوی بازوی ادمین
             string[] StatusMkOnIdArray = new string[GetMKUsersListOnId.Count];
             //======================================================  آرایه کدهای بازاریابی بازوی بازوی ادمین
-            string[] GetNameOnIdArray = new string[GetMKUsersListOnId.Count];          
+            string[] GetNameOnIdArray = new string[GetMKUsersListOnId.Count];
             //======================================================  آرایه کدهای بازاریابی بازوی بازوی ادمین
             string[] GetMoblieOnIdArray = new string[GetMKUsersListOnId.Count];
             if (GetMKUsersListOnId.Count != 0)
@@ -300,7 +302,7 @@ namespace General.Areas.Users.Controllers
                     StatusMkOnIdArray[Counter] = item.FullName;
                     StatusMkOnIdArray[Counter] = item.MobileNumber;
                     GetMKOnIdArray[Counter] = item.MarketingCode;
-                    
+
 
                     //======================================================== تابع بدت آوزدن یوزر از روی کد بازاریابی
 
@@ -380,7 +382,7 @@ namespace General.Areas.Users.Controllers
 
                 }
 
-            
+
                 if (LevelMK > 1)
                 {
                     GetMKUsersonLevelFunc(GetMKOnIdArray, LevelMK);
@@ -411,7 +413,7 @@ namespace General.Areas.Users.Controllers
         /// <param name="LevelMK"></param>
         /// <param name="UserId"></param>
         /// <returns></returns>
-        public List<string>  GetMKUsersonLevelFunc(string[] UserId,int levelMK)
+        public List<string> GetMKUsersonLevelFunc(string[] UserId, int levelMK)
 
         {
             //============================================== شمارنده 
@@ -440,15 +442,15 @@ namespace General.Areas.Users.Controllers
                 }
                 //============================================== حلقه پیدا کردن اعضا
                 for (int i = 0; i < UserId.Length; i++)
-            {
-                var MK = UserId[i];
-                var MKUsers = db.Users.Where(m => m.LeadersMarketingCode == MK).ToList();
+                {
+                    var MK = UserId[i];
+                    var MKUsers = db.Users.Where(m => m.LeadersMarketingCode == MK).ToList();
                     //====================================================== متغیر تعداد بازوی نرم افزار
                     var UsersArms = db.Arms.FirstOrDefault();
                     var UserArmsNum = UsersArms.ArmsNumber;
-                if (MKUsers.Count != 0)
-                {
-                    foreach (var item in MKUsers)
+                    if (MKUsers.Count != 0)
+                    {
+                        foreach (var item in MKUsers)
                         {
                             PersonInArmsList.Add(item.ReagentMarketingCode);
                             PersonInArmsList.Add(item.LeadersMarketingCode);
@@ -467,7 +469,7 @@ namespace General.Areas.Users.Controllers
                             }
                             //=============================================== اگر مقدار نام خالی بود
 
-                                if (item.FullName == null)
+                            if (item.FullName == null)
                             {
 
                                 PersonInArmsList.Add(" ");
@@ -493,10 +495,10 @@ namespace General.Areas.Users.Controllers
                                     var marketingCode = item2.MarketingCode;
                                     //=============================================== حلقه ارسال به تابع های بدست آوردن تعداد یوزر به تعداد بازو
 
-                                        ArmsUser = 1;
+                                    ArmsUser = 1;
 
-                                        GetMKCountArms(item2.MarketingCode);
-                                        PersonInArmsList.Add(ArmsUser.ToString());
+                                    GetMKCountArms(item2.MarketingCode);
+                                    PersonInArmsList.Add(ArmsUser.ToString());
                                     Counter2++;
                                 }
                             }
@@ -510,10 +512,10 @@ namespace General.Areas.Users.Controllers
                                 }
                             }
                             Counter++;
-                    }
+                        }
 
+                    }
                 }
-            }
             }
             //GetMKListCount(MarketingCodelist);
             return (MarketingCodelist);
@@ -551,8 +553,8 @@ namespace General.Areas.Users.Controllers
             return (ArmsUser);
         }
         public int GetMKCountArms(string[] MKArray)
-        
-{
+
+        {
             int ArmsCounter = 0;
             for (int i = 0; i < MKArray.Length; i++)
             {
@@ -619,30 +621,31 @@ namespace General.Areas.Users.Controllers
             var UserId = Session["PID"];
             if (UserId == null)
             {
-                return RedirectToAction("Login", "Account", new { area = ""});
+                return RedirectToAction("Login", "Account", new { area = "" });
             }
             var User = db.Users.Where(u => u.UserName == UserId).FirstOrDefault();
             var UWGroup = db.UsersWallets
                 .Where(m => m.UWMarketingCode == User.MarketingCode)
-                .Where(lc => lc.ListCode !=null && lc.FollowUpNO != null)
-               .OrderBy(w=>w.UWDatePeyment)
+                .Where(lc => lc.ListCode != null && lc.FollowUpNO != null)
+               .OrderBy(w => w.UWDatePeyment)
                 .ToList();
             return View(UWGroup);
         }
-        public ActionResult GetCommisionOnDate( int FromDate, int ToDate)
+        public ActionResult GetCommisionOnDate(int FromDate, int ToDate)
         {
             var UserId = Session["PID"];
             if (UserId == null)
             {
                 return RedirectToAction("Login", "Account", new { area = "" });
             }
-            List<string> AllCommisionList = new List<string>();
+            AllCommisionList = new List<string>();
             var User = db.Users.Where(u => u.UserName == UserId).FirstOrDefault();
             var Commisions = db.UsersWallets
                 .Where(m => m.UWMarketingCode == User.MarketingCode)
                .Where(y => y.UWDateWithoutPoints >= FromDate && y.UWDateWithoutPoints <= ToDate)
-                .Where(lc => lc.ListCode !=null && lc.FollowUpNO != null)
-               .OrderBy(w=>w.UWDatePeyment)
+                .Where(lc => lc.ListCode != null && lc.FollowUpNO != null)
+                 .GroupBy(m => new { m.UWMarketingCode, m.ListCode, m.FollowUpNO })
+                 .Select(g => g.FirstOrDefault())
                 .ToList();
             if (Commisions.Count != 0)
             {
@@ -650,9 +653,11 @@ namespace General.Areas.Users.Controllers
                 {
                     AllCommisionList.Add(item.ListCode.ToString());
                     AllCommisionList.Add(item.FollowUpNO);
-                    AllCommisionList.Add(item.UWDatePeyment.ToString());
+                    AllCommisionList.Add(item.UWDayDeposit.ToString());
+                    AllCommisionList.Add(item.UWMonthDeposit.ToString());
+                    AllCommisionList.Add(item.UWYearDeposit.ToString());
                     AllCommisionList.Add(item.UWFor);
-                    AllCommisionList.Add(item.UWAmountDeposit);
+                   AllCommisionList.Add(GetAllCommisionOnDateAndCodeListAndFollowNum(item.UWMarketingCode,item.ListCode,item.FollowUpNO).ToString());
 
                 }
 
@@ -689,6 +694,116 @@ namespace General.Areas.Users.Controllers
             //}
 
             return View(UWGroup);
+        }
+
+        // =========================================================================== محاسبه سود هر تیم بر اساس تاریخ
+
+        public ActionResult GetAllCommisionOnTeamOnDateInUsers(int FromDate, int ToDate, string MarketingCode)
+        {
+            AllCommisionList = new List<string>();
+
+            //بدست آوردن تعداد نفرات
+            var query1 = db.UsersWallets
+
+                //.Where(m => m.ListCode != null && m.FollowUpNO != null)
+                .Where(M => M.UWMarketingCode == MarketingCode)
+                .Where(y => y.UWDatePeyment >= FromDate && y.UWDatePeyment <= ToDate)
+             .GroupBy(m => new { m.UWMarketingCodeFrom })
+            .Select(g => g.FirstOrDefault())
+            .ToList();
+            //var query2 = db.UsersWallets
+
+            //       //.Where(m => m.ListCode != null && m.FollowUpNO != null)
+            //       .Where(y => y.UWDatePeyment >= FromDate && y.UWDatePeyment <= ToDate)
+            //    .GroupBy(m => new { m.UWMarketingCode, m.UWMarketingCodeFrom })
+            //   .Select(g => g.FirstOrDefault())
+            //   .ToList();
+
+            //ViewBag.SumAllWholes;
+            if (query1.Count != 0)
+            {
+                foreach (var item in query1)
+                {
+                    AllCommisionList.Add(item.UWMarketingCode);
+                    AllCommisionList.Add(item.UWInsuranceNumber);
+                    AllCommisionList.Add(item.UWFirstName);
+                    AllCommisionList.Add(item.UWLastName);
+
+                    foreach (var item2 in query1)
+                    //for (int i = 0; i < CheckNumofTeam.Count; i++)
+                    {
+                        GetAllCommisionOnTeam(item2.UWMarketingCode, item2.UWMarketingCodeFrom);
+                    }
+
+                    //اضافه کردن صفر به جای مقادیری که تیم کار نکرده است
+                    for (int i = 4; i > query1.Count; i--)
+                    {
+                        AllCommisionList.Add("0");
+
+                    }
+                    GetAllCommisionAllTeam(item.UWMarketingCode);
+
+                }
+            }
+            return Json(AllCommisionList, JsonRequestBehavior.AllowGet);
+
+        }
+        // =========================================================================== محاسبه سود بر اساس تاریخ ، کد لیست و شماره پیگیری
+        public int GetAllCommisionOnDateAndCodeListAndFollowNum(string MarketingCode, int? CodeList, string FollowNum)
+        {
+            int Temp = 0;
+
+            var GetAllCommisionOnMKAndMKFromOnTeam = db.UsersWallets
+                .Where(m => m.ListCode != null && m.FollowUpNO != null)
+                .Where(m => m.UWMarketingCode == MarketingCode)
+                .Where(m => m.ListCode == CodeList)
+                .Where(m => m.FollowUpNO == FollowNum)
+                 .ToList();
+            foreach (var item in GetAllCommisionOnMKAndMKFromOnTeam)
+            {
+                Temp += int.Parse(item.UWAmountDeposit);
+            }
+            //AllCommisionList.Add(Temp.ToString());
+
+
+            return Temp;
+        }
+        // =========================================================================== محاسبه سود هر تیم
+        public int GetAllCommisionOnTeam(string MarketingCode, string MarketingCodeFrom)
+        {
+            int Temp = 0;
+
+            var GetAllCommisionOnMKAndMKFromOnTeam = db.UsersWallets
+                .Where(m => m.UWMarketingCode == MarketingCode)
+                .Where(m => m.UWMarketingCodeFrom == MarketingCodeFrom)
+               .ToList();
+
+            foreach (var item in GetAllCommisionOnMKAndMKFromOnTeam)
+            {
+                Temp += int.Parse(item.UWAmountDeposit);
+            }
+            AllCommisionList.Add(Temp.ToString());
+
+
+            return Temp;
+        }
+        // =========================================================================== محاسبه سود هر تیم
+        public int GetAllCommisionAllTeam(string MarketingCode)
+        {
+            int Temp = 0;
+
+            var GetAllCommisionAllTeams = db.UsersWallets
+                .Where(m => m.UWMarketingCode == MarketingCode)
+               .ToList();
+
+            foreach (var item in GetAllCommisionAllTeams)
+            {
+                Temp += int.Parse(item.UWAmountDeposit);
+            }
+            AllCommisionList.Add(Temp.ToString());
+
+
+            return Temp;
         }
     }
 }
